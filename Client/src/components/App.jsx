@@ -6,7 +6,15 @@ const Reviews = lazy(() => import('./Reviews.jsx'));
 
 
 let App = (props) => (
-  <h1>Hello World!</h1>
+  <>
+    <div>
+      some title and nev bar maybe?
+    </div>
+    <ProductOverview />
+    <RelatedProducts />
+    <QnA />
+    <Reviews />
+  </>
 )
 
 export default App;
