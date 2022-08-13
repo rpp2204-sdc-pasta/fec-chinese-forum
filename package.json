@@ -7,7 +7,7 @@
     "server-dev": "npx nodemon --watch server server/index.js",
     "client-dev": "npx webpack --watch",
     "build": "npx webpack",
-    "test-reviews": "jest ./review.spec.js"
+    "test-reviews": "jest ./testsuites/review.spec.js"
   },
   "repository": {
     "type": "git",
