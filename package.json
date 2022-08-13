@@ -8,7 +8,9 @@
     "client-dev": "npx webpack --watch",
     "build": "npx webpack",
     "test-reviews": "jest ./testsuites/review.spec.js",
-    "test-questions": "jest ./testsuites/question.spec.js"
+    "test-questions": "jest ./testsuites/question.spec.js",
+    "test-overview": "jest ./testsuites/overview.spec.js",
+    "test-related": "jest ./testsuites/relatedProducts.spec.js"
   },
   "repository": {
     "type": "git",
