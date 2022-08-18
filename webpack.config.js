@@ -1,5 +1,6 @@
 require("dotenv").config();
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const webpack = require('webpack')
 
 const path = require("path");
 
@@ -15,7 +16,12 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename: 'index.html',
       title: 'Chinese Forum'
-    })
+    }),
+    new webpack.DefinePlugin({
+      "process.env": {
+        AUTH_SECRET: JSON.stringify(process.env.AUTH_SECRET),
+      },
+    }),
   ],
   module: {
     rules: [
