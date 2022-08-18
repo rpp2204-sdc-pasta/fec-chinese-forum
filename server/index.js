@@ -12,7 +12,14 @@ app.use(express.json());
 
 
 app.get('/related/:id', (req, res) => {
-  getRelated(req, res);
+  getRelated(req, res)
+    .then(result => {
+      res.status(200).send(result);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).send("some err happened");
+    });
 });
 
 app.get('/outfit', (req, res) => {

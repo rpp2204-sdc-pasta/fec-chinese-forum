@@ -10,7 +10,7 @@ exports.getRelated = (req, res) => {
     }
   }
   // console.log(req.params.id);
-  axios(options)
+  return axios(options)
     .then(response => {
       let moreAPICalls = response.data.map(num => {
         let options = {
@@ -44,12 +44,5 @@ exports.getRelated = (req, res) => {
           // console.log(result);
           return result;
         });
-    })
-    .then(result => {
-      res.send(result);
-    })
-    .catch(err => {
-      console.log(err);
-      res.status(500).send("some err happened");
-    })
+    });
 }
