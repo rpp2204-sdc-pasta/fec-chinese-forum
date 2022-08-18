@@ -7,45 +7,41 @@ class Reviews extends React.Component {
   constructor(props){
     super(props)
     this.state = {
+      product_id: '71701',
       product: [],
       count: 2,
       length: '',
     }
     this.handleMore=this.handleMore.bind(this)
     this.getProductcount=this.getProductcount.bind(this)
-    this.getReviews=this.getReviews.bind(this)
+    // this.getReviews=this.getReviews.bind(this)
   }
 
 
   componentDidMount(){
     this.getProductcount()
-    this.getReviews(this.state.count)
   }
 
-  getProductcount(){
-    let options ={
-      method: 'GET',
-      url: '/product'
-    }
-    axios(options)
-    .then((response)=>{
-      this.setState({
-        // product: response.data.results,
-        length: response.data.results.length
-      })
-    })
-    .catch((err)=>{
-      console.log(err)
-    })
-  }
+  getProductcount(num=null,sortBy=null, product_id){
 
-  getReviews(num){
+    sortBy = sortBy || 'relevant'
+
     axios.post('/reviews',
-     {count: num})
+    {sort: sortBy,
+      productId: product_id
+    })
     .then((response)=>{
-      this.setState({
-        product: response.data.results,
-      })
+      if(num === null){
+        this.setState({
+          product: response.data.results.slice(0,2),
+          length: response.data.results.length
+        })
+      } else {
+        this.setState({
+          count: num+2,
+          product: response.data.results.slice(0,num)
+        })
+      }
     })
     .catch((err)=>{
       console.log(err)
@@ -54,22 +50,7 @@ class Reviews extends React.Component {
 
   handleMore(e){
     e.preventDefault()
-    console.log('clicked')
-    axios.post('/reviews',
-    {count: this.state.count + 2})
-   .then((response)=>{
-    console.log(response.data.results)
-     this.setState({
-       product: response.data.results,
-       count: this.state.count + 2
-     })
-     console.log(this.state.count)
-   })
-   .catch((err)=>{
-     console.log(err)
-   })
-
-
+    this.getProductcount(this.state.count+2, null, this.state.product_id)
   }
 
 

@@ -11,18 +11,8 @@ app.use(express.json())
 
 
 
-app.get('/product', (req,res)=>{
-  reviews.getProductcount()
-    .then((response)=>{
-      res.status(200).send(response.data)
-    })
-    .catch((err)=>{
-      console.log(err)
-    })
-})
-
 app.post('/reviews', (req,res)=>{
-  reviews.getMorereviews(req.body.count)
+  reviews.getProductcount(req.body.sort, req.body.productId)
     .then((response)=>{
       res.status(200).send(response.data)
     })
