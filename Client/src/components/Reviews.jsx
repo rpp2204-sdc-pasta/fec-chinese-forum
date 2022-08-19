@@ -7,8 +7,9 @@ class Reviews extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      product_id: '71701',
+      product_id: '71700',
       product: [],
+      helpful: false,
       count: 2,
       length: '',
     }
@@ -19,7 +20,7 @@ class Reviews extends React.Component {
 
 
   componentDidMount(){
-    this.getProductcount()
+    this.getProductcount(null, null, this.state.product_id)
   }
 
   getProductcount(num=null,sortBy=null, product_id){
@@ -28,7 +29,7 @@ class Reviews extends React.Component {
 
     axios.post('/reviews',
     {sort: sortBy,
-      productId: product_id
+    productId: product_id
     })
     .then((response)=>{
       if(num === null){
@@ -64,7 +65,7 @@ class Reviews extends React.Component {
         <h1>{`Ratings & Reviews`}</h1>
         <div id='reviews-scrollable'></div>
         <h2>{this.state.length} reviews, sorted by relevance</h2>
-        {this.state.product.map((item=>(<Reviews_list product={item} />)))}
+        {this.state.product.map((item=>(<div key={item.review_id}><Reviews_list product={item} /></div>)))}
         <br></br>
         {morebutton}
         <button type='submit'> ADD A REVIEW +   </button>
