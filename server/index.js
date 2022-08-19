@@ -12,7 +12,7 @@ app.use(express.json());
 
 
 app.get('/related/:id', (req, res) => {
-  getRelated(req, res)
+  getRelated(req.params.id)
     .then(result => {
       res.status(200).send(result);
     })
