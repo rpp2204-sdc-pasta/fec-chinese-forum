@@ -6,7 +6,7 @@ class RelatedProducts extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentID: '',
+      currentID: '71700',
       products: [],
       outfits: []
     };
@@ -25,6 +25,10 @@ class RelatedProducts extends React.Component {
     axios(options)
       .then(response => {
         console.log(response.data);
+        this.setState({ products: response.data });
+      })
+      .catch(err => {
+        console.log(err);
       })
   }
 
@@ -48,6 +52,7 @@ class RelatedProducts extends React.Component {
         </ul>
         <h3>YOUR OUTFIT</h3>
         <ul>
+          {/* <Card item={} /> */}
           {this.state.outfits.map(outfit => <Card item={outfit}/>)}
         </ul>
       </>
