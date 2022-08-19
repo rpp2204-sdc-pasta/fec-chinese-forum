@@ -1,42 +1,14 @@
 require("dotenv").config();
 const axios = require('axios');
 
-exports.getRelated = (req, res) => {
-  let options = {
-    method: 'GET',
-    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${req.params.id}/related`,
-    headers: {
-      Authorization: process.env.AUTH
-    }
-  }
-  // console.log(req.params.id);
-  return axios(options)
+let getRelated = (id) => {
+
+  return getRelatedProductID(id)
     .then(response => {
       let moreAPICalls = response.data.map(num => {
-        let options = {
-          method: 'GET',
-          url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${num}`,
-          headers: {
-            Authorization: process.env.AUTH
-          }
-        };
-        let options2 = {
-          method: 'GET',
-          url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${num}/styles`,
-          headers: {
-            Authorization: process.env.AUTH
-          }
-        };
-        let options3 = {
-          method: 'GET',
-          url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/meta/?product_id=${num}`,
-          headers: {
-            Authorization: process.env.AUTH
-          }
-        };
-        return Promise.all([axios(options).then(response => response.data),
-          axios(options2).then(response => response.data),
-          axios(options3).then(response => response.data)]);
+        return Promise.all([getProductInfo(num).then(response => response.data),
+          getProductStyles(num).then(response => response.data),
+          getProductReviewRating(num).then(response => response.data)]);
       });
       return Promise.all(moreAPICalls)
         .then(values => {
@@ -52,15 +24,7 @@ exports.getRelated = (req, res) => {
                 }
               }
             });
-            let oneStars = value[2].ratings['1'] || 0;
-            let twoStars = value[2].ratings['2'] || 0;
-            let threeStars = value[2].ratings['3'] || 0;
-            let fourStars = value[2].ratings['4'] || 0;
-            let fiveStars = value[2].ratings['5'] || 0;
-            let total = (1 * oneStars) + (2 * twoStars) + (3 * threeStars) + (4 * fourStars)
-            + (5 * fiveStars);
-            let totalReviews = Number(oneStars) + Number(twoStars) + Number(threeStars) + Number(fourStars) + Number(fiveStars);
-            let overallRating = Math.round(100 * total / totalReviews) / 100;
+            let overallRating = getOverAllRating(value[2].ratings);
             product = {
               ...product,
               id: value[0].id,
@@ -75,3 +39,66 @@ exports.getRelated = (req, res) => {
     });
 }
 
+let getRelatedProductID = (id) => {
+  let options = {
+    method: 'GET',
+    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${id}/related`,
+    headers: {
+      Authorization: process.env.AUTH
+    }
+  };
+  return axios(options);
+}
+
+let getProductInfo = (id) => {
+  let options = {
+    method: 'GET',
+    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${id}`,
+    headers: {
+      Authorization: process.env.AUTH
+    }
+  };
+  return axios(options);
+}
+
+let getProductStyles = (id) => {
+  let options = {
+    method: 'GET',
+    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${id}/styles`,
+    headers: {
+      Authorization: process.env.AUTH
+    }
+  };
+  return axios(options);
+}
+
+let getProductReviewRating = (id) => {
+  let options = {
+    method: 'GET',
+    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/meta/?product_id=${id}`,
+    headers: {
+      Authorization: process.env.AUTH
+    }
+  };
+  return axios(options);
+}
+
+let getOverAllRating = (ratings) => {
+  let oneStars = ratings['1'] || 0;
+  let twoStars = ratings['2'] || 0;
+  let threeStars = ratings['3'] || 0;
+  let fourStars = ratings['4'] || 0;
+  let fiveStars = ratings['5'] || 0;
+  let total = (1 * oneStars) + (2 * twoStars) + (3 * threeStars) + (4 * fourStars)
+  + (5 * fiveStars);
+  let totalReviews = Number(oneStars) + Number(twoStars) + Number(threeStars) + Number(fourStars) + Number(fiveStars);
+  let overallRating = Math.round(100 * total / totalReviews) / 100;
+}
+
+
+module.exports.getRelated = getRelated;
+module.exports.getRelatedProductID = getRelatedProductID;
+module.exports.getProductInfo = getProductInfo;
+module.exports.getProductStyles = getProductStyles;
+module.exports.getProductReviewRating = getProductReviewRating;
+module.exports.getOverAllRating = getOverAllRating;
