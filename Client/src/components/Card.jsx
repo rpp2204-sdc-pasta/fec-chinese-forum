@@ -1,7 +1,7 @@
 import StarRating from './StarRating.jsx';
 
 let Card = (props) => (
-  <li>
+  <li className="card" onClick={props.handleClick}>
     <img src={props.item.photos[0].thumbnail_url} />
     <div>{props.item.category}</div>
     <div>{props.item.name}</div>

@@ -24,7 +24,7 @@ class RelatedProducts extends React.Component {
     }
     axios(options)
       .then(response => {
-        console.log(response.data);
+        // console.log(response.data);
         this.setState({ products: response.data });
       })
       .catch(err => {

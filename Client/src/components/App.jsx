@@ -4,16 +4,20 @@
 import Reviews from './Reviews.jsx';
 
 
-let App = (props) => (
-  <>
-    <div>
-      some title and nev bar maybe?
-    </div>
-    {/* <ProductOverview />
-    <RelatedProducts id={props.id}/>
-    <QnA /> */}
-    <Reviews />
-  </>
-)
+
+let App = (props) => {
+  let [id, setID] = useState('71700');
+  return (
+    <>
+      <div>
+        some title and nev bar maybe?
+      </div>
+      <ProductOverview id={id} handleClick={setID}/>
+      <RelatedProducts id={id} handleClick={setID}/>
+      <QnA id={id} handleClick={setID}/>
+      <Reviews id={id} handleClick={setID}/>
+    </>
+  );
+}
 
 export default App;
