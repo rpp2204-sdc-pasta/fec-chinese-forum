@@ -24,9 +24,7 @@ class Reviews extends React.Component {
   }
 
   getProductcount(num=null,sortBy=null, product_id){
-
     sortBy = sortBy || 'relevant'
-
     axios.post('/reviews',
     {sort: sortBy,
     productId: product_id
@@ -52,6 +50,11 @@ class Reviews extends React.Component {
   handleMore(e){
     e.preventDefault()
     this.getProductcount(this.state.count+2, null, this.state.product_id)
+  }
+
+  markHelpful(){
+    axios.put()
+
   }
 
 
