@@ -4,6 +4,7 @@ const express = require('express');
 const app = express();
 const reviews =require('./reviews.js')
 const port = process.env.PORT || 3000;
+const axios = require('axios').default;
 
 app.use(express.static(path.join(__dirname, '../client/dist')));
 app.use(express.json())

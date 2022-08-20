@@ -1,4 +1,5 @@
 const axios = require('axios');
+require("dotenv").config();
 
 
 const apiurl = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews?product_id=71701&sort=relevant`
@@ -7,7 +8,7 @@ const getProductcount =(sort)=>{
   var option = {
     method: 'get',
     url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews?product_id=71701&sort=${sort}`,
-    headers: {Authorization: process.env.DB_TOKEN}
+    headers: {Authorization: process.env.AUTH_SECRET}
   };
   return axios(option)
     .catch((err)=>{
@@ -20,7 +21,7 @@ const getMorereviews = (num) =>{
   var option = {
     method: 'get',
     url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews?product_id=71701&sort=relevant&count=${num}`,
-    headers: {Authorization: process.env.DB_TOKEN}
+    headers: {Authorization: process.env.AUTH_SECRET}
   };
   return axios(option)
     .catch((err)=>{
