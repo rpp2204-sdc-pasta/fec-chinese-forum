@@ -1,19 +1,14 @@
 import React from "React"
 
-export default class Modal extends React.Component {
-  constructor(props){
-    super(props);
+function QSModal (props) {
 
-  }
+  const [modalShow, setModalState] = useState(props.show);
 
-  onClose = e => {
-    this.props.show = false;
+  const onClose = () => {
+    setModalState(false)
   };
 
-  render() {
-      if(!this.props.show){
-          return null;
-      }
+
     return (
       <div>
       <from>
@@ -21,8 +16,8 @@ export default class Modal extends React.Component {
       </form>
       <div>
         <button
-          onClose={e => {
-            this.onClose(e);
+          onClose={() => {
+            this.onClose();
           }}
         >
           Close
@@ -30,5 +25,6 @@ export default class Modal extends React.Component {
       </div>
     </div>
     )
-  }
 }
+
+export default QSModal
