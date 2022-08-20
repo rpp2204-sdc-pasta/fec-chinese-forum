@@ -11,7 +11,7 @@ function QSModal (props) {
 
     return (
       <div>
-      <from>
+      <form>
         <input></input>
       </form>
       <div>

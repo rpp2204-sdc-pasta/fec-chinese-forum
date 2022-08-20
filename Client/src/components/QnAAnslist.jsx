@@ -1,4 +1,5 @@
 import React from "React"
+import axios from 'axios';
 
 function QnAAnsList (props) {
 
@@ -14,14 +15,10 @@ function QnAAnsList (props) {
 
   return (
       <div>
-        <a><b>A: </b></a>
-        {props.ans.map((ans, i) =>
-          <a class="lvl3">{ans.answer}</a><br/>
-          <a class="lvl4">by {ans.user}, {ans.date}  |  Helpful? <p onclick={anshelpful}><u>Yes</u></p><p> &#40;{ans.ansHelpful}&#41;  |  </p><p onclick = {reportAns}><u>Report</u></p></a><br/>
-        )}
-
-      </div><br/>
+        <a class="lvl3">{props.ans.answer}</a><br/>
+        <a class="lvl4">by {props.ans.user}, {props.ans.date}  |  Helpful? <p onclick={anshelpful}><u>Yes</u></p><p> &#40;{props.ans.ansHelpful}&#41;  |  </p><p onclick = {reportAns}><u>Report</u></p></a><br/>
+      </div>
   )
 }
 
-export default QnAAnsList
+export default QnAAnsList;
