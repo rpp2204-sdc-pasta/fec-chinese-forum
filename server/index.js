@@ -10,6 +10,7 @@ const { getRelated } = require('./related');
 app.use(express.static(path.join(__dirname, '../client/dist')));
 app.use(express.json());
 
+//https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp
 
 app.get('/related/:id', (req, res) => {
   getRelated(req.params.id)
