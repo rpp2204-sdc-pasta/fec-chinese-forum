@@ -30,6 +30,7 @@ let getRelated = (id) => {
               id: value[0].id,
               name: value[0].name,
               category: value[0].category,
+              features: value[0].features,
               overallRating
             }
             return product;

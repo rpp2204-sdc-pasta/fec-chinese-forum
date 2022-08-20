@@ -11,6 +11,7 @@ class RelatedProducts extends React.Component {
       outfits: []
     };
     this.getRelated = this.getRelated.bind(this);
+    this.mainItemFeatures = props.features;
   }
 
   componentDidMount() {
@@ -41,17 +42,20 @@ class RelatedProducts extends React.Component {
       .then(response => {
         console.log(response.data);
       })
+      .catch(err => {
+        console.log(err);
+      })
   }
 
   render() {
     return (
       <>
         <h3>RELATED PRODUCTS</h3>
-        <ul>
-          {this.state.products.map(product => <Card item={product}/>)}
+        <ul className="related-products">
+          {this.state.products.map(product => <Card item={product} handleClick={props.handleClick}/>)}
         </ul>
         <h3>YOUR OUTFIT</h3>
-        <ul>
+        <ul className="outfit-list">
           {/* <Card item={} /> */}
           {this.state.outfits.map(outfit => <Card item={outfit}/>)}
         </ul>
