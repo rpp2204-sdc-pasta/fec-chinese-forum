@@ -1,44 +1,54 @@
 import React from "React"
 import QnAAnsList from "./QnAAnsList.jsx";
+import axios from 'axios';
 
-function QnAList (props) {
-
-  var numAns = 2;
-
-  const sendAns = (n) => {
-    return
-  };
-
-  const qshelpful = () => {
-
-  }
-  const addAnswer = () => {
-
+class QnAList extends React.component {
+  constructor(props){
+    super(props)
+    this.state = {
+      qs: this.props.qnaSet.question,
+      ans: this.props.qnaSet.ans,
+      numAns: 2
+    }
   }
 
-  const loadAns = () => {
+  qshelpful = () => {
+
+  }
+  addAnswer = () => {
 
   }
 
-  return (
-    <div>
-      {props.qnaSet.map((qna, i) =>
+  loadAns = () => {
+    this.setState(
+      {
+        numAns: this.state.numAns + 2
+      }
+    )
+  }
+
+  render(){
+    return (
       <div>
-        <a><b>Q: {qna.question}</b></a>
-      </div>
-      <div id = "qsChoice">
-        <a class = "lvl3">Helpful? </a>
-        <a class = "lvl4"><p onclick={qshelpful}><u>Yes</u></p><p> &#40;{qna.qsHelpful}&#41;  |  </p><p onclick={addAnswer}><u>Add Answer</u></p></a>
-      </div><br/>
-      <div>
-        <a><b>A: </b></a>
-        <QnAAnsList ans = {sendAns}/>
-      <p class = "lvl4" onclick = {loadAns}><b>LOAD MORE ANSWERS</b></p>
-      </div><br/>
-      )}
-  </div>
+        <div>
+          <a><b>Q: {this.state.qs}</b></a>
+        </div>
+        <div id = "qsChoice">
+          <a class = "lvl3">Helpful? </a>
+          <a class = "lvl4"><p onclick={this.qshelpful}><u>Yes</u></p><p> &#40;{this.state.qs.qsHelpful}&#41;  |  </p><p onclick={this.addAnswer}><u>Add Answer</u></p></a>
+        </div><br/>
+        <div>
+          <a><b>A: </b></a>
+          {this.state.ans.slice(0,this.state.numAns).map(ans => {
+            <QnAAnsList ans = {ans}/>
+          })}
 
-  )
+        <p class = "lvl4" onclick = {this.loadAns}><b>LOAD MORE ANSWERS</b></p>
+        </div><br/>
+    </div>
+    )
+  }
+
 }
 
 export default QnAList

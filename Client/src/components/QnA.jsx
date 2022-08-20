@@ -2,58 +2,62 @@ import React from 'react';
 import axios from 'axios';
 import QSModal from './QnAQSModal.jsx'
 import QnASearch from './QnASearch.jsx'
-import QnAList from './QnAList.jsx'
+import QnAList from './QnAQSList.jsx'
 
 
 class QnA extends React.component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      qna: [],
-      qsModalshow: false,
-      numQS: 2
-    }
-  }
+constructor(props) {
+super(props)
+this.state = {
+qna: [],
+qsModalshow: false,
+numQS: 2
+}
+}
 
-  componentDidMount = () => {
-    this.sendQSList(2);
-  }
+componentDidMount = () => {
+//API call to get questions and answers.
+}
 
-  sendQSList = (n) => {
-    return this.state.qna.slice(0, n);
-  }
+loadMore = () => {
+this.setState({
+numQS: this.state.numQS + 2
+})
+//send
+}
 
-  loadMore = () => {
-    this.setState({
-      numQS: numQS + 2
-    })
-    sendQSList(this.sate.numQS);
-    //send
-  }
+showQSModal = (e) => {
+this.setState({
+qsModalshow: true
+})
+}
 
-  showQSModal = (e) => {
-    this.setState({
-      qsModalshow: true
-    })
-  }
+Search = (QS) => {
+//write search function
+}
 
-  Search = (QS) => {
-    //write search function
-  }
-
-  render() {
-    return (
+render() {
+return (
+<>
     <h3>QUESTIONS &amp; ANSWERS</h3>
-      <QnASearch search = {this.Search.bind(this)}/>
-      <QnAList qnaSet={this.sendQSList} />
-    <div>
-      <button id="loadMore" onClick={this.loadMore}>MORE ANSWER QUESTIONS</button>
-      <QSModal id="addQS" show={this.state.qsModalshow}>ADD A QUESTION +</Modal>
-    </div>
+  <div>
+    <QnASearch search={this.Search.bind(this)} />
+  </div>
+  <div>
+    {this.state.qna.slice(0,this.state.numQS).map((qs, i)=>
+    <QnAList qnaSet={qs} />
+    )}
+  </div>
+  <div>
+    <button id="loadMore" onClick={this.loadMore}>MORE ANSWER QUESTIONS</button>
+    <QSModal id="addQS" show={this.state.qsModalshow}>ADD A QUESTION +</QSModal>
+  </div>
+</>
 
 
-    )
-  }
+
+)
+}
 }
 
 export default QnA;
