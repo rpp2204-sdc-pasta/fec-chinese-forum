@@ -1,6 +1,8 @@
 import React from 'react';
 import axios from 'axios';
-import Modal from './QnAQSModal.jsx'
+import QSModal from './QnAQSModal.jsx'
+import QnASearch from './QnASearch.jsx'
+import QnAList from './QnAList.jsx'
 
 
 class QnA extends React.component {
@@ -8,11 +10,25 @@ class QnA extends React.component {
     super(props)
     this.state = {
       qna: [],
-      qsModalshow: false
+      qsModalshow: false,
+      numQS: 2
     }
   }
-  loadMore = () => {
 
+  componentDidMount = () => {
+    this.sendQSList(2);
+  }
+
+  sendQSList = (n) => {
+    return this.state.qna.slice(0, n);
+  }
+
+  loadMore = () => {
+    this.setState({
+      numQS: numQS + 2
+    })
+    sendQSList(this.sate.numQS);
+    //send
   }
 
   showQSModal = (e) => {
@@ -21,19 +37,18 @@ class QnA extends React.component {
     })
   }
 
+  Search = (QS) => {
+    //write search function
+  }
+
   render() {
     return (
     <h3>QUESTIONS &amp; ANSWERS</h3>
-    <div>
-      {/* <QnASearch/> */}
-    </div>
-
-    <div>
-      {/* <QnAList qnaSet={qna}/> */}
-    </div>
+      <QnASearch search = {this.Search.bind(this)}/>
+      <QnAList qnaSet={this.sendQSList} />
     <div>
       <button id="loadMore" onClick={this.loadMore}>MORE ANSWER QUESTIONS</button>
-      <Modal id="addQS" onClick={e=>{this.showQSModal} show={this.state.qsModalshow}}>ADD A QUESTION +</Modal>
+      <QSModal id="addQS" show={this.state.qsModalshow}>ADD A QUESTION +</Modal>
     </div>
 
 
@@ -41,4 +56,4 @@ class QnA extends React.component {
   }
 }
 
-export default HelloWorld;
+export default QnA;
