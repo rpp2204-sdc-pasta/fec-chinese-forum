@@ -26,8 +26,8 @@ app.get('/outfit', (req, res) => {
 
 });
 
-
-
+//===========================================
+// reviews api
 app.post('/reviews', (req,res)=>{
   reviews.getProductcount(req.body.sort, req.body.productId)
     .then((response)=>{
@@ -38,6 +38,18 @@ app.post('/reviews', (req,res)=>{
     })
 })
 
+app.put('/reviews/:id', (req, res)=>{
+  // console.log(req.params.id)
+  reviews.addHelpful(req.params.id)
+  .then((resonose)=>{
+    res.status(200).send('Helpful')
+  })
+  .catch((err)=>{
+    console.log(err)
+  })
+})
+
+//=================================================
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })

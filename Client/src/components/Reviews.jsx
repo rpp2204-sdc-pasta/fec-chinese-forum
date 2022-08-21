@@ -7,14 +7,17 @@ class Reviews extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      product_id: '71700',
+      product_id: '71700'||this.props.id,
+      stored_reviews: [],
       product: [],
-      helpful: false,
+      // helpful: false,
       count: 2,
       length: '',
     }
     this.handleMore=this.handleMore.bind(this)
     this.getProductcount=this.getProductcount.bind(this)
+    this.moreReviews=this.moreReviews.bind(this)
+
     // this.getReviews=this.getReviews.bind(this)
   }
 
@@ -32,14 +35,13 @@ class Reviews extends React.Component {
     .then((response)=>{
       if(num === null){
         this.setState({
-          product: response.data.results.slice(0,2),
-          length: response.data.results.length
-        })
-      } else {
-        this.setState({
-          count: num+2,
-          product: response.data.results.slice(0,num)
-        })
+          stored_reviews: response.data.results,
+          length: response.data.results.length,
+          product: response.data.results.slice(0,2)
+        });
+        // this.setState({
+        //   product: this.state.stored_reviews.slice(0,2)
+        // })
       }
     })
     .catch((err)=>{
@@ -47,13 +49,25 @@ class Reviews extends React.Component {
     })
   }
 
-  handleMore(e){
-    e.preventDefault()
-    this.getProductcount(this.state.count+2, null, this.state.product_id)
+  moreReviews(num , review_count=2){
+    let total = num + review_count
+    this.setState({
+      count: total,
+      product: this.state.stored_reviews.slice(0,total)
+    })
   }
 
-  markHelpful(){
-    axios.put()
+  handleMore(e){
+    e.preventDefault()
+    this.moreReviews(this.state.count)
+  }
+
+  handleClick(e){
+    console.log(e.target.name)
+  }
+  markHelpful(e){
+    e.preventDefault()
+    axios.put('/helpful')
 
   }
 
