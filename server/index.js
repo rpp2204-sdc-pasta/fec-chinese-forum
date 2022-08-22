@@ -36,7 +36,6 @@ app.get('/outfit', (req, res) => {
       res.status(500).send("some err happened");
     });
 });
-<<<<<<< HEAD
 
 app.post('/outfit', (req, res) => {
   const { id, category, name, original_price, sale_price, img_url, overallRating } = req.body;
@@ -51,7 +50,6 @@ app.post('/outfit', (req, res) => {
   });
 });
 
-=======
 
 app.post('/outfit', (req, res) => {
   const { id, category, name, original_price, sale_price, img_url, overallRating } = req.body;
@@ -66,7 +64,6 @@ app.post('/outfit', (req, res) => {
   });
 });
 
->>>>>>> 8e826d5ac56a7f4379b4ce75ce457ba9148191cf
 app.delete('/outfit', (req, res) => {
   const { id } = req.body;
   Outfit.deleteOne({id: id}, function(err) {
@@ -79,7 +76,6 @@ app.delete('/outfit', (req, res) => {
   })
 });
 
-//===========================================
 // reviews api
 app.post('/reviews', (req,res)=>{
   reviews.getProductcount(req.body.sort, req.body.productId)
