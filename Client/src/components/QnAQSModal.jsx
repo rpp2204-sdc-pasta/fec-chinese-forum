@@ -10,19 +10,12 @@ function QSModal (props) {
 
 
     return (
-      <div>
+    <div>
+      <button onClose={() => {this.onClose();}}>X</button>
       <form>
-        <input></input>
+        <input style="color:#888;" placeholder="Enter Question"></input>
+        <input type="submit" value="Submit"></input>
       </form>
-      <div>
-        <button
-          onClose={() => {
-            this.onClose();
-          }}
-        >
-          Close
-        </button>
-      </div>
     </div>
     )
 }
