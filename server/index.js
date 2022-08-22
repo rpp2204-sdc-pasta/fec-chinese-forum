@@ -1,5 +1,3 @@
-
-
 require("dotenv").config();
 const axios = require('axios');
 const path = require('path');
@@ -36,7 +34,6 @@ app.get('/outfit', (req, res) => {
       res.status(500).send("some err happened");
     });
 });
-<<<<<<< HEAD
 
 app.post('/outfit', (req, res) => {
   const { id, category, name, original_price, sale_price, img_url, overallRating } = req.body;
@@ -51,22 +48,6 @@ app.post('/outfit', (req, res) => {
   });
 });
 
-=======
-
-app.post('/outfit', (req, res) => {
-  const { id, category, name, original_price, sale_price, img_url, overallRating } = req.body;
-  const obj = { id, category, name, original_price, sale_price, img_url, overallRating };
-  Outfit.updateOne({id: id}, obj, {upsert: true}, function(err) {
-    if (err) {
-      console.log(err)
-      res.status(400);
-    } else {
-      res.status(201);
-    }
-  });
-});
-
->>>>>>> 8e826d5ac56a7f4379b4ce75ce457ba9148191cf
 app.delete('/outfit', (req, res) => {
   const { id } = req.body;
   Outfit.deleteOne({id: id}, function(err) {
