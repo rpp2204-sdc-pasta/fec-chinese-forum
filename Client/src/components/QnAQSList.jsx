@@ -38,9 +38,6 @@ class QnAList extends React.component {
 
   render(){
 
-    if () {
-
-    }
     return (
       <div>
         <div>
