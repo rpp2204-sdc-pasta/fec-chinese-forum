@@ -35,3 +35,13 @@ app.post('/reviews', (req,res)=>{
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
+
+
+axios({
+  method: 'get',
+  url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/71701/styles',
+  headers: {Authorization: process.env.AUTH}
+})
+  .then(function (response) {
+    console.log(response.data.results[1].photos);
+  });

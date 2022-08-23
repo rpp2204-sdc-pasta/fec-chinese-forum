@@ -19,6 +19,9 @@ class OverviewAddtoCart extends React.Component {
 			//size should range from 1 to maximum,
 			//once size is selected, quantity automatically set to 1
 			//
+			<div>
+				adding to cart
+			</div>
 
     );
   }

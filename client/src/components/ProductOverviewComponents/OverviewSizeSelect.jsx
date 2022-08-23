@@ -16,3 +16,17 @@ class OverviewSizeSelect extends React.Component {
 }
 
 export default OverviewSizeSelect;
+
+
+/*
+
+
+    skus: {
+      '2580526': [Object],
+      '2580527': [Object],
+      '2580528': [Object],
+      '2580529': [Object],
+      '2580530': [Object],
+      '2580531': [Object]
+
+*/

@@ -3,15 +3,21 @@ import React from 'react';
 class OverviewStyle extends React.Component {
   constructor(props) {
     super(props);
+    this.handleClick = this.handleClick.bind(this);
+  }
 
+  handleClick(event) {
+    this.props.onClick(this.props.style.style_id);
   }
 
   render() {
     return (
-      <img
-				className="Overview-style"
-				src={this.props.image}
-				onClick={this.props.clickHandle}/>
+      <div>
+        <img
+        className='Overview-stylethumbnail'
+        src={this.props.style.photos[0].thumbnail_url}
+        onClick={this.handleClick}/>
+      </div>
     );
   }
 }

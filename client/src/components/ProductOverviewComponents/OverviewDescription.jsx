@@ -16,9 +16,13 @@ class OverviewDescription extends React.Component {
           {this.props.overview}
         </p>
         <div className='Overview-descriptionFeatures'>
-          {this.props.features.feature}: {this.props.features.value}
+          {this.props.features.map((feature =>
+            <div>
+              {feature.feature}: {feature.value}
+            </div>
+          ))}
         </div>
-      </div>>
+      </div>
     );
   }
 }
