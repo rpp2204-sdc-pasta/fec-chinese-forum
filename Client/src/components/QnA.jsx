@@ -51,17 +51,9 @@ return (
   </div>
   <div>
     <button id="loadMore" onClick={this.loadMore}>MORE ANSWER QUESTIONS</button>
-    <button onClick={showQSModal}>ADD A QUESTION +</button>
-    <Modal isOpen={this.state.qsModalshow}>
-      <QnAQSModal/>
-    </Modal>
+    {this.state.qsModalshow?<QnAQSModal/>:<button onClick={showQSModal}>ADD A QUESTION +</button>}
   </div>
-</>
-
-
-
-)
-}
+</>)}
 }
 
 export default QnA;
