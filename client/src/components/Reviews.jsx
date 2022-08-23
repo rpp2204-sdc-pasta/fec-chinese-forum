@@ -7,68 +7,67 @@ class Reviews extends React.Component {
   constructor(props){
     super(props)
     this.state = {
+      product_id: '71700'||this.props.id,
+      stored_reviews: [],
       product: [],
+      // helpful: false,
       count: 2,
       length: '',
     }
     this.handleMore=this.handleMore.bind(this)
     this.getProductcount=this.getProductcount.bind(this)
-    this.getReviews=this.getReviews.bind(this)
+    this.moreReviews=this.moreReviews.bind(this)
+
+    // this.getReviews=this.getReviews.bind(this)
   }
 
 
   componentDidMount(){
-    this.getProductcount()
-    this.getReviews(this.state.count)
+    this.getProductcount(null, null, this.state.product_id)
   }
 
-  getProductcount(){
-    let options ={
-      method: 'GET',
-      url: '/product'
-    }
-    axios(options)
-    .then((response)=>{
-      this.setState({
-        // product: response.data.results,
-        length: response.data.results.length
-      })
-    })
-    .catch((err)=>{
-      console.log(err)
-    })
-  }
-
-  getReviews(num){
+  getProductcount(num=null,sortBy=null, product_id){
+    sortBy = sortBy || 'relevant'
     axios.post('/reviews',
-     {count: num})
+    {sort: sortBy,
+    productId: product_id
+    })
     .then((response)=>{
-      this.setState({
-        product: response.data.results,
-      })
+      if(num === null){
+        this.setState({
+          stored_reviews: response.data.results,
+          length: response.data.results.length,
+          product: response.data.results.slice(0,2)
+        });
+        // this.setState({
+        //   product: this.state.stored_reviews.slice(0,2)
+        // })
+      }
     })
     .catch((err)=>{
       console.log(err)
+    })
+  }
+
+  moreReviews(num , review_count=2){
+    let total = num + review_count
+    this.setState({
+      count: total,
+      product: this.state.stored_reviews.slice(0,total)
     })
   }
 
   handleMore(e){
     e.preventDefault()
-    console.log('clicked')
-    axios.post('/reviews',
-    {count: this.state.count + 2})
-   .then((response)=>{
-    console.log(response.data.results)
-     this.setState({
-       product: response.data.results,
-       count: this.state.count + 2
-     })
-     console.log(this.state.count)
-   })
-   .catch((err)=>{
-     console.log(err)
-   })
+    this.moreReviews(this.state.count)
+  }
 
+  handleClick(e){
+    console.log(e.target.name)
+  }
+  markHelpful(e){
+    e.preventDefault()
+    axios.put('/helpful')
 
   }
 
@@ -83,7 +82,7 @@ class Reviews extends React.Component {
         <h1>{`Ratings & Reviews`}</h1>
         <div id='reviews-scrollable'></div>
         <h2>{this.state.length} reviews, sorted by relevance</h2>
-        {this.state.product.map((item=>(<Reviews_list product={item} />)))}
+        {this.state.product.map((item=>(<div key={item.review_id}><Reviews_list product={item} /></div>)))}
         <br></br>
         {morebutton}
         <button type='submit'> ADD A REVIEW +   </button>

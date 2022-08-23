@@ -3,36 +3,32 @@ require("dotenv").config();
 
 
 const apiurl = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews?product_id=71701&sort=relevant`
-const getProductcount =(sort)=>{
-  sort = 'helpful' || 'relevant'
-  var option = {
+const getProductcount =(sort, productId)=>{
+  var options = {
     method: 'get',
-    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews?product_id=71701&sort=${sort}`,
-    headers: {Authorization: process.env.AUTH_SECRET}
+    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews?product_id=${productId}&sort=${sort}&count=500`,
+    headers: {Authorization: process.env.DB_TOKEN}
   };
-  return axios(option)
+  return axios(options)
     .catch((err)=>{
       console.log(err)
     })
 }
 
-const getMorereviews = (num) =>{
-  num = num || 2;
-  var option = {
-    method: 'get',
-    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews?product_id=71701&sort=relevant&count=${num}`,
-    headers: {Authorization: process.env.AUTH_SECRET}
+
+const addHelpful = (id) =>{
+  var options = {
+    method: 'put',
+    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/${id}/helpful`,
+    headers: {Authorization: process.env.DB_TOKEN}
   };
-  return axios(option)
-    .catch((err)=>{
-      console.log(err)
-    })
-
+  return axios(options)
+  .catch((err=>{
+    console.log(err)
+  }))
 }
-
-
 
 module.exports ={
   getProductcount,
-  getMorereviews
+  addHelpful
 }
