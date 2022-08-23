@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import Modal from 'react-modal';
 import QSModal from './QnAQSModal.jsx'
 import QnASearch from './QnASearch.jsx'
 import QnAList from './QnAQSList.jsx'
@@ -26,7 +27,7 @@ numQS: this.state.numQS + 2
 //send
 }
 
-showQSModal = (e) => {
+showQSModal = () => {
 this.setState({
 qsModalshow: true
 })
@@ -50,7 +51,10 @@ return (
   </div>
   <div>
     <button id="loadMore" onClick={this.loadMore}>MORE ANSWER QUESTIONS</button>
-    <QSModal id="addQS" show={this.state.qsModalshow}>ADD A QUESTION +</QSModal>
+    <button onClick={showQSModal}>ADD A QUESTION +</button>
+    <Modal isOpen={this.state.qsModalshow}>
+      <QnAQSModal/>
+    </Modal>
   </div>
 </>
 
