@@ -55,6 +55,16 @@ class Reviews_list extends React.Component {
     let Irecommond = <p>✓ I recommond this product</p>
     let lessReview = <p>summary : {this.props.product.body.substring(0,250)}</p>;
     let moreReview = <p>summary : {this.props.product.body}</p>
+    const style = {
+     display: 'none',
+     position: 'fixed',
+     top: 0,
+     bottom: 0,
+     left: 0,
+     right: 0,
+     background: 'rgba(90,90,90, 0.5)',
+     zIndex: 9999,
+    }
     return(
         <div className={this.props.product.review_id} >
           <p>Reviewer name : {this.props.product.reviewer_name}</p>
