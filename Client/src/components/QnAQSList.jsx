@@ -37,6 +37,7 @@ class QnAList extends React.component {
   }
 
   render(){
+
     return (
       <div>
         <div>
@@ -44,17 +45,16 @@ class QnAList extends React.component {
         </div>
         <div id = "qsChoice">
           <a class = "lvl3">Helpful? </a>
-          <a class = "lvl4"><p onclick={this.qshelpful}><u>Yes</u></p><p> &#40;{this.state.qs.qsHelpful}&#41;  |  </p><
-            <p onclick={this.addAnswer}><u>Add Answer</u></p></a>
-            <Modal isOpen={this.state.showAnsModal}>
-              <div>
-              <button onClose={closeModal}>X</button>
-                <form>
-                  <input style="color:#888;" placeholder="Enter Answer"></input>
-                  <input type="submit" value="Submit"></input>
-                </form>
-              </div>
-            </Modal>
+          <a class = "lvl4"><p onclick={this.qshelpful}><u>Yes</u></p><p> &#40;{this.state.qs.qsHelpful}&#41;  |  </p></a>
+
+              {
+                this.state.showAnsModal ? (<div>
+                    <form>
+                      <input style="color:#888;" placeholder="Enter Answer"></input>
+                      <button onClose={closeModal}>X</button><input type="submit" value="Submit"></input>
+                    </form>
+                  </div>):(<p onclick={this.addAnswer}><u>Add Answer</u></p>)
+              }
         </div><br/>
         <div>
           <a><b>A: </b></a>
