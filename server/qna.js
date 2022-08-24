@@ -1,23 +1,26 @@
+require("dotenv").config();
 const axios = require('axios');
 
 
 const endPoint = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions`
 
-const getQuestions =(productId)=>{
+const getQuestions = (productId) => {
+  console.log(productId);
   var options = {
-    method: 'get',
-    url: endPoint + `?product_id=${productId}`,
-    headers: {Authorization: process.env.DB_TOKEN}
+    method: 'GET',
+    url: endPoint,
+    params: {
+      product_id: productId
+    },
+    headers: {
+      Authorization: process.env.DB_TOKEN}
   };
   return axios(options)
-    .catch((err)=>{
-      console.log(err)
-    })
 }
 
 const getAnswers =(questionId)=>{
   var options = {
-    method: 'get',
+    method: 'GET',
     url: endPoint + `/${questionId}/answers`,
     headers: {Authorization: process.env.DB_TOKEN}
   };

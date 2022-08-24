@@ -1,8 +1,8 @@
-import React from "React"
+import React from "react"
 import QnAAnsList from "./QnAAnsList.jsx";
 import axios from 'axios';
 
-class QnAList extends React.component {
+class QnAList extends React.Component {
   constructor(props){
     super(props)
     this.state = {
@@ -45,7 +45,7 @@ class QnAList extends React.component {
         </div>
         <div id = "qsChoice">
           <a class = "lvl3">Helpful? </a>
-          <a class = "lvl4"><p onclick={this.qshelpful}><u>Yes</u></p><p> &#40;{this.state.qs.qsHelpful}&#41;  |  </p></a>
+          <a class = "lvl4"><p onClick={this.qshelpful}><u>Yes</u></p><p> &#40;{this.state.qs.qsHelpful}&#41;  |  </p></a>
 
               {
                 this.state.showAnsModal ? (<div>
@@ -53,7 +53,7 @@ class QnAList extends React.component {
                       <input style="color:#888;" placeholder="Enter Answer"></input>
                       <button onClose={closeModal}>X</button><input type="submit" value="Submit"></input>
                     </form>
-                  </div>):(<p onclick={this.addAnswer}><u>Add Answer</u></p>)
+                  </div>):(<p onClick={this.addAnswer}><u>Add Answer</u></p>)
               }
         </div><br/>
         <div>
@@ -62,7 +62,7 @@ class QnAList extends React.component {
             <QnAAnsList ans = {ans}/>
           })}
 
-        <p class = "lvl4" onclick = {this.loadAns}><b>LOAD MORE ANSWERS</b></p>
+        <p class = "lvl4" onClick = {this.loadAns}><b>LOAD MORE ANSWERS</b></p>
         </div><br/>
     </div>
     )

@@ -1,4 +1,4 @@
-import React from "React"
+import React from "react"
 
 function QnASearch (props) {
 
@@ -12,7 +12,10 @@ function QnASearch (props) {
   return (
     <div id="searchbox">
     <form onSubmit={Search}>
-      <input onChange={e => question = e.target.value}>"HAVE A QUESTION? SEARCH FOR ANSWERS..."</input>
+      <label>
+        Question:
+        <input type="text" onChange={(e) => {question = e.target.value}} value="Ask a question..."/>
+      </label>
       <button type="submit"></button>
     </form>
     </div>

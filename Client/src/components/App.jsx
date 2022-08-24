@@ -2,6 +2,7 @@ import ProductOverview from './ProductOverview.jsx';
 import QnA from './QnA.jsx';
 import RelatedProducts from './RelatedProducts.jsx';
 import Reviews from './Reviews.jsx';
+import React, { useState } from 'react';
 
 
 let App = (props) => {
@@ -9,12 +10,12 @@ let App = (props) => {
   return (
     <>
       <div>
-        some title and nev bar maybe?
+        <h2>Product</h2>
       </div>
-      <ProductOverview id={id} handleClick={setID}/>
-      <RelatedProducts id={id} handleClick={setID}/>
+      {/* <ProductOverview id={id} handleClick={setID}/>
+      <RelatedProducts id={id} handleClick={setID}/> */}
       <QnA id={id} handleClick={setID}/>
-      <Reviews id={id} handleClick={setID}/>
+      {/* <Reviews id={id} handleClick={setID}/> */}
     </>
   );
 }

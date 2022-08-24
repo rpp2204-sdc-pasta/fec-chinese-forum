@@ -7,7 +7,7 @@ const reviews =require('./reviews.js')
 const qna =require('./qna.js')
 const port = process.env.PORT || 3000;
 const { getRelated } = require('./related');
-const { Outfit } = require('../db/index.js');
+//const { Outfit } = require('../db/index.js');
 
 app.use(express.static(path.join(__dirname, '../client/dist')));
 app.use(express.json());
@@ -63,9 +63,10 @@ app.delete('/outfit', (req, res) => {
 //===========================================
 // QnA api
 app.get('/qs', (req,res)=>{
+  //console.log(req.body.productId);
   qna.getQuestions(req.body.productId).then((response) => {
-    console.log(response);
-    res.send(response);
+    //console.log(response.data);
+    res.send(response.data);
   }).catch((err) => {
     console.log(err)
   })
@@ -73,8 +74,8 @@ app.get('/qs', (req,res)=>{
 
 app.get('/ans', (req,res)=>{
   qna.getAnswers(req.body.qsId).then((response) => {
-    console.log(response);
-    res.send(response);
+    console.log(response.data);
+    res.send(response.data);
   }).catch((err) => {
     console.log(err)
   })
@@ -82,18 +83,30 @@ app.get('/ans', (req,res)=>{
 
 app.post('/qs', (req,res)=>{
   console.log(req.body);
+  // {
+  //   body: "",
+  //   name: "",
+  //   email: "",
+  //   product_id: integer
+  // }
   qna.postQuestion(req.body).then((response) => {
-    console.log(response);
-    res.send(response);
+    //console.log(response.data);
+    res.send(response.data);
   }).catch((err) => {
     console.log(err)
   })
 })
 
 app.post('/ans', (req,res)=>{
+  // {
+  //   body: "",
+  //   name: "",
+  //   email: "",
+  //   photos: ""
+  // }
   qna.postAnswer(req.body.questionId, req.body.options).then((response) => {
-    console.log(response);
-    res.send(response);
+    //console.log(response.data);
+    res.send(response.data);
   }).catch((err) => {
     console.log(err)
   })
@@ -102,8 +115,8 @@ app.post('/ans', (req,res)=>{
 app.put('/qshelpful', (req,res)=>{
   console.log(req.body);
   qna.markQSHelpful(req.body.questionId).then((response) => {
-    console.log(response);
-    res.send(response);
+    //console.log(response);
+    res.send(200);
   }).catch((err) => {
     console.log(err)
   })
@@ -112,8 +125,8 @@ app.put('/qshelpful', (req,res)=>{
 app.put('/anshelpful', (req,res)=>{
   console.log(req.body);
   qna.markAnsHelpful(req.body.ansId).then((response) => {
-    console.log(response);
-    res.send(response);
+    //console.log(response);
+    res.send(200);
   }).catch((err) => {
     console.log(err)
   })
@@ -122,8 +135,8 @@ app.put('/anshelpful', (req,res)=>{
 app.put('/reportQs', (req,res)=>{
   console.log(req.body);
   qna.reportQS(req.body.questionId).then((response) => {
-    console.log(response);
-    res.send(response);
+    //console.log(response);
+    res.send(200);
   }).catch((err) => {
     console.log(err)
   })
@@ -133,7 +146,7 @@ app.put('/reportAns', (req,res)=>{
   console.log(req.body);
   qna.reportAns(req.body.ansId).then((response) => {
     console.log(response);
-    res.send(response);
+    res.send(200);
   }).catch((err) => {
     console.log(err)
   })
