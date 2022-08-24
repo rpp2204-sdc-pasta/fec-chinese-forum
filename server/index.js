@@ -119,7 +119,7 @@ app.put('/anshelpful', (req,res)=>{
   })
 })
 
-app.put('/reportQs', (req,res)=>{
+app.put('/reportas', (req,res)=>{
   console.log(req.body);
   qna.reportQS(req.body.questionId).then((response) => {
     console.log(response);
@@ -129,7 +129,7 @@ app.put('/reportQs', (req,res)=>{
   })
 })
 
-app.put('/reportAns', (req,res)=>{
+app.put('/reportans', (req,res)=>{
   console.log(req.body);
   qna.reportAns(req.body.ansId).then((response) => {
     console.log(response);

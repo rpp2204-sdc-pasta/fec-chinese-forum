@@ -1,4 +1,4 @@
-import React from "React"
+import React from "react"
 import QnAAnsList from "./QnAAnsList.jsx";
 import axios from 'axios';
 

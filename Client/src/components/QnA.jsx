@@ -12,7 +12,7 @@ class QnA extends React.component {
         qna: [],
         qsModalshow: false,
         searching: false,
-        searchResult: []
+        searchResult: [],
         numQS: 2
       }
     }
@@ -41,7 +41,7 @@ class QnA extends React.component {
     Search = (QS) => {
       //write search function
       let searchResult = [];
-      this.state.qna.forEach((val){
+      this.state.qna.forEach((val) => {
         if(val.results.question_body.includes(QS)){
           searchResult.push(val);
         }

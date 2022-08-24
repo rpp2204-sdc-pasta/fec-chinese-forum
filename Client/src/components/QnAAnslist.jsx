@@ -1,4 +1,4 @@
-import React from "React"
+import React from "react"
 import axios from 'axios';
 
 function QnAAnsList (props) {
