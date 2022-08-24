@@ -1,10 +1,10 @@
 import StarRating from './StarRating.jsx';
 
-let Card = (props) => (
+let Outfit = (props) => (
   <li className="card" >
     <div className="card-img">
-      <img src="../resource/star.png" className="card-button" alt="compare product" />
-      <div className="card-current-img" onClick={props.handleClick}>
+      <img src="../resource/cross.jpg" className="card-button" alt="delete this outfit" />
+      <div className="card-current-img" onClick={() => {props.handleClick(props.item.id)}}>
         {props.item.photos !== undefined && <img src={props.item.photos[0].url} />}
         {props.item.photos === undefined && <p>sry... no img here</p>}
       </div>
@@ -25,4 +25,4 @@ let Card = (props) => (
   </li>
 )
 
-export default Card;
+export default Outfit;
