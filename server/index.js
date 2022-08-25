@@ -9,7 +9,7 @@ const port = process.env.PORT || 3000;
 const { getRelated } = require('./related');
 const { Outfit } = require('../db/index.js');
 
-app.use(express.static(path.join(__dirname, '../client/dist')));
+app.use(express.static(path.join(__dirname, '../Client/dist')));
 app.use(express.json());
 
 //https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp

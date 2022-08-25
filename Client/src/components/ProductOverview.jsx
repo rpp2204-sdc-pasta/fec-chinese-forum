@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import OverviewImages from './ProductOverviewComponents/OverviewImages.jsx';
 import OverviewReviews from './ProductOverviewComponents/OverviewReviews.jsx';
 import OverviewPrice from './ProductOverviewComponents/OverviewPrice.jsx';
