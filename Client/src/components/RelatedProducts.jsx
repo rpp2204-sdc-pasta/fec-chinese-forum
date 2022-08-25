@@ -94,19 +94,27 @@ class RelatedProducts extends React.Component {
   render() {
     return (
       <>
-        <h3>RELATED PRODUCTS</h3>
-        <ul className="related-products">
-          {this.state.products.map(product => <Card item={product} handleClick={this.handleCompare} />)}
-        </ul>
-        <h3>YOUR OUTFIT</h3>
-        <ul className="outfit-list">
-          <li className="card" onClick={this.handleAdd} >
-            <div className="add-outfit">
-              <img src="../resource/addButton.jpg" alt="add to outfit"/>
+        <section className="related">
+          <h3 className="section-title">RELATED PRODUCTS</h3>
+          <button className="pre-button">&#10132;</button>
+          <button className="next-button">&#10132;</button>
+          <div className="related-products">
+            {this.state.products.map(product => <Card item={product} handleClick={this.handleCompare} />)}
+          </div>
+        </section>
+        <section className="outfit">
+          <h3 className="section-title">YOUR OUTFIT</h3>
+          <button className="pre-button">&#10132;</button>
+          <button className="next-button">&#10132;</button>
+          <div className="outfit-list">
+            <div className="card" onClick={this.handleAdd} >
+              <div className="add-outfit">
+                <img src="../resource/addButton.jpg" alt="add to outfit"/>
+              </div>
             </div>
-          </li>
-          {this.state.outfits.map(outfit => <Outfit item={outfit} handleClick={this.handleDelete} />)}
-        </ul>
+            {this.state.outfits.map(outfit => <Outfit item={outfit} handleClick={this.handleDelete} />)}
+          </div>
+        </section>
       </>
     )
   }
