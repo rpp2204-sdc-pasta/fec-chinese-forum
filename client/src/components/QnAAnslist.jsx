@@ -1,4 +1,4 @@
-import React from "React"
+import React from "react"
 import axios from 'axios';
 
 function QnAAnsList (props) {
@@ -10,6 +10,7 @@ function QnAAnsList (props) {
 
   const reportAns = () => {
     //notify of reporting.
+    axios.post(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/${id}/helpful`)
   }
 
 

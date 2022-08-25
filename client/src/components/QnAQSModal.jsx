@@ -1,4 +1,4 @@
-import React from "React"
+import React from "react"
 
 function QSModal (props) {
 
@@ -11,9 +11,9 @@ function QSModal (props) {
 
     return (
     <div>
-      <button onClose={() => {this.onClose();}}>X</button>
       <form>
         <input style="color:#888;" placeholder="Enter Question"></input>
+        <button onClose={() => {this.onClose();}}>X</button>
         <input type="submit" value="Submit"></input>
       </form>
     </div>

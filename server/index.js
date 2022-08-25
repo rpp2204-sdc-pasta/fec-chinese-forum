@@ -4,6 +4,7 @@ const path = require('path');
 const express = require('express');
 const app = express();
 const reviews =require('./reviews.js')
+const qna =require('./qna.js')
 const port = process.env.PORT || 3000;
 const { getRelated } = require('./related');
 const { Outfit } = require('../db/index.js');
@@ -59,7 +60,95 @@ app.delete('/outfit', (req, res) => {
     }
   })
 });
+//===========================================
+// QnA api
+app.get('/qs', (req,res)=>{
+  qna.getQuestions(req.body.productId).then((response) => {
+    console.log(response);
+    res.send(response);
+  }).catch((err) => {
+    console.log(err)
+  })
+})
 
+app.get('/ans', (req,res)=>{
+  qna.getAnswers(req.body.qsId).then((response) => {
+    console.log(response);
+    res.send(response);
+  }).catch((err) => {
+    console.log(err)
+  })
+})
+
+app.post('/qs', (req,res)=>{
+  console.log(req.body);
+  qna.postQuestion(req.body).then((response) => {
+    console.log(response);
+    res.send(response);
+  }).catch((err) => {
+    console.log(err)
+  })
+})
+
+app.post('/ans', (req,res)=>{
+  qna.postAnswer(req.body.questionId, req.body.options).then((response) => {
+    console.log(response);
+    res.send(response);
+  }).catch((err) => {
+    console.log(err)
+  })
+})
+
+app.put('/qshelpful', (req,res)=>{
+  console.log(req.body);
+  qna.markQSHelpful(req.body.questionId).then((response) => {
+    console.log(response);
+    res.send(response);
+  }).catch((err) => {
+    console.log(err)
+  })
+})
+
+app.put('/anshelpful', (req,res)=>{
+  console.log(req.body);
+  qna.markAnsHelpful(req.body.ansId).then((response) => {
+    console.log(response);
+    res.send(response);
+  }).catch((err) => {
+    console.log(err)
+  })
+})
+
+app.put('/reportas', (req,res)=>{
+  console.log(req.body);
+  qna.reportQS(req.body.questionId).then((response) => {
+    console.log(response);
+    res.send(response);
+  }).catch((err) => {
+    console.log(err)
+  })
+})
+
+app.put('/reportans', (req,res)=>{
+  console.log(req.body);
+  qna.reportAns(req.body.ansId).then((response) => {
+    console.log(response);
+    res.send(response);
+  }).catch((err) => {
+    console.log(err)
+  })
+})
+// getQuestions,
+// getAnswers,
+// postQuestion,
+// postAnswer,
+// reportQS,
+// reportAns,
+// markQSHelpful,
+// markAnsHelpful
+
+
+//=================================================
 //===========================================
 // reviews api
 app.post('/reviews', (req,res)=>{
