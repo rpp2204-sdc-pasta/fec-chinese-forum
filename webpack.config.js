@@ -7,7 +7,7 @@ module.exports = {
   mode: "development",
   entry: path.join(__dirname, "/Client/src/index.jsx"),
   output: {
-    path: path.join(__dirname, "/client/dist"),
+    path: path.join(__dirname, "./Client/dist"),
     filename: "bundle.js",
   },
   devtool: "source-map",

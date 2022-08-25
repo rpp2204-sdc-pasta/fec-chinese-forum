@@ -1,4 +1,5 @@
 const axios = require('axios');
+require("dotenv").config();
 
 
 const apiurl = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews?product_id=71701&sort=relevant`
@@ -13,6 +14,7 @@ const getProductcount =(sort, productId)=>{
       console.log(err)
     })
 }
+
 
 const addHelpful = (id) =>{
   var options = {
