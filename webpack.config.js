@@ -5,13 +5,9 @@ const path = require("path");
 
 module.exports = {
   mode: "development",
-<<<<<<< HEAD
-  entry: path.join(__dirname, "./client/src/index.jsx"),
-=======
   entry: path.join(__dirname, "/Client/src/index.jsx"),
->>>>>>> 57263e9393d861591d29feab86b0234ca423a379
   output: {
-    path: path.join(__dirname, "./client/dist"),
+    path: path.join(__dirname, "./Client/dist"),
     filename: "bundle.js",
   },
   devtool: "source-map",

@@ -13,9 +13,9 @@ let App = (props) => {
         some title and nev bar maybe?
       </div>
       <ProductOverview id={id} handleClick={setID}/>
-      <RelatedProducts id={id} handleClick={setID}/>
+      {/* <RelatedProducts id={id} handleClick={setID}/>
       <QnA id={id} handleClick={setID}/>
-      <Reviews id={id} handleClick={setID}/>
+      <Reviews id={id} handleClick={setID}/> */}
     </>
   );
 }
