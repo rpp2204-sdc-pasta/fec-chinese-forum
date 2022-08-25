@@ -5,7 +5,7 @@ const axios = require('axios');
 const endPoint = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions`
 
 const getQuestions = (productId) => {
-  console.log(productId);
+  //console.log(productId);
   var options = {
     method: 'GET',
     url: endPoint,

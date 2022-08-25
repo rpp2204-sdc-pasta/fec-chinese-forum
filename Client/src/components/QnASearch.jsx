@@ -13,10 +13,9 @@ function QnASearch (props) {
     <div id="searchbox">
     <form onSubmit={Search}>
       <label>
-        Question:
-        <input type="text" onChange={(e) => {question = e.target.value}} value="Ask a question..."/>
+        <input type="text" onChange={(e) => {question = e.target.value}} value="Search Questions..."/>
       </label>
-      <button type="submit"></button>
+      <button type="submit">X</button>
     </form>
     </div>
     )

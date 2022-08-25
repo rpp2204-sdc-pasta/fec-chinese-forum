@@ -10,6 +10,16 @@ function QnAAnsList (props) {
 
   const reportAns = () => {
     //notify of reporting.
+    var options = {
+      method: 'post',
+      url: endPoint,
+      data: options,
+      headers: {Authorization: process.env.DB_TOKEN}
+    };
+    return axios(options)
+      .catch((err)=>{
+        console.log(err)
+      })
     axios.post(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/${id}/helpful`)
   }
 

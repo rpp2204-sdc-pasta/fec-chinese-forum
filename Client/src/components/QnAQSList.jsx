@@ -6,9 +6,13 @@ class QnAList extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      qs: this.props.qnaSet.question,
-      ans: this.props.qnaSet.ans,
+      qsid: this.props.qnaSet.question_id,
+      qs: this.props.qnaSet.question_body,
+      date: this.props.qnaSet.question_date,
+      ans: this.props.qnaSet.answers,
       showAnsModal: false,
+      qshelpful: this.props.qnaSet.question_helpfulness,
+      qsreported: this.props.qnaSet.reported,
       numAns: 2
     }
   }
@@ -37,7 +41,17 @@ class QnAList extends React.Component {
   }
 
   render(){
-
+    let AnsList;
+    // if(Object.keys(this.state.ans).length>0){
+    //   AnsList =
+    //   <a><b>A: </b></a>
+    //   {this.state.ans.slice(0,this.state.numAns).map(ans => {
+    //     <QnAAnsList ans = {ans}/>
+    //   })}
+    // <p class = "lvl4" onClick = {this.loadAns}><b>LOAD MORE ANSWERS</b></p>
+    // } else {
+    //   AnsList =<></>
+    // }
     return (
       <div>
         <div>
@@ -56,14 +70,8 @@ class QnAList extends React.Component {
                   </div>):(<p onClick={this.addAnswer}><u>Add Answer</u></p>)
               }
         </div><br/>
-        <div>
-          <a><b>A: </b></a>
-          {this.state.ans.slice(0,this.state.numAns).map(ans => {
-            <QnAAnsList ans = {ans}/>
-          })}
-
-        <p class = "lvl4" onClick = {this.loadAns}><b>LOAD MORE ANSWERS</b></p>
-        </div><br/>
+        {AnsList}
+        <br/>
     </div>
     )
   }

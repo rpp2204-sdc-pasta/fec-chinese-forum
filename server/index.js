@@ -15,7 +15,7 @@ app.use(express.json());
 //https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp
 
 app.get('/related/:id', (req, res) => {
-  getRelated(req.params.id)
+  getRelated(req)
     .then(result => {
       res.status(200).send(result);
     })
@@ -62,13 +62,13 @@ app.delete('/outfit', (req, res) => {
 });
 //===========================================
 // QnA api
-app.get('/qs', (req,res)=>{
-  //console.log(req.body.productId);
-  qna.getQuestions(req.body.productId).then((response) => {
-    //console.log(response.data);
-    res.send(response.data);
+app.get('/qs/:id', (req,res)=>{
+  //console.log(req.params, "THIS IS GETTING HERE");
+  qna.getQuestions(req.params.id).then((response) => {
+    //console.log(response.data.results);
+    res.send(response.data.results);
   }).catch((err) => {
-    console.log(err)
+    //console.log(err)
   })
 })
 

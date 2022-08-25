@@ -15,22 +15,20 @@ class QnA extends React.Component {
         searchResult: [],
         numQS: 2
       }
-      const endpoint = "http://localhost:3000/";
+      this.endpoint = "http://localhost:3000/";
     }
 
     componentDidMount = () => {
       //API call to get questions and answers.
-      console.log(this.props.id);
-      axios({
+      var options = {
         method:'get',
-        url: this.endpoint + "qs",
-        data: {
-          productId: this.props.id
-        }
-      }).then((result)=>{
+        url: this.endpoint + "qs/" + this.props.id
+      }
+      axios(options).then((result)=>{
         this.setState({
-          qna: result
+          qna: result.data
         })
+        //console.log(result.data);
       }).catch(err => {
         console.log(err)
       })
@@ -76,7 +74,7 @@ class QnA extends React.Component {
 
         return ( <>
             <h3> QUESTIONS &#38; ANSWERS </h3>
-            <div><QnASearch search = {this.Search.bind(this)}/></div><button type="button" onClick={this.cancelSearch.bind(this)}>X</button>
+            <div><QnASearch search = {this.Search.bind(this)} cancelSearch = {this.cancelSearch.bind(this)}/></div>
             <div>
                {this.state.qna.slice(0, this.state.numQS).map((qs, i) =>
                 <QnAList qnaSet = {qs}/>
