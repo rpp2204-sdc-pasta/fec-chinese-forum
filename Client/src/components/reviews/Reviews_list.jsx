@@ -67,6 +67,7 @@ class Reviews_list extends React.Component {
     }
     return(
         <div className={this.props.product.review_id} >
+          <div className={this.props.product.reviewer_name}>
           <p>Reviewer name : {this.props.product.reviewer_name}</p>
           <p>rating : {this.props.product.rating}</p>
           <p style={{fontWeight:'bold'}}> {this.props.product.summary.substring(0,60)}</p>
@@ -78,7 +79,10 @@ class Reviews_list extends React.Component {
           {this.props.product.response? <p>Response from seller: {this.props.product.response}</p> : null}
           <p>Was this review helpful?</p>
           <button disabled={this.state.helpClicked? true: false} type='submit' className={this.props.product.review_id} onClick={this.markHelpful}> Yes ({this.state.helpfulCount})</button>
+
+          </div>
         </div>
+
     )
   }
 }

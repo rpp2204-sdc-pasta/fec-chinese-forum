@@ -30,9 +30,10 @@ const Photo = (props)=>{
     setModal (!modal)
   }
 
-  if (modal){
+
     return(
-      <div>
+      <div className='modal' id='modal'>
+
         <img onClick={toggleModal} src={props.photo.url}
         height= '60'
         width='10%'
@@ -40,16 +41,6 @@ const Photo = (props)=>{
       </div>
 
     )
-  } else {
-    return (
-      <div>
-        <img onClick={toggleModal} src={props.photo.url} className='modalbackground'
-        style={style}
-        alt={props.photo.id}/>
-
-      </div>
-    )
-  }
       // return(
       // <div>
       //   <img onClick={toggleModal} src={props.photo.url}
