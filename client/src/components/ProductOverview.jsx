@@ -18,6 +18,10 @@ class ProductOverview extends React.Component {
 
   changeStyle(style_id) {
     console.log('style selected: ', style_id)
+    this.setState({
+      style_id: style_id
+    });
+
   }
 
   render() {
@@ -35,64 +39,68 @@ class ProductOverview extends React.Component {
       features: [
         { feature: 'Fabric', value: 'Canvas' },
         { feature: 'Buttons', value: 'Brass' }
+      ],
+      styles : [
+        {
+          style_id: 444218,
+          name: 'Forest Green & Black',
+          original_price: '140.00',
+          sale_price: '100.00',
+          'default?': false,
+          photos: [
+            {
+              thumbnail_url: 'https://images.unsplash.com/photo-1544441892-794166f1e3be?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80',
+              url: 'https://images.unsplash.com/photo-1544441892-794166f1e3be?ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80'
+            },
+            {
+              thumbnail_url: 'https://images.unsplash.com/photo-1514590734052-344a18719611?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80',
+              url: 'https://images.unsplash.com/photo-1514590734052-344a18719611?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80'
+            }
+          ],
+          skus: {
+            '2580652': { quantity: 14, size: '7' },
+            '2580653': { quantity: 25, size: '7.5' }
+          }
+        },
+        {
+          style_id: 444219,
+          name: 'Desert Brown & Tan',
+          original_price: '140.00',
+          sale_price: null,
+          'default?': true,
+          photos: [
+            {
+              thumbnail_url: 'https://images.unsplash.com/photo-1542280756-74b2f55e73ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80',
+              url: 'https://images.unsplash.com/photo-1542280756-74b2f55e73ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80'
+            },
+            {
+              thumbnail_url: 'https://images.unsplash.com/photo-1521093470119-a3acdc43374a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80',
+              url: 'https://images.unsplash.com/photo-1521093470119-a3acdc43374a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80'
+            }
+          ],
+          skus: {
+            '2580654': { quantity: 1, size: '5' },
+            '2580655': { quantity: 25, size: '5.5' }
+          }
+        }
       ]
     };
 
-
-
-    var styles = [
-      {
-        style_id: 444218,
-        name: 'Forest Green & Black',
-        original_price: '140.00',
-        sale_price: '100.00',
-        'default?': true,
-        photos: [
-          {
-            thumbnail_url: 'https://images.unsplash.com/photo-1544441892-794166f1e3be?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80',
-            url: 'https://images.unsplash.com/photo-1544441892-794166f1e3be?ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80'
-          },
-          {
-            thumbnail_url: 'https://images.unsplash.com/photo-1514590734052-344a18719611?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80',
-            url: 'https://images.unsplash.com/photo-1514590734052-344a18719611?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80'
-          }
-        ],
-        skus: {
-          '2580652': { quantity: 14, size: '7' },
-          '2580653': { quantity: 25, size: '7.5' },
-        }
-      },
-      {
-        style_id: 444219,
-        name: 'Desert Brown & Tan',
-        original_price: '140.00',
-        sale_price: null,
-        'default?': false,
-        photos: [
-          {
-            thumbnail_url: 'https://images.unsplash.com/photo-1542280756-74b2f55e73ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80',
-            url: 'https://images.unsplash.com/photo-1542280756-74b2f55e73ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80'
-          },
-          {
-            thumbnail_url: 'https://images.unsplash.com/photo-1521093470119-a3acdc43374a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80',
-            url: 'https://images.unsplash.com/photo-1521093470119-a3acdc43374a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80'
-          }
-        ],
-        skus: {
-          '2580654': { quantity: 1, size: '5' },
-          '2580655': { quantity: 25, size: '7' },
-        }
-      }
-    ];
 
     return (
       <div>
         <h2 className="Overview-category">{product.category}</h2>
         <h1 className="Overview-title">{product.name}</h1>
         <OverviewPrice
-          original_price={styles[0].original_price}
-          sale_price={styles[0].sale_price}/>
-        <OverviewStyleSelect styles={styles} changeStyle={this.changeStyle}/>
+          original_price={product.styles.find(style=> style.style_id === this.state.style_id).original_price}
+          sale_price={product.styles.find(style=> style.style_id === this.state.style_id).sale_price}/>
+        <OverviewStyleSelect
+          name={product.styles.find(style=> style.style_id === this.state.style_id).name}
+          styles={product.styles}
+          changeStyle={this.changeStyle}/>
+        <OverviewAddtoCart
+          style_id={this.state.style_id}
+          skus={product.styles.find(style=> style.style_id === this.state.style_id).skus}/>
       </div>
     );
   }

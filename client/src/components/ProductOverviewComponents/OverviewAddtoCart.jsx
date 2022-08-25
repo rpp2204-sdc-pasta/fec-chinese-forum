@@ -1,30 +1,50 @@
 import React from 'react';
+import OverviewSizeSelect from './OverviewSizeSelect.jsx';
+import OverviewQuantitySelect from './OverviewQuantitySelect.jsx';
 
 class OverviewAddtoCart extends React.Component {
-  constructor(props) {
-    super(props);
+		constructor(props) {
+			super(props);
+			this.state = {
+				sku: 0,
+				quantity: 0
+			}
+			this.handleSizeSelect = this.handleSizeSelect.bind(this);
+			this.handleQuantitySelect = this.handleQuantitySelect.bind(this);
+		}
 
-  }
+		handleSizeSelect(sku) {
+			this.setState({
+				sku: sku})
+		}
 
-  render() {
-    return (
-			//size selector
-			//quantity selector
-			//button to add to cart
+		handleQuantitySelect(quantity) {
+			this.setState({
+				quantity: quantity})
+		}
 
-      //select size dropdown of current selected style
-			//select quantity dropdown
-			//if no size is selected, quantity should default to -
-			//    and dropdown disabled
-			//size should range from 1 to maximum,
-			//once size is selected, quantity automatically set to 1
-			//
-			<div>
-				adding to cart
-			</div>
 
-    );
-  }
-}
+		render() {
+			let quantity = 0;
+			if (this.props.skus[this.state.sku] !== undefined) {
+				quantity = (this.props.skus[this.state.sku].quantity);
+				console.log(quantity);
+			}
+
+			return (
+				<div>
+					<React.StrictMode>
+						<OverviewSizeSelect
+							skus={this.props.skus}
+							handleSizeSelect={this.handleSizeSelect}/>
+						<OverviewQuantitySelect
+							quantity={quantity}
+							handleQuantitySelect={this.handleQuantitySelect}/>
+					</React.StrictMode>
+				</div>
+			);
+		}
+	}
+
 
 export default OverviewAddtoCart;

@@ -14,7 +14,7 @@ class OverviewStyle extends React.Component {
     return (
       <div>
         <img
-        className='Overview-stylethumbnail'
+        className='Overview-styleThumbnail'
         src={this.props.style.photos[0].thumbnail_url}
         onClick={this.handleClick}/>
       </div>

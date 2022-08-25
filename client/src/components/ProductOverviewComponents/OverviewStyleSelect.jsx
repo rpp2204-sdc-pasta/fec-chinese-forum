@@ -22,12 +22,12 @@ class OverviewStyleSelect extends React.Component {
 			//A style must be selected at all times
       <div>
         <div className='Overview-styleSelect'>
-          {this.props.styles[0].name}
+          {this.props.name}
         </div>
         <div className="Overview-styles">
-          {this.props.styles.map((style, i) =>
+          {this.props.styles.map((style, index) =>
           <OverviewStyle
-          count={i} style={style}
+          count={index} style={style}
           onClick={this.onClickStyleSelect}/>)}
         </div>
 
