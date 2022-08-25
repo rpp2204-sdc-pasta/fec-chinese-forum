@@ -1,20 +1,23 @@
-import { lazy } from 'react';
-const ProductOverview = lazy(() => import('./ProductOverview.jsx'));
-// const QnA = lazy(() => import('./QnA.jsx'));
-// const RelatedProducts = lazy(() => import('./RelatedProducts.jsx'));
-// const Reviews = lazy(() => import('./Reviews.jsx'));
+import ProductOverview from './ProductOverview.jsx';
+import QnA from './QnA.jsx';
+import RelatedProducts from './RelatedProducts.jsx';
+import Reviews from './Reviews.jsx';
+import { useState } from 'react';
 
 
-let App = (props) => (
-  <>
-    <div>
-      some title and nev bar maybe?
-    </div>
-    <ProductOverview />
-    {/* <RelatedProducts />
-    <QnA />
-    <Reviews /> */}
-  </>
-)
+let App = (props) => {
+  let [id, setID] = useState('71700');
+  return (
+    <>
+      <div>
+        some title and nev bar maybe?
+      </div>
+      <ProductOverview id={id} handleClick={setID}/>
+      <RelatedProducts id={id} handleClick={setID}/>
+      <QnA id={id} handleClick={setID}/>
+      <Reviews id={id} handleClick={setID}/>
+    </>
+  );
+}
 
 export default App;
