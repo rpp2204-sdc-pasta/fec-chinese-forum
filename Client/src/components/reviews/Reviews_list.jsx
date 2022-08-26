@@ -65,20 +65,29 @@ class Reviews_list extends React.Component {
      background: 'rgba(90,90,90, 0.5)',
      zIndex: 9999,
     }
+
+    const image_style ={
+      display: 'flex'
+    }
     return(
         <div className={this.props.product.review_id} >
-          <p>Reviewer name : {this.props.product.reviewer_name}</p>
-          <p>rating : {this.props.product.rating}</p>
-          <p style={{fontWeight:'bold'}}> {this.props.product.summary.substring(0,60)}</p>
-          {this.props.product.photos.length > 0? this.props.product.photos.map((photo)=>(<picture key={photo.id}><Photo photo={photo}/></picture>)) : null}
-          <p>date : {date} </p>
-          {this.state.showMore? moreReview: lessReview}
-          {this.props.product.body.length>= 250 && !this.state.showMore? <button type='submit' onClick={this.handleShowmore}>Show more</button>: null}
-          {this.props.product.recommend? Irecommond: null}
-          {this.props.product.response? <p>Response from seller: {this.props.product.response}</p> : null}
-          <p>Was this review helpful?</p>
-          <button disabled={this.state.helpClicked? true: false} type='submit' className={this.props.product.review_id} onClick={this.markHelpful}> Yes ({this.state.helpfulCount})</button>
+          <div className={this.props.product.reviewer_name}>
+            <p>Reviewer name : {this.props.product.reviewer_name}</p>
+            <p>rating : {this.props.product.rating}</p>
+            <p style={{fontWeight:'bold'}}> {this.props.product.summary.substring(0,60)}</p>
+            <div style={image_style}>
+              {this.props.product.photos.length > 0? this.props.product.photos.map((photo)=>(<picture key={photo.id}><Photo photo={photo}/></picture>)) : null}
+            </div>
+            <p>date : {date} </p>
+            {this.state.showMore? moreReview: lessReview}
+            {this.props.product.body.length>= 250 && !this.state.showMore? <button type='submit' onClick={this.handleShowmore}>Show more</button>: null}
+            {this.props.product.recommend? Irecommond: null}
+            {this.props.product.response? <p>Response from seller: {this.props.product.response}</p> : null}
+            <p>Was this review helpful?</p>
+            <button disabled={this.state.helpClicked? true: false} type='submit' className={this.props.product.review_id} onClick={this.markHelpful}> Yes ({this.state.helpfulCount})</button>
+          </div>
         </div>
+
     )
   }
 }
