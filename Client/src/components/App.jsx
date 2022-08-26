@@ -2,7 +2,8 @@ import ProductOverview from './ProductOverview.jsx';
 import QnA from './QnA.jsx';
 import RelatedProducts from './RelatedProducts.jsx';
 import Reviews from './Reviews.jsx';
-import React, { useState } from 'react';
+import { useState } from 'react';
+import css from '../styles/style.css';
 
 
 let App = (props) => {

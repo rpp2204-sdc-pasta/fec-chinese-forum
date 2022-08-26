@@ -43,7 +43,7 @@ class QnA extends React.Component {
 
     showQSModal = () => {
       this.setState({
-        qsModalshow: (this.state.qsModalshow?false:true)
+        qsModalshow: qsModalshow?false:true
       })
     }
 

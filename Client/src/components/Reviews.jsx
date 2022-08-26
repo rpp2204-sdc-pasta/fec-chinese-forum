@@ -3,11 +3,12 @@ import axios from 'axios';
 import Reviews_list from './reviews/Reviews_list.jsx'
 
 
+
 class Reviews extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      product_id: '71700'||this.props.id,
+      product_id: '71701'||this.props.id,
       stored_reviews: [],
       product: [],
       // helpful: false,
@@ -39,9 +40,6 @@ class Reviews extends React.Component {
           length: response.data.results.length,
           product: response.data.results.slice(0,2)
         });
-        // this.setState({
-        //   product: this.state.stored_reviews.slice(0,2)
-        // })
       }
     })
     .catch((err)=>{
@@ -73,19 +71,64 @@ class Reviews extends React.Component {
 
 
   render(){
+
+    const style_1 = {
+      display:'flex',
+      justifyContent: 'center',
+      width: '100%',
+      position:'relative',
+      overflow: 'hidden'
+
+    }
+
+    const style_review_box = {
+      height: '500px',
+      // maxWidth: '700px',
+      width: '550px',
+      display: 'flex',
+      flexDirection: 'column',
+      minHeight: 0,
+      margin: '100px',
+      // border: '3px solid #333',
+      // backgroundColor: '#dfdfdf',
+    }
+    const style_body_reviews ={
+      position: 'relative',
+      background: 'sliver',
+      flex: 2
+    }
+    const scolled ={
+      position: 'absolute',
+      left:0,
+      top:0,
+      right:0,
+      bottom:0,
+      overflowY: 'auto'
+    }
+
+
     let morebutton
     if (this.state.length > 2 && this.state.length > 0 && this.state.count<= this.state.length){
       morebutton = <button type='submit' onClick={this.handleMore}> MORE REVIEWS</button>
     }
     return(
-      <div>
-        <h1>{`Ratings & Reviews`}</h1>
-        <div id='reviews-scrollable'></div>
-        <h2>{this.state.length} reviews, sorted by relevance</h2>
-        {this.state.product.map((item=>(<div key={item.review_id}><Reviews_list product={item} /></div>)))}
+      <div className='containerAll' style={style_1}>
+        <div>{`Ratings & Reviews`}</div>
+        <div className='containerBreakdown'>breakdown</div>
         <br></br>
-        {morebutton}
-        <button type='submit'> ADD A REVIEW +   </button>
+        <br></br>
+        <div className='containerReviews' style={style_review_box} >
+        <div>{this.state.length} reviews, sorted by relevance         </div>
+          <div style={style_body_reviews}>
+            <div style={scolled}>
+              {this.state.product.map((item=>(<div key={item.review_id}><Reviews_list product={item} /></div>)))}
+              <br></br>
+              {morebutton}
+              <button type='submit'> ADD A REVIEW +   </button>
+
+            </div>
+          </div>
+        </div>
       </div>
   )}
 }
