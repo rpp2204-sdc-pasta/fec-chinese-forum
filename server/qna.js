@@ -30,11 +30,12 @@ const getAnswers =(questionId)=>{
     })
 }
 
-const postQuestion =(options)=>{
+const postQuestion =(opt)=>{
+  //console.log(opt);
   var options = {
     method: 'post',
     url: endPoint,
-    data: options,
+    data: opt,
     headers: {Authorization: process.env.DB_TOKEN}
   };
   return axios(options)

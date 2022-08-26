@@ -1,4 +1,5 @@
-import React from "react"
+import React from "react";
+import axios from 'axios';
 
 function QnASearch (props) {
 
@@ -6,16 +7,18 @@ function QnASearch (props) {
 
   const Search = (e) => {
     e.preventDefault();
+    console.log(question);
     props.search(question);
   };
 
   return (
     <div id="searchbox">
-    <form onSubmit={Search}>
+    <form>
       <label>
-        <input type="text" onChange={(e) => {question = e.target.value}} value="Search Questions..."/>
+        <input type="text" onChange={(e) => {question = e.target.value}} placeholder="Search Questions..."/>
       </label>
-      <button type="submit">X</button>
+      <button type="submit" onClick={Search}>Submit</button>
+      <button onClick={() => {this.onClose();}}>X</button>
     </form>
     </div>
     )

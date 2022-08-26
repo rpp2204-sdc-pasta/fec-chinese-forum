@@ -28,7 +28,7 @@ class QnA extends React.Component {
         this.setState({
           qna: result.data
         })
-        //console.log(result.data);
+        console.log(result.data);
       }).catch(err => {
         console.log(err)
       })
@@ -43,7 +43,7 @@ class QnA extends React.Component {
 
     showQSModal = () => {
       this.setState({
-        qsModalshow: true
+        qsModalshow: (this.state.qsModalshow?false:true)
       })
     }
 
@@ -51,16 +51,18 @@ class QnA extends React.Component {
       //write search function
       let searchResult = [];
       this.state.qna.forEach((val) => {
-        if(val.results.question_body.includes(QS)){
+        if(val.question_body.includes(QS)){
           searchResult.push(val);
         }
-      })
+      });
       if(searchResult.length > 0){
+        console.log(searchResult);
         this.setState({
           searchResult: searchResult,
           searching: true
         })
       }
+      console.log(this.state);
     }
 
     cancelSearch = () => {
@@ -76,13 +78,15 @@ class QnA extends React.Component {
             <h3> QUESTIONS &#38; ANSWERS </h3>
             <div><QnASearch search = {this.Search.bind(this)} cancelSearch = {this.cancelSearch.bind(this)}/></div>
             <div>
-               {this.state.qna.slice(0, this.state.numQS).map((qs, i) =>
-                <QnAList qnaSet = {qs}/>
-                )}
+              {this.state.searching && this.state.searchResult.map((qs, i) =>
+                <QnAList qnaSet = {qs}/>)}
+              {!this.state.searching && this.state.qna.slice(0, this.state.numQS).map((qs, i) =>
+              <QnAList qnaSet = {qs}/>
+              )}
             </div>
             <div>
               <button id = "loadMore" onClick = {this.loadMore}> MORE ANSWER QUESTIONS </button>
-              {this.state.qsModalshow ? <QnAQSModal/> : <button onClick = {this.showQSModal}> ADD A QUESTION + </button>}
+              {this.state.qsModalshow &&<QSModal  show = {this.showQSModal.bind(this)} productId = {this.props.id} />}{!this.state.qsModalshow && <button onClick = {this.showQSModal}> ADD A QUESTION + </button>}
             </div>
             </>)}
 }

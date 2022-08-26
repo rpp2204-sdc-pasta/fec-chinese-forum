@@ -1,33 +1,50 @@
-import React from "react"
+import React from "react";
 import axios from 'axios';
 
 function QnAAnsList (props) {
 
+  console.log(props.ans);
 
   const anshelpful = () => {
     //+1 on this answer's helpfulness.
+    console.log("This is working");
+    axios({
+      method:'put',
+      url: "http://localhost:3000/anshelpful",
+      data: {
+        ansId: props.ans.id
+      }
+    }).then((result)=>{
+      console.log(result);
+    }).catch(err => {
+      console.log(err);
+    })
   }
 
   const reportAns = () => {
     //notify of reporting.
-    var options = {
-      method: 'post',
-      url: endPoint,
-      data: options,
-      headers: {Authorization: process.env.DB_TOKEN}
-    };
-    return axios(options)
-      .catch((err)=>{
-        console.log(err)
+    axios({
+      method:'put',
+      url: "http://localhost:3000/reportAns",
+      data: {
+        ansId: props.ans.id
+      }
+    }).then((result)=>{
+      console.log(result);
+      this.setState({
+        reported: true
       })
-    axios.post(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/${id}/helpful`)
+    }).catch(err => {
+      console.log(err);
+    })
+
   }
 
 
   return (
       <div>
-        <a class="lvl3">{props.ans.answer}</a><br/>
-        <a class="lvl4">by {props.ans.user}, {props.ans.date}  |  Helpful? <p onClick={anshelpful}><u>Yes</u></p><p> &#40;{props.ans.ansHelpful}&#41;  |  </p><p onClick = {reportAns}><u>Report</u></p></a><br/>
+        <a class="lvl3">{props.ans.body}</a><br/>
+        <a class="lvl4">by {props.ans.answer_name}, {props.ans.date}  |  Helpful? <a href="#" onClick = {anshelpful}><u>Yes</u></a><a> &#40;{props.ans.helpfulness}&#41;  |  </a><a href="#" onClick = {reportAns}><u>Report</u></a></a><br/>
       </div>
   )
 }

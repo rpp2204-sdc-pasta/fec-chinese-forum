@@ -82,13 +82,14 @@ app.get('/ans', (req,res)=>{
 })
 
 app.post('/qs', (req,res)=>{
-  console.log(req.body);
+  //console.log(req.body);
   // {
   //   body: "",
   //   name: "",
   //   email: "",
   //   product_id: integer
   // }
+  req.body.product_id = parseInt(req.body.product_id);
   qna.postQuestion(req.body).then((response) => {
     //console.log(response.data);
     res.send(response.data);
@@ -104,7 +105,8 @@ app.post('/ans', (req,res)=>{
   //   email: "",
   //   photos: ""
   // }
-  qna.postAnswer(req.body.questionId, req.body.options).then((response) => {
+  //req.body.questionId = parseInt(req.body.questionId);
+  qna.postAnswer(req.body.questionId, req.body.opt).then((response) => {
     //console.log(response.data);
     res.send(response.data);
   }).catch((err) => {
@@ -113,7 +115,7 @@ app.post('/ans', (req,res)=>{
 })
 
 app.put('/qshelpful', (req,res)=>{
-  console.log(req.body);
+  //console.log(req.body);
   qna.markQSHelpful(req.body.questionId).then((response) => {
     //console.log(response);
     res.send(200);
@@ -133,7 +135,7 @@ app.put('/anshelpful', (req,res)=>{
 })
 
 app.put('/reportQs', (req,res)=>{
-  console.log(req.body);
+  //console.log(req.body);
   qna.reportQS(req.body.questionId).then((response) => {
     //console.log(response);
     res.send(200);
