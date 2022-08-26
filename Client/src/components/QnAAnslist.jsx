@@ -7,7 +7,7 @@ function QnAAnsList (props) {
 
   const anshelpful = () => {
     //+1 on this answer's helpfulness.
-    //console.log("This is");
+    console.log("This is");
     axios({
       method:'put',
       url: "http://localhost:3000/anshelpful",
