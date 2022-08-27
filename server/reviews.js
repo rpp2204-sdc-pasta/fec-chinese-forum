@@ -28,7 +28,17 @@ const addHelpful = (id) =>{
   }))
 }
 
+const avgStar = (data) =>{
+  var sum = 0;
+  var length = data.length;
+  data.forEach((item)=>{
+    sum += item.rating
+  })
+  return parseFloat(sum/length).toFixed(1)
+}
+
 module.exports ={
   getProductcount,
-  addHelpful
+  addHelpful,
+  avgStar
 }

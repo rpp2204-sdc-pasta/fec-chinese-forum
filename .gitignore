@@ -5,7 +5,3 @@ Client/dist/
 .DS_Store
 
 .env
-
-Client/src/App.jsx
-
-db/
