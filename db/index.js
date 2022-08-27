@@ -14,8 +14,5 @@ let outfitSchema = mongoose.Schema({
 let Outfit = mongoose.model('Outfit', outfitSchema);
 
 
-<<<<<<< HEAD
+
 module.exports.Outfit = Outfit;
-=======
-module.exports.Outfit = Outfit;
->>>>>>> a7390485ee32964aa067e28c5456ec5dae02c45e
