@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import axios from 'axios';
 
 
-class QnAAnsList (props) extends React.Component {
+class QnAAnsList extends React.Component {
   constructor(props){
     super(props)
     this.state = {
