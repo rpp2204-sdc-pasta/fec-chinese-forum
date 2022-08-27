@@ -1,5 +1,5 @@
 import React from "react"
-import QnAAnsList from "./QnAAnsList.jsx";
+import QnAAnsList from "./QnAAnslist.jsx";
 import axios from 'axios';
 
 class QnAList extends React.Component {
