@@ -93,18 +93,19 @@ class QnAList extends React.Component {
   render(){
     let AnsList
     if(Object.keys(this.state.ans).length>0){
-      AnsList = Object.keys(this.state.ans).slice(0,this.state.numAns).map(ansId =>
-        <QnAAnsList ans = {this.state.ans[ansId]}/>
+      AnsList = Object.keys(this.state.ans).slice(0,this.state.numAns).map((ansId, i) =>
+        <QnAAnsList key = {i} ans = {this.state.ans[ansId]}/>
       )
     }
 
     return (
       <div>
-        <td>
           <div>
-          <a><b>Q: {this.qs}</b></a>
-          <span class = "lvl3">  Helpful? </span>
-          <span class = "lvl4"><a href="#" onClick={this.qshelpful}><u>Yes</u></a><span> &#40;{this.state.qshelpfulness}&#41;  |  </span>
+          <div><b>Q: {this.qs}</b></div>
+          <span className = "lvl3">  Helpful? </span>
+          <span className = "lvl4">
+            <a href="#" onClick={this.qshelpful}><u>Yes</u></a>
+            <span> &#40;{this.state.qshelpfulness}&#41;  |  </span>
           {!this.state.reported && <a href="#" onClick={this.reportQS}>Report</a>}
           {this.state.reported && <a href="#">Reported</a>} | </span>
 
@@ -122,8 +123,7 @@ class QnAList extends React.Component {
         </div><br/>
         {AnsList}
         <br/>
-        </td>
-        <button class = "lvl4" onClick = {this.loadAns}>LOAD MORE ANSWERS</button><br/><br/>
+        <button className = "lvl4" onClick = {this.loadAns}>LOAD MORE ANSWERS</button><br/><br/>
     </div>
     )
   }

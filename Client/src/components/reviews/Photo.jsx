@@ -1,7 +1,7 @@
 import React from 'react';
 import {useState} from 'react'
-import css from '/Users/zefengshen/Documents/hack reactor/chinese_forum/Client/src/styles/style.css'
-// import '..../src/styles/style.css';
+//import css from '/Users/zefengshen/Documents/hack reactor/chinese_forum/Client/src/styles/style.css'
+//import '..../src/styles/style.css';
 
 const imagestyle = {
   objectFit: 'cover',

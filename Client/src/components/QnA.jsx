@@ -43,7 +43,7 @@ class QnA extends React.Component {
 
     showQSModal = () => {
       this.setState({
-        qsModalshow: qsModalshow?false:true
+        qsModalshow: this.state.qsModalshow?false:true
       })
     }
 
@@ -81,7 +81,7 @@ class QnA extends React.Component {
               {this.state.searching && this.state.searchResult.map((qs, i) =>
                 <QnAList qnaSet = {qs}/>)}
               {!this.state.searching && this.state.qna.slice(0, this.state.numQS).map((qs, i) =>
-              <QnAList qnaSet = {qs}/>
+              <QnAList key = {i} qnaSet = {qs}/>
               )}
             </div>
             <div>
