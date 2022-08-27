@@ -2,11 +2,11 @@ import React from "react";
 import axios from 'axios';
 
 
-class QnAAnsList (props) extends React.Component {
+class QnAAnsList extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      yesCount: this.props.ans.helpfulness
+      yesCount: this.props.ans.helpfulness,
       votedYes: false
     }
   }
@@ -24,11 +24,9 @@ class QnAAnsList (props) extends React.Component {
     }).then((result)=>{
       console.log(result);
       this.setState({
+        votedYes: true,
         yesCount: this.state.yesCount + 1
-      })
-      this.setState({
-        votedYes: true
-      })
+      });
     }).catch(err => {
       console.log(err);
     })

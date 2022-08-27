@@ -104,7 +104,7 @@ class QnAList extends React.Component {
           <div><b>Q: {this.qs}</b></div>
           <span className = "lvl3">  Helpful? </span>
           <span className = "lvl4">
-            <a href="#" onClick={this.qshelpful}><u>Yes</u></a>
+            <a onClick={this.qshelpful}><u>Yes</u></a>
             <span> &#40;{this.state.qshelpfulness}&#41;  |  </span>
           {!this.state.reported && <a href="#" onClick={this.reportQS}>Report</a>}
           {this.state.reported && <a href="#">Reported</a>} | </span>
