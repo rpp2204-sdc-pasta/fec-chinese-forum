@@ -1,4 +1,4 @@
-import StarRating from './StarRating.jsx';
+import StarRating from '../StarRating.jsx';
 
 let Outfit = (props) => (
   <div className="card" >
