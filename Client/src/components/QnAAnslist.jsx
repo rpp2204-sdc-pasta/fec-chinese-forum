@@ -14,7 +14,7 @@ class QnAAnsList (props) extends React.Component {
   anshelpful = (e) => {
     //+1 on this answer's helpfulness.
     e.preventDefault();
-    console.log("This is Work!");
+    //console.log("This is Work!");
     axios({
       method:'put',
       url: "/anshelpful",
@@ -59,7 +59,7 @@ class QnAAnsList (props) extends React.Component {
         <a class="lvl3">{this.props.ans.body}</a><br/>
         <a class="lvl4">by {this.props.ans.answer_name}, {this.props.ans.date}  |  Helpful?
         {!this.state.votedYes ?? <a onClick = {this.anshelpful}><u>Yes</u></a>}
-        {!this.state.votedYes ?? <a><u>Yes</u></a>}
+        {this.state.votedYes ?? <a><u>Yes</u></a>}
         <a> &#40;{this.state.yesCount}&#41;  |  </a>
         <a onClick = {this.reportAns}><u>Report</u></a></a><br/>
       </div>
