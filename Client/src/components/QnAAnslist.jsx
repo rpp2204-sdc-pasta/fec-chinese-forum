@@ -9,6 +9,7 @@ class QnAAnsList extends React.Component {
       yesCount: this.props.ans.helpfulness,
       votedYes: false
     }
+    this.date = new Date(this.props.ans.date).toLocaleString('en-US');
   }
 
   anshelpful = (e) => {
@@ -54,8 +55,8 @@ class QnAAnsList extends React.Component {
   render() {
     return (
       <div>
-        <a class="lvl3">{this.props.ans.body}</a><br/>
-        <a class="lvl4">by {this.props.ans.answer_name}, {this.props.ans.date}  |  Helpful?
+        <a className="lvl3">{this.props.ans.body}</a><br/>
+        <a className="lvl4">by {this.props.ans.answerer_name}, {this.date}  |  Helpful?
         {!this.state.votedYes ?? <a onClick = {this.anshelpful}><u>Yes</u></a>}
         {this.state.votedYes ?? <a><u>Yes</u></a>}
         <a> &#40;{this.state.yesCount}&#41;  |  </a>

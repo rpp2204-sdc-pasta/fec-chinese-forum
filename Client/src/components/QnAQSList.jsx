@@ -9,7 +9,7 @@ class QnAList extends React.Component {
       showAnsModal: false,
       numAns: 2,
       reported: this.props.qnaSet.reported,
-      qshelpfulness: 0 || this.props.qnaSet.question_helpfulness,
+      qshelpfulness: this.props.qnaSet.question_helpfulness,
       ans: this.props.qnaSet.answers
     }
     this.qsid = this.props.qnaSet.question_id
@@ -70,6 +70,7 @@ class QnAList extends React.Component {
       }
     }).then((result)=>{
       console.log(result);
+      this.props.refresh();
       this.showModal();
     }).catch(err => {
       //console.log(err);
@@ -106,8 +107,8 @@ class QnAList extends React.Component {
           <span className = "lvl4">
             <a onClick={this.qshelpful}><u>Yes</u></a>
             <span> &#40;{this.state.qshelpfulness}&#41;  |  </span>
-          {!this.state.reported && <a href="#" onClick={this.reportQS}>Report</a>}
-          {this.state.reported && <a href="#">Reported</a>} | </span>
+          {!this.state.reported && <a onClick={this.reportQS}>Report</a>}
+          {this.state.reported && <a>Reported</a>} | </span>
 
               {
                 this.state.showAnsModal &&
@@ -119,7 +120,7 @@ class QnAList extends React.Component {
                       <button onClick={this.showModal}>X</button>
                     </form>
               }
-              {!this.state.showAnsModal && <a href="#" onClick={this.showModal}><u>Add Answer</u></a>}
+              {!this.state.showAnsModal && <a onClick={this.showModal}><u>Add Answer</u></a>}
         </div><br/>
         {AnsList}
         <br/>
