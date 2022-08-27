@@ -12,7 +12,6 @@ class OverviewQuantitySelect extends React.Component {
   }
 
   render() {
-    console.log(this.props.quantity);
     let quantitySelect = []
     for(var i = 1; (i < this.props.quantity+1) && (i <= 15); i++) {
       quantitySelect.push(<option value={i}>{i}</option>);

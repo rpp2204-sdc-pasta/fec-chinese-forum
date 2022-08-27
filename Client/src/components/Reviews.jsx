@@ -149,9 +149,13 @@ class Reviews extends React.Component {
 
     return(
       <div className='containerAll' style={style_1}>
-        <div>{`Ratings & Reviews`}</div>
-          <Ratingbreakdown avgRating={this.state.avgRating}/>
-        <div className='containerReviews' style={style_review_box} >
+        <div className='container title'>{`Ratings & Reviews`}
+          <div className='container breakdown'>
+            <br></br>
+            <Ratingbreakdown avgRating={this.state.avgRating}/>
+          </div>
+        </div>
+        <div className='container reviews' style={style_review_box} >
           <Sorted length={this.state.length} selectFilter={this.selectFilter} product_id={this.props.id} resetCount={this.resetCount}/>
           <div style={style_body_reviews}>
             <div style={scolled}>
