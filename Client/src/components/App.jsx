@@ -13,7 +13,7 @@ let App = (props) => {
       <div>
         some title and nev bar maybe?
       </div>
-      <ProductOverview id={id} handleClick={setID}/>
+      <ProductOverview id={id}/>
       <RelatedProducts id={id} handleClick={setID}/>
       <QnA id={id} handleClick={setID}/>
       <Reviews id={id} handleClick={setID}/>
