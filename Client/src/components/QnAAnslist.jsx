@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import axios from 'axios';
 
 
@@ -7,22 +7,27 @@ class QnAAnsList extends React.Component {
     super(props)
     this.state = {
       yesCount: this.props.ans.helpfulness
+      votedYes: false
     }
   }
 
-  anshelpful = () => {
+  anshelpful = (e) => {
     //+1 on this answer's helpfulness.
-    console.log("This is");
+    e.preventDefault();
+    //console.log("This is Work!");
     axios({
       method:'put',
-      url: "http://localhost:3000/anshelpful",
+      url: "/anshelpful",
       data: {
         ansId: this.props.ans.id
       }
     }).then((result)=>{
       console.log(result);
       this.setState({
-        yesCount: this.props.ans.helpfulness + 1
+        yesCount: this.state.yesCount + 1
+      })
+      this.setState({
+        votedYes: true
       })
     }).catch(err => {
       console.log(err);
@@ -33,7 +38,7 @@ class QnAAnsList extends React.Component {
     //notify of reporting.
     axios({
       method:'put',
-      url: "http://localhost:3000/reportAns",
+      url: "/reportAns",
       data: {
         ansId: this.props.ans.id
       }
@@ -52,7 +57,11 @@ class QnAAnsList extends React.Component {
     return (
       <div>
         <a class="lvl3">{this.props.ans.body}</a><br/>
-        <a class="lvl4">by {this.props.ans.answer_name}, {this.props.ans.date}  |  Helpful? <a href="#" onClick = {this.anshelpful}><u>Yes</u></a><a> &#40;{this.state.yesCount}&#41;  |  </a><a href="#" onClick = {this.reportAns}><u>Report</u></a></a><br/>
+        <a class="lvl4">by {this.props.ans.answer_name}, {this.props.ans.date}  |  Helpful?
+        {!this.state.votedYes ?? <a onClick = {this.anshelpful}><u>Yes</u></a>}
+        {this.state.votedYes ?? <a><u>Yes</u></a>}
+        <a> &#40;{this.state.yesCount}&#41;  |  </a>
+        <a onClick = {this.reportAns}><u>Report</u></a></a><br/>
       </div>
     )
   }

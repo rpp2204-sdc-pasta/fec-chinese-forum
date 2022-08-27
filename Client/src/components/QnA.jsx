@@ -15,14 +15,13 @@ class QnA extends React.Component {
         searchResult: [],
         numQS: 2
       }
-      this.endpoint = "http://localhost:3000/";
     }
 
     componentDidMount = () => {
       //API call to get questions and answers.
       var options = {
         method:'get',
-        url: this.endpoint + "qs/" + this.props.id
+        url:  "/qs/" + this.props.id
       }
       axios(options).then((result)=>{
         this.setState({

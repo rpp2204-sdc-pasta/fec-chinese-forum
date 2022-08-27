@@ -11,7 +11,7 @@ function QSModal (props) {
     e.preventDefault();
     axios({
       method:'post',
-      url: "http://localhost:3000/qs/",
+      url: "/qs",
       data: {
         body: question,
         name: name,
