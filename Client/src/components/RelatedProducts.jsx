@@ -8,17 +8,19 @@ class RelatedProducts extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentID: '71700',
       products: [],
       outfits: [],
       compare: false,
-      compareID: 0
+      compareFeatures: {}
     };
     this.getRelated = this.getRelated.bind(this);
     this.getOutfit = this.getOutfit.bind(this);
     this.handleCompare = this.handleCompare.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
-    // this.mainItemFeatures = props.features;
+    this.handleAdd = this.handleAdd.bind(this);
+    this.currentID = props.id;
+    this.mainItem = props.mainItem;
+    this.handleClick = props.handleClick;
   }
 
   componentDidMount() {
@@ -29,7 +31,7 @@ class RelatedProducts extends React.Component {
   getRelated() {
     let options = {
       method: 'GET',
-      url: `/related/${this.state.currentID}`
+      url: '/related/' + this.currentID
     };
     axios(options)
       .then(response => {
@@ -48,7 +50,7 @@ class RelatedProducts extends React.Component {
     };
     axios(options)
       .then(response => {
-        console.log(response.data);
+        // console.log(response.data);
         this.setState({ outfits: response.data });
       })
       .catch(err => {
@@ -57,7 +59,31 @@ class RelatedProducts extends React.Component {
   }
 
   handleCompare(index) {
+    let compareData = {};
+    let currentName = this.mainItem.name;
+    let compareName = this.state.products[index].name;
+    this.state.products[index].features.forEach(feature => {
+      if (!compareData[feature.feature]) {
+        compareData[feature.feature] = {}
+      }
+      compareData[feature.feature]["compare"] = feature.value;
+    });
 
+    this.mainItem.features.forEach(feature => {
+      if (!compareData[feature.feature]) {
+        compareData[feature.feature] = {}
+      }
+      compareData[feature.feature]["current"] = feature.value;
+    });
+    compareData["name"] = {
+      "compare": compareName,
+      "current": currentName
+    }
+    // console.log(compareData);
+    this.setState({
+      compare: true,
+      compareFeatures: compareData
+    });
   }
 
   handleDelete(id) {
@@ -82,7 +108,7 @@ class RelatedProducts extends React.Component {
       method: 'post',
       url: '/outfit',
       data: {
-        id: id
+        id: this.state.id
       }
     };
     axios(options)
@@ -102,7 +128,7 @@ class RelatedProducts extends React.Component {
           <button className="pre-button">&#10132;</button>
           <button className="next-button">&#10132;</button>
           <div className="related-products">
-            {this.state.products.map((product, index) => <Card item={product}
+            {this.state.products.map((product, index) => <Card item={product} key={index}
               handleCompare={() => { this.handleCompare(index); }} handleClick={this.handleClick}/>)}
           </div>
         </section>
@@ -116,11 +142,11 @@ class RelatedProducts extends React.Component {
                 <img src="../resource/addButton.jpg" alt="add to outfit"/>
               </div>
             </div>
-            {this.state.outfits.map(outfit => <Outfit item={outfit} handleClick={this.handleDelete} />)}
+            {this.state.outfits.map(outfit => <Outfit item={outfit} key={outfit.id}
+            handleDelete={this.handleDelete} handleAdd={this.handleAdd} />)}
           </div>
         </section>
-        {this.state.compare && <Compare current={this.state.products[this.state.compareID]}
-          compare={this.state.products[this.state.compareID]} />}
+        {this.state.compare && <Compare data={this.state.compareFeatures} />}
         <div id="compare-overlay" ></div>
       </>
     )

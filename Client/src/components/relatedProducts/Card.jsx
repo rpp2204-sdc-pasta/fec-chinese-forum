@@ -4,8 +4,8 @@ let Card = (props) => (
   <>
     <div className="card" >
       <div className="card-img" onClick={props.handleClick} >
-        <button className="card-compare-btn">&#9733;</button>
-        <img className="card-current-img" src={props.item.photos[0].url} />
+        <button className="card-compare-btn" onClick={props.handleCompare}>&#9733;</button>
+        <img className="card-current-img" src={props.item.photos[0].url} onClick={() => {props.handleClick(props.item.id)}} />
 
         {/* <ul className="card-thumbnail">
           {props.item.photos.map(photo => {
