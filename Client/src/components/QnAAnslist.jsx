@@ -17,10 +17,13 @@ class QnAAnsList (props) extends React.Component {
       method:'put',
       url: "http://localhost:3000/anshelpful",
       data: {
-        ansId: props.ans.id
+        ansId: this.props.ans.id
       }
     }).then((result)=>{
       console.log(result);
+      this.setState({
+        yesCount: this.props.ans.helpfulness + 1
+      })
     }).catch(err => {
       console.log(err);
     })
@@ -32,7 +35,7 @@ class QnAAnsList (props) extends React.Component {
       method:'put',
       url: "http://localhost:3000/reportAns",
       data: {
-        ansId: props.ans.id
+        ansId: this.props.ans.id
       }
     }).then((result)=>{
       console.log(result);
@@ -48,8 +51,8 @@ class QnAAnsList (props) extends React.Component {
   render() {
     return (
       <div>
-        <a class="lvl3">{props.ans.body}</a><br/>
-        <a class="lvl4">by {props.ans.answer_name}, {this.props.ans.date}  |  Helpful? <a href="#" onClick = {anshelpful}><u>Yes</u></a><a> &#40;{this.state.yesCount}&#41;  |  </a><a href="#" onClick = {reportAns}><u>Report</u></a></a><br/>
+        <a class="lvl3">{this.props.ans.body}</a><br/>
+        <a class="lvl4">by {this.props.ans.answer_name}, {this.props.ans.date}  |  Helpful? <a href="#" onClick = {this.anshelpful}><u>Yes</u></a><a> &#40;{this.state.yesCount}&#41;  |  </a><a href="#" onClick = {this.reportAns}><u>Report</u></a></a><br/>
       </div>
     )
   }
