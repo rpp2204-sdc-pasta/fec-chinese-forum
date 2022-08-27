@@ -1,11 +1,13 @@
 import React from 'react';
 
+
+
 const Ratingbreakdown = (props)=>{
 
   return (
     <span>
 
-        <div>
+        <div className='containerBreakdown'>
 
           {props.avgRating}
 
