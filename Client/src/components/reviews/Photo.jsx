@@ -7,7 +7,6 @@ const imagestyle = {
   objectFit: 'cover',
   border: '0.5px solid #ddd',
   borderRadius: '50%',
-  // padding: '5px',
   height: '30px',
   width: '30px',
   position: 'relative',

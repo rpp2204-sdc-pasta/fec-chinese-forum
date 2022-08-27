@@ -169,7 +169,8 @@ app.put('/reportAns', (req,res)=>{
 app.post('/reviews', (req,res)=>{
   reviews.getProductcount(req.body.sort, req.body.productId)
     .then((response)=>{
-      res.status(200).send(response.data)
+      let avg = reviews.avgStar(response.data.results)
+      res.status(200).send({reviews:response.data, avg:avg})
     })
     .catch((err)=>{
       console.log(err)

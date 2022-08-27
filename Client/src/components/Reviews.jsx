@@ -1,6 +1,9 @@
 import React from 'react';
 import axios from 'axios';
 import Reviews_list from './reviews/Reviews_list.jsx'
+import Morebutton from './reviews/Morebutton.jsx'
+import Ratingbreakdown from './reviews/Ratingbreakdown.jsx'
+import Sorted from './reviews/Sorted.jsx'
 
 
 
@@ -8,39 +11,63 @@ class Reviews extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      product_id: '71701'||this.props.id,
-      stored_reviews: [],
+      product_id: this.props.id,
+      stored_relevant: [],
+      stored_helpful: [],
+      stored_newest:[],
+      currentLoad: [],
       product: [],
-      // helpful: false,
       count: 2,
       length: '',
+      avgRating: ''
     }
     this.handleMore=this.handleMore.bind(this)
     this.getProductcount=this.getProductcount.bind(this)
     this.moreReviews=this.moreReviews.bind(this)
-
-    // this.getReviews=this.getReviews.bind(this)
+    this.resetCount=this.resetCount.bind(this)
+    this.selectFilter=this.selectFilter.bind(this)
   }
 
 
   componentDidMount(){
-    this.getProductcount(null, null, this.state.product_id)
+    Promise.all([
+      this.getProductcount(null, 'relevant', this.state.product_id),
+      this.getProductcount(null, 'helpful', this.state.product_id),
+      this.getProductcount(null, 'newest', this.state.product_id),
+    ])
   }
 
-  getProductcount(num=null,sortBy=null, product_id){
-    sortBy = sortBy || 'relevant'
+  getProductcount(num=null,sortBy, product_id){
+    sortBy = sortBy
     axios.post('/reviews',
     {sort: sortBy,
     productId: product_id
     })
     .then((response)=>{
-      if(num === null){
+      if(num === null && sortBy === 'relevant'){
         this.setState({
-          stored_reviews: response.data.results,
-          length: response.data.results.length,
-          product: response.data.results.slice(0,2)
+          stored_relevant: response.data.reviews.results,
+          // product: response.data.results.slice(0,2)
+        });
+        return response
+      } else if(num === null && sortBy ==='helpful'){
+        this.setState({
+          stored_helpful: response.data.reviews.results,
+        });
+      } else if(num === null && sortBy ==='newest'){
+        this.setState({
+          stored_newest: response.data.reviews.results,
         });
       }
+    })
+    .then((response)=>{
+      if(sortBy === 'relevant')
+      this.setState({
+        length: response.data.reviews.results.length,
+        currentLoad: response.data.reviews.results,
+        product: response.data.reviews.results.slice(0,2),
+        avgRating: response.data.avg
+      })
     })
     .catch((err)=>{
       console.log(err)
@@ -51,8 +78,9 @@ class Reviews extends React.Component {
     let total = num + review_count
     this.setState({
       count: total,
-      product: this.state.stored_reviews.slice(0,total)
+      product: this.state.currentLoad.slice(0,total)
     })
+
   }
 
   handleMore(e){
@@ -60,15 +88,28 @@ class Reviews extends React.Component {
     this.moreReviews(this.state.count)
   }
 
-  handleClick(e){
-    console.log(e.target.name)
-  }
   markHelpful(e){
     e.preventDefault()
     axios.put('/helpful')
-
   }
 
+  resetCount(){
+    this.setState({
+      count: 2
+    })
+  }
+
+  selectFilter(value){
+    const filter ={
+      'relevant': this.state.stored_relevant,
+      'helpful': this.state.stored_helpful,
+      'newest': this.state.stored_newest
+    }
+    this.setState({
+      currentLoad: filter[value],
+      product: filter[value].slice(0,2)
+    })
+  }
 
   render(){
 
@@ -80,19 +121,16 @@ class Reviews extends React.Component {
       overflow: 'hidden'
 
     }
-
     const style_review_box = {
       height: '500px',
-      // maxWidth: '700px',
       width: '550px',
       display: 'flex',
       flexDirection: 'column',
       minHeight: 0,
       margin: '100px',
-      // border: '3px solid #333',
-      // backgroundColor: '#dfdfdf',
     }
     const style_body_reviews ={
+      wordWrap: 'break-word',
       position: 'relative',
       background: 'sliver',
       flex: 2
@@ -105,28 +143,25 @@ class Reviews extends React.Component {
       bottom:0,
       overflowY: 'auto'
     }
-
-
-    let morebutton
-    if (this.state.length > 2 && this.state.length > 0 && this.state.count<= this.state.length){
-      morebutton = <button type='submit' onClick={this.handleMore}> MORE REVIEWS</button>
+    const button_style={
+      cursor: 'pointer',
     }
+
     return(
       <div className='containerAll' style={style_1}>
         <div>{`Ratings & Reviews`}</div>
-        <div className='containerBreakdown'>breakdown</div>
-        <br></br>
-        <br></br>
+          <Ratingbreakdown avgRating={this.state.avgRating}/>
         <div className='containerReviews' style={style_review_box} >
-        <div>{this.state.length} reviews, sorted by relevance         </div>
+          <Sorted length={this.state.length} selectFilter={this.selectFilter} product_id={this.props.id} resetCount={this.resetCount}/>
           <div style={style_body_reviews}>
             <div style={scolled}>
               {this.state.product.map((item=>(<div key={item.review_id}><Reviews_list product={item} /></div>)))}
               <br></br>
-              {morebutton}
-              <button type='submit'> ADD A REVIEW +   </button>
-
             </div>
+          </div>
+          <div>
+            <Morebutton length={this.state.length} count={this.state.count} handleMore={this.handleMore}/>
+            <button style={button_style} type='submit'> ADD A REVIEW +   </button>
           </div>
         </div>
       </div>
