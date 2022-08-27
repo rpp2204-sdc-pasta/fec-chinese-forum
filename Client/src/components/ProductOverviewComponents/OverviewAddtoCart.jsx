@@ -28,19 +28,18 @@ class OverviewAddtoCart extends React.Component {
 			let quantity = 0;
 			if (this.props.skus[this.state.sku] !== undefined) {
 				quantity = (this.props.skus[this.state.sku].quantity);
-				console.log(quantity);
 			}
 
 			return (
 				<div>
-					<React.StrictMode>
-						<OverviewSizeSelect
-							skus={this.props.skus}
-							handleSizeSelect={this.handleSizeSelect}/>
-						<OverviewQuantitySelect
-							quantity={quantity}
-							handleQuantitySelect={this.handleQuantitySelect}/>
-					</React.StrictMode>
+
+					<OverviewSizeSelect
+						skus={this.props.skus}
+						handleSizeSelect={this.handleSizeSelect}/>
+					<OverviewQuantitySelect
+						quantity={quantity}
+						handleQuantitySelect={this.handleQuantitySelect}/>
+
 				</div>
 			);
 		}
