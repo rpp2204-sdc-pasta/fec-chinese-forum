@@ -122,7 +122,8 @@ app.put('/qshelpful', (req,res)=>{
   }).catch((err) => {
     console.log(err)
   })
-	@@ -127,28 +112,28 @@ app.put('/qshelpful', (req,res)=>{
+})
+
 app.put('/anshelpful', (req,res)=>{
   console.log(req.body);
   qna.markAnsHelpful(req.body.ansId).then((response) => {
