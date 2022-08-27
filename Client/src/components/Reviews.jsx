@@ -1,6 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import Reviews_list from './reviews/Reviews_list.jsx'
+import Morebutton from './reviews/Morebutton.jsx'
+import Ratingbreakdown from './reviews/Ratingbreakdown.jsx'
 import Sorted from './reviews/Sorted.jsx'
 
 
@@ -17,6 +19,7 @@ class Reviews extends React.Component {
       product: [],
       count: 2,
       length: '',
+      avgRating: ''
     }
     this.handleMore=this.handleMore.bind(this)
     this.getProductcount=this.getProductcount.bind(this)
@@ -43,26 +46,27 @@ class Reviews extends React.Component {
     .then((response)=>{
       if(num === null && sortBy === 'relevant'){
         this.setState({
-          stored_relevant: response.data.results,
+          stored_relevant: response.data.reviews.results,
           // product: response.data.results.slice(0,2)
         });
         return response
       } else if(num === null && sortBy ==='helpful'){
         this.setState({
-          stored_helpful: response.data.results,
+          stored_helpful: response.data.reviews.results,
         });
       } else if(num === null && sortBy ==='newest'){
         this.setState({
-          stored_newest: response.data.results,
+          stored_newest: response.data.reviews.results,
         });
       }
     })
     .then((response)=>{
       if(sortBy === 'relevant')
       this.setState({
-        length: response.data.results.length,
-        currentLoad: response.data.results,
-        product: response.data.results.slice(0,2)
+        length: response.data.reviews.results.length,
+        currentLoad: response.data.reviews.results,
+        product: response.data.reviews.results.slice(0,2),
+        avgRating: response.data.avg
       })
     })
     .catch((err)=>{
@@ -143,17 +147,10 @@ class Reviews extends React.Component {
       cursor: 'pointer',
     }
 
-
-    let morebutton
-    if (this.state.length > 2 && this.state.count<= this.state.length){
-      morebutton = <button disablestyle={button_style} type='submit' onClick={this.handleMore}> MORE REVIEWS</button>
-    }
     return(
       <div className='containerAll' style={style_1}>
         <div>{`Ratings & Reviews`}</div>
-        <div className='containerBreakdown'>breakdown</div>
-        <br></br>
-        <br></br>
+          <Ratingbreakdown avgRating={this.state.avgRating}/>
         <div className='containerReviews' style={style_review_box} >
           <Sorted length={this.state.length} selectFilter={this.selectFilter} product_id={this.props.id} resetCount={this.resetCount}/>
           <div style={style_body_reviews}>
@@ -162,7 +159,8 @@ class Reviews extends React.Component {
               <br></br>
             </div>
           </div>
-          <div>{morebutton}
+          <div>
+            <Morebutton length={this.state.length} count={this.state.count} handleMore={this.handleMore}/>
             <button style={button_style} type='submit'> ADD A REVIEW +   </button>
           </div>
         </div>
