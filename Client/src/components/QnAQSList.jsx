@@ -23,7 +23,7 @@ class QnAList extends React.Component {
     console.log(this.qshelpfulness);
     axios({
       method:'put',
-      url: "http://localhost:3000/qshelpful",
+      url: "/qshelpful",
       data: {
         questionId: this.qsid
       }
@@ -41,7 +41,7 @@ class QnAList extends React.Component {
     console.log(this.state.reported);
     axios({
       method:'put',
-      url: "http://localhost:3000/reportQs",
+      url: "/reportQs",
       data: {
         questionId: this.qsid
       }
@@ -59,7 +59,7 @@ class QnAList extends React.Component {
     e.preventDefault();
     axios({
       method:'post',
-      url: "http://localhost:3000/ans",
+      url: "/ans",
       data: {
         questionId: this.qsid,
         opt: {
