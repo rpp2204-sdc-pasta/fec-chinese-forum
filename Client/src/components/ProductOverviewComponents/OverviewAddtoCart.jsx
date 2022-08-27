@@ -39,9 +39,6 @@ class OverviewAddtoCart extends React.Component {
 					<OverviewQuantitySelect
 						quantity={quantity}
 						handleQuantitySelect={this.handleQuantitySelect}/>
-					<addButton
-						sku={this.state.sku}
-						quantity={this.state.quanitty}/>
 
 				</div>
 			);
