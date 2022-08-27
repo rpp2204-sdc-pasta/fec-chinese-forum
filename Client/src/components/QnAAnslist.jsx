@@ -6,7 +6,7 @@ class QnAAnsList extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      yesCount: this.props.ans.helpfulness
+      yesCount: this.props.ans.helpfulness,
       votedYes: false
     }
   }
