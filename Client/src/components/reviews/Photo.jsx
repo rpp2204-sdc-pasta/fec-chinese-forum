@@ -1,13 +1,12 @@
 import React from 'react';
 import {useState} from 'react'
-import css from '/Users/zefengshen/Documents/hack reactor/chinese_forum/Client/src/styles/style.css'
-// import '..../src/styles/style.css';
+// import css from '/Users/zefengshen/Documents/hack reactor/chinese_forum/Client/src/styles/style.css'
+// import css from '.../styles/style.css';
 
 const imagestyle = {
   objectFit: 'cover',
   border: '0.5px solid #ddd',
   borderRadius: '50%',
-  // padding: '5px',
   height: '30px',
   width: '30px',
   position: 'relative',
