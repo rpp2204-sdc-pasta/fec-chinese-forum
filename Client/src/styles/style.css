@@ -176,3 +176,17 @@
   overflow-y: scroll;
 }
 
+.containerAll {
+  background-color: white;
+  padding: 10px;
+  margin: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.containerBreakdown {
+  font-size: 90px;
+  font-weight: bold;
+}
