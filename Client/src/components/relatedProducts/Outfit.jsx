@@ -4,7 +4,7 @@ let Outfit = (props) => (
   <div className="card" >
     <div className="card-img">
       <button className="card-compare">&times;</button>
-      <div className="card-current-img" onClick={() => {props.handleClick(props.item.id)}}>
+      <div className="card-current-img" onClick={props.handleAdd}>
         {props.item.photos !== undefined && <img src={props.item.photos[0].url} />}
         {props.item.photos === undefined && <p>sry... no img here</p>}
       </div>

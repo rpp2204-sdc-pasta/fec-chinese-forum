@@ -118,7 +118,7 @@ app.put('/qshelpful', (req,res)=>{
   //console.log(req.body);
   qna.markQSHelpful(req.body.questionId).then((response) => {
     //console.log(response);
-    res.send(200);
+    res.sendStatus(200);
   }).catch((err) => {
     console.log(err)
   })
@@ -128,7 +128,7 @@ app.put('/anshelpful', (req,res)=>{
   console.log(req.body);
   qna.markAnsHelpful(req.body.ansId).then((response) => {
     //console.log(response);
-    res.send(200);
+    res.sendStatus(200);
   }).catch((err) => {
     console.log(err)
   })
@@ -138,7 +138,7 @@ app.put('/reportQs', (req,res)=>{
   //console.log(req.body);
   qna.reportQS(req.body.questionId).then((response) => {
     //console.log(response);
-    res.send(200);
+    res.sendStatus(200);
   }).catch((err) => {
     console.log(err)
   })
@@ -148,7 +148,7 @@ app.put('/reportAns', (req,res)=>{
   console.log(req.body);
   qna.reportAns(req.body.ansId).then((response) => {
     console.log(response);
-    res.send(200);
+    res.sendStatus(200);
   }).catch((err) => {
     console.log(err)
   })
