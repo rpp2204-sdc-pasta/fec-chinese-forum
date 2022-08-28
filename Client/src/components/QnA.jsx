@@ -19,6 +19,7 @@ class QnA extends React.Component {
 
     componentDidMount = () => {
       //API call to get questions and answers.
+      console.log(this.props.id)
       var options = {
         method:'get',
         url:  "/qs/" + this.props.id
