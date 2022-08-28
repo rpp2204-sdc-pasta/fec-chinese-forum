@@ -18,6 +18,7 @@ class RelatedProducts extends React.Component {
     this.handleCompare = this.handleCompare.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.handleAdd = this.handleAdd.bind(this);
+    this.closeOverlay = this.closeOverlay.bind(this);
     this.currentID = props.id;
     this.mainItem = props.mainItem;
     this.handleClick = props.handleClick;
@@ -120,6 +121,10 @@ class RelatedProducts extends React.Component {
       });
   }
 
+  closeOverlay() {
+    this.setState({compare: false});
+  }
+
   render() {
     return (
       <>
@@ -146,8 +151,7 @@ class RelatedProducts extends React.Component {
             handleDelete={this.handleDelete} handleAdd={this.handleAdd} />)}
           </div>
         </section>
-        {this.state.compare && <Compare data={this.state.compareFeatures} />}
-        <div id="compare-overlay" ></div>
+        {this.state.compare && <div id="compare-overlay" onClick={this.closeOverlay}><Compare data={this.state.compareFeatures} /></div>}
       </>
     )
   }

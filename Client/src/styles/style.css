@@ -115,6 +115,83 @@
   color: yellow;
 }
 
+#compare-overlay {
+  position: fixed;
+  opacity: 1;
+  background-color: rgba(0, 0, 0, 0);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: all;
+  z-index: 20;
+}
+
+.compare-modal {
+  opacity: 1;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-30%, -50%);
+  border: 1px solid black;
+  z-index: 30;
+  background-color: white;
+  width: 800px;
+  max-width: 60%;
+  padding: 10px 0;
+}
+
+.compare-title,
+.compare-name,
+.compare-features {
+  position: relative;
+  top: 0;
+  width: 100%;
+  text-transform: capitalize;
+}
+
+.compare-title {
+  text-align: center;
+}
+
+.compare-name {
+  height: 40px;
+}
+
+.compare-features {
+  max-height: 30vh;
+}
+
+.compare-roll {
+  position: relative;
+  width: 100%;
+  height: 20px;
+}
+
+.compare-current {
+  position: absolute;
+  left: 0;
+  width: 300px;
+  text-align: left;
+  padding: 0 10px;
+}
+
+.feature-name {
+  position: absolute;
+  left: 300px;
+  padding: 0 10px;
+  width: 200px;
+  text-align: center;
+}
+
+.compare-compare {
+  position: absolute;
+  right: 0;
+  width: 300px;
+  text-align: right;
+  padding: 0 10px;
+}
+
 .card-info {
   width: 100%;
   height: 100%;
