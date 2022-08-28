@@ -37,8 +37,21 @@ const avgStar = (data) =>{
   return parseFloat(sum/length).toFixed(1)
 }
 
+const percentRecommend = (data) =>{
+  var length = data.length
+  var count = 0
+  data.forEach((item)=>{
+    if(item.recommend === true){
+      count++
+    }
+  })
+  return parseFloat(count/length*100).toFixed(0)
+}
+
 module.exports ={
   getProductcount,
   addHelpful,
-  avgStar
+  avgStar,
+  percentRecommend
+
 }
