@@ -255,6 +255,10 @@
   overflow-y: scroll;
 }
 
+
+
+/* ================================
+Reviews */
 .containerAll {
   background-color: white;
   padding: 10px;
@@ -265,15 +269,141 @@
   flex-wrap: wrap;
 }
 
+.breakdownAll{
+  text-align: left;
+}
 .containerBreakdown {
-  font-size: 90px;
+  font-size: 70px;
   font-weight: bold;
 }
-.star:hover{
-  margin: 5px;
-  /* font-size: 90px;
-  font-weight: bold; */
-  /* background-color: red; */
-  padding: 10px;
-  color: green;
+
+.starReview{
+  padding-left: 0;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  text-align: left;
+  list-style-type: none;
+}
+
+.starBar{
+  background-color: white;
+  color: #222;
+  padding: 0.01em;
+  border: none;
+  outline: none;
+  position: relative;
+  cursor: pointer;
+}
+
+.starBar::before{
+  content:'';
+  /* margin: 0; */
+  position: absolute;
+  height: 50px;
+  top: 0;
+  left:0;
+  right:0;
+  bottom:0;
+  z-index: -1;
+  border: 2px solid rgb(240, 138, 94);
+  transition: top, left, right, bottom, 100ms ease-in-out;
+}
+
+.starBar:hover::before,
+.starBar:focus::before {
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  z-index: 1;
+}
+
+.star{
+  top:4px;
+  line-height: 2.5;
+  text-align: left;
+  position: relative;
+}
+
+
+.progress-bar{
+  position: relative;
+  border: none;
+  position: relative;
+  height: 0.5em;
+  width: 200px;
+  background: rgb(174, 171, 171);
+  color: rgb(244, 244, 242);
+  cursor: pointer;
+}
+
+.progress-bar.five::before {
+  content: '';
+  display: flex;
+  position: absolute;
+  height: .5em;
+  left: 0;
+  top: 00;
+  bottom: 0;
+  width: var(--star5-color);
+  min-width: 0;
+  max-width: 100%;
+  background-color: rgb(54, 162, 54);
+}
+
+.progress-bar.four::before {
+  content: '';
+  display: flex;
+  position: absolute;
+  height: .5em;
+  left: 0;
+  top: 00;
+  bottom: 0;
+  width: var(--star4-color);
+  min-width: 0;
+  max-width: 100%;
+  background-color: rgb(54, 162, 54);
+}
+
+.progress-bar.three::before {
+  content: '';
+  display: flex;
+  position: absolute;
+  height: .5em;
+  left: 0;
+  top: 00;
+  bottom: 0;
+  width: var(--star3-color);
+  min-width: 0;
+  max-width: 100%;
+  background-color: rgb(54, 162, 54);
+}
+
+.progress-bar.two::before {
+  content: '';
+  display: flex;
+  position: absolute;
+  height: .5em;
+  left: 0;
+  top: 00;
+  bottom: 0;
+  width: var(--star2-color);
+  min-width: 0;
+  max-width: 100%;
+  background-color: rgb(54, 162, 54);
+}
+
+.progress-bar.one::before {
+  content: '';
+  display: flex;
+  position: absolute;
+  height: .5em;
+  left: 0;
+  top: 00;
+  bottom: 0;
+  width: var(--star1-color);
+  min-width: 0;
+  max-width: 100%;
+  background-color: rgb(54, 162, 54);
 }

@@ -20,7 +20,8 @@ class Reviews extends React.Component {
       count: 2,
       length: '',
       avgRating: '',
-      percent:''
+      percent:'',
+      breakdownScore: {},
     }
     this.handleMore=this.handleMore.bind(this)
     this.getProductcount=this.getProductcount.bind(this)
@@ -67,7 +68,8 @@ class Reviews extends React.Component {
         currentLoad: response.data.reviews.results,
         product: response.data.reviews.results.slice(0,2),
         avgRating: response.data.avg,
-        percent: response.data.percent
+        percent: response.data.percent,
+        breakdownScore: response.data.breakdownScore
       })
     })
     .catch((err)=>{
@@ -151,9 +153,9 @@ class Reviews extends React.Component {
     return(
       <div className='containerAll' style={style_1}>
         <div className='left'>{`Ratings & Reviews`}
-          <div className='container breakdown'>
+          <div >
             <br></br>
-            <Ratingbreakdown avgRating={this.state.avgRating} percent={this.state.percent}/>
+            <Ratingbreakdown avgRating={this.state.avgRating} percent={this.state.percent} breakdownScore={this.state.breakdownScore}/>
           </div>
         </div>
         <div className='right' style={style_review_box} >

@@ -174,10 +174,12 @@ app.post('/reviews', (req,res)=>{
     .then((response)=>{
       let percent = reviews.percentRecommend(response.data.results)
       let avg = reviews.avgStar(response.data.results)
+      let breakdownScore = reviews.breakdownScore(response.data.results)
       res.status(200).send({
         reviews:response.data,
         avg,
-        percent
+        percent,
+        breakdownScore
       })
     })
     .catch((err)=>{
