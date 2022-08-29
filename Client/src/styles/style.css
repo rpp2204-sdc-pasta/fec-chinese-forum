@@ -214,12 +214,6 @@
   font-size: 18px;
 }
 
-.star-rating {
-  padding: 0;
-
-  margin: 5px;
-}
-
 .current-price {
   font-size: 1rem;
   color: black;
@@ -255,7 +249,31 @@
   overflow-y: scroll;
 }
 
+.single-star-outline {
+  height: 18px;
+  width: 18px;
+}
 
+.single-star-fill {
+  position: relative;
+  display: inline-block;
+  height: 18px;
+  background-color: black;
+}
+
+.single-star-container {
+  height: 18px;
+  width: 18px;
+  display: inline-block;
+}
+
+.card-price {
+  margin: 5px;
+}
+
+.star-rating {
+  margin: 5px;
+}
 
 /* ================================
 Reviews */

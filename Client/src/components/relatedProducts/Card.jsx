@@ -16,10 +16,12 @@ let Card = (props) => (
       <div className="card-info">
         <div className="card-category" >{props.item.category}</div>
         <div className="card-name" >{props.item.name}</div>
-        {props.item.sale_price !== null && (<div><span className="sale-price" >{'$' + props.item.sale_price}</span>
+        {props.item.sale_price !== null && (<div className="card-price">
+            <span className="sale-price" >{'$' + props.item.sale_price}</span>
             <span className="original-price" >{'$' + props.item.original_price}</span></div>)}
-        {props.item.sale_price === null && (<div><span className="current-price" >{'$' + props.item.original_price}</span></div>)}
-        <StarRating value={props.item.overallRating}/>
+        {props.item.sale_price === null && (<div className="card-price">
+          <span className="current-price" >{'$' + props.item.original_price}</span></div>)}
+        <StarRating rating={props.item.overallRating}/>
       </div>
     </div>
   </>
