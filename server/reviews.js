@@ -37,8 +37,43 @@ const avgStar = (data) =>{
   return parseFloat(sum/length).toFixed(1)
 }
 
+const percentRecommend = (data) =>{
+  var length = data.length
+  var count = 0
+  data.forEach((item)=>{
+    if(item.recommend === true){
+      count++
+    }
+  })
+  return parseFloat(count/length*100).toFixed(0)
+}
+
+const breakdownScore = (data) =>{
+  var total = data.length;
+  var result = {1:0,
+                2:0,
+                3:0,
+                4:0,
+                5:0};
+  data.forEach((item)=>{
+    result[item.rating]=(result[item.rating]|| 0)+1
+  })
+  const sorted = Object.keys(result)
+                    .sort()
+                    .reduce(
+                      (acc,key)=>({
+                        ...acc,
+                        [key]: parseFloat(result[key]/total*100).toFixed(0)
+                        ,}),{});
+
+return sorted
+}
+
 module.exports ={
   getProductcount,
   addHelpful,
-  avgStar
+  avgStar,
+  percentRecommend,
+  breakdownScore
+
 }
