@@ -10,7 +10,8 @@ const getQuestions = (productId) => {
     method: 'GET',
     url: endPoint,
     params: {
-      product_id: productId
+      product_id: productId,
+      count: 50
     },
     headers: {
       Authorization: process.env.DB_TOKEN}
@@ -22,6 +23,9 @@ const getAnswers =(questionId)=>{
   var options = {
     method: 'GET',
     url: endPoint + `/${questionId}/answers`,
+    params: {
+      count: 50
+    },
     headers: {Authorization: process.env.DB_TOKEN}
   };
   return axios(options)

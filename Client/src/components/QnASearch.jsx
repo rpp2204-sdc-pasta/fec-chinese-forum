@@ -3,22 +3,27 @@ import axios from 'axios';
 
 function QnASearch (props) {
 
-  var question;
-
   const Search = (e) => {
-    e.preventDefault();
-    console.log(question);
-    props.search(question);
+    let question = e.target.value;
+    if(question.length >= 3) {
+      props.search(question);
+    }
   };
+
+  const Close = (e) => {
+    e.preventDefault();
+    document.getElementById('qnaSearch').value = ''
+    props.cancelSearch();
+  }
 
   return (
     <div id="searchbox">
     <form>
       <label>
-        <input type="text" onChange={(e) => {question = e.target.value}} placeholder="Search Questions..."/>
+        <input id = "qnaSearch" type="text" onChange={Search} size = "50" placeholder="Have a question? Search for answers..."/>
       </label>
       <button type="submit" onClick={Search}>Submit</button>
-      <button onClick={() => {this.onClose();}}>X</button>
+      <button onClick={Close}>X</button>
     </form>
     </div>
     )

@@ -7,7 +7,8 @@ class QnAAnsList extends React.Component {
     super(props);
     this.state = {
       yesCount: this.props.ans.helpfulness,
-      votedYes: false
+      votedYes: false,
+      reported: false
     };
     this.date = new Date(this.props.ans.date).toLocaleString('en-US');
   }
@@ -53,15 +54,21 @@ class QnAAnsList extends React.Component {
   }
 
   render() {
-    console.log(this.state.votedYes);
+    let Yes;
+    if(!this.state.votedYes){
+      Yes = <button onClick = {this.anshelpful}>Yes</button>
+    } else {
+      Yes = <a>Yes</a>
+    }
+
+
     return (
       <div>
         <a className="lvl3">{this.props.ans.body}</a><br/>
-        <span className="lvl4">by {this.props.ans.answerer_name}, {this.date}  |  Helpful?
-        {!this.state.votedYes ?? <button onClick = {this.anshelpful}>Yes</button>}
-        {this.state.votedYes ?? <button>Yes</button>}
+        <span className="lvl4">by {this.props.ans.answerer_name}, {this.date}  |  Helpful? {Yes}</span>
         <a> &#40;{this.state.yesCount}&#41;  |  </a>
-        <button onClick = {this.reportAns}>Report</button></span><br/>
+        {!this.state.reported && <button onClick = {this.reportAns}>Report</button>}
+        {this.state.reported && <a>Reported</a>}<br/>
       </div>
     )
   }

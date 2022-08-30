@@ -10,7 +10,8 @@ class QnAList extends React.Component {
       numAns: 2,
       reported: this.props.qnaSet.reported,
       qshelpfulness: this.props.qnaSet.question_helpfulness,
-      ans: this.props.qnaSet.answers
+      ans: this.props.qnaSet.answers,
+      yes: false
     }
     this.qsid = this.props.qnaSet.question_id
     this.qs = this.props.qnaSet.question_body
@@ -30,7 +31,8 @@ class QnAList extends React.Component {
     }).then((result)=>{
       console.log(result);
       this.setState({
-        qshelpfulness: this.state.qshelpfulness + 1
+        qshelpfulness: this.state.qshelpfulness + 1,
+        yes: true
       })
     }).catch(err => {
       console.log(err);
@@ -57,6 +59,17 @@ class QnAList extends React.Component {
   }
   submitAns = (e) => {
     e.preventDefault();
+    let checkAnswerer = false
+    Object.keys(this.state.ans).forEach(val => {
+      console.log(this.state.ans[val].answerer_name);
+      if(this.state.ans[val].answerer_name === this.inputname) {
+        checkAnswerer = true;
+      }
+    });
+    if(checkAnswerer) {
+      this.showModal();
+      return alert("You've already answerd this question.");
+    }
     axios({
       method:'post',
       url: "/ans",
@@ -86,18 +99,36 @@ class QnAList extends React.Component {
   loadAns = () => {
     this.setState(
       {
-        numAns: this.state.numAns + 2
+        numAns: Object.keys(this.state.ans).length
+      }
+    )
+  }
+
+  collapse = () => {
+    this.setState(
+      {
+        numAns: 2
       }
     )
   }
 
   render(){
-    let AnsList
-    if(Object.keys(this.state.ans).length>0){
+    let AnsList, loader;
+    let AnsLength = Object.keys(this.state.ans).length;
+    if(AnsLength>0){
       AnsList = Object.keys(this.state.ans).slice(0,this.state.numAns).map((ansId, i) =>
         <QnAAnsList key = {i} ans = {this.state.ans[ansId]}/>
       )
     }
+
+    if(this.state.numAns >= AnsLength && AnsLength > 2){
+      loader = <button className = "lvl4" onClick = {this.collapse}>- COLLAPSE</button>
+    } else if(AnsLength <= 2){
+      loader = ''
+    } else {
+      loader = <button className = "lvl4" onClick = {this.loadAns}>LOAD MORE ANSWERS</button>
+    }
+
 
     return (
       <div>
@@ -105,17 +136,18 @@ class QnAList extends React.Component {
           <div><b>Q: {this.qs}</b></div>
           <span className = "lvl3">  Helpful? </span>
           <span className = "lvl4">
-            <button onClick={this.qshelpful}>Yes</button>
+            {!this.state.yes && <button onClick={this.qshelpful}>Yes</button>}
+            {this.state.yes && <a>Yes</a>}
             <span> &#40;{this.state.qshelpfulness}&#41;  |  </span>
           {!this.state.reported && <button onClick={this.reportQS}>Report</button>}
-          {this.state.reported && <button>Reported</button>} | </span>
+          {this.state.reported && <a>Reported</a>} | </span>
 
               {
                 this.state.showAnsModal &&
                     <form>
-                      <input placeholder="Name" onChange={(e) => {this.inputname = e.target.value}} placeholder="Name"></input><br/>
-                      <input placeholder="Email" onChange={(e) => {this.inputemail = e.target.value}} placeholder="Email"></input><br/>
-                      <input placeholder="Enter Answer" onChange={(e) => {this.inputanswer = e.target.value}} size="30"></input><br/>
+                      <input placeholder="Name" onChange={(e) => {this.inputname = e.target.value}} placeholder="Name" maxlength="60" required></input><br/>
+                      <input placeholder="Email" type="email" onChange={(e) => {this.inputemail = e.target.value}} placeholder="Email" maxlength="60" required></input><br/>
+                      <input placeholder="Enter Answer" onChange={(e) => {this.inputanswer = e.target.value}} size="30" maxlength="1000"required></input><br/>
                       <button type="submit" value="Submit" onClick = {this.submitAns}>Submit</button>
                       <button onClick={this.showModal}>X</button>
                     </form>
@@ -124,7 +156,7 @@ class QnAList extends React.Component {
         </div><br/>
         {AnsList}
         <br/>
-        <button className = "lvl4" onClick = {this.loadAns}>LOAD MORE ANSWERS</button><br/><br/>
+        {loader}<br/>
     </div>
     )
   }
