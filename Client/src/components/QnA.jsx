@@ -65,6 +65,12 @@ class QnA extends React.Component {
       console.log(this.state);
     }
 
+    collapse = () => {
+      this.setState({
+        numQS: 2
+      })
+    }
+
     cancelSearch = () => {
       this.setState({
         searchResult: [],
@@ -73,20 +79,26 @@ class QnA extends React.Component {
     }
 
     render() {
-
+        let loader;
+        if(this.state.numQS >= this.state.qna.length) {
+          loader = <button id = "collapse" onClick = {this.collapse}> - COLLAPSE</button>
+        } else if(this.state.qna.length > 2) {
+          loader = <button id = "loadMore" onClick = {this.loadMore}> MORE ANSWER QUESTIONS </button>
+        }
         return ( <>
             <h3> QUESTIONS &#38; ANSWERS </h3>
-            <div><QnASearch search = {this.Search.bind(this)} cancelSearch = {this.cancelSearch.bind(this)}/></div>
+            {(this.state.qna.length === 0 && !this.state.qsModalshow) && <button onClick = {this.showQSModal}> ADD A QUESTION + </button>}
+            {(this.state.qna.length > 0 && !this.state.qsModalshow) && <div><QnASearch search = {this.Search.bind(this)} cancelSearch = {this.cancelSearch.bind(this)}/></div>}
             <div>
               {this.state.searching && this.state.searchResult.map((qs, i) =>
                 <QnAList qnaSet = {qs}/>)}
               {!this.state.searching && this.state.qna.slice(0, this.state.numQS).map((qs, i) =>
-              <QnAList key = {i} qnaSet = {qs}/>
+              <QnAList key = {i} qnaSet = {qs} refresh = {this.componentDidMount}/>
               )}
             </div>
             <div>
-              <button id = "loadMore" onClick = {this.loadMore}> MORE ANSWER QUESTIONS </button>
-              {this.state.qsModalshow &&<QSModal  show = {this.showQSModal.bind(this)} productId = {this.props.id} />}{!this.state.qsModalshow && <button onClick = {this.showQSModal}> ADD A QUESTION + </button>}
+              {loader}
+              {this.state.qsModalshow &&<QSModal  show = {this.showQSModal.bind(this)} productId = {this.props.id}/>}{(this.state.qna.length > 0 && !this.state.qsModalshow) && <button onClick = {this.showQSModal}> ADD A QUESTION + </button>}
             </div>
             </>)}
 }

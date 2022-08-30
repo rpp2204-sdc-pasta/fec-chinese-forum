@@ -27,14 +27,15 @@ function QSModal (props) {
   }
 
     return (
-    <div>
+    <div className = "qsModal">
       <form>
-        <input placeholder="Name" onChange={(e) => {name = e.target.value}} placeholder="Name"></input><br/>
-        <input placeholder="Email" onChange={(e) => {email = e.target.value}} placeholder="Email"></input><br/>
-        <input placeholder="Enter Question" onChange={(e) => {question = e.target.value}} size="30"></input><br/>
+        <h4>Ask Your Question</h4>
+        <h5>About the INSERT PRODUCT NAME</h5>
+        <input placeholder="Name" onChange={(e) => {name = e.target.value}} placeholder="Name" required></input><br/>
+        <input type="email" placeholder="Email" onChange={(e) => {email = e.target.value}} placeholder="Email" required></input><br/>
+        <input placeholder="Enter Question" onChange={(e) => {question = e.target.value}} size="30" required></input><br/>
         <button type="submit" value="Submit" onClick = {submitQS}>Submit</button>
         <button onClick={props.show}>X</button>
-
       </form>
     </div>
     )
