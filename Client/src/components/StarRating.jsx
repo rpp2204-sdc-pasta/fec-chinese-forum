@@ -1,8 +1,6 @@
 let StarRating = (props) => {
   let rating = props.rating || 0;
   let stars = [];
-  console.log('triggered');
-  console.log(rating);
   while (stars.length < 5) {
       if (rating > 1) {
           stars.push(1);
