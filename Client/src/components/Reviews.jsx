@@ -3,6 +3,7 @@ import axios from 'axios';
 import Reviews_list from './reviews/Reviews_list.jsx'
 import Morebutton from './reviews/Morebutton.jsx'
 import Ratingbreakdown from './reviews/Ratingbreakdown.jsx'
+import CharBreakdown from './reviews/CharBreakdown.jsx'
 import Sorted from './reviews/Sorted.jsx'
 
 
@@ -22,12 +23,14 @@ class Reviews extends React.Component {
       avgRating: '',
       percent:'',
       breakdownScore: {},
+      characteristics: {},
     }
     this.handleMore=this.handleMore.bind(this)
     this.getProductcount=this.getProductcount.bind(this)
     this.moreReviews=this.moreReviews.bind(this)
     this.resetCount=this.resetCount.bind(this)
     this.selectFilter=this.selectFilter.bind(this)
+    this.getMeta=this.getMeta.bind(this)
   }
 
 
@@ -36,6 +39,7 @@ class Reviews extends React.Component {
       this.getProductcount(null, 'relevant', this.state.product_id),
       this.getProductcount(null, 'helpful', this.state.product_id),
       this.getProductcount(null, 'newest', this.state.product_id),
+      this.getMeta(this.state.product_id),
     ])
   }
 
@@ -67,9 +71,6 @@ class Reviews extends React.Component {
         length: response.data.reviews.results.length,
         currentLoad: response.data.reviews.results,
         product: response.data.reviews.results.slice(0,2),
-        avgRating: response.data.avg,
-        percent: response.data.percent,
-        breakdownScore: response.data.breakdownScore
       })
     })
     .catch((err)=>{
@@ -91,11 +92,6 @@ class Reviews extends React.Component {
     this.moreReviews(this.state.count)
   }
 
-  markHelpful(e){
-    e.preventDefault()
-    axios.put('/helpful')
-  }
-
   resetCount(){
     this.setState({
       count: 2
@@ -111,6 +107,24 @@ class Reviews extends React.Component {
     this.setState({
       currentLoad: filter[value],
       product: filter[value].slice(0,2)
+    })
+  }
+
+  getMeta(product_id){
+    axios.get('/reviews/meta',{params: {
+      product_id: product_id}
+    })
+    .then((response)=>{
+      // console.log(response.data.characteristics.Fit.id)
+      this.setState({
+        avgRating: response.data.avg,
+        percent: response.data.percent,
+        breakdownScore: response.data.breakdownScore,
+        characteristics: response.data.characteristics,
+      })
+    })
+    .catch((err)=>{
+      console.log(err)
     })
   }
 
@@ -156,6 +170,7 @@ class Reviews extends React.Component {
           <div >
             <br></br>
             <Ratingbreakdown avgRating={this.state.avgRating} percent={this.state.percent} breakdownScore={this.state.breakdownScore}/>
+            <CharBreakdown characteristics={this.state.characteristics}/>
           </div>
         </div>
         <div className='right' style={style_review_box} >

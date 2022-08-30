@@ -172,14 +172,8 @@ app.put('/reportAns', (req,res)=>{
 app.post('/reviews', (req,res)=>{
   reviews.getProductcount(req.body.sort, req.body.productId)
     .then((response)=>{
-      let percent = reviews.percentRecommend(response.data.results)
-      let avg = reviews.avgStar(response.data.results)
-      let breakdownScore = reviews.breakdownScore(response.data.results)
       res.status(200).send({
-        reviews:response.data,
-        avg,
-        percent,
-        breakdownScore
+        reviews:response.data
       })
     })
     .catch((err)=>{
@@ -188,13 +182,27 @@ app.post('/reviews', (req,res)=>{
 })
 
 app.put('/reviews/:id', (req, res)=>{
-  // console.log(req.params.id)
   reviews.addHelpful(req.params.id)
   .then((resonose)=>{
     res.status(200).send('Helpful')
   })
   .catch((err)=>{
     console.log(err)
+  })
+})
+
+app.get('/reviews/meta',(req, res)=>{
+  reviews.getMeta(req.query.product_id)
+  .then((response)=>{
+    let percent = reviews.percentRecommend(response.data.recommended)
+    let avg = reviews.avgStar(response.data.ratings)
+    let breakdownScore = reviews.breakdownScore(response.data.ratings)
+    res.status(200).send({
+      avg,
+      percent,
+      breakdownScore,
+      characteristics: response.data.characteristics,
+    })
   })
 })
 

@@ -444,3 +444,70 @@ Reviews */
   max-width: 100%;
   background-color: rgb(54, 162, 54);
 }
+
+.charaBreakdown{
+  padding:0;
+  margin:0;
+  position: relative;
+  display:flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+.bar-text{
+  font-size: 12px;
+}
+
+.bar-box{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.bar-title{
+  margin-top: 10px;
+  font-size: medium;
+
+}
+.bar-one{
+  margin-top: 10px;
+  width:80px;
+  height:0.5em;
+  background-color: rgb(149, 145, 145);
+  color: #222;
+  padding: 0.01em;
+  border: none;
+  outline: none;
+  position: relative;
+}
+.bar-two{
+  margin-top: 10px;
+  width: 80px;
+  height:0.5em;
+  background-color: rgb(149, 145, 145);
+  color: #222;
+  padding: 0.01em;
+  border: none;
+  outline: none;
+  position: relative;
+}
+
+.bar-three{
+  margin-top: 10px;
+  width: 80px;
+  height:0.5em;
+  background-color: rgb(149, 145, 145);
+  color: #222;
+  padding: 0.01em;
+  border: none;
+  outline: none;
+  position: relative;
+
+}
+
+
+.bar-box::before{
+  content: '▼';
+  display: flex;
+  right:calc(-4% - var(--characteristics-bar));
+  position: relative;
+  z-index: 2;
+}

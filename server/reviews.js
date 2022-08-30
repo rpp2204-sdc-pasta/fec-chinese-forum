@@ -29,44 +29,49 @@ const addHelpful = (id) =>{
 }
 
 const avgStar = (data) =>{
+  var result = {};
+  var total = 0;
   var sum = 0;
-  var length = data.length;
-  data.forEach((item)=>{
-    sum += item.rating
+  Object.entries(data).map((value)=>{
+      total += Number(value[0])* Number(value[1])
+      sum += Number(value[1])
   })
-  return parseFloat(sum/length).toFixed(1)
+  return parseFloat(total/sum).toFixed(1)
 }
 
 const percentRecommend = (data) =>{
-  var length = data.length
-  var count = 0
-  data.forEach((item)=>{
-    if(item.recommend === true){
-      count++
-    }
+  var total = 0;
+  Object.values(data).map((item)=>{
+    total += Number(item)
   })
-  return parseFloat(count/length*100).toFixed(0)
+  return parseFloat(Number(data['true'])/total*100).toFixed(0)
 }
 
 const breakdownScore = (data) =>{
-  var total = data.length;
-  var result = {1:0,
-                2:0,
-                3:0,
-                4:0,
-                5:0};
-  data.forEach((item)=>{
-    result[item.rating]=(result[item.rating]|| 0)+1
-  })
-  const sorted = Object.keys(result)
-                    .sort()
-                    .reduce(
-                      (acc,key)=>({
-                        ...acc,
-                        [key]: parseFloat(result[key]/total*100).toFixed(0)
-                        ,}),{});
+  var total = 0
+  for(var i=1; i<6; i++){
+    if(!data[i]){
+      data[i] = 0
+    } else{
+      total += Number(data[i])
+    }
+  }
+  for(let key in data){
+    data[key]= parseFloat(Number(data[key])/total*100).toFixed(0)
+  }
+  return data
+}
 
-return sorted
+const getMeta = (id)=>{
+  var options={
+    method: 'get',
+    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/meta?product_id=${id}`,
+    headers: {Authorization: process.env.DB_TOKEN}
+  }
+  return axios(options)
+        .catch((err)=>{
+          console.log(err)
+        })
 }
 
 module.exports ={
@@ -74,6 +79,7 @@ module.exports ={
   addHelpful,
   avgStar,
   percentRecommend,
-  breakdownScore
+  breakdownScore,
+  getMeta
 
 }
