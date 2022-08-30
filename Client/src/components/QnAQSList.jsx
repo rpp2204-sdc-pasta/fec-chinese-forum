@@ -20,7 +20,7 @@ class QnAList extends React.Component {
   }
 
   qshelpful = () => {
-    console.log(this.qshelpfulness);
+    console.log(this.state.qshelpfulness);
     axios({
       method:'put',
       url: "/qshelpful",
@@ -105,10 +105,10 @@ class QnAList extends React.Component {
           <div><b>Q: {this.qs}</b></div>
           <span className = "lvl3">  Helpful? </span>
           <span className = "lvl4">
-            <a onClick={this.qshelpful}><u>Yes</u></a>
+            <button onClick={this.qshelpful}>Yes</button>
             <span> &#40;{this.state.qshelpfulness}&#41;  |  </span>
-          {!this.state.reported && <a onClick={this.reportQS}>Report</a>}
-          {this.state.reported && <a>Reported</a>} | </span>
+          {!this.state.reported && <button onClick={this.reportQS}>Report</button>}
+          {this.state.reported && <button>Reported</button>} | </span>
 
               {
                 this.state.showAnsModal &&
@@ -120,7 +120,7 @@ class QnAList extends React.Component {
                       <button onClick={this.showModal}>X</button>
                     </form>
               }
-              {!this.state.showAnsModal && <a onClick={this.showModal}><u>Add Answer</u></a>}
+              {!this.state.showAnsModal && <button onClick={this.showModal}>Add Answer</button>}
         </div><br/>
         {AnsList}
         <br/>

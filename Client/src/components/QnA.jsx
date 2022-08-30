@@ -81,7 +81,7 @@ class QnA extends React.Component {
               {this.state.searching && this.state.searchResult.map((qs, i) =>
                 <QnAList qnaSet = {qs}/>)}
               {!this.state.searching && this.state.qna.slice(0, this.state.numQS).map((qs, i) =>
-              <QnAList key = {i} qnaSet = {qs}/>
+              <QnAList key = {i} qnaSet = {qs} refresh = {this.componentDidMount}/>
               )}
             </div>
             <div>

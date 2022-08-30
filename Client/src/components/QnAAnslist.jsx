@@ -4,11 +4,11 @@ import axios from 'axios';
 
 class QnAAnsList extends React.Component {
   constructor(props){
-    super(props)
+    super(props);
     this.state = {
       yesCount: this.props.ans.helpfulness,
       votedYes: false
-    }
+    };
     this.date = new Date(this.props.ans.date).toLocaleString('en-US');
   }
 
@@ -53,14 +53,15 @@ class QnAAnsList extends React.Component {
   }
 
   render() {
+    console.log(this.state.votedYes);
     return (
       <div>
         <a className="lvl3">{this.props.ans.body}</a><br/>
-        <a className="lvl4">by {this.props.ans.answerer_name}, {this.date}  |  Helpful?
-        {!this.state.votedYes ?? <a onClick = {this.anshelpful}><u>Yes</u></a>}
-        {this.state.votedYes ?? <a><u>Yes</u></a>}
+        <span className="lvl4">by {this.props.ans.answerer_name}, {this.date}  |  Helpful?
+        {!this.state.votedYes ?? <button onClick = {this.anshelpful}>Yes</button>}
+        {this.state.votedYes ?? <button>Yes</button>}
         <a> &#40;{this.state.yesCount}&#41;  |  </a>
-        <a onClick = {this.reportAns}><u>Report</u></a></a><br/>
+        <button onClick = {this.reportAns}>Report</button></span><br/>
       </div>
     )
   }

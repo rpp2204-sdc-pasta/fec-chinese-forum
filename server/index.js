@@ -125,7 +125,7 @@ app.put('/qshelpful', (req,res)=>{
 })
 
 app.put('/anshelpful', (req,res)=>{
-  console.log(req.body);
+  //console.log(req.body);
   qna.markAnsHelpful(req.body.ansId).then((response) => {
     //console.log(response);
     res.sendStatus(200);
