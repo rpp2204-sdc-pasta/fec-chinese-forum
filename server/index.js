@@ -45,9 +45,9 @@ app.post('/outfit', (req, res) => {
   Outfit.updateOne({id: id}, obj, {upsert: true}, function(err) {
     if (err) {
       console.log(err)
-      res.status(400);
+      res.status(400).end();
     } else {
-      res.status(201);
+      res.status(201).end();
     }
   });
 });
@@ -57,9 +57,9 @@ app.delete('/outfit', (req, res) => {
   Outfit.deleteOne({id: id}, function(err) {
     if (err) {
       console.log(err)
-      res.status(406);
+      res.status(406).end();
     } else {
-      res.status(204);
+      res.status(204).end();
     }
   })
 });

@@ -87,12 +87,12 @@ class RelatedProducts extends React.Component {
     });
   }
 
-  handleDelete(id) {
+  handleDelete(index) {
     let options = {
       method: 'DELETE',
       url: '/outfit',
       data: {
-        id: id
+        id: this.state.outfits[index].id
       }
     };
     axios(options)
@@ -109,7 +109,13 @@ class RelatedProducts extends React.Component {
       method: 'post',
       url: '/outfit',
       data: {
-        id: this.state.id
+        id: this.mainItem.id,
+        category: this.mainItem.category,
+        name: this.mainItem.category,
+        original_price: this.mainItem.original_price,
+        sale_price: this.mainItem.sale_price,
+        img_url: this.mainItem.img_url,
+        overallRating: this.mainItem.overallRating
       }
     };
     axios(options)
@@ -143,12 +149,11 @@ class RelatedProducts extends React.Component {
           <button className="next-button">&#10132;</button>
           <div className="outfit-list">
             <div className="card" onClick={this.handleAdd} >
-              <div className="add-outfit">
-                <img src="../resource/addButton.jpg" alt="add to outfit"/>
-              </div>
+              <div className="add-outfit-sign">&#43;</div>
+              <div className="add-outfit-word">Add to Outfit</div>
             </div>
-            {this.state.outfits.map(outfit => <Outfit item={outfit} key={outfit.id}
-            handleDelete={this.handleDelete} handleAdd={this.handleAdd} />)}
+            {this.state.outfits.map((outfit, index) => <Outfit item={outfit} key={outfit.id}
+            handleDelete={() => { this.handleDelete(index); }} />)}
           </div>
         </section>
         {this.state.compare && <div id="compare-overlay" onClick={this.closeOverlay}><Compare data={this.state.compareFeatures} /></div>}
