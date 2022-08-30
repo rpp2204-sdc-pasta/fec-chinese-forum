@@ -33,6 +33,7 @@
   scroll-behavior: smooth;
 }
 
+.outfit-list::-webkit-scrollbar,
 .related-products::-webkit-scrollbar {
   display: none;
 }
@@ -90,7 +91,7 @@
   object-fit: cover;
 }
 
-.card-compare-btn {
+.card-function-btn {
   position: absolute;
   top: 10px;
   right: 10px;
@@ -107,12 +108,12 @@
   color: white;
 }
 
-.card-img:hover .card-compare-btn {
+.card-img:hover .card-function-btn {
   opacity: 1;
 }
 
-.card-compare-btn:hover {
-  color: yellow;
+.card-function-btn:hover {
+  color: black;
 }
 
 #compare-overlay {
@@ -231,6 +232,24 @@
   text-decoration: line-through;
   color: black;
   margin: 5px;
+}
+
+.add-outfit-sign {
+  font-size: 10rem;
+  font-weight: bold;
+  text-align: center;
+  width: 100%;
+  height: 80%;
+  padding: 25%;
+}
+
+.add-outfit-word {
+  font-size: 1.5rem;
+  text-align: center;
+  width: 100%;
+  height: 20%;
+  overflow: hidden;
+  padding: 10%
 }
 
 .card-compare-modal {
