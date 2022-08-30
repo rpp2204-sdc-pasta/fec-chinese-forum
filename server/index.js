@@ -45,9 +45,9 @@ app.post('/outfit', (req, res) => {
   Outfit.updateOne({id: id}, obj, {upsert: true}, function(err) {
     if (err) {
       console.log(err)
-      res.status(400);
+      res.status(400).end();
     } else {
-      res.status(201);
+      res.status(201).end();
     }
   });
 });
@@ -57,9 +57,9 @@ app.delete('/outfit', (req, res) => {
   Outfit.deleteOne({id: id}, function(err) {
     if (err) {
       console.log(err)
-      res.status(406);
+      res.status(406).end();
     } else {
-      res.status(204);
+      res.status(204).end();
     }
   })
 });
@@ -128,7 +128,7 @@ app.put('/qshelpful', (req,res)=>{
 })
 
 app.put('/anshelpful', (req,res)=>{
-  console.log(req.body);
+  //console.log(req.body);
   qna.markAnsHelpful(req.body.ansId).then((response) => {
     //console.log(response);
     res.sendStatus(200);
@@ -172,14 +172,8 @@ app.put('/reportAns', (req,res)=>{
 app.post('/reviews', (req,res)=>{
   reviews.getProductcount(req.body.sort, req.body.productId)
     .then((response)=>{
-      let percent = reviews.percentRecommend(response.data.results)
-      let avg = reviews.avgStar(response.data.results)
-      let breakdownScore = reviews.breakdownScore(response.data.results)
       res.status(200).send({
-        reviews:response.data,
-        avg,
-        percent,
-        breakdownScore
+        reviews:response.data
       })
     })
     .catch((err)=>{
@@ -188,13 +182,27 @@ app.post('/reviews', (req,res)=>{
 })
 
 app.put('/reviews/:id', (req, res)=>{
-  // console.log(req.params.id)
   reviews.addHelpful(req.params.id)
   .then((resonose)=>{
     res.status(200).send('Helpful')
   })
   .catch((err)=>{
     console.log(err)
+  })
+})
+
+app.get('/reviews/meta',(req, res)=>{
+  reviews.getMeta(req.query.product_id)
+  .then((response)=>{
+    let percent = reviews.percentRecommend(response.data.recommended)
+    let avg = reviews.avgStar(response.data.ratings)
+    let breakdownScore = reviews.breakdownScore(response.data.ratings)
+    res.status(200).send({
+      avg,
+      percent,
+      breakdownScore,
+      characteristics: response.data.characteristics,
+    })
   })
 })
 
