@@ -14,6 +14,9 @@ app.use(express.json());
 
 //https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp
 
+//===========================================
+// related products api
+
 app.get('/related/:id', (req, res) => {
   getRelated(req.params.id)
     .then(result => {
@@ -169,8 +172,15 @@ app.put('/reportAns', (req,res)=>{
 app.post('/reviews', (req,res)=>{
   reviews.getProductcount(req.body.sort, req.body.productId)
     .then((response)=>{
+      let percent = reviews.percentRecommend(response.data.results)
       let avg = reviews.avgStar(response.data.results)
-      res.status(200).send({reviews:response.data, avg:avg})
+      let breakdownScore = reviews.breakdownScore(response.data.results)
+      res.status(200).send({
+        reviews:response.data,
+        avg,
+        percent,
+        breakdownScore
+      })
     })
     .catch((err)=>{
       console.log(err)

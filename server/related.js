@@ -94,6 +94,7 @@ let getOverAllRating = (ratings) => {
   + (5 * fiveStars);
   let totalReviews = Number(oneStars) + Number(twoStars) + Number(threeStars) + Number(fourStars) + Number(fiveStars);
   let overallRating = Math.round(100 * total / totalReviews) / 100;
+  return overallRating;
 }
 
 

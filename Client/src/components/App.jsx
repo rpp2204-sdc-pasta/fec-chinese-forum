@@ -14,7 +14,7 @@ let App = (props) => {
         some title and nev bar maybe?
       </div>
       <ProductOverview id={id}/>
-      <RelatedProducts id={id} handleClick={setID}/>
+      <RelatedProducts id={id} handleClick={setID} mainItem={{"name": 'some random name', "features": []}} />
       <QnA id={id} handleClick={setID}/>
       <Reviews id={id} handleClick={setID}/>
     </>

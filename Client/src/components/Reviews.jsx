@@ -19,7 +19,9 @@ class Reviews extends React.Component {
       product: [],
       count: 2,
       length: '',
-      avgRating: ''
+      avgRating: '',
+      percent:'',
+      breakdownScore: {},
     }
     this.handleMore=this.handleMore.bind(this)
     this.getProductcount=this.getProductcount.bind(this)
@@ -47,7 +49,6 @@ class Reviews extends React.Component {
       if(num === null && sortBy === 'relevant'){
         this.setState({
           stored_relevant: response.data.reviews.results,
-          // product: response.data.results.slice(0,2)
         });
         return response
       } else if(num === null && sortBy ==='helpful'){
@@ -66,7 +67,9 @@ class Reviews extends React.Component {
         length: response.data.reviews.results.length,
         currentLoad: response.data.reviews.results,
         product: response.data.reviews.results.slice(0,2),
-        avgRating: response.data.avg
+        avgRating: response.data.avg,
+        percent: response.data.percent,
+        breakdownScore: response.data.breakdownScore
       })
     })
     .catch((err)=>{
@@ -149,13 +152,13 @@ class Reviews extends React.Component {
 
     return(
       <div className='containerAll' style={style_1}>
-        <div className='container title'>{`Ratings & Reviews`}
-          <div className='container breakdown'>
+        <div className='left'>{`Ratings & Reviews`}
+          <div >
             <br></br>
-            <Ratingbreakdown avgRating={this.state.avgRating}/>
+            <Ratingbreakdown avgRating={this.state.avgRating} percent={this.state.percent} breakdownScore={this.state.breakdownScore}/>
           </div>
         </div>
-        <div className='container reviews' style={style_review_box} >
+        <div className='right' style={style_review_box} >
           <Sorted length={this.state.length} selectFilter={this.selectFilter} product_id={this.props.id} resetCount={this.resetCount}/>
           <div style={style_body_reviews}>
             <div style={scolled}>
