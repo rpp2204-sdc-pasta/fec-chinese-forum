@@ -2,10 +2,10 @@ import StarRating from '../StarRating.jsx';
 
 let Card = (props) => (
   <>
-    <div className="card" >
-      <div className="card-img" onClick={props.handleClick} >
+    <div className="card" onClick={props.handleClick} >
+      <div className="card-img" >
         <button className="card-function-btn" onClick={props.handleCompare}>&#9733;</button>
-        <img className="card-current-img" src={props.item.photos[0].thumbnail_url} onClick={() => {props.handleClick(props.item.id)}} />
+        <img className="card-current-img" src={props.item.photos[0].thumbnail_url} />
 
         {/* <ul className="card-thumbnail">
           {props.item.photos.map(photo => {
