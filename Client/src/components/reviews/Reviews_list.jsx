@@ -1,6 +1,7 @@
 import React from 'react';
 import Photo from './Photo.jsx'
 const axios = require('axios');
+import Report from './Report.jsx'
 // const StarRating = require('./components/StarRating.jsx')
 
 class Reviews_list extends React.Component {
@@ -87,12 +88,14 @@ class Reviews_list extends React.Component {
             {this.state.showMore? moreReview: lessReview}
             {this.props.product.body.length>= 250 && !this.state.showMore? <p><button type='submit' onClick={this.handleShowmore}>Show more</button></p>: null}
             {this.props.product.recommend? Irecommond: null}
-            {this.props.product.response? <p>Response from seller: {this.props.product.response}</p> : null}
-            <span>Helpful? </span>
-            <button style={helpful_style} disabled={this.state.helpClicked? true: false} type='submit' className={this.props.product.review_id} onClick={this.markHelpful}> Yes ({this.state.helpfulCount})</button>
-            <span>     |     </span>
-            <span style={helpful_style}> Report</span>
-            <hr></hr>
+            {this.props.product.response? <p className='sellerRes'>Response from seller: {this.props.product.response}</p> : null}
+            <div>
+              Helpful?
+              <button style={helpful_style} disabled={this.state.helpClicked? true: false} type='submit' className={this.props.product.review_id} onClick={this.markHelpful}> Yes ({this.state.helpfulCount})</button>
+              |
+              <Report id={this.props.product.review_id} clickedReport={this.props.clickedReport}/>
+             </div>
+
           </div>
         </div>
 
