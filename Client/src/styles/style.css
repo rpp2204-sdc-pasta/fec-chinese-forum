@@ -511,3 +511,12 @@ Reviews */
   position: relative;
   z-index: 2;
 }
+
+.sellerRes{
+  font-size: small;
+  background-color: rgb(154, 151, 151);
+  display: inline;
+  margin: 0px auto 0px auto;
+  border-radius: 10px;
+
+}

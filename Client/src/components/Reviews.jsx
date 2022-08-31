@@ -17,6 +17,7 @@ class Reviews extends React.Component {
       stored_helpful: [],
       stored_newest:[],
       currentLoad: [],
+      currentSort:'relevant',
       product: [],
       count: 2,
       length: '',
@@ -24,6 +25,7 @@ class Reviews extends React.Component {
       percent:'',
       breakdownScore: {},
       characteristics: {},
+      report: true,
     }
     this.handleMore=this.handleMore.bind(this)
     this.getProductcount=this.getProductcount.bind(this)
@@ -31,6 +33,8 @@ class Reviews extends React.Component {
     this.resetCount=this.resetCount.bind(this)
     this.selectFilter=this.selectFilter.bind(this)
     this.getMeta=this.getMeta.bind(this)
+    this.clickedReport=this.clickedReport.bind(this)
+    this.reportData=this.reportData.bind(this)
   }
 
 
@@ -51,6 +55,7 @@ class Reviews extends React.Component {
     })
     .then((response)=>{
       if(num === null && sortBy === 'relevant'){
+        console.log(response.data.reviews.results)
         this.setState({
           stored_relevant: response.data.reviews.results,
         });
@@ -105,6 +110,7 @@ class Reviews extends React.Component {
       'newest': this.state.stored_newest
     }
     this.setState({
+      currentSort: value,
       currentLoad: filter[value],
       product: filter[value].slice(0,2)
     })
@@ -127,6 +133,48 @@ class Reviews extends React.Component {
       console.log(err)
     })
   }
+
+  reportData(sorted, data){
+    return sorted.filter((item)=>{
+      return item['review_id'] !== Number(data)
+    })
+  }
+
+  clickedReport(e){
+    e.preventDefault()
+    let helpful = this.reportData(this.state.stored_helpful, e.target.id)
+    let relevant = this.reportData(this.state.stored_relevant, e.target.id)
+    let newest = this.reportData(this.state.stored_newest, e.target.id)
+    this.setState({
+      stored_helpful: helpful,
+      stored_newest: newest,
+      stored_relevant : relevant,
+      length: relevant.length
+    })
+    if(this.state.currentSort === 'helpful'){
+      this.setState({
+        currentLoad: helpful,
+      })
+      this.setState({
+        product: helpful.slice(0,2)
+      })
+    } else if(this.state.currentSort === 'newest'){
+      this.setState({
+        currentLoad: newest
+      })
+      this.setState({
+        product: newest.slice(0,2)
+      })
+    } else {
+      this.setState({
+        currentLoad: relevant,
+      })
+      this.setState({
+        product: relevant.slice(0,2)
+      })
+    }
+  }
+
 
   render(){
 
@@ -177,10 +225,12 @@ class Reviews extends React.Component {
           <Sorted length={this.state.length} selectFilter={this.selectFilter} product_id={this.props.id} resetCount={this.resetCount}/>
           <div style={style_body_reviews}>
             <div style={scolled}>
-              {this.state.product.map((item=>(<div key={item.review_id}><Reviews_list product={item} /></div>)))}
-              <br></br>
+              {this.state.product.map((item=>
+                 <div key={item.review_id}>
+                    <Reviews_list product={item} clickedReport={this.clickedReport} report={this.state.report}/>
+                </div>))}
+              </div>
             </div>
-          </div>
           <div>
             <Morebutton length={this.state.length} count={this.state.count} handleMore={this.handleMore}/>
             <button style={button_style} type='submit'> ADD A REVIEW +   </button>
