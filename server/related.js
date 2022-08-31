@@ -24,6 +24,14 @@ let getRelated = (id) => {
                 }
               }
             });
+            if (product["style_id"] === undefined) {
+              product = {
+                style_id: value[1].results[0].style_id,
+                original_price: value[1].results[0].original_price,
+                sale_price: value[1].results[0].sale_price,
+                photos: value[1].results[0].photos
+              }
+            }
             let overallRating = getOverAllRating(value[2].ratings);
             product = {
               ...product,
