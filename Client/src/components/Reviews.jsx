@@ -5,6 +5,7 @@ import Morebutton from './reviews/Morebutton.jsx'
 import Ratingbreakdown from './reviews/Ratingbreakdown.jsx'
 import CharBreakdown from './reviews/CharBreakdown.jsx'
 import Sorted from './reviews/Sorted.jsx'
+import Addreview from './reviews/Addreview.jsx'
 
 
 
@@ -26,6 +27,13 @@ class Reviews extends React.Component {
       breakdownScore: {},
       characteristics: {},
       report: true,
+      fiveStar: true,
+      fourStar: true,
+      threeStar: true,
+      twoStar: true,
+      oneStar: true
+
+
     }
     this.handleMore=this.handleMore.bind(this)
     this.getProductcount=this.getProductcount.bind(this)
@@ -35,6 +43,7 @@ class Reviews extends React.Component {
     this.getMeta=this.getMeta.bind(this)
     this.clickedReport=this.clickedReport.bind(this)
     this.reportData=this.reportData.bind(this)
+    this.filterReviews_Star=this.filterReviews_Star.bind(this)
   }
 
 
@@ -55,7 +64,6 @@ class Reviews extends React.Component {
     })
     .then((response)=>{
       if(num === null && sortBy === 'relevant'){
-        console.log(response.data.reviews.results)
         this.setState({
           stored_relevant: response.data.reviews.results,
         });
@@ -121,7 +129,6 @@ class Reviews extends React.Component {
       product_id: product_id}
     })
     .then((response)=>{
-      // console.log(response.data.characteristics.Fit.id)
       this.setState({
         avgRating: response.data.avg,
         percent: response.data.percent,
@@ -175,6 +182,32 @@ class Reviews extends React.Component {
     }
   }
 
+  filterReviews_Star(e){
+    e.preventDefault();
+    if(e.target.id === '5'){
+      this.setState(prevState=>({
+        fiveStar: !this.state.fiveStar
+      }))
+    } else if(e.target.id === '4'){
+      this.setState(prevState=>({
+        fourStar: !prevState.fourStar
+      }))
+    } else if(e.target.id === '3'){
+      this.setState(prevState=>({
+        threeStar: !prevState.threeStar
+      }))
+    } else if(e.target.id === '2'){
+      this.setState(prevState=>({
+        twoStar: !prevState.twoStar
+      }))
+    }else if(e.target.id === '1'){
+      this.setState(prevState=>({
+        oneStar: !prevState.oneStar
+      }))
+    }
+
+  }
+
 
   render(){
 
@@ -217,7 +250,8 @@ class Reviews extends React.Component {
         <div className='left'>{`Ratings & Reviews`}
           <div >
             <br></br>
-            <Ratingbreakdown avgRating={this.state.avgRating} percent={this.state.percent} breakdownScore={this.state.breakdownScore}/>
+            <Ratingbreakdown avgRating={this.state.avgRating} percent={this.state.percent} breakdownScore={this.state.breakdownScore}
+            filterReviews_Star={this.filterReviews_Star}/>
             <CharBreakdown characteristics={this.state.characteristics}/>
           </div>
         </div>
@@ -227,13 +261,15 @@ class Reviews extends React.Component {
             <div style={scolled}>
               {this.state.product.map((item=>
                  <div key={item.review_id}>
-                    <Reviews_list product={item} clickedReport={this.clickedReport} report={this.state.report}/>
+                    <Reviews_list product={item} clickedReport={this.clickedReport} report={this.state.report}
+                    five={this.state.fiveStar} four={this.state.fourStar} three={this.state.threeStar} two={this.state.twoStar} one={this.state.oneStar}/>
                 </div>))}
               </div>
             </div>
           <div>
             <Morebutton length={this.state.length} count={this.state.count} handleMore={this.handleMore}/>
-            <button style={button_style} type='submit'> ADD A REVIEW +   </button>
+            <Addreview />
+
           </div>
         </div>
       </div>

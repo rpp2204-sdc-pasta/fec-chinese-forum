@@ -73,9 +73,17 @@ class Reviews_list extends React.Component {
       cursor: 'pointer',
       textDecoration: 'underline'
     }
+    const filter=[this.props.one,
+                  this.props.two,
+                  this.props.three,
+                  this.props.four,
+                  this.props.five]
 
-    return(
-        <div className={this.props.product.review_id} >
+    for(let i= 0; i< 5; i++){
+      if(this.props.product.rating === i+1 ){
+        return (
+          filter[i] &&
+          <div id={this.props.product.rating} className={this.props.product.review_id} >
           <div className={this.props.product.reviewer_name}>
             <br></br>
             <span>rating : {this.props.product.rating}</span>
@@ -94,12 +102,12 @@ class Reviews_list extends React.Component {
               <button style={helpful_style} disabled={this.state.helpClicked? true: false} type='submit' className={this.props.product.review_id} onClick={this.markHelpful}> Yes ({this.state.helpfulCount})</button>
               |
               <Report id={this.props.product.review_id} clickedReport={this.props.clickedReport}/>
-             </div>
-
+            </div>
           </div>
         </div>
-
-    )
+        )
+      }
+    }
   }
 }
 
