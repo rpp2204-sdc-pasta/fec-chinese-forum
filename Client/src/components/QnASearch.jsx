@@ -17,12 +17,10 @@ function QnASearch (props) {
   }
 
   return (
-    <div id="searchbox">
-    <form>
-      <label>
-        <input id = "qnaSearch" type="text" onChange={Search} size = "50" placeholder="Have a question? Search for answers..."/>
-      </label>
-      <button type="submit" onClick={Search}>Submit</button>
+    <div>
+    <form className = "lvl3" id="searchBox">
+      <input id = "searchBar" type="text" onChange={Search} size = "50" placeholder="Have a question? Search for answers..."/>
+      <button id = "searchButton" type="submit" onClick={Search}>Submit</button>
       <button onClick={Close}>X</button>
     </form>
     </div>
