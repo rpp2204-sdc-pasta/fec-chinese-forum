@@ -1,24 +1,24 @@
 let Compare = (props) => (
   <div className="compare-modal">
     <div className="compare-title">Comparing</div>
-    <div className="compare-name">
-      <span className="compare-current">{props.data.name.current}</span>
-      <span className="feature-name" >{' '}</span>
-      <span className="compare-compare">{props.data.name.compare}</span>
-    </div>
-    <div className="compare-features" >
+    <table className="compare-features" >
+      <tr>
+        <th className="compare-current">{props.data.name.current}</th>
+        <th> </th>
+        <th className="compare-compare">{props.data.name.compare}</th>
+      </tr>
       {Object.keys(props.data).map((key, index) => {
         // console.log(key);
         if (key !== 'name') {
           return (
-          <div key={index} className="compare-roll">
-            <span className="compare-current" >{props.data[key].current || ' '}</span>
-            <span className="feature-name" >{key}</span>
-            <span className="compare-compare" >{props.data[key].compare || ' '}</span>
-          </div>)
+          <tr key={index}>
+            <td className="compare-current" >{props.data[key].current === true ? <>&#10003;</> : props.data[key].current}</td>
+            <td className="feature-name" >{key}</td>
+            <td className="compare-compare" >{props.data[key].compare === true ? <>&#10003;</> : props.data[key].compare}</td>
+          </tr>)
         }
       })}
-    </div>
+    </table>
   </div>
 )
 
