@@ -19,9 +19,6 @@ class RelatedProducts extends React.Component {
     this.handleDelete = this.handleDelete.bind(this);
     this.handleAdd = this.handleAdd.bind(this);
     this.closeOverlay = this.closeOverlay.bind(this);
-    this.currentID = props.id;
-    this.mainItem = props.mainItem;
-    this.handleClick = props.handleClick;
   }
 
   componentDidMount() {
@@ -29,14 +26,20 @@ class RelatedProducts extends React.Component {
     this.getOutfit();
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.id !== prevProps.id) {
+      this.getRelated();
+    }
+  }
+
   getRelated() {
     let options = {
       method: 'GET',
-      url: '/related/' + this.currentID
+      url: '/related/' + this.props.id
     };
     axios(options)
       .then(response => {
-        // console.log(response.data);
+        console.log(response.data);
         this.setState({ products: response.data });
       })
       .catch(err => {
@@ -61,7 +64,7 @@ class RelatedProducts extends React.Component {
 
   handleCompare(index) {
     let compareData = {};
-    let currentName = this.mainItem.name;
+    let currentName = this.props.mainItem.name;
     let compareName = this.state.products[index].name;
     this.state.products[index].features.forEach(feature => {
       if (!compareData[feature.feature]) {
@@ -70,7 +73,7 @@ class RelatedProducts extends React.Component {
       compareData[feature.feature]["compare"] = feature.value;
     });
 
-    this.mainItem.features.forEach(feature => {
+    this.props.mainItem.features.forEach(feature => {
       if (!compareData[feature.feature]) {
         compareData[feature.feature] = {}
       }
@@ -109,13 +112,13 @@ class RelatedProducts extends React.Component {
       method: 'post',
       url: '/outfit',
       data: {
-        id: this.mainItem.id,
-        category: this.mainItem.category,
-        name: this.mainItem.category,
-        original_price: this.mainItem.original_price,
-        sale_price: this.mainItem.sale_price,
-        img_url: this.mainItem.img_url,
-        overallRating: this.mainItem.overallRating
+        id: this.props.mainItem.id,
+        category: this.props.mainItem.category,
+        name: this.props.mainItem.category,
+        original_price: this.props.mainItem.original_price,
+        sale_price: this.props.mainItem.sale_price,
+        img_url: this.props.mainItem.img_url,
+        overallRating: this.props.mainItem.overallRating
       }
     };
     axios(options)
@@ -140,7 +143,8 @@ class RelatedProducts extends React.Component {
           <button className="next-button">&#10132;</button>
           <div className="related-products">
             {this.state.products.map((product, index) => <Card item={product} key={index}
-              handleCompare={() => { this.handleCompare(index); }} handleClick={this.handleClick}/>)}
+              handleCompare={() => { this.handleCompare(index); }}
+              handleClick={() => {this.props.handleClick(product.id)}} />)}
           </div>
         </section>
         <h3 className="section-title">YOUR OUTFIT</h3>
@@ -156,7 +160,8 @@ class RelatedProducts extends React.Component {
             handleDelete={() => { this.handleDelete(index); }} />)}
           </div>
         </section>
-        {this.state.compare && <div id="compare-overlay" onClick={this.closeOverlay}><Compare data={this.state.compareFeatures} /></div>}
+        {this.state.compare && <div id="compare-overlay" onClick={this.closeOverlay}>
+          <Compare data={this.state.compareFeatures} /></div>}
       </>
     )
   }
