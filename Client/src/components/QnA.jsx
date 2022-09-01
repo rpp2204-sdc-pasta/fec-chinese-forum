@@ -81,15 +81,15 @@ class QnA extends React.Component {
     render() {
         let loader;
         if(this.state.numQS >= this.state.qna.length) {
-          loader = <button id = "collapse" onClick = {this.collapse}> - COLLAPSE</button>
+          loader = <button className = "buttonLink" id = "collapse" onClick = {this.collapse}> - COLLAPSE</button>
         } else if(this.state.qna.length > 2) {
-          loader = <button id = "loadMore" onClick = {this.loadMore}> MORE ANSWER QUESTIONS </button>
+          loader = <button className = "buttonLink" id = "loadMore" onClick = {this.loadMore}> + MORE QUESTIONS </button>
         }
-        return ( <>
-            <h3> QUESTIONS &#38; ANSWERS </h3>
+        return ( <div className = "QnA">
+            <h3 className = ""> QUESTIONS &#38; ANSWERS </h3>
             {(this.state.qna.length === 0 && !this.state.qsModalshow) && <button onClick = {this.showQSModal}> ADD A QUESTION + </button>}
             {(this.state.qna.length > 0 && !this.state.qsModalshow) && <div><QnASearch search = {this.Search.bind(this)} cancelSearch = {this.cancelSearch.bind(this)}/></div>}
-            <div>
+            <div id = "QSList">
               {this.state.searching && this.state.searchResult.map((qs, i) =>
                 <QnAList qnaSet = {qs}/>)}
               {!this.state.searching && this.state.qna.slice(0, this.state.numQS).map((qs, i) =>
@@ -98,9 +98,9 @@ class QnA extends React.Component {
             </div>
             <div>
               {loader}
-              {this.state.qsModalshow &&<QSModal  show = {this.showQSModal.bind(this)} productId = {this.props.id}/>}{(this.state.qna.length > 0 && !this.state.qsModalshow) && <button onClick = {this.showQSModal}> ADD A QUESTION + </button>}
+              {this.state.qsModalshow &&<QSModal  show = {this.showQSModal.bind(this)} productId = {this.props.id}/>}{(this.state.qna.length > 0 && !this.state.qsModalshow) && <button  className = "buttonLink addQS" onClick = {this.showQSModal}> ADD A QUESTION + </button>}
             </div>
-            </>)}
+            </div>)}
 }
 
 export default QnA;

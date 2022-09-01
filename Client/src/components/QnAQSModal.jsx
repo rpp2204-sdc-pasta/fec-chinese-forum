@@ -28,7 +28,7 @@ function QSModal (props) {
 
     return (
     <div className = "qsModal">
-      <form>
+      <form className = "lvl3">
         <h4>Ask Your Question</h4>
         <h5>About the INSERT PRODUCT NAME</h5>
         <input placeholder="Name" onChange={(e) => {name = e.target.value}} placeholder="Name" required></input><br/>
