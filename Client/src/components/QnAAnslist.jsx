@@ -68,7 +68,7 @@ class QnAAnsList extends React.Component {
         <span className = "lvl4">by {this.props.ans.answerer_name}, {this.date}  |  Helpful? {Yes}</span>
         <a className = "lvl4"> &#40;{this.state.yesCount}&#41;  |  </a>
         {!this.state.reported && <button className = "buttonLink" onClick = {this.reportAns}>Report</button>}
-        {this.state.reported && <a>Reported</a>}<br/>
+        {this.state.reported && <a className = "lvl4">Reported</a>}<br/>
       </div>
     )
   }
