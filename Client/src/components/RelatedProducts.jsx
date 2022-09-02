@@ -8,6 +8,7 @@ class RelatedProducts extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      current: {},
       products: [],
       outfits: [],
       compare: false,
@@ -34,6 +35,7 @@ class RelatedProducts extends React.Component {
   }
 
   componentDidMount() {
+    this.getCurrent();
     this.getRelated();
     this.getOutfit();
     this.checkRelated();
@@ -42,6 +44,7 @@ class RelatedProducts extends React.Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (this.props.id !== prevProps.id) {
+      this.getCurrent();
       this.getRelated();
     }
     if (this.state.outfitIndex !== prevState.outfitIndex) {
@@ -56,6 +59,21 @@ class RelatedProducts extends React.Component {
     if (this.state.outfits !== prevState.outfits) {
       this.checkOutfit();
     }
+  }
+
+  getCurrent() {
+    let options = {
+      method: 'GET',
+      url: '/current/' + this.props.id
+    };
+    axios(options)
+      .then(response => {
+        console.log(response.data);
+        this.setState({ current: response.data });
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 
   getRelated() {
@@ -90,7 +108,7 @@ class RelatedProducts extends React.Component {
 
   handleCompare(index) {
     let compareData = {};
-    let currentName = this.props.mainItem.name;
+    let currentName = this.state.current.name;
     let compareName = this.state.products[index].name;
     this.state.products[index].features.forEach(feature => {
       if (!compareData[feature.feature]) {
@@ -99,7 +117,7 @@ class RelatedProducts extends React.Component {
       compareData[feature.feature]["compare"] = feature.value;
     });
 
-    this.props.mainItem.features.forEach(feature => {
+    this.state.current.features.forEach(feature => {
       if (!compareData[feature.feature]) {
         compareData[feature.feature] = {}
       }
@@ -138,13 +156,13 @@ class RelatedProducts extends React.Component {
       method: 'post',
       url: '/outfit',
       data: {
-        id: this.props.mainItem.id,
-        category: this.props.mainItem.category,
-        name: this.props.mainItem.category,
-        original_price: this.props.mainItem.original_price,
-        sale_price: this.props.mainItem.sale_price,
-        img_url: this.props.mainItem.img_url,
-        overallRating: this.props.mainItem.overallRating
+        id: this.state.current.id,
+        category: this.state.current.category,
+        name: this.state.current.category,
+        original_price: this.state.current.original_price,
+        sale_price: this.state.current.sale_price,
+        img_url: this.state.current.photos[0].thumbnail_url,
+        overallRating: this.state.current.overallRating
       }
     };
     axios(options)
@@ -167,11 +185,10 @@ class RelatedProducts extends React.Component {
     } else {
       this.setState({relatedNext: false});
     }
-    console.log("related checked");
   }
 
   checkOutfit() {
-    if (this.state.outfitIndex > 0) {
+    if (this.state.outfitIndex > -1) {
       this.setState({outfitPre: true});
     } else {
       this.setState({outfitPre: false});
@@ -181,7 +198,6 @@ class RelatedProducts extends React.Component {
     } else {
       this.setState({outfitNext: false});
     }
-    console.log("outfit checked");
   }
 
   relatedPre() {
@@ -225,10 +241,14 @@ class RelatedProducts extends React.Component {
             {this.state.outfitPre && <button className="pre-button" onClick={this.outfitPre} >&#10132;</button>}
             {this.state.outfitNext && <button className="next-button" onClick={this.outfitNext} >&#10132;</button>}
           </div>
-          <div className="outfit-list" style={{transform: `translateX(-${(this.state.outfitIndex + 1) * 25}%)`}}>
+          <div className="outfit-list" style={{transform: `translateX(-${(this.state.outfitIndex + 1) * 25}%)`}} >
             <div className="card" onClick={this.handleAdd} >
-              <div className="add-outfit-sign">&#43;</div>
-              <div className="add-outfit-word">Add to Outfit</div>
+              <div className="card-img" >
+                <div className="add-outfit-sign" >&#43;</div>
+              </div>
+              <div className="card-info" >
+                <div className="add-outfit-word" >Add to Outfit</div>
+              </div>
             </div>
             {this.state.outfits.map((outfit, index) => <Outfit item={outfit} key={index}
             handleDelete={() => { this.handleDelete(index); }} />)}
