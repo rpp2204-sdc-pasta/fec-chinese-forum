@@ -14,7 +14,7 @@ let Outfit = (props) => (
         <span className="original-price" >{'$' + props.item.original_price}</span></div>)}
       {props.item.sale_price === null && (<div className="card-price">
         <span className="current-price" >{'$' + props.item.original_price}</span></div>)}
-      <StarRating rating={props.item.overallRating}/>
+      <StarRating rating={props.item.overallRating} count={props.item.reviewCount}/>
     </div>
   </div>
 )

@@ -135,20 +135,26 @@ Related Product */
   background-color: white;
   width: 800px;
   max-width: 60%;
-  padding: 1vw 0;
+  padding: .5vw;
 }
 
-.compare-title,
-.compare-features {
+.compare-title {
   position: relative;
   top: 0;
   width: 100%;
   text-transform: capitalize;
+  margin: 0.25vw;
+}
+
+.compare-features {
+  position: relative;
+  width: 100%;
+  margin: 0.25vw;
 }
 
 .compare-title {
   text-align: left;
-  padding-left: 3vw;
+  padding-left: .25vw;
 }
 
 .compare-features {
@@ -238,6 +244,13 @@ Related Product */
   background-color: black;
   object-fit: cover;
   display: flex;
+}
+
+.review-count {
+  display: inline-block;
+  height: 100%;
+  font-size: 1vw;
+  margin: 2%;
 }
 
 .add-outfit-sign {

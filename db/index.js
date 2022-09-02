@@ -8,7 +8,8 @@ let outfitSchema = mongoose.Schema({
   original_price: Number,
   sale_price: Number,
   img_url: String,
-  overallRating: Number
+  overallRating: Number,
+  reviewCount: Number
 });
 
 let Outfit = mongoose.model('Outfit', outfitSchema);

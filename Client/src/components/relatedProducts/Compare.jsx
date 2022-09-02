@@ -12,9 +12,11 @@ let Compare = (props) => (
         if (key !== 'name') {
           return (
           <tr key={index}>
-            <td className="compare-current" >{props.data[key].current === true ? <>&#10003;</> : props.data[key].current}</td>
+            <td className="compare-current" >{props.data[key].current === true ? <>&#10003;</> :
+            (props.data[key].current === null ? <>&#10006;</> : props.data[key].current) }</td>
             <td className="feature-name" >{key}</td>
-            <td className="compare-compare" >{props.data[key].compare === true ? <>&#10003;</> : props.data[key].compare}</td>
+            <td className="compare-compare" >{props.data[key].compare === true ? <>&#10003;</> :
+            (props.data[key].compare === null ? <>&#10006;</> : props.data[key].compare) }</td>
           </tr>)
         }
       })}
