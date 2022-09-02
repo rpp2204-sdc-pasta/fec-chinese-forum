@@ -35,17 +35,17 @@ class RelatedProducts extends React.Component {
   }
 
   componentDidMount() {
-    this.getCurrent();
     this.getRelated();
     this.getOutfit();
     this.checkRelated();
     this.checkOutfit();
+    this.getCurrent();
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (this.props.id !== prevProps.id) {
-      this.getCurrent();
       this.getRelated();
+      this.getCurrent();
     }
     if (this.state.outfitIndex !== prevState.outfitIndex) {
       this.checkOutfit();
@@ -84,7 +84,7 @@ class RelatedProducts extends React.Component {
     axios(options)
       .then(response => {
         // console.log(response.data);
-        this.setState({ products: response.data });
+        this.setState({ products: response.data, relatedIndex: 0 });
       })
       .catch(err => {
         console.log(err);
@@ -99,7 +99,7 @@ class RelatedProducts extends React.Component {
     axios(options)
       .then(response => {
         // console.log(response.data);
-        this.setState({ outfits: response.data });
+        this.setState({ outfits: response.data, outfitIndex: -1 });
       })
       .catch(err => {
         console.log(err);
@@ -252,7 +252,7 @@ class RelatedProducts extends React.Component {
               </div>
             </div>
             {this.state.outfits.map((outfit, index) => <Outfit item={outfit} key={index}
-            handleDelete={() => { this.handleDelete(index); }} />)}
+            handleDelete={() => { this.handleDelete(index); }} handleClick={() => {this.props.handleClick(outfit.id)}} />)}
           </div>
         </section>
         {this.state.compare && <div id="compare-overlay" onClick={this.closeOverlay}>

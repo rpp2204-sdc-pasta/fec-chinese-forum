@@ -24,8 +24,8 @@ app.get('/current/:id', (req, res) => {
       res.status(200).send(result);
     })
     .catch(err => {
-      console.log(err);
-      res.status(500).send("some err happened");
+      // console.log(err);
+      res.status(500).send(err);
     });
 });
 
@@ -35,8 +35,8 @@ app.get('/related/:id', (req, res) => {
       res.status(200).send(result);
     })
     .catch(err => {
-      console.log(err);
-      res.status(500).send("some err happened");
+      // console.log(err);
+      res.status(500).send(err);
     });
 });
 
@@ -46,8 +46,8 @@ app.get('/outfit', (req, res) => {
       res.status(200).send(data);
     })
     .catch(err => {
-      console.log(err);
-      res.status(500).send("some err happened");
+      // console.log(err);
+      res.status(500).send(err);
     });
 });
 
@@ -56,8 +56,8 @@ app.post('/outfit', (req, res) => {
   const obj = { id, category, name, original_price, sale_price, img_url, overallRating, reviewCount };
   Outfit.updateOne({id: id}, obj, {upsert: true}, function(err) {
     if (err) {
-      console.log(err)
-      res.status(400).end();
+      // console.log(err)
+      res.status(400).send(err);
     } else {
       res.status(201).end();
     }
@@ -68,8 +68,8 @@ app.delete('/outfit', (req, res) => {
   const { id } = req.body;
   Outfit.deleteOne({id: id}, function(err) {
     if (err) {
-      console.log(err)
-      res.status(406).end();
+      // console.log(err)
+      res.status(406).send(err);
     } else {
       res.status(204).end();
     }
