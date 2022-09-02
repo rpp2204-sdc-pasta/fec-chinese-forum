@@ -26,11 +26,12 @@ function QSModal (props) {
     })
   }
 
+
     return (
     <div className = "qsModal">
-      <form className = "lvl3">
+      <form className = "lvl3 modalForm">
         <h4>Ask Your Question</h4>
-        <h5>About the INSERT PRODUCT NAME</h5>
+        <h6>About the INSERT PRODUCT NAME</h6>
         <input placeholder="Name" onChange={(e) => {name = e.target.value}} placeholder="Name" required></input><br/>
         <input type="email" placeholder="Email" onChange={(e) => {email = e.target.value}} placeholder="Email" required></input><br/>
         <input placeholder="Enter Question" onChange={(e) => {question = e.target.value}} size="30" required></input><br/>

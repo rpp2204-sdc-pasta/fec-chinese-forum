@@ -122,7 +122,7 @@ class QnAList extends React.Component {
     }
 
     if(this.state.numAns >= AnsLength && AnsLength > 2){
-      loader = <button className = "lvl4" onClick = {this.collapse}>- COLLAPSE</button>
+      loader = <button className = "lvl4 buttonLink" onClick = {this.collapse}>- COLLAPSE</button>
     } else if(AnsLength <= 2){
       loader = ''
     } else {
@@ -144,7 +144,7 @@ class QnAList extends React.Component {
 
               {
                 this.state.showAnsModal &&
-                    <form className = "lvl4">
+                    <form className = "lvl4 ansModal">
                       <input placeholder="Name" onChange={(e) => {this.inputname = e.target.value}} placeholder="Name" maxlength="60" required></input><br/>
                       <input placeholder="Email" type="email" onChange={(e) => {this.inputemail = e.target.value}} placeholder="Email" maxlength="60" required></input><br/>
                       <input placeholder="Enter Answer" onChange={(e) => {this.inputanswer = e.target.value}} size="30" maxlength="1000"required></input><br/>
@@ -153,7 +153,7 @@ class QnAList extends React.Component {
                     </form>
               }
               {!this.state.showAnsModal && <button className = "buttonLink" onClick={this.showModal}>Add Answer</button>}
-        </div><br/>
+        </div><br/><br/>
         <div id = "ansList">{AnsList}</div>
         {loader}<br/><br/>
     </div>
