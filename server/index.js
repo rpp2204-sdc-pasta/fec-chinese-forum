@@ -6,7 +6,7 @@ const app = express();
 const reviews =require('./reviews.js')
 const qna =require('./qna.js')
 const port = process.env.PORT || 3000;
-const { getRelated } = require('./related');
+const { getRelated, getCurrent } = require('./related');
 const { Outfit } = require('../db/index.js');
 
 app.use(express.static(path.join(__dirname, '../Client/dist')));
@@ -16,6 +16,18 @@ app.use(express.json());
 
 //===========================================
 // related products api
+
+
+app.get('/current/:id', (req, res) => {
+  getCurrent(req.params.id)
+    .then(result => {
+      res.status(200).send(result);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).send("some err happened");
+    });
+});
 
 app.get('/related/:id', (req, res) => {
   getRelated(req.params.id)
