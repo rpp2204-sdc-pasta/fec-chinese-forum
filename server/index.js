@@ -52,8 +52,8 @@ app.get('/outfit', (req, res) => {
 });
 
 app.post('/outfit', (req, res) => {
-  const { id, category, name, original_price, sale_price, img_url, overallRating } = req.body;
-  const obj = { id, category, name, original_price, sale_price, img_url, overallRating };
+  const { id, category, name, original_price, sale_price, img_url, overallRating, reviewCount } = req.body;
+  const obj = { id, category, name, original_price, sale_price, img_url, overallRating, reviewCount };
   Outfit.updateOne({id: id}, obj, {upsert: true}, function(err) {
     if (err) {
       console.log(err)

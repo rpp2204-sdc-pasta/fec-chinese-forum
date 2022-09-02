@@ -48,6 +48,7 @@ let StarRating = (props) => {
                 </div>
             );
         })}
+        <div className="review-count">{`(${props.count})`}</div>
     </div>
 );
 };

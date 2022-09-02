@@ -68,7 +68,7 @@ class RelatedProducts extends React.Component {
     };
     axios(options)
       .then(response => {
-        console.log(response.data);
+        // console.log(response.data);
         this.setState({ current: response.data });
       })
       .catch(err => {
@@ -162,7 +162,8 @@ class RelatedProducts extends React.Component {
         original_price: this.state.current.original_price,
         sale_price: this.state.current.sale_price,
         img_url: this.state.current.photos[0].thumbnail_url,
-        overallRating: this.state.current.overallRating
+        overallRating: this.state.current.overallRating,
+        reviewCount: this.state.current.reviewCount
       }
     };
     axios(options)
