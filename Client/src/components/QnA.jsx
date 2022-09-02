@@ -88,10 +88,10 @@ class QnA extends React.Component {
         return ( <div className = "QnA">
             <h3 className = ""> QUESTIONS &#38; ANSWERS </h3>
             {(this.state.qna.length === 0 && !this.state.qsModalshow) && <button onClick = {this.showQSModal}> ADD A QUESTION + </button>}
-            {(this.state.qna.length > 0 && !this.state.qsModalshow) && <div><QnASearch search = {this.Search.bind(this)} cancelSearch = {this.cancelSearch.bind(this)}/></div>}
+            {(this.state.qna.length > 0 && !this.state.qsModalshow) && <QnASearch search = {this.Search.bind(this)} cancelSearch = {this.cancelSearch.bind(this)}/>}
             <div id = "QSList">
               {this.state.searching && this.state.searchResult.map((qs, i) =>
-                <QnAList qnaSet = {qs}/>)}
+                <QnAList key = {i} qnaSet = {qs}/>)}
               {!this.state.searching && this.state.qna.slice(0, this.state.numQS).map((qs, i) =>
               <QnAList key = {i} qnaSet = {qs} refresh = {this.componentDidMount}/>
               )}

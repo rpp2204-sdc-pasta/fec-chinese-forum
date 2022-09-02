@@ -526,43 +526,86 @@ Reviews */
 
 .QnA {
   font-family: Arial, Helvetica, sans-serif;
-  margin-left: 10%;
+  margin-left: 30%;
+  position: relative;
 }
 
 .QS, .QSOpts {
   display: inline;
 }
 
+.QS {
+  margin-bottom: 15px;
+}
+
 .QSOpts {
   margin-left: auto;
-  margin-right: 0;
+  float: right;
 }
 
 .qsModal {
-  overflow-y: scroll;
   border: 1px solid black;
-  width: 70%;
-  margin: 0 auto;
+  width: 350px;
+  margin: 10px;
   border-bottom: gray solid;
 }
 
-.QSList {
-  height: 150px;
+.ansModal {
+  width: 50%;
+  margin: 10px;
+}
+
+.modalForm {
+  margin: 10px;
+}
+
+#QSList {
+  overflow-Y: auto;
+  height: 300px;
+  width: 1000px;
 }
 
 .ansList {
-  overflow-y: scroll;
+  overflow-y: auto;
   height: 75px;
+  margin-top: 10px;
 }
 
 .ans {
-  overflow-y: scroll;
   margin-bottom: 10px;
-  border-bottom: dashed gray;
 }
+
 #searchBox {
   margin-bottom: 5px;
-  padding: 20px 10px;
+  padding: 5px;
+  width: 1000px;
+  border: #222 solid 1px;
+  align-content: center;
+}
+
+.searchBar {
+  margin-top: 5px;
+  border: 0;
+  width: 900px;
+  height: 30px;
+}
+
+.searchSubmit {
+  margin-top: 9px;
+  float: right;
+  border: 0;
+  size: 20px;
+  cursor: pointer;
+}
+
+
+.searchClose {
+  margin-top: 9px;
+  float: right;
+  cursor: pointer;
+  border: 0;
+  size: 20px;
+  background-color: white;
 }
 
 input {
@@ -572,6 +615,14 @@ input {
 
 .QSboxbotbut{
   margin-right: 20px;
+}
+
+#collapse {
+  margin-right: 7px;
+}
+
+#loadMore {
+  margin-right: 7px;
 }
 
 .lvl4 {
