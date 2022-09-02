@@ -18,8 +18,8 @@ Related Product */
 .section-title {
   position: relative;
   top: 0;
-  padding: 0 8%;
-  font-size: 2vw;
+  padding: 0 8.4%;
+  font-size: 1.2vw;
   margin: 2vw auto;
   width: 80%;
   justify-content: center;
@@ -230,13 +230,13 @@ Related Product */
 
 .single-star-container {
   height: 100%;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 8 / 9;
   display: inline-block;
 }
 
 .single-star-outline {
   height: 100%;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 8 / 9;
 }
 
 .single-star-fill {
