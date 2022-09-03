@@ -250,7 +250,7 @@
   position: relative;
   display: inline-block;
   height: 2vw;
-  background-color: black;
+  background-color: gold;
 }
 
 .single-star-container {
@@ -266,6 +266,11 @@
 
 /* ================================
 Reviews */
+.reviewTitle{
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
 .containerAll {
   background-color: white;
   padding: 10px;
@@ -280,8 +285,14 @@ Reviews */
   text-align: left;
 }
 .containerBreakdown {
-  font-size: 70px;
+  font-size: 50px;
   font-weight: bold;
+}
+
+.starflex{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }
 
 .starReview{
@@ -490,6 +501,32 @@ Reviews */
 
 }
 
+.starDate{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-self: flex-end;
+}
+
+.create {
+  max-width: 400px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.create label {
+  text-align: left;
+  display: block;
+}
+
+.create input, .create textarea {
+  width: 50%;
+  padding: 6px 10px;
+  margin: 10px 0;;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+  display: block;
+}
 
 /* ================================ QnA */
 

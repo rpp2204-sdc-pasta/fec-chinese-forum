@@ -41,7 +41,6 @@ const Photo = (props)=>{
   const [isOpen, setIsOpen] =useState(false);
 
   const toggleModal= () =>{
-    console.log('modal')
     setIsOpen (!isOpen)
   }
 

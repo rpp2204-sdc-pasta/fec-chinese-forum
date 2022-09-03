@@ -247,9 +247,11 @@ class Reviews extends React.Component {
 
     return(
       <div className='containerAll' style={style_1}>
-        <div className='left'>{`Ratings & Reviews`}
+        <div className='left'>
+          <div className='reviewTitle'>
+            {`Ratings & Reviews`}
+          </div>
           <div >
-            <br></br>
             <Ratingbreakdown avgRating={this.state.avgRating} percent={this.state.percent} breakdownScore={this.state.breakdownScore}
             filterReviews_Star={this.filterReviews_Star}/>
             <CharBreakdown characteristics={this.state.characteristics}/>
@@ -269,7 +271,6 @@ class Reviews extends React.Component {
           <div>
             <Morebutton length={this.state.length} count={this.state.count} handleMore={this.handleMore}/>
             <Addreview />
-
           </div>
         </div>
       </div>
