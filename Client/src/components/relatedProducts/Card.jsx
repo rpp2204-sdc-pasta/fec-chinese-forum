@@ -21,7 +21,9 @@ let Card = (props) => (
             <span className="original-price" >{'$' + props.item.original_price}</span></div>)}
         {props.item.sale_price === null && (<div className="card-price">
           <span className="current-price" >{'$' + props.item.original_price}</span></div>)}
-        <StarRating rating={props.item.overallRating} count={props.item.reviewCount}/>
+        <div className="card-star-rating" >
+          <StarRating rating={props.item.overallRating} count={props.item.reviewCount}/>
+        </div>
       </div>
     </div>
   </>

@@ -221,7 +221,8 @@ class RelatedProducts extends React.Component {
     this.setState({compare: false});
   }
 
-  render() {
+  render(props) {
+    let { id, handleClick } = this.props;
     return (
       <>
         <h3 className="section-title">RELATED PRODUCTS</h3>
@@ -233,7 +234,7 @@ class RelatedProducts extends React.Component {
           <div className="related-products" style={{transform: `translateX(-${this.state.relatedIndex * 25}%)`}} >
             {this.state.products.map((product, index) => <Card item={product} key={index}
               handleCompare={() => { this.handleCompare(index); }}
-              handleClick={() => {this.props.handleClick(product.id)}} />)}
+              handleClick={() => {handleClick(product.id)}} />)}
           </div>
         </section>
         <h3 className="section-title">YOUR OUTFIT</h3>
@@ -252,7 +253,7 @@ class RelatedProducts extends React.Component {
               </div>
             </div>
             {this.state.outfits.map((outfit, index) => <Outfit item={outfit} key={index}
-            handleDelete={() => { this.handleDelete(index); }} handleClick={() => {this.props.handleClick(outfit.id)}} />)}
+            handleDelete={() => { this.handleDelete(index); }} handleClick={() => {handleClick(outfit.id)}} />)}
           </div>
         </section>
         {this.state.compare && <div id="compare-overlay" onClick={this.closeOverlay}>
