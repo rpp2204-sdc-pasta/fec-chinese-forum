@@ -12,6 +12,22 @@ class OverviewStyleSelect extends React.Component {
   }
 
   render() {
+    var index = 0;
+    var styles = [];
+    for (var groups = 0; groups < Math.ceil(this.props.styles.length/4); groups++) {
+      var group = [];
+      for (var i = 0; i < 4; i++) {
+        if( index < this.props.styles.length) {
+          group.push(<OverviewStyle
+            count={index} style={this.props.styles[index]}
+            onClick={this.onClickStyleSelect}/>);
+          index++;
+        }
+      }
+      styles.push(<div className='Overview-styleGroupOfFour'>{group}</div>)
+      group = [];
+    }
+    console.log('numofprops: ',this.props.styles.length);
     return (
       //style selector will show thumbnail of different styles
 			//4 per row
@@ -25,10 +41,7 @@ class OverviewStyleSelect extends React.Component {
           {this.props.name}
         </div>
         <div className="Overview-styles">
-          {this.props.styles.map((style, index) =>
-          <OverviewStyle
-          count={index} style={style}
-          onClick={this.onClickStyleSelect}/>)}
+          {styles}
         </div>
 
       </div>
