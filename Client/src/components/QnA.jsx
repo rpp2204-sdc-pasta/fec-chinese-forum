@@ -15,6 +15,12 @@ class QnA extends React.Component {
         searchResult: [],
         numQS: 2
       }
+
+      this.loadMore = this.loadMore.bind(this)
+      this.showQSModal = this.showQSModal.bind(this)
+      this.Search = this.Search.bind(this)
+      this.collapse = this.collapse.bind(this)
+      this.cancelSearch = this.cancelSearch.bind(this)
     }
 
     componentDidMount = () => {

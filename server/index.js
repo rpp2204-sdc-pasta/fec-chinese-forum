@@ -17,7 +17,6 @@ app.use(express.json());
 //===========================================
 // related products api
 
-
 app.get('/current/:id', (req, res) => {
   getCurrent(req.params.id)
     .then(result => {
