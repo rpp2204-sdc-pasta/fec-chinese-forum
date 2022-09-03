@@ -12,16 +12,17 @@ function QnASearch (props) {
 
   const Close = (e) => {
     e.preventDefault();
-    document.getElementById('qnaSearch').value = ''
+    document.getElementById("searchBar").value = ''
     props.cancelSearch();
   }
 
   return (
-    <div>
-    <form className = "lvl3" id="searchBox">
-      <input id = "searchBar" type="text" onChange={Search} size = "50" placeholder="Have a question? Search for answers..."/>
-      <button id = "searchButton" type="submit" onClick={Search}>Submit</button>
-      <button onClick={Close}>X</button>
+    <div id="searchBox">
+    <form className = "lvl3" onSubmit = {(e)=>{e.preventDefault()}}>
+      <input id = "searchBar" className = "searchBar" type="text" onChange={Search}  placeholder="Have a question? Search for answers..."/>
+      <button type = "button" className = "searchClose" onClick={Close}>X</button>
+      {/* <button className = "searchSubmit" type="submit" onClick={Search}></button> */}
+
     </form>
     </div>
     )
