@@ -5,6 +5,7 @@ import Morebutton from './reviews/Morebutton.jsx'
 import Ratingbreakdown from './reviews/Ratingbreakdown.jsx'
 import CharBreakdown from './reviews/CharBreakdown.jsx'
 import Sorted from './reviews/Sorted.jsx'
+import Addreview from './reviews/Addreview.jsx'
 
 
 
@@ -17,6 +18,7 @@ class Reviews extends React.Component {
       stored_helpful: [],
       stored_newest:[],
       currentLoad: [],
+      currentSort:'relevant',
       product: [],
       count: 2,
       length: '',
@@ -24,6 +26,14 @@ class Reviews extends React.Component {
       percent:'',
       breakdownScore: {},
       characteristics: {},
+      report: true,
+      fiveStar: true,
+      fourStar: true,
+      threeStar: true,
+      twoStar: true,
+      oneStar: true
+
+
     }
     this.handleMore=this.handleMore.bind(this)
     this.getProductcount=this.getProductcount.bind(this)
@@ -31,6 +41,9 @@ class Reviews extends React.Component {
     this.resetCount=this.resetCount.bind(this)
     this.selectFilter=this.selectFilter.bind(this)
     this.getMeta=this.getMeta.bind(this)
+    this.clickedReport=this.clickedReport.bind(this)
+    this.reportData=this.reportData.bind(this)
+    this.filterReviews_Star=this.filterReviews_Star.bind(this)
   }
 
 
@@ -105,6 +118,7 @@ class Reviews extends React.Component {
       'newest': this.state.stored_newest
     }
     this.setState({
+      currentSort: value,
       currentLoad: filter[value],
       product: filter[value].slice(0,2)
     })
@@ -115,7 +129,6 @@ class Reviews extends React.Component {
       product_id: product_id}
     })
     .then((response)=>{
-      // console.log(response.data.characteristics.Fit.id)
       this.setState({
         avgRating: response.data.avg,
         percent: response.data.percent,
@@ -127,6 +140,74 @@ class Reviews extends React.Component {
       console.log(err)
     })
   }
+
+  reportData(sorted, data){
+    return sorted.filter((item)=>{
+      return item['review_id'] !== Number(data)
+    })
+  }
+
+  clickedReport(e){
+    e.preventDefault()
+    let helpful = this.reportData(this.state.stored_helpful, e.target.id)
+    let relevant = this.reportData(this.state.stored_relevant, e.target.id)
+    let newest = this.reportData(this.state.stored_newest, e.target.id)
+    this.setState({
+      stored_helpful: helpful,
+      stored_newest: newest,
+      stored_relevant : relevant,
+      length: relevant.length
+    })
+    if(this.state.currentSort === 'helpful'){
+      this.setState({
+        currentLoad: helpful,
+      })
+      this.setState({
+        product: helpful.slice(0,2)
+      })
+    } else if(this.state.currentSort === 'newest'){
+      this.setState({
+        currentLoad: newest
+      })
+      this.setState({
+        product: newest.slice(0,2)
+      })
+    } else {
+      this.setState({
+        currentLoad: relevant,
+      })
+      this.setState({
+        product: relevant.slice(0,2)
+      })
+    }
+  }
+
+  filterReviews_Star(e){
+    e.preventDefault();
+    if(e.target.id === '5'){
+      this.setState(prevState=>({
+        fiveStar: !this.state.fiveStar
+      }))
+    } else if(e.target.id === '4'){
+      this.setState(prevState=>({
+        fourStar: !prevState.fourStar
+      }))
+    } else if(e.target.id === '3'){
+      this.setState(prevState=>({
+        threeStar: !prevState.threeStar
+      }))
+    } else if(e.target.id === '2'){
+      this.setState(prevState=>({
+        twoStar: !prevState.twoStar
+      }))
+    }else if(e.target.id === '1'){
+      this.setState(prevState=>({
+        oneStar: !prevState.oneStar
+      }))
+    }
+
+  }
+
 
   render(){
 
@@ -166,10 +247,13 @@ class Reviews extends React.Component {
 
     return(
       <div className='containerAll' style={style_1}>
-        <div className='left'>{`Ratings & Reviews`}
+        <div className='left'>
+          <div className='reviewTitle'>
+            {`Ratings & Reviews`}
+          </div>
           <div >
-            <br></br>
-            <Ratingbreakdown avgRating={this.state.avgRating} percent={this.state.percent} breakdownScore={this.state.breakdownScore}/>
+            <Ratingbreakdown avgRating={this.state.avgRating} percent={this.state.percent} breakdownScore={this.state.breakdownScore}
+            filterReviews_Star={this.filterReviews_Star}/>
             <CharBreakdown characteristics={this.state.characteristics}/>
           </div>
         </div>
@@ -177,13 +261,16 @@ class Reviews extends React.Component {
           <Sorted length={this.state.length} selectFilter={this.selectFilter} product_id={this.props.id} resetCount={this.resetCount}/>
           <div style={style_body_reviews}>
             <div style={scolled}>
-              {this.state.product.map((item=>(<div key={item.review_id}><Reviews_list product={item} /></div>)))}
-              <br></br>
+              {this.state.product.map((item=>
+                 <div key={item.review_id}>
+                    <Reviews_list product={item} clickedReport={this.clickedReport} report={this.state.report}
+                    five={this.state.fiveStar} four={this.state.fourStar} three={this.state.threeStar} two={this.state.twoStar} one={this.state.oneStar}/>
+                </div>))}
+              </div>
             </div>
-          </div>
           <div>
             <Morebutton length={this.state.length} count={this.state.count} handleMore={this.handleMore}/>
-            <button style={button_style} type='submit'> ADD A REVIEW +   </button>
+            <Addreview />
           </div>
         </div>
       </div>

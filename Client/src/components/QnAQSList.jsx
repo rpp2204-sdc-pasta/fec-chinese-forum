@@ -122,29 +122,29 @@ class QnAList extends React.Component {
     }
 
     if(this.state.numAns >= AnsLength && AnsLength > 2){
-      loader = <button className = "lvl4" onClick = {this.collapse}>- COLLAPSE</button>
+      loader = <button className = "lvl4 buttonLink" onClick = {this.collapse}>- COLLAPSE</button>
     } else if(AnsLength <= 2){
       loader = ''
     } else {
-      loader = <button className = "lvl4" onClick = {this.loadAns}>LOAD MORE ANSWERS</button>
+      loader = <button className = "lvl4 buttonLink" onClick = {this.loadAns}>+ LOAD MORE ANSWERS</button>
     }
 
 
     return (
-      <div>
-          <div>
-          <div><b>Q: {this.qs}</b></div>
-          <span className = "lvl3">  Helpful? </span>
+      <div className = "QSList">
+          <div className = "lvl3 QS"><b>Q: {this.qs}</b></div>
+          <div className = "QSOpts">
+          <span className = "lvl4">  Helpful? </span>
           <span className = "lvl4">
-            {!this.state.yes && <button onClick={this.qshelpful}>Yes</button>}
+            {!this.state.yes && <button className = "buttonLink" onClick={this.qshelpful}>Yes</button>}
             {this.state.yes && <a>Yes</a>}
             <span> &#40;{this.state.qshelpfulness}&#41;  |  </span>
-          {!this.state.reported && <button onClick={this.reportQS}>Report</button>}
+          {!this.state.reported && <button className = "buttonLink" onClick={this.reportQS}>Report</button>}
           {this.state.reported && <a>Reported</a>} | </span>
 
               {
                 this.state.showAnsModal &&
-                    <form>
+                    <form className = "lvl4 ansModal">
                       <input placeholder="Name" onChange={(e) => {this.inputname = e.target.value}} placeholder="Name" maxlength="60" required></input><br/>
                       <input placeholder="Email" type="email" onChange={(e) => {this.inputemail = e.target.value}} placeholder="Email" maxlength="60" required></input><br/>
                       <input placeholder="Enter Answer" onChange={(e) => {this.inputanswer = e.target.value}} size="30" maxlength="1000"required></input><br/>
@@ -152,11 +152,10 @@ class QnAList extends React.Component {
                       <button onClick={this.showModal}>X</button>
                     </form>
               }
-              {!this.state.showAnsModal && <button onClick={this.showModal}>Add Answer</button>}
-        </div><br/>
-        {AnsList}
-        <br/>
-        {loader}<br/>
+              {!this.state.showAnsModal && <button className = "buttonLink" onClick={this.showModal}>Add Answer</button>}
+        </div><br/><br/>
+        <div id = "ansList">{AnsList}</div>
+        {loader}<br/><br/>
     </div>
     )
   }

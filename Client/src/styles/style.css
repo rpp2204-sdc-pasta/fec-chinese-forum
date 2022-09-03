@@ -2,35 +2,35 @@
   box-sizing: border-box;
 }
 
+/* ================================
+Related Product */
+
 .related,
 .outfit {
   position: relative;
   overflow: hidden;
-  width: 1500px;
-  max-width: 100%;
-  margin-left: auto;
-  margin-right: auto;
+  display: flex;
   justify-content: center;
+  max-width: 80%;
+  margin: auto;
 }
 
 .section-title {
-  padding: 0 10vw;
-  font-size: 20px;
-  margin-bottom: 20px;
-  width: 1500px;
-  max-width: 100%;
-  margin-left: auto;
-  margin-right: auto;
+  position: relative;
+  top: 0;
+  padding: 0 8.4%;
+  font-size: 1.2vw;
+  margin: 2vw auto;
+  width: 80%;
+  justify-content: center;
   text-transform: uppercase;
 }
 
 .outfit-list,
 .related-products {
-  padding: 0 10vw;
+  width: 80%;
   display: flex;
-  overflow-x: auto;
-  overflow-y: hidden;
-  scroll-behavior: smooth;
+  transition: transform 250ms ease-in-out
 }
 
 .outfit-list::-webkit-scrollbar,
@@ -41,19 +41,16 @@
 .pre-button,
 .next-button {
   border: none;
-  width: 10vw;
-  height: 100%;
-  padding: 20px;
   position: absolute;
-  top: 0;
+  width: 10%;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   background: linear-gradient(90deg, rgba(255,255,255,0) 0%, #fff 100%);
   cursor: pointer;
   z-index: 9;
-  font-size: 1.3rem;
-  opacity: 0.5;
+  font-size: 2vw;
 }
 
 .pre-button {
@@ -67,14 +64,14 @@
 
 .pre-button:hover,
 .next-button:hover {
-  opacity: 1;
+  font-size: 4vw;
 }
 
 .card {
-  flex: 0 0 auto;
-  width: 250px;
-  height: 400px;
-  margin-right: 40px;
+  flex: 0 0 24%;
+  max-width: 24%;
+  aspect-ratio: 5 / 8;
+  margin: .5%;
   border: 1px solid black;
 }
 
@@ -82,7 +79,6 @@
   position: relative;
   width: 100%;
   height: 70%;
-  overflow: hidden;
 }
 
 .card-current-img {
@@ -93,9 +89,9 @@
 
 .card-function-btn {
   position: absolute;
-  top: 10px;
-  right: 10px;
-  padding: 2px;
+  top: 3%;
+  right: 5%;
+  padding: .25vw;
   width: 14%;
   height: 10%;
   background: none;
@@ -104,7 +100,7 @@
   opacity: 0;
   border: none;
   outline: none;
-  font-size: 1.5rem;
+  font-size: 2vw;
   color: white;
 }
 
@@ -139,24 +135,26 @@
   background-color: white;
   width: 800px;
   max-width: 60%;
-  padding: 10px 0;
+  padding: .5vw;
 }
 
-.compare-title,
-.compare-name,
-.compare-features {
+.compare-title {
   position: relative;
   top: 0;
   width: 100%;
   text-transform: capitalize;
+  margin: 0.25vw;
+}
+
+.compare-features {
+  position: relative;
+  width: 100%;
+  margin: 0.25vw;
 }
 
 .compare-title {
-  text-align: center;
-}
-
-.compare-name {
-  height: 40px;
+  text-align: left;
+  padding-left: .25vw;
 }
 
 .compare-features {
@@ -166,90 +164,109 @@
 .compare-roll {
   position: relative;
   width: 100%;
-  height: 20px;
 }
 
 .compare-current {
-  position: absolute;
-  left: 0;
-  width: 300px;
   text-align: left;
-  padding: 0 10px;
 }
 
 .feature-name {
-  position: absolute;
-  left: 300px;
-  padding: 0 10px;
-  width: 200px;
   text-align: center;
 }
 
 .compare-compare {
-  position: absolute;
-  right: 0;
-  width: 300px;
   text-align: right;
-  padding: 0 10px;
 }
 
 .card-info {
   width: 100%;
-  height: 100%;
+  height: 30%;
 }
 
 .card-category {
   font-family: Arial, Helvetica, sans-serif;
   text-transform: uppercase;
-  margin: 5px;
-  font-size: 13px;
+  margin: 2%;
+  font-size: 1vw;
+  height: 14%;
 }
 
 .card-name {
-  height: 40px;
-  line-height: 20px;
-  overflow: hidden;
   font-weight: bold;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  margin: 5px;
-  font-size: 18px;
+  margin: 2%;
+  font-size: 1.25vw;
+  height: 36%;
+}
+
+.card-price {
+  margin: 2%;
+  height: 14%;
 }
 
 .current-price {
-  font-size: 1rem;
+  font-size: 1vw;
   color: black;
-  margin: 5px;
+  margin: 0 2%;
 }
 
 .sale-price {
-  font-size: 1rem;
+  font-size: 1vw;
   color: red;
-  margin: 5px;
+  margin: 0 2%;
 }
 
 .original-price {
-  font-size: 0.75rem;
+  font-size: 1vw;
   text-decoration: line-through;
   color: black;
-  margin: 5px;
+  margin: 0 2%;
+}
+
+.card-star-rating {
+  margin: 2%;
+  height: 18%;
+}
+
+.star-rating {
+  height: 100%;
+}
+
+.single-star-container {
+  height: 100%;
+  aspect-ratio: 8 / 9;
+  display: inline-block;
+}
+
+.single-star-outline {
+  height: 100%;
+  aspect-ratio: 8 / 9;
+}
+
+.single-star-fill {
+  height: 100%;
+  background-color: gold;
+  object-fit: cover;
+  display: flex;
+}
+
+.review-count {
+  display: inline-block;
+  height: 100%;
+  font-size: 1vw;
+  margin: 2%;
 }
 
 .add-outfit-sign {
-  font-size: 10rem;
+  font-size: 12vw;
   font-weight: bold;
   text-align: center;
-  width: 100%;
-  height: 80%;
-  padding: 25%;
 }
 
 .add-outfit-word {
-  font-size: 1.5rem;
+  font-size: 2vw;
   text-align: center;
-  width: 100%;
-  height: 20%;
-  overflow: hidden;
-  padding: 10%
+  margin: 2%;
 }
 
 .card-compare-modal {
@@ -258,7 +275,6 @@
   left: 50%;
   transform: translate(-50%, -50%);
   border: 1px solid black;
-  border-radius: 10px;
   width: 500px;
   max-width: 80%;
   height: 400px;
@@ -268,34 +284,16 @@
   overflow-y: scroll;
 }
 
-.single-star-outline {
-  height: 18px;
-  width: 18px;
-}
 
-.single-star-fill {
-  position: relative;
-  display: inline-block;
-  height: 18px;
-  background-color: black;
-}
 
-.single-star-container {
-  height: 18px;
-  width: 18px;
-  display: inline-block;
-}
-
-.card-price {
-  margin: 5px;
-}
-
-.star-rating {
-  margin: 5px;
-}
 
 /* ================================
 Reviews */
+.reviewTitle{
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
 .containerAll {
   background-color: white;
   padding: 10px;
@@ -310,8 +308,14 @@ Reviews */
   text-align: left;
 }
 .containerBreakdown {
-  font-size: 70px;
+  font-size: 50px;
   font-weight: bold;
+}
+
+.starflex{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }
 
 .starReview{
@@ -500,7 +504,6 @@ Reviews */
   border: none;
   outline: none;
   position: relative;
-
 }
 
 
@@ -510,4 +513,172 @@ Reviews */
   right:calc(-4% - var(--characteristics-bar));
   position: relative;
   z-index: 2;
+}
+
+.sellerRes{
+  font-size: small;
+  background-color: rgb(154, 151, 151);
+  display: inline;
+  margin: 0px auto 0px auto;
+  border-radius: 10px;
+
+}
+
+.starDate{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-self: flex-end;
+}
+
+.create {
+  max-width: 400px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.create label {
+  text-align: left;
+  display: block;
+}
+
+.create input, .create textarea {
+  width: 50%;
+  padding: 6px 10px;
+  margin: 10px 0;;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+  display: block;
+}
+
+/* ================================ QnA */
+
+.buttonLink {
+  background: none!important;
+  border: none;
+  padding: 0!important;
+  /*optional*/
+  font-family: Arial, Helvetica, sans-serif;
+  /*input has OS specific font-family*/
+  color: #069;
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.QnA {
+  font-family: Arial, Helvetica, sans-serif;
+  margin-left: 30%;
+  position: relative;
+}
+
+.QS, .QSOpts {
+  display: inline;
+}
+
+.QS {
+  margin-bottom: 15px;
+}
+
+.QSOpts {
+  margin-left: auto;
+  float: right;
+}
+
+.qsModal {
+  border: 1px solid black;
+  width: 350px;
+  margin: 10px;
+  border-bottom: gray solid;
+}
+
+.ansModal {
+  width: 50%;
+  margin: 10px;
+}
+
+.modalForm {
+  margin: 10px;
+}
+
+#QSList {
+  overflow-Y: auto;
+  height: 300px;
+  width: 1000px;
+}
+
+.ansList {
+  overflow-y: auto;
+  height: 75px;
+  margin-top: 10px;
+}
+
+.ans {
+  margin-bottom: 10px;
+}
+
+#searchBox {
+  margin-bottom: 5px;
+  padding: 5px;
+  width: 1000px;
+  border: #222 solid 1px;
+  align-content: center;
+}
+
+.searchBar {
+  margin-top: 5px;
+  border: 0;
+  width: 900px;
+  height: 30px;
+}
+
+.searchSubmit {
+  margin-top: 9px;
+  float: right;
+  border: 0;
+  size: 20px;
+  cursor: pointer;
+}
+
+
+.searchClose {
+  margin-top: 9px;
+  float: right;
+  cursor: pointer;
+  border: 0;
+  size: 20px;
+  background-color: white;
+}
+
+input {
+  margin-bottom: 5px;
+  padding: 5px;
+}
+
+.QSboxbotbut{
+  margin-right: 20px;
+}
+
+#collapse {
+  margin-right: 7px;
+}
+
+#loadMore {
+  margin-right: 7px;
+}
+
+.lvl4 {
+  font-size: 12px;
+}
+
+.lvl3 {
+  font-size: 18px;
+}
+
+.lvl2 {
+  font-size: 22px;
+}
+
+.lvl1 {
+  font-size: 26px;
 }

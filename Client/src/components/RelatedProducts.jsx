@@ -8,10 +8,17 @@ class RelatedProducts extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      current: {},
       products: [],
       outfits: [],
       compare: false,
-      compareFeatures: {}
+      compareFeatures: {},
+      relatedIndex: 0,
+      outfitIndex: -1,
+      relatedPre: true,
+      relatedNext: true,
+      outfitPre: true,
+      outfitNext: true
     };
     this.getRelated = this.getRelated.bind(this);
     this.getOutfit = this.getOutfit.bind(this);
@@ -19,25 +26,65 @@ class RelatedProducts extends React.Component {
     this.handleDelete = this.handleDelete.bind(this);
     this.handleAdd = this.handleAdd.bind(this);
     this.closeOverlay = this.closeOverlay.bind(this);
-    this.currentID = props.id;
-    this.mainItem = props.mainItem;
-    this.handleClick = props.handleClick;
+    this.relatedPre = this.relatedPre.bind(this);
+    this.relatedNext = this.relatedNext.bind(this);
+    this.outfitPre = this.outfitPre.bind(this);
+    this.outfitNext = this.outfitNext.bind(this);
+    this.checkRelated = this.checkRelated.bind(this);
+    this.checkOutfit = this.checkOutfit.bind(this);
   }
 
   componentDidMount() {
     this.getRelated();
     this.getOutfit();
+    this.checkRelated();
+    this.checkOutfit();
+    this.getCurrent();
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.id !== prevProps.id) {
+      this.getRelated();
+      this.getCurrent();
+    }
+    if (this.state.outfitIndex !== prevState.outfitIndex) {
+      this.checkOutfit();
+    }
+    if (this.state.relatedIndex !== prevState.relatedIndex) {
+      this.checkRelated();
+    }
+    if (this.state.products !== prevState.products) {
+      this.checkRelated();
+    }
+    if (this.state.outfits !== prevState.outfits) {
+      this.checkOutfit();
+    }
+  }
+
+  getCurrent() {
+    let options = {
+      method: 'GET',
+      url: '/current/' + this.props.id
+    };
+    axios(options)
+      .then(response => {
+        // console.log(response.data);
+        this.setState({ current: response.data });
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 
   getRelated() {
     let options = {
       method: 'GET',
-      url: '/related/' + this.currentID
+      url: '/related/' + this.props.id
     };
     axios(options)
       .then(response => {
         // console.log(response.data);
-        this.setState({ products: response.data });
+        this.setState({ products: response.data, relatedIndex: 0 });
       })
       .catch(err => {
         console.log(err);
@@ -52,7 +99,7 @@ class RelatedProducts extends React.Component {
     axios(options)
       .then(response => {
         // console.log(response.data);
-        this.setState({ outfits: response.data });
+        this.setState({ outfits: response.data, outfitIndex: -1 });
       })
       .catch(err => {
         console.log(err);
@@ -61,7 +108,7 @@ class RelatedProducts extends React.Component {
 
   handleCompare(index) {
     let compareData = {};
-    let currentName = this.mainItem.name;
+    let currentName = this.state.current.name;
     let compareName = this.state.products[index].name;
     this.state.products[index].features.forEach(feature => {
       if (!compareData[feature.feature]) {
@@ -70,7 +117,7 @@ class RelatedProducts extends React.Component {
       compareData[feature.feature]["compare"] = feature.value;
     });
 
-    this.mainItem.features.forEach(feature => {
+    this.state.current.features.forEach(feature => {
       if (!compareData[feature.feature]) {
         compareData[feature.feature] = {}
       }
@@ -109,13 +156,14 @@ class RelatedProducts extends React.Component {
       method: 'post',
       url: '/outfit',
       data: {
-        id: this.mainItem.id,
-        category: this.mainItem.category,
-        name: this.mainItem.category,
-        original_price: this.mainItem.original_price,
-        sale_price: this.mainItem.sale_price,
-        img_url: this.mainItem.img_url,
-        overallRating: this.mainItem.overallRating
+        id: this.state.current.id,
+        category: this.state.current.category,
+        name: this.state.current.category,
+        original_price: this.state.current.original_price,
+        sale_price: this.state.current.sale_price,
+        img_url: this.state.current.photos[0].thumbnail_url,
+        overallRating: this.state.current.overallRating,
+        reviewCount: this.state.current.reviewCount
       }
     };
     axios(options)
@@ -127,36 +175,89 @@ class RelatedProducts extends React.Component {
       });
   }
 
+  checkRelated() {
+    if (this.state.relatedIndex > 0) {
+      this.setState({relatedPre: true});
+    } else {
+      this.setState({relatedPre: false});
+    }
+    if (this.state.relatedIndex + 4 < this.state.products.length) {
+      this.setState({relatedNext: true});
+    } else {
+      this.setState({relatedNext: false});
+    }
+  }
+
+  checkOutfit() {
+    if (this.state.outfitIndex > -1) {
+      this.setState({outfitPre: true});
+    } else {
+      this.setState({outfitPre: false});
+    }
+    if (this.state.outfitIndex + 4 < this.state.outfits.length) {
+      this.setState({outfitNext: true});
+    } else {
+      this.setState({outfitNext: false});
+    }
+  }
+
+  relatedPre() {
+    this.setState({relatedIndex: this.state.relatedIndex - 1});
+  }
+
+  relatedNext() {
+    this.setState({relatedIndex: this.state.relatedIndex + 1});
+  }
+
+  outfitPre() {
+    this.setState({outfitIndex: this.state.outfitIndex - 1});
+  }
+
+  outfitNext() {
+    this.setState({outfitIndex: this.state.outfitIndex + 1});
+  }
+
   closeOverlay() {
     this.setState({compare: false});
   }
 
-  render() {
+  render(props) {
+    let { id, handleClick } = this.props;
     return (
       <>
         <h3 className="section-title">RELATED PRODUCTS</h3>
         <section className="related">
-          <button className="pre-button">&#10132;</button>
-          <button className="next-button">&#10132;</button>
-          <div className="related-products">
+          <div className="button">
+            {this.state.relatedPre && <button className="pre-button" onClick={this.relatedPre} >&#10132;</button>}
+            {this.state.relatedNext && <button className="next-button" onClick={this.relatedNext} >&#10132;</button>}
+          </div>
+          <div className="related-products" style={{transform: `translateX(-${this.state.relatedIndex * 25}%)`}} >
             {this.state.products.map((product, index) => <Card item={product} key={index}
-              handleCompare={() => { this.handleCompare(index); }} handleClick={this.handleClick}/>)}
+              handleCompare={() => { this.handleCompare(index); }}
+              handleClick={() => {handleClick(product.id)}} />)}
           </div>
         </section>
         <h3 className="section-title">YOUR OUTFIT</h3>
         <section className="outfit">
-          <button className="pre-button">&#10132;</button>
-          <button className="next-button">&#10132;</button>
-          <div className="outfit-list">
+          <div>
+            {this.state.outfitPre && <button className="pre-button" onClick={this.outfitPre} >&#10132;</button>}
+            {this.state.outfitNext && <button className="next-button" onClick={this.outfitNext} >&#10132;</button>}
+          </div>
+          <div className="outfit-list" style={{transform: `translateX(-${(this.state.outfitIndex + 1) * 25}%)`}} >
             <div className="card" onClick={this.handleAdd} >
-              <div className="add-outfit-sign">&#43;</div>
-              <div className="add-outfit-word">Add to Outfit</div>
+              <div className="card-img" >
+                <div className="add-outfit-sign" >&#43;</div>
+              </div>
+              <div className="card-info" >
+                <div className="add-outfit-word" >Add to Outfit</div>
+              </div>
             </div>
-            {this.state.outfits.map((outfit, index) => <Outfit item={outfit} key={outfit.id}
-            handleDelete={() => { this.handleDelete(index); }} />)}
+            {this.state.outfits.map((outfit, index) => <Outfit item={outfit} key={index}
+            handleDelete={() => { this.handleDelete(index); }} handleClick={() => {handleClick(outfit.id)}} />)}
           </div>
         </section>
-        {this.state.compare && <div id="compare-overlay" onClick={this.closeOverlay}><Compare data={this.state.compareFeatures} /></div>}
+        {this.state.compare && <div id="compare-overlay" onClick={this.closeOverlay}>
+          <Compare data={this.state.compareFeatures} /></div>}
       </>
     )
   }

@@ -3,9 +3,9 @@ import StarRating from '../StarRating.jsx';
 let Card = (props) => (
   <>
     <div className="card" >
-      <div className="card-img" onClick={props.handleClick} >
+      <div className="card-img" >
         <button className="card-function-btn" onClick={props.handleCompare}>&#9733;</button>
-        <img className="card-current-img" src={props.item.photos[0].thumbnail_url} onClick={() => {props.handleClick(props.item.id)}} />
+        <img className="card-current-img" src={props.item.photos[0].thumbnail_url} onClick={props.handleClick} />
 
         {/* <ul className="card-thumbnail">
           {props.item.photos.map(photo => {
@@ -13,7 +13,7 @@ let Card = (props) => (
           })}
         </ul> */}
       </div>
-      <div className="card-info">
+      <div className="card-info" onClick={props.handleClick} >
         <div className="card-category" >{props.item.category}</div>
         <div className="card-name" >{props.item.name}</div>
         {props.item.sale_price !== null && (<div className="card-price">
@@ -21,7 +21,9 @@ let Card = (props) => (
             <span className="original-price" >{'$' + props.item.original_price}</span></div>)}
         {props.item.sale_price === null && (<div className="card-price">
           <span className="current-price" >{'$' + props.item.original_price}</span></div>)}
-        <StarRating rating={props.item.overallRating}/>
+        <div className="card-star-rating" >
+          <StarRating rating={props.item.overallRating} count={props.item.reviewCount}/>
+        </div>
       </div>
     </div>
   </>
