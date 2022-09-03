@@ -87,7 +87,7 @@ class Reviews_list extends React.Component {
           <div id={this.props.product.rating} className={this.props.product.review_id} >
           <div className={this.props.product.reviewer_name}>
             <div className='starDate'>
-              <span><StarRating rating={this.props.product.rating}/></span>
+              <span className='starSize'><StarRating rating={this.props.product.rating}/></span>
               <span style={date_style}>{this.props.product.reviewer_name}, {date} </span>
             </div>
             <p style={{fontWeight:'bold'}}> {this.props.product.summary.substring(0,60)}</p>
