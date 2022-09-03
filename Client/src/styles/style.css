@@ -223,9 +223,13 @@ Related Product */
   margin: 0 2%;
 }
 
-.star-rating {
+.card-star-rating {
   margin: 2%;
   height: 18%;
+}
+
+.star-rating {
+  height: 100%;
 }
 
 .single-star-container {
@@ -241,7 +245,7 @@ Related Product */
 
 .single-star-fill {
   height: 100%;
-  background-color: black;
+  background-color: gold;
   object-fit: cover;
   display: flex;
 }
