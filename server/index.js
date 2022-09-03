@@ -7,12 +7,28 @@ const reviews =require('./reviews.js')
 const qna =require('./qna.js')
 const port = process.env.PORT || 3000;
 const { getRelated } = require('./related');
+const { getOverview } = require('./overview.js');
 const { Outfit } = require('../db/index.js');
 
 app.use(express.static(path.join(__dirname, '../Client/dist')));
 app.use(express.json());
 
 //https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp
+//===========================================
+// Overview api
+
+app.get('/overview/:id', (req, res) => {
+  getOverview(req.params.id)
+    .then(result => {
+      res.status(200).send(result);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).send("some err happened");
+    });
+});
+
+
 
 //===========================================
 // related products api
