@@ -314,6 +314,7 @@ Reviews */
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  align-content: flex-end;
 }
 
 .starReview{
@@ -547,6 +548,10 @@ Reviews */
   border: 1px solid #ddd;
   box-sizing: border-box;
   display: block;
+}
+
+.starSize {
+  height: 2vw;
 }
 
 /* ================================ QnA */

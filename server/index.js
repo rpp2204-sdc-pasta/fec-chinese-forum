@@ -189,7 +189,8 @@ app.post('/reviews', (req,res)=>{
       })
     })
     .catch((err)=>{
-      console.log(err)
+      // console.log(err)
+      res.status(500).send(err);
     })
 })
 
@@ -199,7 +200,8 @@ app.put('/reviews/:id', (req, res)=>{
     res.status(200).send('Helpful')
   })
   .catch((err)=>{
-    console.log(err)
+    // console.log(err)
+    res.status(500).send(err);
   })
 })
 
@@ -215,6 +217,9 @@ app.get('/reviews/meta',(req, res)=>{
       breakdownScore,
       characteristics: response.data.characteristics,
     })
+  })
+  .catch((err)=>{
+    res.status(500).send(err);
   })
 })
 
