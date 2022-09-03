@@ -1,29 +1,34 @@
-import React from 'react';
+import React, {useState} from 'react';
 
-const Star =()=>{
+const Starinform =(props)=>{
+    const [rating,setRating]= useState(null);
+    const [hover, setHover] = useState(null);
+
+
   return (
-      <svg height='24px' width='24px' fill='yellow'>
-        ☆
-        hi
-      </svg>
-  )
-}
-
-
-
-const Starinform = (props)=>{
-
-  const stars=[1,2,3,4,5]
-  return(
-
-    <div className='star-container'>
-
-      <Star />
-
+    <div className="star-rating_reviews" value={props.rating}>
+        {[...Array(5)].map((item, i) => {
+            const ratingValue = i + 1
+            return (
+                <label>
+                    <input type='radio' name='rating' key={ratingValue} value={ratingValue}
+                    onClick={()=>{setRating(ratingValue)}}
+                    />
+                    <div className="single-star-container_reviews" >
+                        <div className="single-star-fill_reviews"
+                            style={{backgroundColor: ratingValue <= (hover || rating)? 'gold': '#e4e5e9' }}
+                            onMouseEnter={()=>setHover(ratingValue)}
+                            onMouseLeave={()=>setHover(null)}>
+                            <img className="single-star-outline_reviews"
+                            src="https://i.postimg.cc/L6TpKcYC/star.png" alt="stars alt"></img>
+                        </div>
+                    </div>
+                </label>
+            );
+        })}
     </div>
-
-  )
-}
+);
+};
 
 
 export default Starinform;

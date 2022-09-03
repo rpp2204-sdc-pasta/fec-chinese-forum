@@ -67,14 +67,6 @@ const Addreview = (props)=>{
     setIsSubmit(true)
   }
 
-  // useEffect(()=>{
-  //   console.log(formErrors)
-  //   if(Object.keys(formErrors).length === 0 && isSubmit) {
-  //     console.log(formValues)
-  //   }
-  // }, [formErrors]);
-
-
   const validate = (values) =>{
     const errors = {};
      if(values.title.length < 60) {
@@ -107,7 +99,7 @@ const Addreview = (props)=>{
                 <div style={another_style}>
                   {Object.keys(formErrors).length === 0 && isSubmit ? <div>Review Submitted Successfully</div> : null}
                   <form onSubmit={handleSubmit}>
-                  <Starinform />
+                  <div className='starinform'> <Starinform /> </div>
                     <label>
                       Add a headline: <textarea value={formValues.title} onChange={handleChange} placeholder='Example: Best purchase ever!' maxLength={60} type='text' name='title'  required />
                     </label>
