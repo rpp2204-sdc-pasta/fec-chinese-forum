@@ -43,12 +43,12 @@ let StarRating = (props) => {
             return (
                 <div className="single-star-container" key={i}>
                     <div className="single-star-fill" style={{"width" : `${item*100}%`}}>
-                        <img className="single-star-outline" src="star.png" alt="stars alt"></img>
+                        <img className="single-star-outline" src="https://i.postimg.cc/L6TpKcYC/star.png" alt="stars alt"></img>
                     </div>
                 </div>
             );
         })}
-        <div className="review-count">{`(${props.count})`}</div>
+        {props.count && <div className="review-count">{`(${props.count})`}</div>}
     </div>
 );
 };
