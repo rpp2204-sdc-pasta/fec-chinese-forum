@@ -16,13 +16,13 @@ let StarRating = (props) => {
                   stars.push(0);
                   break;
               case quart:
-                  stars.push(0.28);
+                  stars.push(0.35);
                   break;
               case half:
                   stars.push(0.5);
                   break;
               case three:
-                  stars.push(0.72);
+                  stars.push(0.65);
                   break;
               case full:
                   stars.push(1.0);
@@ -42,12 +42,13 @@ let StarRating = (props) => {
         {stars.map((item, i) => {
             return (
                 <div className="single-star-container" key={i}>
-                    <div className="single-star-fill" style={{"width" : `${parseInt(item*18)}px`}}>
-                        <img className="single-star-outline" src="star.png" alt="stars alt"></img>
+                    <div className="single-star-fill" style={{"width" : `${item*100}%`}}>
+                        <img className="single-star-outline" src="https://i.postimg.cc/L6TpKcYC/star.png" alt="stars alt"></img>
                     </div>
                 </div>
             );
         })}
+        {props.count && <div className="review-count">{`(${props.count})`}</div>}
     </div>
 );
 };

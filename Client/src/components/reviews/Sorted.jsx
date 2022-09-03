@@ -21,15 +21,14 @@ class Sorted extends React.Component{
       <div>
         <span>
           {this.props.length} reviews, sorted by
-          </span>
-          <span>
-            <select style={select_style} onChange={this.handleSort}>
-              <option className='Relevant' value='relevant'>Relevant</option>
-              <option className='Newest' value='newest'>Newest</option>
-              <option className='Helpful' value='helpful'>Helpful</option>
-            </select>
-          </span>
-
+        </span>
+        <span>
+          <select style={select_style} onChange={this.handleSort}>
+            <option className='Relevant' value='relevant'>Relevant</option>
+            <option className='Newest' value='newest'>Newest</option>
+            <option className='Helpful' value='helpful'>Helpful</option>
+          </select>
+        </span>
       </div>
     )
 

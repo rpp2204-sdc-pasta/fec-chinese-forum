@@ -6,8 +6,8 @@ const app = express();
 const reviews =require('./reviews.js')
 const qna =require('./qna.js')
 const port = process.env.PORT || 3000;
-const { getRelated } = require('./related');
 const { getOverview } = require('./overview.js');
+const { getRelated, getCurrent } = require('./related');
 const { Outfit } = require('../db/index.js');
 
 app.use(express.static(path.join(__dirname, '../Client/dist')));
@@ -33,14 +33,26 @@ app.get('/overview/:id', (req, res) => {
 //===========================================
 // related products api
 
+
+app.get('/current/:id', (req, res) => {
+  getCurrent(req.params.id)
+    .then(result => {
+      res.status(200).send(result);
+    })
+    .catch(err => {
+      // console.log(err);
+      res.status(500).send(err);
+    });
+});
+
 app.get('/related/:id', (req, res) => {
   getRelated(req.params.id)
     .then(result => {
       res.status(200).send(result);
     })
     .catch(err => {
-      console.log(err);
-      res.status(500).send("some err happened");
+      // console.log(err);
+      res.status(500).send(err);
     });
 });
 
@@ -50,18 +62,18 @@ app.get('/outfit', (req, res) => {
       res.status(200).send(data);
     })
     .catch(err => {
-      console.log(err);
-      res.status(500).send("some err happened");
+      // console.log(err);
+      res.status(500).send(err);
     });
 });
 
 app.post('/outfit', (req, res) => {
-  const { id, category, name, original_price, sale_price, img_url, overallRating } = req.body;
-  const obj = { id, category, name, original_price, sale_price, img_url, overallRating };
+  const { id, category, name, original_price, sale_price, img_url, overallRating, reviewCount } = req.body;
+  const obj = { id, category, name, original_price, sale_price, img_url, overallRating, reviewCount };
   Outfit.updateOne({id: id}, obj, {upsert: true}, function(err) {
     if (err) {
-      console.log(err)
-      res.status(400).end();
+      // console.log(err)
+      res.status(400).send(err);
     } else {
       res.status(201).end();
     }
@@ -72,8 +84,8 @@ app.delete('/outfit', (req, res) => {
   const { id } = req.body;
   Outfit.deleteOne({id: id}, function(err) {
     if (err) {
-      console.log(err)
-      res.status(406).end();
+      // console.log(err)
+      res.status(406).send(err);
     } else {
       res.status(204).end();
     }
