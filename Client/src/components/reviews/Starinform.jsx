@@ -5,6 +5,14 @@ const Starinform =(props)=>{
     const [hover, setHover] = useState(null);
 
 
+    const stardescribe = {
+        1: 'Poor',
+        2: 'Fair',
+        3: 'Avg',
+        4: 'Good',
+        5: 'Great'
+    }
+
   return (
     <div className="star-rating_reviews" value={props.rating}>
         {[...Array(5)].map((item, i) => {
@@ -23,6 +31,7 @@ const Starinform =(props)=>{
                             src="https://i.postimg.cc/L6TpKcYC/star.png" alt="stars alt"></img>
                         </div>
                     </div>
+                    <div>{ratingValue === (hover || rating) ? <div style={{fontSize: 'small'}}>{stardescribe[ratingValue]}</div> : null }</div>
                 </label>
             );
         })}

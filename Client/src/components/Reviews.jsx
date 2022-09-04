@@ -279,7 +279,7 @@ class Reviews extends React.Component {
             </div>
           <div>
             <Morebutton length={this.state.length} count={this.state.count} handleMore={this.handleMore}/>
-            <Addreview />
+            <Addreview characteristics={this.state.characteristics}/>
           </div>
         </div>
       </div>

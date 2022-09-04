@@ -1,5 +1,6 @@
 import React from 'react';
 import Starinform from './Starinform.jsx'
+import CharStarBreakdown from './CharStarBreakdown.jsx'
 import {useState, useEffect} from 'react';
 
 
@@ -13,10 +14,10 @@ const another_style ={
   position:'fixed',
   marginLetf: 'auto',
   marginRight: 'auto',
-  height: '700px',
+  // height: '700px',
   width: '600px',
-  maxWidth: '1100px',
-  maxHeight: '1000px',
+  maxWidth: '2000px',
+  maxHeight: '1900px',
   top: '50%',
   left:'50%',
   transform: 'translate(-50%,-50%)',
@@ -99,25 +100,29 @@ const Addreview = (props)=>{
                 <div style={another_style}>
                   {Object.keys(formErrors).length === 0 && isSubmit ? <div>Review Submitted Successfully</div> : null}
                   <form onSubmit={handleSubmit}>
-                  <div className='starinform'> <Starinform /> </div>
-                    <label>
+                  <div className='overall-rating-star'>
+                    <div style={{marginTop:'20px', fontSize:'Large', fontWeight:'bold', marginBottom:'30px'}}> Overall Rating</div>
+                    <div className='starinform'> <Starinform /> </div>
+                  </div>
+                    <CharStarBreakdown characteristics={props.characteristics}/>
+                    <label style={{fontWeight: 'bold',fontSize: 'large'}}>
                       Add a headline: <textarea value={formValues.title} onChange={handleChange} placeholder='Example: Best purchase ever!' maxLength={60} type='text' name='title'  required />
                     </label>
                     <p className='error'>{formErrors.title}</p>
-                    <label>
+                    <label style={{fontWeight: 'bold',fontSize: 'large'}}>
                       Add a written summary <textarea value={formValues.summary} onChange={handleChange} placeholder='Why did you like the product or not' name='summary' type='text' required/>
                     </label>
                     {formValues.summary.length <=60 ? <span>Minimum required characters left: {60 -formValues.summary.length} </span> : <span>Minimum reached</span>}
                     <p className='error'>{formErrors.summary}</p>
                     <div>Upload a photo</div>
-                    <label>
+                    <label style={{fontWeight: 'bold',fontSize: 'large'}}>
                       Nickname: <input value={formValues.nickename}  onChange={handleChange} maxLength={60} type='text' name='Fname' placeholder='Example: jackson11!' required/>
                     </label>
                     <p className='error'>{formErrors.nickname}</p>
-                    <label>
+                    <label style={{fontWeight: 'bold',fontSize: 'large', marginBottom:'0'}}>
                       Email: <input value={formValues.email} onChange={handleChange} maxLength={60} type='email' name='email' placeholder='Example: jackson11@email.com' required/>
                     </label>
-                    <span>For authentication reasons, you will not be emailed</span>
+                    <span style={{fontSize: 'small'}}>For authentication reasons, you will not be emailed</span>
                     <p className='error'>{formErrors.email}</p>
                     <button>Sumbit Review </button>
                   </form>
