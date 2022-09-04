@@ -84,6 +84,9 @@ class OverviewAddtoCart extends React.Component {
 						<button
 							className='Overview-addToCartButton'
 							onClick={this.handleAddToCart}>Add To Cart</button>
+						<button
+							className='Overview-addToOutfit'
+							onClick={console.log('add to outfit')}>&#x2b50;</button>
 					</div>
 				</div>
 			);

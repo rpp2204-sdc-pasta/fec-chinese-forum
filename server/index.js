@@ -6,6 +6,7 @@ const app = express();
 const reviews =require('./reviews.js')
 const qna =require('./qna.js')
 const port = process.env.PORT || 3000;
+const { getOverview } = require('./overview.js');
 const { getRelated, getCurrent } = require('./related');
 const { Outfit } = require('../db/index.js');
 
@@ -13,10 +14,43 @@ app.use(express.static(path.join(__dirname, '../Client/dist')));
 app.use(express.json());
 
 //https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp
+//===========================================
+// Overview api
+
+app.get('/overview/:id', (req, res) => {
+  getOverview(req.params.id)
+    .then(result => {
+      res.status(200).send(result);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).send("some err happened");
+    });
+});
+
+//===========================================
+// log interaction
+app.post('/interactions', (req, res) => {
+  // console.log(req.body);
+  let options = {
+    method: 'POST',
+    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/interactions`,
+    data: req.body,
+    headers: {
+      Authorization: process.env.AUTH
+    }
+  };
+  return axios(options)
+          .then(response => {
+            res.status(200).send(response.data);
+          })
+          .catch(err => {
+            res.status(500).send(err);
+          });
+});
 
 //===========================================
 // related products api
-
 
 app.get('/current/:id', (req, res) => {
   getCurrent(req.params.id)
