@@ -33,7 +33,6 @@ app.get('/overview/:id', (req, res) => {
 //===========================================
 // related products api
 
-
 app.get('/current/:id', (req, res) => {
   getCurrent(req.params.id)
     .then(result => {
