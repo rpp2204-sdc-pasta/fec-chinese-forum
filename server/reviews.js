@@ -74,6 +74,19 @@ const getMeta = (id)=>{
         })
 }
 
+const getImage = (images)=>{
+  var options={
+    method: 'post',
+    url: `'https://api.imgbb.com/1/upload?key=${process.env.IMAGE}'`,
+    headers: {'Content-Type': 'multipart/form-data'},
+    data: images
+  }
+  return axios(options)
+        .catch((err)=>{
+          console.log(err)
+        })
+}
+
 module.exports ={
   getProductcount,
   addHelpful,

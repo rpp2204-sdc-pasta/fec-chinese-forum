@@ -257,6 +257,13 @@ app.get('/reviews/meta',(req, res)=>{
   })
 })
 
+app.post('/images', (req, res)=>{
+  console.log(req.body)
+  // console.log(req.rawHeaders)
+  // console.log(Object.values(req))
+  // reviews.getImage
+})
+
 //=================================================
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)

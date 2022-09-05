@@ -556,9 +556,9 @@ Reviews */
 }
 
 .starinform{
-  height: 2vw;
+  height: 3vw;
   margin-top: 20px;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
   margin-right: auto;
 }
 
@@ -567,13 +567,15 @@ input[type='radio'] {
 }
 
 .star-rating_reviews {
-  height: 100%;
+  /* height: 100%; */
   display: flex;
   flex-direction: row;
 }
 
 .single-star-container_reviews {
-  height: 100%;
+  /* height: 100%; */
+  height: 2.5vw;
+  /* width: 2.5vw; */
   aspect-ratio: 8 / 9;
   display: inline-block;
 }
@@ -589,6 +591,8 @@ input[type='radio'] {
   display: flex;
   cursor: pointer;
   transition: color 200ms;
+  margin-top: 0;
+  margin-bottom: 10px;
 }
 
 .overall-rating-star{
@@ -597,13 +601,10 @@ input[type='radio'] {
   justify-content: flex-start;
   align-items: center;
   gap: 20px;
+  margin-bottom: 10px;
 }
 
-/* .charstarbreakdown{
-  display:flex;
-  flex-direction: column;
-  justify-content: flex-start;
-} */
+
 
 /* ================================ QnA */
 

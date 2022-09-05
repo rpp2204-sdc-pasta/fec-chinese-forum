@@ -1,6 +1,7 @@
 import React from 'react';
 import Starinform from './Starinform.jsx'
 import CharStarBreakdown from './CharStarBreakdown.jsx'
+import Uploadimage from './Uploadimage.jsx'
 import {useState, useEffect} from 'react';
 
 
@@ -14,16 +15,17 @@ const another_style ={
   position:'fixed',
   marginLetf: 'auto',
   marginRight: 'auto',
-  // height: '700px',
-  width: '600px',
-  maxWidth: '2000px',
-  maxHeight: '1900px',
+  width: '45%',
+  height: '80%',
+  // maxWidth: '1000px',
+  // maxHeight: '1000px',
   top: '50%',
   left:'50%',
   transform: 'translate(-50%,-50%)',
   backgroundColor: '#FFF',
   padding: '5px',
   zInder: 1000,
+  overflowY: 'scroll'
 }
 
 const overlay = {
@@ -33,7 +35,7 @@ const overlay = {
   right:0,
   bottom:0,
   backgroundColor: 'rgba(0,0,0, .7)',
-  zIndex: 1000
+  zIndex: 1000,
 }
 
 
@@ -101,30 +103,32 @@ const Addreview = (props)=>{
                   {Object.keys(formErrors).length === 0 && isSubmit ? <div>Review Submitted Successfully</div> : null}
                   <form onSubmit={handleSubmit}>
                   <div className='overall-rating-star'>
-                    <div style={{marginTop:'20px', fontSize:'Large', fontWeight:'bold', marginBottom:'30px'}}> Overall Rating</div>
+                    <div style={{marginTop:'20px', fontSize:'Large', fontWeight:'bold', marginBottom:'10px'}}> Overall Rating</div>
                     <div className='starinform'> <Starinform /> </div>
                   </div>
                     <CharStarBreakdown characteristics={props.characteristics}/>
-                    <label style={{fontWeight: 'bold',fontSize: 'large'}}>
+                    <label style={{fontWeight: 'bold',fontSize: 'large',marginBottom: '0'}}>
                       Add a headline: <textarea value={formValues.title} onChange={handleChange} placeholder='Example: Best purchase ever!' maxLength={60} type='text' name='title'  required />
                     </label>
                     <p className='error'>{formErrors.title}</p>
                     <label style={{fontWeight: 'bold',fontSize: 'large'}}>
-                      Add a written summary <textarea value={formValues.summary} onChange={handleChange} placeholder='Why did you like the product or not' name='summary' type='text' required/>
+                      Add a written summary <textarea style={{marginBottom: '0'}} value={formValues.summary} onChange={handleChange} placeholder='Why did you like the product or not' name='summary' type='text' required/>
                     </label>
-                    {formValues.summary.length <=60 ? <span>Minimum required characters left: {60 -formValues.summary.length} </span> : <span>Minimum reached</span>}
+                    {formValues.summary.length <=60 ?
+                      <span style={{fontSize: '70%', color: 'red'}}>Minimum required characters left: {60 -formValues.summary.length} </span>
+                        : <span style={{fontSize: '70%'}}>Minimum reached</span>}
                     <p className='error'>{formErrors.summary}</p>
-                    <div>Upload a photo</div>
+                    <Uploadimage />
                     <label style={{fontWeight: 'bold',fontSize: 'large'}}>
                       Nickname: <input value={formValues.nickename}  onChange={handleChange} maxLength={60} type='text' name='Fname' placeholder='Example: jackson11!' required/>
                     </label>
                     <p className='error'>{formErrors.nickname}</p>
                     <label style={{fontWeight: 'bold',fontSize: 'large', marginBottom:'0'}}>
-                      Email: <input value={formValues.email} onChange={handleChange} maxLength={60} type='email' name='email' placeholder='Example: jackson11@email.com' required/>
+                      Email: <input style={{marginBottom: '0'}}  value={formValues.email} onChange={handleChange} maxLength={60} type='email' name='email' placeholder='Example: jackson11@email.com' required/>
                     </label>
-                    <span style={{fontSize: 'small'}}>For authentication reasons, you will not be emailed</span>
+                    <span style={{fontSize: '60%'}}>For authentication reasons, you will not be emailed</span>
                     <p className='error'>{formErrors.email}</p>
-                    <button>Sumbit Review </button>
+                    <button style={{textAlign:'center'}}>Sumbit Review </button>
                   </form>
                   <button onClick={toggleModal} type='submit'>CLOSE</button>
                 </div>
