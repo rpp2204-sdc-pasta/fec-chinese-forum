@@ -50,7 +50,6 @@ const Photo = (props)=>{
          <img  style={imagestyle} onClick={toggleModal} src={props.photo.url} alt={props.photo.id}></img>
          {isOpen && <div style={overlay}><img  style={another_style} onClick={toggleModal} src={props.photo.url} alt={props.photo.id}></img></div>}
       </div>
-
     </>
     )
 }

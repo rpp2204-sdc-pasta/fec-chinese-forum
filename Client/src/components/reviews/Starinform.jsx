@@ -21,7 +21,7 @@ const Starinform =(props)=>{
                 <div style={{display:'flex', flexDirection:'column'}}>
                     <label>
                         <input type='radio' name='rating' key={ratingValue} value={ratingValue}
-                        onClick={()=>{setRating(ratingValue)}}
+                        onClick={()=>{setRating(ratingValue); props.onChange(ratingValue)}}
                         />
                         <div className="single-star-container_reviews" >
                             <div className="single-star-fill_reviews"

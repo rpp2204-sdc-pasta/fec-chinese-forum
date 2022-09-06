@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from 'axios';
 
-const Uploadimage = () => {
+const Uploadimage = (props) => {
   const [selectedImages, setSelectedImages] = useState([]);
   const [imgUrl, setimgUrl] =useState([]);
 
@@ -24,30 +24,39 @@ const Uploadimage = () => {
     setSelectedImages(prevState =>[...prevState, e.target.files[0]])
   }
 
-  const handleUpload= (e) => {
+
+  const imageProgress =() =>{
+
+
+  }
+
+  async function handleUpload(e){
     e.preventDefault();
+    let results = [];
+    let imageUrl = [];
+    const options = {onUploadProgress: (progressEvent) =>{
+      const {loaded, total} = progressEvent;
+      let percent = Math.floor(loaded * 100 / total)
+      console.log(`${loadded}kb of ${total}kb| ${percent}% `)
+      }
+    }
     const fd = new FormData()
     selectedImages.forEach(imagefile=>{
       fd.append('image', imagefile);
+      let response = axios.post('https://api.imgbb.com/1/upload?key=0c6337f450a2645ba037e6c8628add6e',
+        fd,
+        {headers: { 'Content-Type': 'multipart/form-data'}},
+        options)
+      .catch((err)=>{
+        console.log(err)
+      })
+      results.push(response);
     })
-    console.log(fd, 'fdddddddddddddddddddddddd')
-    return axios({
-      method:'post',
-      // url:'https://api.imgbb.com/1/upload?key=0c6337f450a2645ba037e6c8628add6e',
-      headers: {'Content-Type': 'multipart/form-data'},
-      url: '/images',
-      data: fd,
+    let data = await Promise.all(results);
+    data.map(item=>{
+      imageUrl.push(item.data.data.url)
     })
-    .then((response)=>{
-      console.log(response)
-    })
-    .catch((err)=>{
-      console.log(err)
-    })
-
-    // setimgUrl(prevState =>[...prevState, ]])
-    // console.log(data[0].data.data.url)
-    // return data;
+    props.onChange(imageUrl)
   }
 
   return (
