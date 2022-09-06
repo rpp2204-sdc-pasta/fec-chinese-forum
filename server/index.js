@@ -284,21 +284,21 @@ app.post('/submit', (req, res)=>{
 
 //=================================================
 app.get('/*', (req, res) => {
-  console.log(req.param('product_id'));
-  let options = {
-    method: 'GET',
-    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${req.param('product_id')}`,
-    headers: {
-      Authorization: process.env.AUTH
-    }
-  };
-  axios(options)
-    .then(() => {
+  // console.log(req.params.id);
+  // let options = {
+  //   method: 'GET',
+  //   url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${req.params.id}`,
+  //   headers: {
+  //     Authorization: process.env.AUTH
+  //   }
+  // };
+  // axios(options)
+  //   .then(() => {
       res.sendFile(path.join(__dirname, '../Client/dist/index.html'));
-    })
-    .catch(err => {
-      res.send('<!DOCTYPE html' + `<p> Can't find product, maybe try a different ID?</p>`);
-    });
+    // })
+    // .catch(err => {
+    //   res.send('<!DOCTYPE html' + `<p> Can't find product, maybe try a different ID?</p>`);
+    // });
 })
 
 //=================================================
