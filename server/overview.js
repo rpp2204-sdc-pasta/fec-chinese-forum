@@ -18,8 +18,6 @@ let getOverview = (id) => {
       var overviewData;
       overviewData=responses[0].data;
       overviewData.styles=responses[1].data.results;
-      console.log(overviewData.styles[1].skus);
-      console.log(overviewData.styles[0].skus);
       return overviewData;
     })
     .catch((err)=>{

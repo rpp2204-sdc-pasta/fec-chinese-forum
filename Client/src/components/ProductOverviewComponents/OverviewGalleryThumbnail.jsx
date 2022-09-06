@@ -13,7 +13,6 @@ class OverviewGalleryThumbnail extends React.Component {
   render() {
     let thumbnails = this.props.thumbnails.slice(this.props.range[0],this.props.range[1])
       .map( (thumbnail, index) => {
-        console.log('index:thumbnail',index+this.props.range[0],thumbnail);
         if (index === this.props.mainImageIndex-this.props.range[0]) {
           return (
             <div key={index}
