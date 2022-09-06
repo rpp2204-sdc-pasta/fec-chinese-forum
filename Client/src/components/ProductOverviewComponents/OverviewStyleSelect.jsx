@@ -27,7 +27,6 @@ class OverviewStyleSelect extends React.Component {
       styles.push(<div className='Overview-styleGroupOfFour'>{group}</div>)
       group = [];
     }
-    console.log('numofprops: ',this.props.styles.length);
     return (
       //style selector will show thumbnail of different styles
 			//4 per row

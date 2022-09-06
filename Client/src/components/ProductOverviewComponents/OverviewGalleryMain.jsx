@@ -21,9 +21,12 @@ class OverviewGalleryMain extends React.Component {
       <div className='Overview-galleryMain'>
         {scrollLeft}
         {scrollRight}
-        <div className='Overview-mainImgDiv'>
+        <div
+          className='Overview-mainImgDiv'
+          onClick={this.props.handleExpand}>
         <img className='Overview-mainImg'
-          src={this.props.photo}/>
+          src={this.props.photo}
+          />
         </div>
         <OverviewGalleryThumbnail
           thumbnails={this.props.thumbnails}
