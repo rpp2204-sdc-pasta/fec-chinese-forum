@@ -17,8 +17,6 @@ class OverviewGallery extends React.Component {
 
   }
   handleClickThumbnail(index) {
-    console.log('current', this.state.mainImageIndex)
-    console.log('set Target', index)
     let targetIndex = parseInt(index)+parseInt(this.state.thumbnailRange[0]);
     this.setState({
       mainImageIndex: targetIndex
@@ -26,7 +24,6 @@ class OverviewGallery extends React.Component {
   }
 
   handleThumbnailScrollUp(){
-    console.log('scrollup');
     let lowerRange = parseInt(this.state.thumbnailRange[0])-1;
     let upperRange = parseInt(this.state.thumbnailRange[1])-1;
     if((lowerRange >= 0) && (upperRange >= 7)) {
@@ -72,6 +69,7 @@ class OverviewGallery extends React.Component {
       for(var index = 0; index < this.props.photos.length; index++) {
             thumbnails.push(this.props.photos[index].thumbnail_url);
       };
+
     };
     return (
       <div className='Overview-gallery'>
@@ -85,6 +83,7 @@ class OverviewGallery extends React.Component {
           changeMainImage={this.handleClickThumbnail}
           scrollUp={this.handleThumbnailScrollUp}
           scrollDown={this.handleThumbnailScrollDown}
+          handleExpand={this.props.handleExpand}
         />
       </div>
     );
