@@ -28,11 +28,29 @@ app.get('/overview/:id', (req, res) => {
     });
 });
 
-
+//===========================================
+// log interaction
+app.post('/interactions', (req, res) => {
+  // console.log(req.body);
+  let options = {
+    method: 'POST',
+    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/interactions`,
+    data: req.body,
+    headers: {
+      Authorization: process.env.AUTH
+    }
+  };
+  return axios(options)
+          .then(response => {
+            res.status(200).send(response.data);
+          })
+          .catch(err => {
+            res.status(500).send(err);
+          });
+});
 
 //===========================================
 // related products api
-
 
 app.get('/current/:id', (req, res) => {
   getCurrent(req.params.id)
@@ -205,7 +223,8 @@ app.post('/reviews', (req,res)=>{
       })
     })
     .catch((err)=>{
-      console.log(err)
+      // console.log(err)
+      res.status(500).send(err);
     })
 })
 
@@ -215,7 +234,8 @@ app.put('/reviews/:id', (req, res)=>{
     res.status(200).send('Helpful')
   })
   .catch((err)=>{
-    console.log(err)
+    // console.log(err)
+    res.status(500).send(err);
   })
 })
 
@@ -231,6 +251,9 @@ app.get('/reviews/meta',(req, res)=>{
       breakdownScore,
       characteristics: response.data.characteristics,
     })
+  })
+  .catch((err)=>{
+    res.status(500).send(err);
   })
 })
 

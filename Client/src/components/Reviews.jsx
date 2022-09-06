@@ -13,7 +13,6 @@ class Reviews extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      product_id: this.props.id,
       stored_relevant: [],
       stored_helpful: [],
       stored_newest:[],
@@ -49,13 +48,23 @@ class Reviews extends React.Component {
 
   componentDidMount(){
     Promise.all([
-      this.getProductcount(null, 'relevant', this.state.product_id),
-      this.getProductcount(null, 'helpful', this.state.product_id),
-      this.getProductcount(null, 'newest', this.state.product_id),
-      this.getMeta(this.state.product_id),
+      this.getProductcount(null, 'relevant', this.props.id),
+      this.getProductcount(null, 'helpful', this.props.id),
+      this.getProductcount(null, 'newest', this.props.id),
+      this.getMeta(this.props.id),
     ])
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.id !== prevProps.id) {
+      Promise.all([
+        this.getProductcount(null, 'relevant', this.props.id),
+        this.getProductcount(null, 'helpful', this.props.id),
+        this.getProductcount(null, 'newest', this.props.id),
+        this.getMeta(this.props.id),
+      ])
+    }
+  }
   getProductcount(num=null,sortBy, product_id){
     sortBy = sortBy
     axios.post('/reviews',

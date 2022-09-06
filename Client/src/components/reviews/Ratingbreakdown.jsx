@@ -8,7 +8,7 @@ const Ratingbreakdown = (props)=>{
     <div className='breakdownAll'>
       <div className='starflex'>
         <div className='containerBreakdown'>{props.avgRating} </div>
-        <span> <StarRating rating= {props.avgRating} /></span>
+        <div className='starSize'> <StarRating rating= {props.avgRating} /></div>
       </div>
         <span>{props.percent}% of reviews recommend this product</span>
         <ul className='starReview'>

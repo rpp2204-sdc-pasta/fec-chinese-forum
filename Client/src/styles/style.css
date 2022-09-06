@@ -285,8 +285,6 @@ Related Product */
 }
 
 
-
-
 /* ================================
 Reviews */
 .reviewTitle{
@@ -316,6 +314,7 @@ Reviews */
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  align-content: flex-end;
 }
 
 .starReview{
@@ -551,6 +550,46 @@ Reviews */
   display: block;
 }
 
+.starSize {
+  height: 2vw;
+}
+
+.starinform{
+  height: 4vw;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  margin-left: 30%;
+  margin-right: auto;
+}
+input[type='radio'] {
+  display : none;
+}
+
+.star-rating_reviews {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.single-star-container_reviews {
+  height: 100%;
+  aspect-ratio: 8 / 9;
+  display: inline-block;
+}
+
+.single-star-outline_reviews {
+  height: 100%;
+  aspect-ratio: 8 / 9;
+}
+
+.single-star-fill_reviews {
+  height: 100%;
+  /* background-color: gold; */
+  object-fit: cover;
+  display: flex;
+  cursor: pointer;
+  transition: color 200ms;
+}
 /* ================================ QnA */
 
 .buttonLink {
