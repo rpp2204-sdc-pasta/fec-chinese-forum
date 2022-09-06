@@ -75,13 +75,13 @@ const Addreview = (props)=>{
 
   const validate = (values) =>{
     const errors = {};
-     if(values.summary.length < 60) {
+     if(values.summary.length < 60 || values.summary.length === 0) {
       errors.summary = 'Headline is too short'
      }
      if(values.body.length > 1000) {
       errors.body = 'Summary cannot be over 1000 characters'
      }
-     if(values.body.length < 50) {
+     if(values.body.length < 50 || values.body.length === 0) {
       errors.body = 'Summary cannot be less than 50 characters'
      }
      if(values.name.length > 60) {
@@ -99,6 +99,7 @@ const Addreview = (props)=>{
   }
 
   const submitReview = () =>{
+    e.preventDefault(e);
     if(Object.keys(formErrors).length === 0){
       let options ={
         method: 'post',
@@ -107,7 +108,7 @@ const Addreview = (props)=>{
       }
       return axios(options)
       .catch((err)=>{
-        console.log(err, 'addreviews line 110000000000')
+        console.log(err)
       })
       toggleModal()
     }
@@ -119,7 +120,6 @@ const Addreview = (props)=>{
         <div className='create'>
             {isOpen && <div style={overlay}>
                 <div style={another_style}>
-                  {Object.keys(formErrors).length === 0 && isSubmit ? <div>Review Submitted Successfully</div> : null}
                   <form onSubmit={handleSubmit}>
                   <div className='overall-rating-star'>
                     <div style={{marginTop:'20px', fontSize:'Large', fontWeight:'bold', marginBottom:'10px'}}> Overall Rating</div>
