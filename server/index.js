@@ -10,8 +10,10 @@ const { getOverview } = require('./overview.js');
 const { getRelated, getCurrent } = require('./related');
 const { Outfit } = require('../db/index.js');
 
-app.use(express.static(path.join(__dirname, '../Client/dist')));
+
 app.use(express.json());
+app.use(express.static(path.join(__dirname, '../Client/dist')));
+
 
 //https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp
 //===========================================
@@ -234,7 +236,6 @@ app.put('/reviews/:id', (req, res)=>{
     res.status(200).send('Helpful')
   })
   .catch((err)=>{
-    // console.log(err)
     res.status(500).send(err);
   })
 })
@@ -256,6 +257,30 @@ app.get('/reviews/meta',(req, res)=>{
     res.status(500).send(err);
   })
 })
+
+app.post('/submit', (req, res)=>{
+  console.log(req.body)
+  reviews.postReview(req.body)
+  .then((response)=>{
+    // console.log(response, 'submit response  line 265555555555')
+    res.status(200)
+  })
+  .catch((err)=>{
+    console.log(err,   'submit err server index  line 269999999')
+  })
+
+})
+// app.post('/image', upload.array('image'), (req, res)=>{
+//   reviews.getImage(req.file)
+//     .then((response)=>{
+//       console.log(response)
+//       res.status(200).send(response)
+//     })
+//     .catch((err)=>{
+//       res.status(500).send(err)
+//     })
+
+// })
 
 //=================================================
 app.listen(port, () => {

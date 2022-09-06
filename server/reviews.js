@@ -74,12 +74,40 @@ const getMeta = (id)=>{
         })
 }
 
+const postReview = (info) =>{
+  var a = {
+    "product_id": 71700,
+    "rating": 5,
+    "summary": "some sum is bad",
+    "body": "erfectly",
+    "recommend": true,
+    "name": "haha",
+    "email": "haha@yahoo.com",
+    "photos": [],
+    "characteristics":  {}
+}
+
+
+
+  var options={
+    method: 'post',
+    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews`,
+    headers: {Authorization: process.env.DB_TOKEN},
+    data: info
+  }
+  return axios(options)
+  .catch((err)=>{
+    console.log(err,  'submit err reviews  line 866666666666666')
+  })
+}
+
 module.exports ={
   getProductcount,
   addHelpful,
   avgStar,
   percentRecommend,
   breakdownScore,
-  getMeta
+  getMeta,
+  postReview,
 
 }
