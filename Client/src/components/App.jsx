@@ -12,6 +12,11 @@ let App = (props) => {
   const product_id = queryParams.get("product_id") || '71700';
   console.log(product_id);
   let [id, setID] = useState(product_id);
+
+  const reviewsRef = useRef();
+  const handleScrollToReview = () => {
+    reviewsRef.current.scrollIntoView({behavior: 'smooth'});
+  };
   return (
     <>
       <div>
