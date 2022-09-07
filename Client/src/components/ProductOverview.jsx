@@ -72,6 +72,10 @@ class ProductOverview extends React.Component {
 
     let OverviewRight =
       <div className='Overview-Right'>
+        <div className='Overview-star-rating'>
+          <StarRating rating={this.state.product.starRating}/>
+          <button onClick={this.props.handleScrollToReview}>Read All Reviews</button>
+        </div>
         <h2 className="Overview-category">{this.state.product.category}</h2>
         <h1 className="Overview-title">{this.state.product.name}</h1>
         <OverviewPrice
@@ -90,8 +94,6 @@ class ProductOverview extends React.Component {
     let isExpanded = this.state.expanded;
 
     return (
-      // <div>testing</div>
-
       <div className='Overview-main'>
         <div className='Overview-flexRowOne'>
           <div className='Overview-Left'>
