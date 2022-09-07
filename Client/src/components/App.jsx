@@ -8,11 +8,10 @@ import { OverviewWithTracker, RelatedWithTracker, QnAWithTracker, ReviewsWithTra
 import {useRef} from 'react';
 
 let App = (props) => {
-  let [id, setID] = useState('71701');
-  const reviewsRef = useRef();
-  const handleScrollToReview = () => {
-    reviewsRef.current.scrollIntoView({behavior: 'smooth'});
-  };
+  const queryParams = new URLSearchParams(window.location.search);
+  const product_id = queryParams.get("product_id") || '71700';
+  console.log(product_id);
+  let [id, setID] = useState(product_id);
   return (
     <>
       <div>
