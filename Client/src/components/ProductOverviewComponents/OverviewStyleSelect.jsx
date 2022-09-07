@@ -16,12 +16,31 @@ class OverviewStyleSelect extends React.Component {
     var styles = [];
     for (var groups = 0; groups < Math.ceil(this.props.styles.length/4); groups++) {
       var group = [];
-      for (var i = 0; i < 4; i++) {
-        if( index < this.props.styles.length) {
+
+      if(groups===0) {
           group.push(<OverviewStyle
-            count={index} style={this.props.styles[index]}
-            onClick={this.onClickStyleSelect}/>);
+            count={index}
+            style={this.props.styles.find(style => style.name===this.props.name)}
+            onClick={this.onClickStyleSelect}/>
+          );
           index++;
+          for (var i = 0; i < 3; i++) {
+            if( index < this.props.styles.length) {
+              group.push(<OverviewStyle
+                count={index} style={this.props.styles[index]}
+                onClick={this.onClickStyleSelect}/>);
+              index++;
+            }
+          }
+
+      } else {
+        for (var i = 0; i < 4; i++) {
+          if( index < this.props.styles.length) {
+            group.push(<OverviewStyle
+              count={index} style={this.props.styles[index]}
+              onClick={this.onClickStyleSelect}/>);
+            index++;
+          }
         }
       }
       styles.push(<div className='Overview-styleGroupOfFour'>{group}</div>)
