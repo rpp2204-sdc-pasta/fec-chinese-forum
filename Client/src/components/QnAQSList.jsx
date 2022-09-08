@@ -112,6 +112,14 @@ class QnAList extends React.Component {
     )
   }
 
+  setValue = (e) => {
+    let value = e.target.value;
+    let name = e.target.name;
+    this.setState({
+      [name]: value
+    })
+  }
+
   render(){
     let AnsList, loader;
     let AnsLength = Object.keys(this.state.ans).length;
@@ -145,9 +153,9 @@ class QnAList extends React.Component {
               {
                 this.state.showAnsModal &&
                     <form className = "lvl4 ansModal">
-                      <input placeholder="Name" onChange={(e) => {this.inputname = e.target.value}} placeholder="Name" maxlength="60" required></input><br/>
-                      <input placeholder="Email" type="email" onChange={(e) => {this.inputemail = e.target.value}} placeholder="Email" maxlength="60" required></input><br/>
-                      <input placeholder="Enter Answer" onChange={(e) => {this.inputanswer = e.target.value}} size="30" maxlength="1000"required></input><br/>
+                      <input Name = "inputname" placeholder="Name" onChange={this.setValue} placeholder="Name" maxlength="60" required></input><br/>
+                      <input Name = "inputemail" placeholder="Email" type="email" onChange={this.setValue} placeholder="Email" maxlength="60" required></input><br/>
+                      <input Name = "inputanswer" placeholder="Enter Answer" onChange={this.setValue} size="30" maxlength="1000"required></input><br/>
                       <button type="submit" value="Submit" onClick = {this.submitAns}>Submit</button>
                       <button onClick={this.showModal}>X</button>
                     </form>

@@ -10,7 +10,8 @@ class QnAAnsList extends React.Component {
       votedYes: false,
       reported: false
     };
-    this.date = new Date(this.props.ans.date).toLocaleString('en-US');
+    this.date = new Date(this.props.ans.date).toLocaleDateString('en-US');
+    console.log(this.date);
   }
 
   anshelpful = (e) => {
