@@ -2,6 +2,7 @@ import React from 'react';
 import Photo from './Photo.jsx'
 const axios = require('axios');
 import Report from './Report.jsx'
+import StarRating from '../StarRating.jsx'
 // const StarRating = require('./components/StarRating.jsx')
 
 class Reviews_list extends React.Component {
@@ -85,10 +86,10 @@ class Reviews_list extends React.Component {
           filter[i] &&
           <div id={this.props.product.rating} className={this.props.product.review_id} >
           <div className={this.props.product.reviewer_name}>
-            <br></br>
-            <span>rating : {this.props.product.rating}</span>
-            <span style={date_style} >{this.props.product.reviewer_name}, {date} </span>
-            <br></br>
+            <div className='starDate'>
+              <span className='starSize'><StarRating rating={this.props.product.rating}/></span>
+              <span style={date_style}>{this.props.product.reviewer_name}, {date} </span>
+            </div>
             <p style={{fontWeight:'bold'}}> {this.props.product.summary.substring(0,60)}</p>
             <div style={image_style}>
               {this.props.product.photos.length > 0? this.props.product.photos.map((photo)=>(<picture key={photo.id}><Photo photo={photo}/></picture>)) : null}

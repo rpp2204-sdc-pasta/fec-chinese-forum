@@ -13,6 +13,7 @@ class OverviewAddtoCart extends React.Component {
 			this.handleQuantitySelect = this.handleQuantitySelect.bind(this);
 			this.handleOpenSizeSelect = this.handleOpenSizeSelect.bind(this);
 			this.handleAddToCart = this.handleAddToCart.bind(this);
+			this.handleAddToOutfit = this.handleAddToOutfit.bind(this);
 		}
 		selectRef = React.createRef();
 
@@ -42,7 +43,9 @@ class OverviewAddtoCart extends React.Component {
 
 		}
 
-
+		handleAddToOutfit() {
+			console.log('add to outfit');
+		}
 
 		render() {
 			let quantity = 0;
@@ -84,6 +87,9 @@ class OverviewAddtoCart extends React.Component {
 						<button
 							className='Overview-addToCartButton'
 							onClick={this.handleAddToCart}>Add To Cart</button>
+						<button
+							className='Overview-addToOutfit'
+							onClick={this.handleAddToOutfit}>&#x2b50;</button>
 					</div>
 				</div>
 			);

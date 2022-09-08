@@ -6,17 +6,53 @@ const app = express();
 const reviews =require('./reviews.js')
 const qna =require('./qna.js')
 const port = process.env.PORT || 3000;
+const { getOverview } = require('./overview.js');
 const { getRelated, getCurrent } = require('./related');
 const { Outfit } = require('../db/index.js');
 
-app.use(express.static(path.join(__dirname, '../Client/dist')));
+
 app.use(express.json());
+app.use(express.static(path.join(__dirname, '../Client/dist')));
+
 
 //https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp
+//===========================================
+// Overview api
+
+app.get('/overview/:id', (req, res) => {
+  getOverview(req.params.id)
+    .then(result => {
+      res.status(200).send(result);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).send("some err happened");
+    });
+});
+
+//===========================================
+// log interaction
+app.post('/interactions', (req, res) => {
+  // console.log(req.body);
+  let options = {
+    method: 'POST',
+    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/interactions`,
+    data: req.body,
+    headers: {
+      Authorization: process.env.AUTH
+    }
+  };
+  return axios(options)
+          .then(response => {
+            res.status(200).send(response.data);
+          })
+          .catch(err => {
+            res.status(500).send(err);
+          });
+});
 
 //===========================================
 // related products api
-
 
 app.get('/current/:id', (req, res) => {
   getCurrent(req.params.id)
@@ -24,8 +60,8 @@ app.get('/current/:id', (req, res) => {
       res.status(200).send(result);
     })
     .catch(err => {
-      console.log(err);
-      res.status(500).send("some err happened");
+      // console.log(err);
+      res.status(500).send(err);
     });
 });
 
@@ -35,8 +71,8 @@ app.get('/related/:id', (req, res) => {
       res.status(200).send(result);
     })
     .catch(err => {
-      console.log(err);
-      res.status(500).send("some err happened");
+      // console.log(err);
+      res.status(500).send(err);
     });
 });
 
@@ -46,18 +82,18 @@ app.get('/outfit', (req, res) => {
       res.status(200).send(data);
     })
     .catch(err => {
-      console.log(err);
-      res.status(500).send("some err happened");
+      // console.log(err);
+      res.status(500).send(err);
     });
 });
 
 app.post('/outfit', (req, res) => {
-  const { id, category, name, original_price, sale_price, img_url, overallRating } = req.body;
-  const obj = { id, category, name, original_price, sale_price, img_url, overallRating };
+  const { id, category, name, original_price, sale_price, img_url, overallRating, reviewCount } = req.body;
+  const obj = { id, category, name, original_price, sale_price, img_url, overallRating, reviewCount };
   Outfit.updateOne({id: id}, obj, {upsert: true}, function(err) {
     if (err) {
-      console.log(err)
-      res.status(400).end();
+      // console.log(err)
+      res.status(400).send(err);
     } else {
       res.status(201).end();
     }
@@ -68,8 +104,8 @@ app.delete('/outfit', (req, res) => {
   const { id } = req.body;
   Outfit.deleteOne({id: id}, function(err) {
     if (err) {
-      console.log(err)
-      res.status(406).end();
+      // console.log(err)
+      res.status(406).send(err);
     } else {
       res.status(204).end();
     }
@@ -189,7 +225,8 @@ app.post('/reviews', (req,res)=>{
       })
     })
     .catch((err)=>{
-      console.log(err)
+      // console.log(err)
+      res.status(500).send(err);
     })
 })
 
@@ -199,7 +236,7 @@ app.put('/reviews/:id', (req, res)=>{
     res.status(200).send('Helpful')
   })
   .catch((err)=>{
-    console.log(err)
+    res.status(500).send(err);
   })
 })
 
@@ -216,6 +253,53 @@ app.get('/reviews/meta',(req, res)=>{
       characteristics: response.data.characteristics,
     })
   })
+  .catch((err)=>{
+    res.status(500).send(err);
+  })
+})
+
+app.post('/submit', (req, res)=>{
+  console.log(req.body)
+  reviews.postReview(req.body)
+  .then((response)=>{
+    // console.log(response, 'submit response  line 265555555555')
+    res.status(200)
+  })
+  .catch((err)=>{
+    console.log(err,   'submit err server index  line 269999999')
+  })
+
+})
+// app.post('/image', upload.array('image'), (req, res)=>{
+//   reviews.getImage(req.file)
+//     .then((response)=>{
+//       console.log(response)
+//       res.status(200).send(response)
+//     })
+//     .catch((err)=>{
+//       res.status(500).send(err)
+//     })
+
+// })
+
+//=================================================
+app.get('/*', (req, res) => {
+
+  // console.log(req.params.id);
+  // let options = {
+  //   method: 'GET',
+  //   url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${req.params.id}`,
+  //   headers: {
+  //     Authorization: process.env.AUTH
+  //   }
+  // };
+  // axios(options)
+  //   .then(() => {
+      res.sendFile(path.join(__dirname, '../Client/dist/index.html'));
+    // })
+    // .catch(err => {
+    //   res.send('<!DOCTYPE html' + `<p> Can't find product, maybe try a different ID?</p>`);
+    // });
 })
 
 //=================================================

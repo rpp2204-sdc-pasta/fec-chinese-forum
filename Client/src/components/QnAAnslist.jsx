@@ -11,7 +11,10 @@ class QnAAnsList extends React.Component {
       reported: false
     };
     this.date = new Date(this.props.ans.date).toLocaleDateString('en-US');
+<<<<<<< HEAD
     console.log(this.date);
+=======
+>>>>>>> 4b5092310e8f129fb2f80e29e1fc241000a144f6
   }
 
   anshelpful = (e) => {

@@ -35,17 +35,17 @@ class RelatedProducts extends React.Component {
   }
 
   componentDidMount() {
-    this.getCurrent();
     this.getRelated();
     this.getOutfit();
     this.checkRelated();
     this.checkOutfit();
+    this.getCurrent();
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (this.props.id !== prevProps.id) {
-      this.getCurrent();
       this.getRelated();
+      this.getCurrent();
     }
     if (this.state.outfitIndex !== prevState.outfitIndex) {
       this.checkOutfit();
@@ -68,7 +68,7 @@ class RelatedProducts extends React.Component {
     };
     axios(options)
       .then(response => {
-        console.log(response.data);
+        // console.log(response.data);
         this.setState({ current: response.data });
       })
       .catch(err => {
@@ -84,7 +84,7 @@ class RelatedProducts extends React.Component {
     axios(options)
       .then(response => {
         // console.log(response.data);
-        this.setState({ products: response.data });
+        this.setState({ products: response.data, relatedIndex: 0 });
       })
       .catch(err => {
         console.log(err);
@@ -99,7 +99,7 @@ class RelatedProducts extends React.Component {
     axios(options)
       .then(response => {
         // console.log(response.data);
-        this.setState({ outfits: response.data });
+        this.setState({ outfits: response.data, outfitIndex: -1 });
       })
       .catch(err => {
         console.log(err);
@@ -162,7 +162,8 @@ class RelatedProducts extends React.Component {
         original_price: this.state.current.original_price,
         sale_price: this.state.current.sale_price,
         img_url: this.state.current.photos[0].thumbnail_url,
-        overallRating: this.state.current.overallRating
+        overallRating: this.state.current.overallRating,
+        reviewCount: this.state.current.reviewCount
       }
     };
     axios(options)
@@ -220,7 +221,8 @@ class RelatedProducts extends React.Component {
     this.setState({compare: false});
   }
 
-  render() {
+  render(props) {
+    let { id, handleClick } = this.props;
     return (
       <>
         <h3 className="section-title">RELATED PRODUCTS</h3>
@@ -232,7 +234,8 @@ class RelatedProducts extends React.Component {
           <div className="related-products" style={{transform: `translateX(-${this.state.relatedIndex * 25}%)`}} >
             {this.state.products.map((product, index) => <Card item={product} key={index}
               handleCompare={() => { this.handleCompare(index); }}
-              handleClick={() => {this.props.handleClick(product.id)}} />)}
+              handleClick={() => { handleClick(product.id);
+                window.location.href = `/?product_id=${product.id}`; }} />)}
           </div>
         </section>
         <h3 className="section-title">YOUR OUTFIT</h3>
@@ -251,7 +254,7 @@ class RelatedProducts extends React.Component {
               </div>
             </div>
             {this.state.outfits.map((outfit, index) => <Outfit item={outfit} key={index}
-            handleDelete={() => { this.handleDelete(index); }} />)}
+            handleDelete={() => { this.handleDelete(index); }} handleClick={() => {handleClick(outfit.id)}} />)}
           </div>
         </section>
         {this.state.compare && <div id="compare-overlay" onClick={this.closeOverlay}>

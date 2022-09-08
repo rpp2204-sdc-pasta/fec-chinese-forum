@@ -17,41 +17,47 @@ class OverviewGallery extends React.Component {
 
   }
   handleClickThumbnail(index) {
+    let targetIndex = parseInt(index)+parseInt(this.state.thumbnailRange[0]);
     this.setState({
-      mainImageIndex: index
+      mainImageIndex: targetIndex
     });
   }
 
   handleThumbnailScrollUp(){
-    if((this.state.thumbnailRange[0] > 0) && (this.state.thumbnailRange[1] > 7)) {
+    let lowerRange = parseInt(this.state.thumbnailRange[0])-1;
+    let upperRange = parseInt(this.state.thumbnailRange[1])-1;
+    if((lowerRange >= 0) && (upperRange >= 7)) {
       this.setState({
-        thumbnailRange: [this.state.thumbnailRange[0]--, this.state.thumbnailRange[1]--]
+        thumbnailRange: [lowerRange, upperRange]
       });
     };
   }
 
   handleThumbnailScrollDown(){
-    if((this.state.thumbnailRange[1]+1 < this.props.photos.length)) {
+    let lowerRange = parseInt(this.state.thumbnailRange[0])+1;
+    let upperRange = parseInt(this.state.thumbnailRange[1])+1;
+    if(upperRange <= this.props.photos.length) {
       this.setState({
-        thumbnailRange: [this.state.thumbnailRange[0]++, this.state.thumbnailRange[1]++]
+        thumbnailRange: [lowerRange, upperRange]
       });
-    }
+    };
   }
 
   handleMainImageScrollLeft(){
-    if(this.state.mainImageIndex-1 > 0) {
+    let targetIndex = parseInt(this.state.mainImageIndex)-1;
+    if(targetIndex >= 0) {
       this.setState({
-        mainImageIndex: this.state.mainImageIndex-1
+        mainImageIndex: targetIndex
       });
     };
   }
 
   handleMainImageScrollRight(){
-    if(this.state.mainImageIndex+1 < this.props.photos.length) {
+    let targetIndex = parseInt(this.state.mainImageIndex)+1;
+    if(targetIndex <= this.props.photos.length-1) {
       this.setState({
-        mainImageIndex: this.state.mainImageIndex+1
+        mainImageIndex: targetIndex
       });
-
     };
   }
 
@@ -63,6 +69,7 @@ class OverviewGallery extends React.Component {
       for(var index = 0; index < this.props.photos.length; index++) {
             thumbnails.push(this.props.photos[index].thumbnail_url);
       };
+
     };
     return (
       <div className='Overview-gallery'>
@@ -70,13 +77,13 @@ class OverviewGallery extends React.Component {
           photo={this.props.photos[this.state.mainImageIndex].url}
           scrollLeft={this.handleMainImageScrollLeft}
           scrollRight={this.handleMainImageScrollRight}
-        />
-        <OverviewGalleryThumbnail
+          mainImageIndex={this.state.mainImageIndex}
           thumbnails={thumbnails}
           range={this.state.thumbnailRange}
           changeMainImage={this.handleClickThumbnail}
           scrollUp={this.handleThumbnailScrollUp}
           scrollDown={this.handleThumbnailScrollDown}
+          handleExpand={this.props.handleExpand}
         />
       </div>
     );

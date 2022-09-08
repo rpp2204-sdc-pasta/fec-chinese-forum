@@ -13,7 +13,6 @@ class Reviews extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      product_id: this.props.id,
       stored_relevant: [],
       stored_helpful: [],
       stored_newest:[],
@@ -49,13 +48,23 @@ class Reviews extends React.Component {
 
   componentDidMount(){
     Promise.all([
-      this.getProductcount(null, 'relevant', this.state.product_id),
-      this.getProductcount(null, 'helpful', this.state.product_id),
-      this.getProductcount(null, 'newest', this.state.product_id),
-      this.getMeta(this.state.product_id),
+      this.getProductcount(null, 'relevant', this.props.id),
+      this.getProductcount(null, 'helpful', this.props.id),
+      this.getProductcount(null, 'newest', this.props.id),
+      this.getMeta(this.props.id),
     ])
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.id !== prevProps.id) {
+      Promise.all([
+        this.getProductcount(null, 'relevant', this.props.id),
+        this.getProductcount(null, 'helpful', this.props.id),
+        this.getProductcount(null, 'newest', this.props.id),
+        this.getMeta(this.props.id),
+      ])
+    }
+  }
   getProductcount(num=null,sortBy, product_id){
     sortBy = sortBy
     axios.post('/reviews',
@@ -247,9 +256,11 @@ class Reviews extends React.Component {
 
     return(
       <div className='containerAll' style={style_1}>
-        <div className='left'>{`Ratings & Reviews`}
+        <div className='left'>
+          <div className='reviewTitle'>
+            {`Ratings & Reviews`}
+          </div>
           <div >
-            <br></br>
             <Ratingbreakdown avgRating={this.state.avgRating} percent={this.state.percent} breakdownScore={this.state.breakdownScore}
             filterReviews_Star={this.filterReviews_Star}/>
             <CharBreakdown characteristics={this.state.characteristics}/>
@@ -268,8 +279,7 @@ class Reviews extends React.Component {
             </div>
           <div>
             <Morebutton length={this.state.length} count={this.state.count} handleMore={this.handleMore}/>
-            <Addreview />
-
+            <Addreview characteristics={this.state.characteristics} id={this.props.id}/>
           </div>
         </div>
       </div>

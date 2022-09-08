@@ -5,153 +5,116 @@ import OverviewPrice from './ProductOverviewComponents/OverviewPrice.jsx';
 import OverviewStyleSelect from './ProductOverviewComponents/OverviewStyleSelect.jsx';
 import OverviewAddtoCart from './ProductOverviewComponents/OverviewAddtoCart.jsx';
 import OverviewDescription from './ProductOverviewComponents/OverviewDescription.jsx';
-
+import StarRating from './StarRating.jsx';
+import axios from 'axios'
 
 class ProductOverview extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      style_id: 444218
+      isLoading: true,
+      currStyle: 0,
+      product: {},
+      expanded: false
     }
     this.changeStyle = this.changeStyle.bind(this);
+    this.changeExpand = this.changeExpand.bind(this);
+    this.fetchData = this.fetchData.bind(this);
   }
 
   changeStyle(style_id) {
-    console.log('style selected: ', style_id)
     this.setState({
-      style_id: style_id
+      currStyle: style_id
     });
 
   }
 
-  render() {
+  changeExpand(event) {
+    this.setState({
+      expanded: !this.state.expanded
+    });
 
-    var product = {
-      "id": 71701,
-      "campus": "hr-rpp",
-      "name": "Heir Force Ones",
-      "slogan": "A sneaker dynasty",
-      "description": "Now where da boxes where I keep mine? You should peep mine, maybe once or twice but never three times. I'm just a sneaker pro, I love Pumas and shell toes, but can't nothin compare to a fresh crispy white pearl",
-      "category": "Kicks",
-      "default_price": "99.00",
-      "created_at": "2022-05-11T19:38:15.373Z",
-      "updated_at": "2022-05-11T19:38:15.373Z",
-      "features": [
-        {
-            "feature": "Sole",
-            "value": "Rubber"
-        },
-        {
-            "feature": "Material",
-            "value": "FullControlSkin"
-        },
-        {
-            "feature": "Mid-Sole",
-            "value": "ControlSupport Arch Bridge"
-        },
-        {
-            "feature": "Stitching",
-            "value": "Double Stitch"
-        }
-        ],
-      "styles" : [
-        {
-          "style_id": 444218,
-          "name": 'Forest Green & Black',
-          "original_price": '140.00',
-          "sale_price": '100.00',
-          'default?': false,
-          "photos": [
-            {
-              "thumbnail_url": 'https://images.unsplash.com/photo-1544441892-794166f1e3be?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80',
-              "url": 'https://images.unsplash.com/photo-1544441892-794166f1e3be?ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80'
-            },
-            {
-              "thumbnail_url": 'https://images.unsplash.com/photo-1514590734052-344a18719611?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80',
-              "url": 'https://images.unsplash.com/photo-1514590734052-344a18719611?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80'
-            }
-          ],
-          "skus": {
-            '2580652': { quantity: 14, size: '7' },
-            '2580653': { quantity: 25, size: '7.5' }
-          }
-        },
-        {
-          "style_id": 444219,
-          "name": 'Desert Brown & Tan',
-          "original_price": '140.00',
-          "sale_price": null,
-          'default?': true,
-          "photos": [
-            {
-              "thumbnail_url": 'https://images.unsplash.com/photo-1542280756-74b2f55e73ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80',
-              "url": 'https://images.unsplash.com/photo-1542280756-74b2f55e73ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80'
-            },
-            {
-              "thumbnail_url": 'https://images.unsplash.com/photo-1521093470119-a3acdc43374a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80',
-              "url": 'https://images.unsplash.com/photo-1521093470119-a3acdc43374a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80'
-            },
-            {
-              "thumbnail_url": 'https://images.unsplash.com/photo-1542280756-74b2f55e73ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80',
-              "url": 'https://images.unsplash.com/photo-1542280756-74b2f55e73ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80'
-            },
-            {
-              "thumbnail_url": 'https://images.unsplash.com/photo-1521093470119-a3acdc43374a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80',
-              "url": 'https://images.unsplash.com/photo-1521093470119-a3acdc43374a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80'
-            },
-            {
-              "thumbnail_url": 'https://images.unsplash.com/photo-1542280756-74b2f55e73ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80',
-              "url": 'https://images.unsplash.com/photo-1542280756-74b2f55e73ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80'
-            },
-            {
-              "thumbnail_url": 'https://images.unsplash.com/photo-1521093470119-a3acdc43374a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80',
-              "url": 'https://images.unsplash.com/photo-1521093470119-a3acdc43374a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80'
-            },
-            {
-              "thumbnail_url": 'https://images.unsplash.com/photo-1542280756-74b2f55e73ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80',
-              "url": 'https://images.unsplash.com/photo-1542280756-74b2f55e73ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80'
-            },
-            {
-              "thumbnail_url": 'https://images.unsplash.com/photo-1521093470119-a3acdc43374a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80',
-              "url": 'https://images.unsplash.com/photo-1521093470119-a3acdc43374a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80'
-            }
-          ],
-          "skus": {
-            '2580654': { "quantity": 1, "size": '5' },
-            '2580655': { "quantity": 25, "size": '5.5' }
-          }
-        }
-      ]
-    };
-    // console.log('productfeatures', product.features);
+  }
+
+  componentDidMount() {
+    this.fetchData();
+  }
+
+  fetchData() {
+    var options = {
+      method:'get',
+      url:  `http://localhost:1234/overview/${this.props.id}`
+    }
+    axios(options)
+    .then((result)=>{
+      let defaultStyle = result.data.styles[0].style_id;
+      if (result.data.styles.find((style)=>style['default?']===true)) {
+        defaultStyle = (result.data.styles.find((style)=>style['default?']===true).style_id);
+      }
+
+      this.setState({
+        product: result.data,
+        isLoading: false,
+        currStyle: defaultStyle
+      })
+    })
+    .catch(err => {
+      console.log(err)
+    });
+
+
+  }
+
+  render() {
+    if (this.state.isLoading) {
+      return <div>Loading Overview</div>
+    }
+
+    let OverviewRight =
+      <div className='Overview-Right'>
+        <div className='Overview-star-rating'>
+          <StarRating rating={this.state.product.starRating}/>
+          <button onClick={this.props.handleScrollToReview}>Read All Reviews</button>
+        </div>
+        <h2 className="Overview-category">{this.state.product.category}</h2>
+        <h1 className="Overview-title">{this.state.product.name}</h1>
+        <OverviewPrice
+          original_price={this.state.product.styles.find(style=> style.style_id === this.state.currStyle).original_price}
+          sale_price={this.state.product.styles.find(style=> style.style_id === this.state.currStyle).sale_price}/>
+        <OverviewStyleSelect
+          name={this.state.product.styles.find(style=> style.style_id === this.state.currStyle).name}
+          styles={this.state.product.styles}
+          changeStyle={this.changeStyle}/>
+        <OverviewAddtoCart
+          style_id={this.state.currStyle}
+          skus={this.state.product.styles.find(style=> style.style_id === this.state.currStyle).skus}
+          key={new Date().getTime()}/>
+      </div>;
+
+    let isExpanded = this.state.expanded;
 
     return (
-      <div>
-        <div className='Overview-Left'>
-        <OverviewGallery
-            photos={product.styles.find(style=> style.style_id === this.state.style_id).photos}/>
+      <div className='Overview-main'>
+        <div className='Overview-flexRowOne'>
+          <div className='Overview-Left'>
+          <OverviewGallery
+              photos={this.state.product.styles.find(style=> style.style_id === this.state.currStyle).photos}
+              handleExpand={this.changeExpand}
+              key={new Date().getTime()}/>
+          </div>
+          {isExpanded
+            ? null
+            : OverviewRight
+          }
         </div>
-        <div className='Overview-Right'>
-          <h2 className="Overview-category">{product.category}</h2>
-          <h1 className="Overview-title">{product.name}</h1>
-          <OverviewPrice
-            original_price={product.styles.find(style=> style.style_id === this.state.style_id).original_price}
-            sale_price={product.styles.find(style=> style.style_id === this.state.style_id).sale_price}/>
-          <OverviewStyleSelect
-            name={product.styles.find(style=> style.style_id === this.state.style_id).name}
-            styles={product.styles}
-            changeStyle={this.changeStyle}/>
-          <OverviewAddtoCart
-            style_id={this.state.style_id}
-            skus={product.styles.find(style=> style.style_id === this.state.style_id).skus}
-            key={new Date().getTime()}/>
-        </div>
-        <div className='Overview-Bottom'>
+        <div className='Overview-flexRowTwo'>
+          <div className='Overview-Bottom'>
           <OverviewDescription
-            slogan={product.slogan}
-            overview={product.description}
-            features={product.features}
+            slogan={this.state.product.slogan}
+            overview={this.state.product.description}
+            features={this.state.product.features}
             />
+          </div>
         </div>
       </div>
     );

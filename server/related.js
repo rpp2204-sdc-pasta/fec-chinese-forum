@@ -35,14 +35,15 @@ let getRelated = (id) => {
             if (!product["photos"][0]["thumbnail_url"]) {
               product["photos"][0]["thumbnail_url"] = "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/480px-No_image_available.svg.png"
             }
-            let overallRating = getOverAllRating(value[2].ratings);
+            let [overallRating, reviewCount] = getOverAllRating(value[2].ratings);
             product = {
               ...product,
               id: value[0].id,
               name: value[0].name,
               category: value[0].category,
               features: value[0].features,
-              overallRating
+              overallRating,
+              reviewCount
             }
             return product;
           });
@@ -78,14 +79,15 @@ let getCurrent = (id) => {
           if (!product["photos"][0]["thumbnail_url"]) {
             product["photos"][0]["thumbnail_url"] = "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/480px-No_image_available.svg.png"
           }
-          let overallRating = getOverAllRating(value[2].ratings);
+          let [overallRating, reviewCount] = getOverAllRating(value[2].ratings);
           product = {
             ...product,
             id: value[0].id,
             name: value[0].name,
             category: value[0].category,
             features: value[0].features,
-            overallRating
+            overallRating,
+            reviewCount
           }
           return product;
         });
@@ -145,7 +147,7 @@ let getOverAllRating = (ratings) => {
   + (5 * fiveStars);
   let totalReviews = Number(oneStars) + Number(twoStars) + Number(threeStars) + Number(fourStars) + Number(fiveStars);
   let overallRating = Math.round(100 * total / totalReviews) / 100;
-  return overallRating;
+  return [overallRating, totalReviews];
 }
 
 

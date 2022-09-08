@@ -41,17 +41,15 @@ const Photo = (props)=>{
   const [isOpen, setIsOpen] =useState(false);
 
   const toggleModal= () =>{
-    console.log('modal')
     setIsOpen (!isOpen)
   }
 
     return(
     <>
-      <div   className={props.photo.id}>
+      <div className={props.photo.id}>
          <img  style={imagestyle} onClick={toggleModal} src={props.photo.url} alt={props.photo.id}></img>
          {isOpen && <div style={overlay}><img  style={another_style} onClick={toggleModal} src={props.photo.url} alt={props.photo.id}></img></div>}
       </div>
-
     </>
     )
 }

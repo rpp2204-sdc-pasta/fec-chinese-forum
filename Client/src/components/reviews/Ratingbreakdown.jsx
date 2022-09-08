@@ -1,15 +1,16 @@
 import React from 'react';
-
+import StarRating from '../StarRating.jsx'
 
 
 const Ratingbreakdown = (props)=>{
 
   return (
     <div className='breakdownAll'>
-        <div className='containerBreakdown'>
-          {props.avgRating}
-        </div>
-        <div>{props.percent}% of reviews recommend this product</div>
+      <div className='starflex'>
+        <div className='containerBreakdown'>{props.avgRating} </div>
+        <div className='starSize'> <StarRating rating= {props.avgRating} /></div>
+      </div>
+        <span>{props.percent}% of reviews recommend this product</span>
         <ul className='starReview'>
         <li id={5} className='starBar' onClick={props.filterReviews_Star}>
           <span className='star'>5 stars </span><button style={{'--star5-color': `${props.breakdownScore['5']}%`}} className='progress-bar five'></button>
@@ -23,7 +24,7 @@ const Ratingbreakdown = (props)=>{
         <li id={2}className='starBar' onClick={props.filterReviews_Star}>
           <span className='star'>2 stars </span><button style={{'--star2-color': `${props.breakdownScore['2']}%`}} className='progress-bar two'></button>
         </li>
-        <li id={1} className='starBar' onClick={props.filterReviews_Star}>
+        <li id={1}className='starBar' onClick={props.filterReviews_Star}>
          <span className='star'>1 stars </span><button style={{'--star1-color': `${props.breakdownScore['1']}%`}} className='progress-bar one'></button>
         </li>
 

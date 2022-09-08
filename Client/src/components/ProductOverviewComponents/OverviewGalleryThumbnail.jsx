@@ -6,43 +6,47 @@ class OverviewGalleryThumbnail extends React.Component {
     super(props);
     this.handleClick = this.handleClick.bind(this);
   }
-  handleClick(event) {
-    this.props.changeMainImage(event.target.id);
-    // console.log('clicked',event.target.id)
+  handleClick(index) {
+    this.props.changeMainImage(index);
   }
 
   render() {
-    // let thumbnails = []
-    //   if(this.props.photos) {
-    //     for(var index = this.state.thumbnailRange[0];
-    //         index < this.state.thumbnailRange[1] && index < this.props.photos.length;
-    //         index++) {
-    //           thumbnails.push(
-    //           <OverviewImageGallaryThumbnail
-    //             thumbnailURL={this.props.photos[index].thumbnail_url}
-    //             index={index}
-    //             changeMainImage={this.handleClickThumbnail}/>);
-    //     };
-    //   };
-    // console.log('rangeMin', this.props);
     let thumbnails = this.props.thumbnails.slice(this.props.range[0],this.props.range[1])
       .map( (thumbnail, index) => {
-        console.log('thumbnail,index',thumbnail,index);
+        if (index === this.props.mainImageIndex-this.props.range[0]) {
+          return (
+            <div key={index}
+            onClick={() => this.handleClick(index)}>
+              <img className='Overview-galleryThumbnailSelected'
+                src={thumbnail}/>
+            </div>
+          )
+
+        }
         return (
-          <div>
+          <div key={index}
+          onClick={() => this.handleClick(index)}>
             <img className='Overview-galleryThumbnail'
-              src={thumbnail}
-              id={index}
-              onClick={this.handleClick}/>
+              src={thumbnail}/>
           </div>
         )
+
       });
+
+    let scrollUp = null;
+    if (parseInt(this.props.range[0])!==0) {
+      scrollUp = <a className='up' onClick={this.props.scrollUp}>&#708;</a>;
+    }
+    let scrollDown = null;
+    if (parseInt(this.props.range[1])!==(this.props.thumbnails.length)) {
+      scrollDown = <a className='down' onClick={this.props.scrollDown}>&#x02c5;</a>;
+    }
 
     return (
       <div className='Overview-galleryThumbnails'>
-        <a className='up' onClick={this.props.scrollUp}/>
+        {scrollUp}
         {thumbnails}
-        <a className='down' onClick={this.props.scrollDown}/>
+        {scrollDown}
       </div>
       );
     }
