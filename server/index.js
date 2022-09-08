@@ -157,6 +157,7 @@ app.post('/ans', (req,res)=>{
   //   photos: ""
   // }
   //req.body.questionId = parseInt(req.body.questionId);
+  console.log(req.body);
   qna.postAnswer(req.body.questionId, req.body.opt).then((response) => {
     //console.log(response.data);
     res.send(response.data);
