@@ -14,27 +14,43 @@ class OverviewStyleSelect extends React.Component {
   render() {
     var index = 0;
     var styles = [];
+    var tmpPropStyles = this.props.styles.slice();
+
     for (var groups = 0; groups < Math.ceil(this.props.styles.length/4); groups++) {
       var group = [];
-      for (var i = 0; i < 4; i++) {
-        if( index < this.props.styles.length) {
+      if(groups===0) {
           group.push(<OverviewStyle
-            count={index} style={this.props.styles[index]}
-            onClick={this.onClickStyleSelect}/>);
-          index++;
+            count={index}
+            style={tmpPropStyles.find(style => style.name===this.props.name)}
+            onClick={this.onClickStyleSelect}/>
+          );
+
+          let currStyleIndex = tmpPropStyles.indexOf(tmpPropStyles.find(style => style.name===this.props.name));
+          console.log(index);
+          tmpPropStyles.splice(currStyleIndex,1);
+          for (var i = 0; i < 3; i++) {
+            if( index < this.props.styles.length) {
+              group.push(<OverviewStyle
+                count={index} style={tmpPropStyles[index]}
+                onClick={this.onClickStyleSelect}/>);
+              index++;
+            }
+          }
+      } else {
+        for (var i = 0; i < 4; i++) {
+          if( index < tmpPropStyles.length) {
+            group.push(<OverviewStyle
+              count={index} style={tmpPropStyles[index]}
+              onClick={this.onClickStyleSelect}/>);
+            index++;
+          }
         }
       }
       styles.push(<div className='Overview-styleGroupOfFour'>{group}</div>)
       group = [];
     }
     return (
-      //style selector will show thumbnail of different styles
-			//4 per row
-			//overlay of checkmark on top of selected style
-			//selected style will be first on list
-			//clicking on selected thumbnail will not do anything
-			//Only one style can be selected at a time.
-			//A style must be selected at all times
+
       <div>
         <div className='Overview-styleSelect'>
           {this.props.name}
