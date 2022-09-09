@@ -47,6 +47,10 @@ class RelatedProducts extends React.Component {
       this.getRelated();
       this.getCurrent();
     }
+    if (this.props.renderOutfit !== prevProps.renderOutfit) {
+      this.getOutfit();
+      this.props.setRenderOutfit(false);
+    }
     if (this.state.outfitIndex !== prevState.outfitIndex) {
       this.checkOutfit();
     }
