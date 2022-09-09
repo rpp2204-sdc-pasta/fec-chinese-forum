@@ -663,7 +663,7 @@ input[type='radio'] {
 }
 
 .ansList {
-  overflow-y: auto;
+  overflow-Y: auto;
   height: 75px;
   margin-top: 10px;
 }

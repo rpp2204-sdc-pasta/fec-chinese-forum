@@ -112,13 +112,22 @@ class QnAList extends React.Component {
     )
   }
 
+  setValue = (e) => {
+    let value = e.target.value;
+    let name = e.target.name;
+    this[name] = value;
+  }
+
   render(){
-    let AnsList, loader;
+    let AnsList, loader, A;
     let AnsLength = Object.keys(this.state.ans).length;
     if(AnsLength>0){
       AnsList = Object.keys(this.state.ans).slice(0,this.state.numAns).map((ansId, i) =>
         <QnAAnsList key = {i} ans = {this.state.ans[ansId]}/>
       )
+    }
+    if(AnsLength>0) {
+      A = <a><b>A:</b> </a>
     }
 
     if(this.state.numAns >= AnsLength && AnsLength > 2){
@@ -145,16 +154,16 @@ class QnAList extends React.Component {
               {
                 this.state.showAnsModal &&
                     <form className = "lvl4 ansModal">
-                      <input placeholder="Name" onChange={(e) => {this.inputname = e.target.value}} placeholder="Name" maxlength="60" required></input><br/>
-                      <input placeholder="Email" type="email" onChange={(e) => {this.inputemail = e.target.value}} placeholder="Email" maxlength="60" required></input><br/>
-                      <input placeholder="Enter Answer" onChange={(e) => {this.inputanswer = e.target.value}} size="30" maxlength="1000"required></input><br/>
+                      <input name = "inputname" placeholder="Name" onChange={this.setValue} placeholder="Name" maxLength="60" required></input><br/>
+                      <input name = "inputemail" placeholder="Email" type="email" onChange={this.setValue} placeholder="Email" maxLength="60" required></input><br/>
+                      <input name = "inputanswer" placeholder="Enter Answer" onChange={this.setValue} size="30" maxLength="1000"required></input><br/>
                       <button type="submit" value="Submit" onClick = {this.submitAns}>Submit</button>
                       <button onClick={this.showModal}>X</button>
                     </form>
               }
               {!this.state.showAnsModal && <button className = "buttonLink" onClick={this.showModal}>Add Answer</button>}
         </div><br/><br/>
-        <div id = "ansList">{AnsList}</div>
+        <div id = "ansList">{A}{AnsList}</div>
         {loader}<br/><br/>
     </div>
     )

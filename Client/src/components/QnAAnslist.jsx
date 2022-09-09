@@ -53,7 +53,7 @@ class QnAAnsList extends React.Component {
 
   }
 
-  render() {
+  render = () => {
     let Yes;
     if(!this.state.votedYes){
       Yes = <button className = "buttonLink" onClick = {this.anshelpful}>Yes</button>
