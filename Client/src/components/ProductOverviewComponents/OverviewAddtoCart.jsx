@@ -60,14 +60,14 @@ class OverviewAddtoCart extends React.Component {
 					category: this.props.product.category,
 					name: this.props.product.name,
 					original_price: this.props.product.default_price,
-					sale_price: this.props.product.default_price,
+					sale_price: null,
 					img_url: img_url,
 					overallRating: this.props.product.starRating,
 					reviewCount: this.props.product.reviewCount
 				}
 			};
 			axios(options)
-				.then ( res => {
+				.then( () => {
 					this.props.setRenderOutfit(true);
 				})
 				.catch(err => {
