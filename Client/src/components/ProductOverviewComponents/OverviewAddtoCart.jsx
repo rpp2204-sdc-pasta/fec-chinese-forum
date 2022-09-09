@@ -67,6 +67,9 @@ class OverviewAddtoCart extends React.Component {
 				}
 			};
 			axios(options)
+				.then ( res => {
+					this.props.setRenderOutfit(true);
+				})
 				.catch(err => {
 					console.log(err);
 				});
