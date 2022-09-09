@@ -155,8 +155,8 @@ class QnAList extends React.Component {
                 this.state.showAnsModal &&
                     <form className = "lvl4 ansModal">
                       <input name = "inputname" placeholder="Name" onChange={this.setValue} placeholder="Name" maxLength="60" required></input><br/>
-                      <input name = "inputemail" placeholder="Email" type="email" onChange={this.setValue} placeholder="Email" maxLength="60" required></input><br/>
-                      <input name = "inputanswer" placeholder="Enter Answer" onChange={this.setValue} size="30" maxLength="1000"required></input><br/>
+                      <input name = "inputemail" placeholder="Alex@email.com" type="email" onChange={this.setValue} placeholder="Email" maxLength="60" required></input><br/>
+                      <input name = "inputanswer" placeholder="Enter Answer" type = "textarea" rows = {2} onChange={this.setValue} size="30" maxLength="1000"required></input><br/>
                       <button type="submit" value="Submit" onClick = {this.submitAns}>Submit</button>
                       <button onClick={this.showModal}>X</button>
                     </form>
