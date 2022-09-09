@@ -6,7 +6,11 @@ const app = express();
 const reviews =require('./reviews.js')
 const qna =require('./qna.js')
 const port = process.env.PORT || 3000;
+<<<<<<< HEAD
 const { getOverview, addToCart } = require('./overview.js');
+=======
+const { getOverview, addToCart  } = require('./overview.js');
+>>>>>>> main
 const { getRelated, getCurrent } = require('./related');
 const { Outfit } = require('../db/index.js');
 
