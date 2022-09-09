@@ -29,19 +29,6 @@ let getOverview = (id) => {
       overviewData=responses[0].data;
       overviewData.styles=responses[1].data.results;
 
-      // GET /reviews
-      // let reviews = responses[2].data.results;
-      // let sum = 0;
-      // reviews.map((review) => {
-      //   sum += review.rating;
-      // });
-      // overviewData.starRating = sum/reviews.length;
-      // console.log('sum',sum);
-      // console.log('length', reviews.length);
-      // console.log('avg',sum/reviews.length);
-
-
-      // GET /reviews/meta
       let sum = 0;
       let count = 0;
       let reviewsMeta = responses[2].data.ratings;
@@ -50,6 +37,7 @@ let getOverview = (id) => {
         count += parseInt(rating[1]);
       });
       overviewData.starRating =  parseFloat(sum/count).toFixed(2);
+      console.log(overviewData.name);
       return overviewData;
     })
     .catch((err)=>{
@@ -57,5 +45,11 @@ let getOverview = (id) => {
     })
 };
 
-
+let addToCart = (sku, count) => {
+  let getProductInfo = {
+    method: 'GET',
+    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${id}`,
+    headers: {Authorization: process.env.AUTH}
+  };
+};
 module.exports.getOverview = getOverview;
