@@ -32,8 +32,8 @@ app.get('/overview/:id', (req, res) => {
 
 app.post('/overview/cart', (req, res) => {
   console.log(req.body.sku_id);
-  console.log(req.body.count);
-  addToCart(req.body.sku, req.body.count)
+  console.log(req.body.quantity);
+  Promise.resolve(addToCart(req.body.sku_id, req.body.quantity))
     .then(result => {
       res.status(200).send(result);
     })
