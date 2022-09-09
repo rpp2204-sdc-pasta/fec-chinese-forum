@@ -37,7 +37,7 @@ let getOverview = (id) => {
         count += parseInt(rating[1]);
       });
       overviewData.starRating =  parseFloat(sum/count).toFixed(2);
-      console.log(overviewData.name);
+      overviewData.reviewCount = count;
       return overviewData;
     })
     .catch((err)=>{
@@ -47,9 +47,22 @@ let getOverview = (id) => {
 
 let addToCart = (sku, count) => {
   let getProductInfo = {
-    method: 'GET',
-    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${id}`,
+    method: 'POST',
+    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/cart`,
+    body: {
+      'sku_id': sku,
+      'count': count
+    },
     headers: {Authorization: process.env.AUTH}
   };
+  axios(getProductInfo)
+  .then(res => {
+    return res;
+  })
+  .catch(err => {
+    console.log(err);
+  });
 };
+
+module.exports.addToCart = addToCart;
 module.exports.getOverview = getOverview;

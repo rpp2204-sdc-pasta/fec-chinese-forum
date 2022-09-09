@@ -6,7 +6,7 @@ const app = express();
 const reviews =require('./reviews.js')
 const qna =require('./qna.js')
 const port = process.env.PORT || 3000;
-const { getOverview,  } = require('./overview.js');
+const { getOverview, addToCart } = require('./overview.js');
 const { getRelated, getCurrent } = require('./related');
 const { Outfit } = require('../db/index.js');
 
@@ -30,15 +30,17 @@ app.get('/overview/:id', (req, res) => {
     });
 });
 
-app.post('/overview/:id', (req, res) => {
-  addToCart(req.params.id)
+app.post('/overview/cart', (req, res) => {
+  console.log(req.body.sku_id);
+  console.log(req.body.count);
+  addToCart(req.body.sku, req.body.count)
     .then(result => {
       res.status(200).send(result);
     })
-    .catch(err => {
-      console.log(err);
-      res.status(500).send("some err happened");
-    });
+  .catch(err => {
+    console.log(err);
+    res.status(500).send("some err happened");
+  });
 });
 
 //===========================================

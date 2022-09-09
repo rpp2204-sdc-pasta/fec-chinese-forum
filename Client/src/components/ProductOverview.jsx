@@ -43,7 +43,7 @@ class ProductOverview extends React.Component {
   fetchData() {
     var options = {
       method:'get',
-      url:  `http://localhost:1234/overview/${this.props.id}`
+      url:  `/overview/${this.props.id}`
     }
     axios(options)
     .then((result)=>{
@@ -56,8 +56,8 @@ class ProductOverview extends React.Component {
         product: result.data,
         isLoading: false,
         currStyle: defaultStyle
-      })
-      this.props.setName(result.data.name);
+      });
+      console.log(result.data);
     })
     .catch(err => {
       console.log(err)
@@ -87,6 +87,7 @@ class ProductOverview extends React.Component {
           styles={this.state.product.styles}
           changeStyle={this.changeStyle}/>
         <OverviewAddtoCart
+          product={this.state.product}
           style_id={this.state.currStyle}
           skus={this.state.product.styles.find(style=> style.style_id === this.state.currStyle).skus}
           key={new Date().getTime()}/>

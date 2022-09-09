@@ -815,22 +815,31 @@ input {
   width: 100%;
   /* border: 3px solid;
   border-color: blue; */
-  background-color: grey;
+  background-color: transparent;
   overflow: hidden;
 }
 
 .Overview-gallery {
-  background-color: grey;
+  background-color: transparent;
+  height: 100%
 }
 .Overview-galleryMain {
   position:relative;
-}
+  height: 100%;
+  width: 100%;
 
+}
+.Overview-mainImgDiv {
+  height: 100%;
+  width: 100%;
+}
 .Overview-mainImg {
+  height: 100%;
+  top: 25%;
+  max-height: 800px;
   display:block;
   /* position: absolute; */
   width: 100%;
-  height: auto;
   object-fit: contain;
   overflow: hidden;
   cursor: -moz-zoom-in;

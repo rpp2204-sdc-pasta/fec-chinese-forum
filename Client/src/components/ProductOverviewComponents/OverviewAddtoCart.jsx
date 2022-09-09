@@ -1,5 +1,6 @@
 import React from 'react';
 import Select from 'react-select';
+import axios from 'axios';
 
 class OverviewAddtoCart extends React.Component {
 		constructor(props) {
@@ -12,8 +13,7 @@ class OverviewAddtoCart extends React.Component {
 			this.handleSizeSelect = this.handleSizeSelect.bind(this);
 			this.handleQuantitySelect = this.handleQuantitySelect.bind(this);
 			this.handleOpenSizeSelect = this.handleOpenSizeSelect.bind(this);
-			this.handleAddToCart = this.handleAddToCart.bind(this);
-			this.handleAddToOutfit = this.handleAddToOutfit.bind(this);
+			this.handleAdd = this.handleAdd.bind(this);
 		}
 		selectRef = React.createRef();
 
@@ -43,9 +43,35 @@ class OverviewAddtoCart extends React.Component {
 
 		}
 
-		handleAddToOutfit() {
-			console.log('add to outfit');
+
+		handleAdd() {
+
+			let img_url = this.props.product.styles[0].photos;
+      if (this.props.product.styles.find((style)=>style['default?']===true)) {
+        img_url = (this.props.product.styles.find((style)=>style['default?']===true).photos[0].thumbnail_url);
+      }
+			console.log('imgurl', img_url);
+
+			let options = {
+				method: 'post',
+				url: '/outfit',
+				data: {
+					id: this.props.product.id,
+					category: this.props.product.category,
+					name: this.props.product.name,
+					original_price: this.props.product.default_price,
+					sale_price: this.props.product.default_price,
+					img_url: img_url,
+					overallRating: this.props.product.starRating,
+					reviewCount: this.props.product.reviewCount
+				}
+			};
+			axios(options)
+				.catch(err => {
+					console.log(err);
+				});
 		}
+
 
 		render() {
 			let quantity = 0;
@@ -89,7 +115,7 @@ class OverviewAddtoCart extends React.Component {
 							onClick={this.handleAddToCart}>Add To Cart</button>
 						<button
 							className='Overview-addToOutfit'
-							onClick={this.handleAddToOutfit}>&#x2b50;</button>
+							onClick={this.handleAdd}>&#x2b50;</button>
 					</div>
 				</div>
 			);
