@@ -557,13 +557,15 @@ Reviews */
 
 .starinform{
   height: 3vw;
-  margin-top: 20px;
+  /* margin-top: 20px; */
   margin-bottom: 10px;
   margin-right: auto;
 }
 
 input[type='radio'] {
-  display : none;
+  /* display : none; */
+  opacity: 0;
+  margin: 0;
 }
 
 .star-rating_reviews {
@@ -599,11 +601,63 @@ input[type='radio'] {
   display:flex;
   flex-direction: row;
   justify-content: flex-start;
-  align-items: center;
+  align-items: baseline;
+  align-content: flex-start;
   gap: 20px;
   margin-bottom: 10px;
 }
 
+input[type='checkbox'].toggle {
+  opacity: 0;
+  position: absolute;
+  left: -9999px;
+  top: -9999px;
+
+}
+input[type="checkbox"].toggle+ label {
+  position: relative;
+  display: flex;
+  cursor: pointer;
+  align-items:center;
+}
+
+input[type="checkbox"].toggle:focus + label::before {
+  outline: 1px solid black;
+}
+
+input[type="checkbox"].toggle + label::before{
+  content : '';
+  width: 2em;
+  height: 1em;
+  background-color: hsl(0,80%,90%);
+  border-radius: 1em;
+  margin-right: .25em;
+  transition: background-color 200ms ease-in-out;
+}
+
+input[type="checkbox"].toggle + label::after{
+  position :absolute;
+  left:.1em;
+  content : '';
+  width: .9em;
+  height: .9em;
+  background-color: hsl(0,80%,60%);
+  border-radius: 1em;
+  transition: background-color 200ms ease-in-out, transform 200ms ease-in-out
+  /* margin-right: .25em; */
+}
+
+
+input[type="checkbox"].toggle:checked + label::after{
+
+  transform: translateX(100%);
+  background-color: hsl(100,70%, 60%);
+
+}
+
+input[type="checkbox"].toggle:checked + label::before{
+  background-color: hsl(100,70%,90%);
+}
 
 
 /* ================================ QnA */
