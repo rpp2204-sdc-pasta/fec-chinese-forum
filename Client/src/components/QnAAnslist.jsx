@@ -54,18 +54,24 @@ class QnAAnsList extends React.Component {
   }
 
   render = () => {
-    let Yes;
+    let Yes, Answerer;
     if(!this.state.votedYes){
       Yes = <button className = "buttonLink" onClick = {this.anshelpful}>Yes</button>
     } else {
       Yes = <a>Yes</a>
     }
 
+    if(this.props.ans.answerer_name === "Seller") {
+      Answerer = <b>{this.props.ans.answerer_name}</b>
+    } else {
+      Answerer = this.props.ans.answerer_name;
+    }
+
 
     return (
       <div className = "ans">
         <a className="lvl3">{this.props.ans.body}</a><br/>
-        <span className = "lvl4">by {this.props.ans.answerer_name}, {this.date}  |  Helpful? {Yes}</span>
+        <span className = "lvl4">by {Answerer}, {this.date}  |  Helpful? {Yes}</span>
         <a className = "lvl4"> &#40;{this.state.yesCount}&#41;  |  </a>
         {!this.state.reported && <button className = "buttonLink" onClick = {this.reportAns}>Report</button>}
         {this.state.reported && <a className = "lvl4">Reported</a>}<br/>
