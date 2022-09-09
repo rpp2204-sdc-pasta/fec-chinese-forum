@@ -37,7 +37,6 @@ let getOverview = (id) => {
         count += parseInt(rating[1]);
       });
       overviewData.starRating =  parseFloat(sum/count).toFixed(2);
-      console.log(overviewData.name);
       return overviewData;
     })
     .catch((err)=>{
@@ -52,4 +51,6 @@ let addToCart = (sku, count) => {
     headers: {Authorization: process.env.AUTH}
   };
 };
+
+module.exports.addToCart = addToCart;
 module.exports.getOverview = getOverview;
