@@ -30,7 +30,9 @@ class Reviews extends React.Component {
       fourStar: true,
       threeStar: true,
       twoStar: true,
-      oneStar: true
+      oneStar: true,
+      filter: '',
+      reRender: false
 
 
     }
@@ -43,61 +45,111 @@ class Reviews extends React.Component {
     this.clickedReport=this.clickedReport.bind(this)
     this.reportData=this.reportData.bind(this)
     this.filterReviews_Star=this.filterReviews_Star.bind(this)
+    this.filterState=this.filterState.bind(this)
+    this.reSet=this.reSet.bind(this)
   }
 
 
   componentDidMount(){
-    Promise.all([
-      this.getProductcount(null, 'relevant', this.props.id),
-      this.getProductcount(null, 'helpful', this.props.id),
-      this.getProductcount(null, 'newest', this.props.id),
-      this.getMeta(this.props.id),
-    ])
+      this.getProductcount('relevant', this.props.id)
+      this.getMeta(this.props.id)
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (this.props.id !== prevProps.id) {
-      Promise.all([
-        this.getProductcount(null, 'relevant', this.props.id),
-        this.getProductcount(null, 'helpful', this.props.id),
-        this.getProductcount(null, 'newest', this.props.id),
-        this.getMeta(this.props.id),
-      ])
+        this.getProductcount('relevant', this.props.id)
+        this.getMeta(this.props.id)
+    }
+    if(this.state.filter !== prevState.filter){
+      console.log(this.state.filter)
+      this.selectFilter(this.state.filter)
+      this.resetCount()
+    }
+    if(this.state.reRender !== prevState.reRender){
+      console.log(this.state.filter)
+      this.getProductcount(this.state.filter, this.props.id)
     }
   }
-  getProductcount(num=null,sortBy, product_id){
-    sortBy = sortBy
-    axios.post('/reviews',
-    {sort: sortBy,
-    productId: product_id
-    })
-    .then((response)=>{
-      if(num === null && sortBy === 'relevant'){
+
+  getProductcount(filter, product_id){
+    console.log(filter)
+    let relevant = axios.post('/reviews',
+                      {sort: 'relevant',
+                      productId: product_id
+                      }).catch((err)=>{
+                        console.log(err)
+                      })
+    let helpful = axios.post('/reviews',
+                  {sort: 'helpful',
+                  productId: product_id
+                  }).catch((err)=>{
+                    console.log(err)
+                  })
+    let newest = axios.post('/reviews',
+                  {sort: 'newest',
+                  productId: product_id
+                  }).catch((err)=>{
+                    console.log(err)
+                  })
+    Promise.all([relevant, helpful, newest])
+    .then((result)=>{
+      this.setState({
+        stored_relevant: result[0].data.reviews.results,
+        stored_helpful: result[1].data.reviews.results,
+        stored_newest: result[2].data.reviews.results,
+      })
+      if(filter === 'relevant'){
         this.setState({
-          stored_relevant: response.data.reviews.results,
-        });
-        return response
-      } else if(num === null && sortBy ==='helpful'){
+          length: result[0].data.reviews.results.length,
+          currentLoad: result[0].data.reviews.results,
+          product: result[0].data.reviews.results.slice(0,2),
+        })
+      } else if(filter === 'helpful'){
         this.setState({
-          stored_helpful: response.data.reviews.results,
-        });
-      } else if(num === null && sortBy ==='newest'){
+          length: result[1].data.reviews.results.length,
+          currentLoad: result[1].data.reviews.results,
+          product: result[1].data.reviews.results.slice(0,2),
+        })
+      } else if(filter === 'newest'){
         this.setState({
-          stored_newest: response.data.reviews.results,
-        });
+          length: result[2].data.reviews.results.length,
+          currentLoad: result[2].data.reviews.results,
+          product: result[2].data.reviews.results.slice(0,2),
+        })
       }
     })
-    .then((response)=>{
-      if(sortBy === 'relevant')
-      this.setState({
-        length: response.data.reviews.results.length,
-        currentLoad: response.data.reviews.results,
-        product: response.data.reviews.results.slice(0,2),
-      })
-    })
-    .catch((err)=>{
-      console.log(err)
-    })
+    // axios.post('/reviews',
+    // {sort: sortBy,
+    // productId: product_id
+    // })
+    // .then((response)=>{
+    //   if(sortBy === 'relevant'){
+    //     this.setState({
+    //       stored_relevant: response.data.reviews.results,
+    //     });
+    //     return response
+    //   } else if(sortBy ==='helpful'){
+    //     this.setState({
+    //       stored_helpful: response.data.reviews.results,
+    //     });
+    //   } else if(sortBy ==='newest'){
+    //     this.setState({
+    //       stored_newest: response.data.reviews.results,
+    //     });
+    //   }
+    // })
+    // .then((response)=>{
+    //   if(filter === 'relevant'){
+    //     this.setState({
+          // length: response.data.reviews.results.length,
+          // currentLoad: response.data.reviews.results,
+          // product: response.data.reviews.results.slice(0,2),
+    //     })
+    //   }
+    // })
+    // .catch((err)=>{
+    //   console.log(err)
+    // })
   }
 
   moreReviews(num , review_count=2){
@@ -214,7 +266,18 @@ class Reviews extends React.Component {
         oneStar: !prevState.oneStar
       }))
     }
+  }
 
+  filterState(value){
+    this.setState({
+      filter: value
+    })
+  }
+
+  reSet(){
+    this.setState(prevState=>({
+      reRender: !prevState.reRender
+    }))
   }
 
 
@@ -267,7 +330,7 @@ class Reviews extends React.Component {
           </div>
         </div>
         <div className='right' style={style_review_box} >
-          <Sorted length={this.state.length} selectFilter={this.selectFilter} product_id={this.props.id} resetCount={this.resetCount}/>
+          <Sorted length={this.state.length} product_id={this.props.id} filterState={this.filterState}/>
           <div style={style_body_reviews}>
             <div style={scolled}>
               {this.state.product.map((item=>
@@ -279,7 +342,7 @@ class Reviews extends React.Component {
             </div>
           <div>
             <Morebutton length={this.state.length} count={this.state.count} handleMore={this.handleMore}/>
-            <Addreview characteristics={this.state.characteristics} id={this.props.id}/>
+            <Addreview characteristics={this.state.characteristics} id={this.props.id} reSet={this.reSet} />
           </div>
         </div>
       </div>

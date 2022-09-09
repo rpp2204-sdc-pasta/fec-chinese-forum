@@ -4,6 +4,7 @@ import axios from 'axios';
 const Uploadimage = (props) => {
   const [selectedImages, setSelectedImages] = useState([]);
   const [imgUrl, setimgUrl] =useState([]);
+  const [progress, setProgress]= useState(0);
 
   const imagestyle = {
     objectFit: 'cover',
@@ -25,28 +26,33 @@ const Uploadimage = (props) => {
   }
 
 
-  const imageProgress =() =>{
-
-
-  }
-
   async function handleUpload(e){
     e.preventDefault();
     let results = [];
     let imageUrl = [];
-    const options = {onUploadProgress: (progressEvent) =>{
-      const {loaded, total} = progressEvent;
-      let percent = Math.floor(loaded * 100 / total)
-      console.log(`${loadded}kb of ${total}kb| ${percent}% `)
-      }
-    }
+    // let loaded, total, percent
+    // let options = onUploadProgress: (progressEvent) =>{
+    //   const {loaded, total} = progressEvent;
+    //   let percent = Math.floor(loaded * 100 / total)
+    //   console.log(`${loadded}kb of ${total}kb| ${percent}% `)
+    //   }
+    //
     const fd = new FormData()
     selectedImages.forEach(imagefile=>{
       fd.append('image', imagefile);
-      let response = axios.post('https://api.imgbb.com/1/upload?key=0c6337f450a2645ba037e6c8628add6e',
+      let response = axios.post(
+        'https://api.imgbb.com/1/upload?key=0c6337f450a2645ba037e6c8628add6e',
         fd,
-        {headers: { 'Content-Type': 'multipart/form-data'}},
-        options)
+        {headers: { 'Content-Type': 'multipart/form-data'},
+          onUploadProgress:
+          (progressEvent) =>{
+            let {loaded, total} = progressEvent;
+            let percent = Math.floor(loaded * 100 / total)
+            console.log(`${loaded}kb of ${total}kb| ${percent}% `)
+            setProgress(percent)
+          }
+        }
+         )
       .catch((err)=>{
         console.log(err)
       })
@@ -80,7 +86,8 @@ const Uploadimage = (props) => {
           onChange={handleMultiimage}
           /> : null
         }
-        <button type='submit' style={{backgroundColor: 'red', height:'35px'}} onClick={handleUpload}>Upload</button>
+        <button type='submit' style={{backgroundColor: 'red', height:'35px', marginRight:'5%'}} onClick={handleUpload}>Upload</button>
+        <div>{progress}%</div>
       </div>
     </div>
   );

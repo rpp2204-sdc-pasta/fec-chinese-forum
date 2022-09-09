@@ -7,8 +7,7 @@ class Sorted extends React.Component{
   }
 
   handleSort(e){
-    this.props.selectFilter(e.target.value)
-    this.props.resetCount()
+    this.props.filterState(e.target.value)
   }
 
   render() {
