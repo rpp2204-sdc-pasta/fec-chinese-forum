@@ -18,11 +18,11 @@ class OverviewAddtoCart extends React.Component {
 			this.handleAdd = this.handleAdd.bind(this);
 		}
 		selectSizeRef = React.createRef();
-		selectQuantityRef = React.createRef();
 
 		handleSizeSelect(event) {
 			this.setState({
 				sku: event.value,
+				quantity: 0,
 				displayAddToCart: false
 			})
 		}
@@ -107,7 +107,6 @@ class OverviewAddtoCart extends React.Component {
 			if (this.state.sku !== 0) {
 				quantity = (this.props.skus[this.state.sku].quantity);
 			}
-			// console.log(quantity);
 			let quantitySelect = []
 			for(var i = 1; (i < quantity+1) && (i <= 15); i++) {
 				quantitySelect.push({value:i, label:i});
@@ -135,8 +134,7 @@ class OverviewAddtoCart extends React.Component {
 						<Select
 							className='Overview-quantitySelect'
 							options={quantitySelect}
-							onChange={this.handleQuantitySelect}
-							ref={this.selectQuantityRef}/>
+							onChange={this.handleQuantitySelect}/>
 					</div>
 					<div>
 						{this.state.displayAddToCart
