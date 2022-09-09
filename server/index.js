@@ -226,7 +226,6 @@ app.post('/reviews', (req,res)=>{
       })
     })
     .catch((err)=>{
-      // console.log(err)
       res.status(500).send(err);
     })
 })
@@ -263,25 +262,13 @@ app.post('/submit', (req, res)=>{
   console.log(req.body)
   reviews.postReview(req.body)
   .then((response)=>{
-    // console.log(response, 'submit response  line 265555555555')
-    res.status(200)
+    res.status(200).send(true)
   })
   .catch((err)=>{
-    console.log(err,   'submit err server index  line 269999999')
+    res.status(500).send(false)
   })
 
 })
-// app.post('/image', upload.array('image'), (req, res)=>{
-//   reviews.getImage(req.file)
-//     .then((response)=>{
-//       console.log(response)
-//       res.status(200).send(response)
-//     })
-//     .catch((err)=>{
-//       res.status(500).send(err)
-//     })
-
-// })
 
 //=================================================
 app.get('/*', (req, res) => {
