@@ -31,7 +31,7 @@ let App = (props) => {
       <RelatedWithTracker id={id} handleClick={setID} />
       <QnAWithTracker id={id} prodName={prodName}/>
       <div ref={reviewsRef}>
-      <ReviewsWithTracker  id={id} />
+        <ReviewsWithTracker  id={id} />
       </div>
     </>
   );
