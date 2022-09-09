@@ -7,6 +7,8 @@ function QnASearch (props) {
     let question = e.target.value;
     if(question.length >= 3) {
       props.search(question);
+    } else {
+      props.cancelSearch();
     }
   };
 

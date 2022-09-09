@@ -92,7 +92,7 @@ class QnA extends React.Component {
           loader = <button className = "buttonLink" id = "loadMore" onClick = {this.loadMore}> + MORE QUESTIONS </button>
         }
         return ( <div className = "QnA">
-            <h3 className = ""> QUESTIONS &#38; ANSWERS </h3>
+            <h3> QUESTIONS &#38; ANSWERS </h3>
             {(this.state.qna.length === 0 && !this.state.qsModalshow) && <button onClick = {this.showQSModal}> ADD A QUESTION + </button>}
             {(this.state.qna.length > 0 && !this.state.qsModalshow) && <QnASearch search = {this.Search.bind(this)} cancelSearch = {this.cancelSearch.bind(this)}/>}
             <div id = "QSList">

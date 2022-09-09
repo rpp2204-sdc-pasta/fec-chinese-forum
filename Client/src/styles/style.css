@@ -623,8 +623,10 @@ input[type='radio'] {
 
 .QnA {
   font-family: Arial, Helvetica, sans-serif;
-  margin-left: 30%;
   position: relative;
+  justify-content: center;
+  margin: auto;
+  display: initial;
 }
 
 .QS, .QSOpts {
@@ -645,6 +647,7 @@ input[type='radio'] {
   width: 350px;
   margin: 10px;
   border-bottom: gray solid;
+  justify-content: center;
 }
 
 .ansModal {
