@@ -57,6 +57,7 @@ class ProductOverview extends React.Component {
         isLoading: false,
         currStyle: defaultStyle
       })
+      this.props.setName(result.data.name);
     })
     .catch(err => {
       console.log(err)
