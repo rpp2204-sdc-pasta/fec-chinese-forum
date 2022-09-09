@@ -37,10 +37,6 @@ let getOverview = (id) => {
         count += parseInt(rating[1]);
       });
       overviewData.starRating =  parseFloat(sum/count).toFixed(2);
-<<<<<<< HEAD
-      overviewData.reviewCount = count;
-=======
->>>>>>> main
       return overviewData;
     })
     .catch((err)=>{
@@ -68,8 +64,4 @@ let addToCart = (sku, count) => {
 };
 
 module.exports.addToCart = addToCart;
-<<<<<<< HEAD
 module.exports.getOverview = getOverview;
-=======
-module.exports.getOverview = getOverview;
->>>>>>> main
