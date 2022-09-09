@@ -43,7 +43,7 @@ class ProductOverview extends React.Component {
   fetchData() {
     var options = {
       method:'get',
-      url:  `http://localhost:1234/overview/${this.props.id}`
+      url:  `/overview/${this.props.id}`
     }
     axios(options)
     .then((result)=>{
@@ -57,7 +57,7 @@ class ProductOverview extends React.Component {
         isLoading: false,
         currStyle: defaultStyle
       })
-      this.props.setName(result.data.name);
+      this.props.getName(result.data.name);
     })
     .catch(err => {
       console.log(err)

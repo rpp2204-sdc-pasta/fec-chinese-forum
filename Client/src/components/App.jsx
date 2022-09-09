@@ -12,12 +12,13 @@ let App = (props) => {
   const product_id = queryParams.get("product_id") || '71700';
   // console.log(product_id);
   let [id, setID] = useState(product_id);
-  let [prodName, setName] = useState('');
+  let [prodName, setName] = useState("");
 
   const reviewsRef = useRef();
   const handleScrollToReview = () => {
     reviewsRef.current.scrollIntoView({behavior: 'smooth'});
   };
+
   return (
     <>
       <div>
