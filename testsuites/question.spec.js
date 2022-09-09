@@ -1,4 +1,5 @@
 import {render, fireEvent, screen} from '@testing-library/react';
+import ReactDOM from 'react-dom';
 import QnA from '../client/src/components/QnA';
 import QnASearch from '../client/src/components/QnASearch';
 import QnAAnslist from '../client/src/components/QnAAnslist';
@@ -17,15 +18,13 @@ describe("QnA", () => {
   });
 
   it('should have a submit button', async () => {
-    render(<QSModal/>);
-    const submit = await screen.getByRole('button', {
-      name: /submit/i
-    });
+    render(<QSModal show = {mockedSetId} productId = {"71700"}/>);
+    const submit = await screen.findByText("Submit");
     expect(submit).toBeInTheDocument();
   });
 
   it('should have a search bar', async () => {
-    render(<QnASearch></QnASearch>);
+    render(<QnASearch search = {mockedSetId} cancelSearch = {mockedSetId}></QnASearch>);
     const close = await screen.getByRole('button', {
       class: /searchClose/i
     });
