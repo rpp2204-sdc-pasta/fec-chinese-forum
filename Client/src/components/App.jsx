@@ -12,6 +12,7 @@ let App = (props) => {
   const product_id = queryParams.get("product_id") || '71700';
   // console.log(product_id);
   let [id, setID] = useState(product_id);
+  let [prodName, setName] = useState('');
 
   const reviewsRef = useRef();
   const handleScrollToReview = () => {
@@ -26,9 +27,9 @@ let App = (props) => {
       <RelatedProducts id={id} handleClick={setID} />
       <QnA id={id} />
       <Reviews id={id} /> */}
-      <OverviewWithTracker id={id} handleScrollToReview={handleScrollToReview}/>
+      <OverviewWithTracker id={id} handleScrollToReview={handleScrollToReview} getName={setName}/>
       <RelatedWithTracker id={id} handleClick={setID} />
-      <QnAWithTracker id={id} />
+      <QnAWithTracker id={id} prodName={prodName}/>
       <div ref={reviewsRef}>
         <ReviewsWithTracker  id={id} />
       </div>
