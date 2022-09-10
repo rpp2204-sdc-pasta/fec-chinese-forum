@@ -13,6 +13,7 @@ let App = (props) => {
   // console.log(product_id);
   let [id, setID] = useState(product_id);
   let [prodName, setName] = useState('');
+  let [renderOutfit, setRenderOutfit] = useState(false);
 
   const reviewsRef = useRef();
   const handleScrollToReview = () => {
@@ -27,8 +28,8 @@ let App = (props) => {
       <RelatedProducts id={id} handleClick={setID} />
       <QnA id={id} />
       <Reviews id={id} /> */}
-      <OverviewWithTracker id={id} handleScrollToReview={handleScrollToReview} getName={setName}/>
-      <RelatedWithTracker id={id} handleClick={setID} />
+      <OverviewWithTracker id={id} handleScrollToReview={handleScrollToReview} getName={setName} setRenderOutfit={setRenderOutfit} />
+      <RelatedWithTracker id={id} handleClick={setID} renderOutfit={renderOutfit} setRenderOutfit={setRenderOutfit} />
       <QnAWithTracker id={id} prodName={prodName}/>
       <div ref={reviewsRef}>
         <ReviewsWithTracker  id={id} />

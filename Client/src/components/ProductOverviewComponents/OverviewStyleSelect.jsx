@@ -26,7 +26,6 @@ class OverviewStyleSelect extends React.Component {
           );
 
           let currStyleIndex = tmpPropStyles.indexOf(tmpPropStyles.find(style => style.name===this.props.name));
-          console.log(index);
           tmpPropStyles.splice(currStyleIndex,1);
           for (var i = 0; i < 3; i++) {
             if( index < this.props.styles.length) {
