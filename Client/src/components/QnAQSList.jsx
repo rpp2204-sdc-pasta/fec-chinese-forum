@@ -21,7 +21,7 @@ class QnAList extends React.Component {
   }
 
   qshelpful = () => {
-    console.log(this.state.qshelpfulness);
+    // console.log(this.state.qshelpfulness);
     axios({
       method:'put',
       url: "/qshelpful",
@@ -29,7 +29,7 @@ class QnAList extends React.Component {
         questionId: this.qsid
       }
     }).then((result)=>{
-      console.log(result);
+      // console.log(result);
       this.setState({
         qshelpfulness: this.state.qshelpfulness + 1,
         yes: true
@@ -40,7 +40,7 @@ class QnAList extends React.Component {
   }
 
   reportQS = () => {
-    console.log(this.state.reported);
+    // console.log(this.state.reported);
     axios({
       method:'put',
       url: "/reportQs",
@@ -48,7 +48,7 @@ class QnAList extends React.Component {
         questionId: this.qsid
       }
     }).then((result)=>{
-      console.log(result);
+      // console.log(result);
       this.setState({
         reported: true
       })
@@ -84,7 +84,7 @@ class QnAList extends React.Component {
       return;
     }
     Object.keys(this.state.ans).forEach(val => {
-      console.log(this.state.ans[val].answerer_name);
+      // console.log(this.state.ans[val].answerer_name);
       if(this.state.ans[val].answerer_name === this.inputname) {
         checkAnswerer = true;
       }
@@ -105,7 +105,7 @@ class QnAList extends React.Component {
         }
       }
     }).then((result)=>{
-      console.log(result);
+      // console.log(result);
       this.props.refresh();
       this.showModal();
     }).catch(err => {

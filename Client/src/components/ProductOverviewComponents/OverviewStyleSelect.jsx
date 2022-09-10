@@ -19,10 +19,14 @@ class OverviewStyleSelect extends React.Component {
     for (var groups = 0; groups < Math.ceil(this.props.styles.length/4); groups++) {
       var group = [];
       if(groups===0) {
-          group.push(<OverviewStyle
-            count={index}
-            style={tmpPropStyles.find(style => style.name===this.props.name)}
-            onClick={this.onClickStyleSelect}/>
+          group.push(
+          <div className='Overview-selectedStyleThumbnail'>
+            <OverviewStyle
+              count={index}
+              style={tmpPropStyles.find(style => style.name===this.props.name)}
+              onClick={this.onClickStyleSelect}
+              select={true}/>
+          </div>
           );
 
           let currStyleIndex = tmpPropStyles.indexOf(tmpPropStyles.find(style => style.name===this.props.name));

@@ -13,21 +13,17 @@ let withTracker = (WrappedComponent, widgetName) => {
     }
 
     clickTracker (e) {
-      // console.log(e.target);
-      // console.log(widgetName);
-      // console.log(Date.now());
       let options = {
         method: 'POST',
         url: '/interactions',
         data: {
-          element: `${e.target}`,
+          element: '' + e.target.innerHTML,
           widget: widgetName,
           time: '' + Date.now()
         }
       };
       axios(options)
         // .then((response) => {
-        //   console.log('Click logged');
         //   console.log(response.data);
         // })
         .catch(err => {

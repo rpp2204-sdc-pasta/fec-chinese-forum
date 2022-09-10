@@ -34,11 +34,11 @@ class OverviewGalleryThumbnail extends React.Component {
       });
 
     let scrollUp = null;
-    if (parseInt(this.props.range[0])!==0) {
+    if (parseInt(this.props.range[0])>0) {
       scrollUp = <a className='up' onClick={this.props.scrollUp}>&#708;</a>;
     }
     let scrollDown = null;
-    if (parseInt(this.props.range[1])!==(this.props.thumbnails.length)) {
+    if (parseInt(this.props.range[1])<(this.props.thumbnails.length)) {
       scrollDown = <a className='down' onClick={this.props.scrollDown}>&#x02c5;</a>;
     }
 

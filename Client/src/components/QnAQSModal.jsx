@@ -19,7 +19,7 @@ function QSModal (props) {
         product_id: props.productId
       }
     }).then((result)=>{
-      console.log(result);
+      // console.log(result);
       props.show();
     }).catch(err => {
       console.log(err);
