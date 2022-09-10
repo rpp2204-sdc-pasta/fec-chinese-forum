@@ -281,7 +281,6 @@ app.get('/reviews/meta',(req, res)=>{
 })
 
 app.post('/submit', (req, res)=>{
-  // console.log(req.body)
   reviews.postReview(req.body)
   .then((response)=>{
     res.status(200).send(true)
