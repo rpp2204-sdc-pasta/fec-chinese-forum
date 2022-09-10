@@ -104,7 +104,7 @@ class QnA extends React.Component {
 
     render() {
         let loader, collaps;
-        if(this.state.numQS >= this.state.qna.length && this.state.qna.length != 0) {
+        if(this.state.numQS > 2 && this.state.qna.length != 0) {
           collaps = <button className = "buttonLink" id = "collapse" onClick = {this.collapse}> - COLLAPSE</button>
         }
         if(this.state.qna.length > 2) {
@@ -124,7 +124,8 @@ class QnA extends React.Component {
               )}
             </div>
             <div>
-              {collaps}{loader}
+              {collaps}
+              {loader}
               {this.state.qsModalshow &&<QSModal  show = {this.showQSModal.bind(this)} productId = {this.props.id} prodName = {this.props.prodName}/>}{(this.state.qna.length > 0 && !this.state.qsModalshow) && <button  className = "buttonLink addQS" onClick = {this.showQSModal}> ADD A QUESTION + </button>}
             </div>
             </div>)}
