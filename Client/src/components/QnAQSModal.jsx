@@ -30,11 +30,11 @@ function QSModal (props) {
     return (
     <div className = "qsModal">
       <form className = "lvl3 modalForm">
-        <h4>Ask Your Question</h4>
-        <h6>About the INSERT PRODUCT NAME</h6>
+        <div className="lvl2">Ask Your Question</div>
+        <div className="lvl4">About the {props.prodName}</div><br/>
         <input placeholder="Name" onChange={(e) => {name = e.target.value}} placeholder="Name" required></input><br/>
-        <input type="email" placeholder="Email" onChange={(e) => {email = e.target.value}} placeholder="Email" required></input><br/>
-        <input placeholder="Enter Question" onChange={(e) => {question = e.target.value}} size="30" required></input><br/>
+        <input type="email" placeholder="Alex@email.com" onChange={(e) => {email = e.target.value}} placeholder="Email" required></input><br/>
+        <textarea placeholder="Enter Question" type = "textarea" rows={8} cols={35} onChange={(e) => {question = e.target.value}} required></textarea><br/>
         <button type="submit" value="Submit" onClick = {submitQS}>Submit</button>
         <button onClick={props.show}>X</button>
       </form>

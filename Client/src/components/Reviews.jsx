@@ -118,38 +118,6 @@ class Reviews extends React.Component {
         })
       }
     })
-    // axios.post('/reviews',
-    // {sort: sortBy,
-    // productId: product_id
-    // })
-    // .then((response)=>{
-    //   if(sortBy === 'relevant'){
-    //     this.setState({
-    //       stored_relevant: response.data.reviews.results,
-    //     });
-    //     return response
-    //   } else if(sortBy ==='helpful'){
-    //     this.setState({
-    //       stored_helpful: response.data.reviews.results,
-    //     });
-    //   } else if(sortBy ==='newest'){
-    //     this.setState({
-    //       stored_newest: response.data.reviews.results,
-    //     });
-    //   }
-    // })
-    // .then((response)=>{
-    //   if(filter === 'relevant'){
-    //     this.setState({
-          // length: response.data.reviews.results.length,
-          // currentLoad: response.data.reviews.results,
-          // product: response.data.reviews.results.slice(0,2),
-    //     })
-    //   }
-    // })
-    // .catch((err)=>{
-    //   console.log(err)
-    // })
   }
 
   moreReviews(num , review_count=2){
@@ -286,7 +254,7 @@ class Reviews extends React.Component {
     const style_1 = {
       display:'flex',
       justifyContent: 'center',
-      width: '100%',
+      width: '80%',
       position:'relative',
       overflow: 'hidden'
 
