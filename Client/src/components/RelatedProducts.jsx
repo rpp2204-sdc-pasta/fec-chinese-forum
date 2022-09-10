@@ -47,6 +47,10 @@ class RelatedProducts extends React.Component {
       this.getRelated();
       this.getCurrent();
     }
+    if (this.props.renderOutfit !== prevProps.renderOutfit) {
+      this.getOutfit();
+      this.props.setRenderOutfit(false);
+    }
     if (this.state.outfitIndex !== prevState.outfitIndex) {
       this.checkOutfit();
     }
@@ -158,7 +162,7 @@ class RelatedProducts extends React.Component {
       data: {
         id: this.state.current.id,
         category: this.state.current.category,
-        name: this.state.current.category,
+        name: this.state.current.name,
         original_price: this.state.current.original_price,
         sale_price: this.state.current.sale_price,
         img_url: this.state.current.photos[0].thumbnail_url,

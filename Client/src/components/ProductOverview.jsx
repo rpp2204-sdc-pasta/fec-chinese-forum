@@ -56,7 +56,7 @@ class ProductOverview extends React.Component {
         product: result.data,
         isLoading: false,
         currStyle: defaultStyle
-      })
+      });
       this.props.getName(result.data.name);
     })
     .catch(err => {
@@ -87,9 +87,11 @@ class ProductOverview extends React.Component {
           styles={this.state.product.styles}
           changeStyle={this.changeStyle}/>
         <OverviewAddtoCart
+          product={this.state.product}
           style_id={this.state.currStyle}
           skus={this.state.product.styles.find(style=> style.style_id === this.state.currStyle).skus}
-          key={new Date().getTime()}/>
+          key={new Date().getTime()}
+          setRenderOutfit={this.props.setRenderOutfit}/>
       </div>;
 
     let isExpanded = this.state.expanded;
