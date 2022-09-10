@@ -701,14 +701,14 @@ input[type="checkbox"].toggle:checked + label::before{
 
 .qsModal {
   border: 1px solid black;
-  width: 350px;
+  width: 300px;
   margin: 10px;
   border-bottom: gray solid;
   justify-content: center;
 }
 
 .ansModal {
-  width: 50%;
+  width: 70%;
   margin: 10px;
 }
 
@@ -765,9 +765,10 @@ input[type="checkbox"].toggle:checked + label::before{
   background-color: white;
 }
 
-input {
+input, textarea {
   margin-bottom: 5px;
   padding: 5px;
+  font-family: Arial
 }
 
 .QSboxbotbut{

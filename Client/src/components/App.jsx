@@ -14,6 +14,7 @@ let App = (props) => {
   const handleScrollToReview = () => {
     reviewsRef.current.scrollIntoView({behavior: 'smooth'});
   };
+
   return (
     <>
       <h2>

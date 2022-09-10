@@ -64,13 +64,13 @@ class QnA extends React.Component {
         }
       });
       if(searchResult.length > 0){
-        console.log(searchResult);
+        //console.log(searchResult);
         this.setState({
           searchResult: searchResult,
           searching: true
         })
       }
-      console.log(this.state);
+      //console.log(this.state);
     }
 
     collapse() {
@@ -93,7 +93,9 @@ class QnA extends React.Component {
         } else if(this.state.qna.length > 2) {
           loader = <button className = "buttonLink" id = "loadMore" onClick = {this.loadMore}> + MORE QUESTIONS </button>
         }
-        return ( <div className = "QnA">
+
+        return (
+            <div className = "QnA">
             <h3> QUESTIONS &#38; ANSWERS </h3>
             {(this.state.qna.length === 0 && !this.state.qsModalshow) && <button onClick = {this.showQSModal}> ADD A QUESTION + </button>}
             {(this.state.qna.length > 0 && !this.state.qsModalshow) && <QnASearch search = {this.Search.bind(this)} cancelSearch = {this.cancelSearch.bind(this)}/>}
@@ -106,7 +108,7 @@ class QnA extends React.Component {
             </div>
             <div>
               {loader}
-              {this.state.qsModalshow &&<QSModal  show = {this.showQSModal.bind(this)} productId = {this.props.id}/>}{(this.state.qna.length > 0 && !this.state.qsModalshow) && <button  className = "buttonLink addQS" onClick = {this.showQSModal}> ADD A QUESTION + </button>}
+              {this.state.qsModalshow &&<QSModal  show = {this.showQSModal.bind(this)} productId = {this.props.id} prodName = {this.props.prodName}/>}{(this.state.qna.length > 0 && !this.state.qsModalshow) && <button  className = "buttonLink addQS" onClick = {this.showQSModal}> ADD A QUESTION + </button>}
             </div>
             </div>)}
 }
