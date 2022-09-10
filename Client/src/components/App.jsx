@@ -21,9 +21,9 @@ let App = (props) => {
   };
   return (
     <>
-      <div>
-        some title and nev bar maybe?
-      </div>
+      <h2>
+        Chiness Forum
+      </h2>
       {/* <ProductOverview id={id}/>
       <RelatedProducts id={id} handleClick={setID} />
       <QnA id={id} />
