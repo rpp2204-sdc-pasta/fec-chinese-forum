@@ -24,19 +24,9 @@ class QnA extends React.Component {
       this.getData = this.getData.bind(this)
     }
 
-    componentDidUpdate(prevProps) {
-      if (this.props.id !== prevProps.id) {
-        this.getData();
-        this.setState({
-          qsModalshow: false,
-          searching: false,
-          searchResult: [],
-          numQS: 2
-        })
-      }
-    }
-
-    getData() {
+    componentDidMount() {
+      //API call to get questions and answers.
+      //console.log(this.props.id)
       var options = {
         method:'get',
         url:  "/qs/" + this.props.id
@@ -45,11 +35,12 @@ class QnA extends React.Component {
         this.setState({
           qna: result.data
         })
-        console.log(result.data);
+        //console.log(result.data);
       }).catch(err => {
         console.log(err)
       })
     }
+
 
     loadMore() {
       this.setState({
