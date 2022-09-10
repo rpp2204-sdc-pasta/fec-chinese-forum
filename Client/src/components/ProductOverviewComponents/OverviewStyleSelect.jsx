@@ -15,8 +15,9 @@ class OverviewStyleSelect extends React.Component {
     var index = 0;
     var styles = [];
     var tmpPropStyles = this.props.styles.slice();
-
+    console.log('props.styles', this.props.styles);
     for (var groups = 0; groups < Math.ceil(this.props.styles.length / 4); groups++) {
+      console.log('total groups: ',Math.ceil(this.props.styles.length / 4))
       var group = [];
       if (groups === 0) {
         group.push(
@@ -32,7 +33,7 @@ class OverviewStyleSelect extends React.Component {
         let currStyleIndex = tmpPropStyles.indexOf(tmpPropStyles.find(style => style.name === this.props.name));
         tmpPropStyles.splice(currStyleIndex, 1);
         for (var i = 0; i < 3; i++) {
-          if (index < this.props.styles.length) {
+          if (index < this.props.styles.length-1) {
             group.push(<OverviewStyle
               count={index} style={tmpPropStyles[index]}
               onClick={this.onClickStyleSelect} />);
@@ -40,6 +41,7 @@ class OverviewStyleSelect extends React.Component {
           }
         }
       } else {
+        console.log('group: ', groups);
         for (var i = 0; i < 4; i++) {
           if (index < tmpPropStyles.length) {
             group.push(<OverviewStyle
