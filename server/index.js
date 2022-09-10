@@ -6,7 +6,7 @@ const app = express();
 const reviews =require('./reviews.js')
 const qna =require('./qna.js')
 const port = process.env.PORT || 3000;
-const { getOverview, addToCart  } = require('./overview.js');
+const { getOverview } = require('./overview.js');
 const { getRelated, getCurrent } = require('./related');
 const { Outfit } = require('../db/index.js');
 
@@ -21,17 +21,6 @@ app.use(express.static(path.join(__dirname, '../Client/dist')));
 
 app.get('/overview/:id', (req, res) => {
   getOverview(req.params.id)
-    .then(result => {
-      res.status(200).send(result);
-    })
-    .catch(err => {
-      console.log(err);
-      res.status(500).send("some err happened");
-    });
-});
-
-app.post('/overview/:id', (req, res) => {
-  addToCart(req.params.id)
     .then(result => {
       res.status(200).send(result);
     })
@@ -130,7 +119,7 @@ app.get('/qs/:id', (req,res)=>{
     //console.log(response.data.results);
     res.send(response.data.results);
   }).catch((err) => {
-    //console.log(err)
+    res.status(400).send(err);
   })
 })
 
@@ -139,7 +128,7 @@ app.get('/ans', (req,res)=>{
     console.log(response.data);
     res.send(response.data);
   }).catch((err) => {
-    console.log(err)
+    res.status(400).send(err);
   })
 })
 
@@ -156,7 +145,7 @@ app.post('/qs', (req,res)=>{
     //console.log(response.data);
     res.send(response.data);
   }).catch((err) => {
-    console.log(err)
+    res.status(500).send(err);
   })
 })
 
@@ -173,7 +162,7 @@ app.post('/ans', (req,res)=>{
     //console.log(response.data);
     res.send(response.data);
   }).catch((err) => {
-    console.log(err)
+    res.status(500).send(err);
   })
 })
 
@@ -183,7 +172,7 @@ app.put('/qshelpful', (req,res)=>{
     //console.log(response);
     res.sendStatus(200);
   }).catch((err) => {
-    console.log(err)
+    res.status(500).send(err);
   })
 })
 
@@ -193,7 +182,7 @@ app.put('/anshelpful', (req,res)=>{
     //console.log(response);
     res.sendStatus(200);
   }).catch((err) => {
-    console.log(err)
+    res.status(500).send(err);
   })
 })
 
@@ -203,7 +192,7 @@ app.put('/reportQs', (req,res)=>{
     //console.log(response);
     res.sendStatus(200);
   }).catch((err) => {
-    console.log(err)
+    res.status(500).send(err);
   })
 })
 
@@ -213,7 +202,7 @@ app.put('/reportAns', (req,res)=>{
     console.log(response);
     res.sendStatus(200);
   }).catch((err) => {
-    console.log(err)
+    res.status(500).send(err);
   })
 })
 // getQuestions,
@@ -237,6 +226,7 @@ app.post('/reviews', (req,res)=>{
       })
     })
     .catch((err)=>{
+      // console.log(err)
       res.status(500).send(err);
     })
 })
@@ -273,13 +263,25 @@ app.post('/submit', (req, res)=>{
   console.log(req.body)
   reviews.postReview(req.body)
   .then((response)=>{
-    res.status(200).send(true)
+    // console.log(response, 'submit response  line 265555555555')
+    res.status(200)
   })
   .catch((err)=>{
-    res.status(500).send(false)
+    console.log(err,   'submit err server index  line 269999999')
   })
 
 })
+// app.post('/image', upload.array('image'), (req, res)=>{
+//   reviews.getImage(req.file)
+//     .then((response)=>{
+//       console.log(response)
+//       res.status(200).send(response)
+//     })
+//     .catch((err)=>{
+//       res.status(500).send(err)
+//     })
+
+// })
 
 //=================================================
 app.get('/*', (req, res) => {
