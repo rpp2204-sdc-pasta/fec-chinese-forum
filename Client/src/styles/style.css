@@ -2,6 +2,11 @@
   box-sizing: border-box;
 }
 
+h2 {
+  font-family:Arial, Helvetica, sans-serif;
+  font-size: 3vw;
+}
+
 /* ================================
 Related Product */
 
@@ -11,17 +16,17 @@ Related Product */
   overflow: hidden;
   display: flex;
   justify-content: center;
-  max-width: 80%;
+  max-width: 70%;
   margin: auto;
 }
 
 .section-title {
   position: relative;
   top: 0;
-  padding: 0 8.4%;
+  padding: 0 7vw;
   font-size: 1.2vw;
-  margin: 2vw auto;
-  width: 80%;
+  margin: 1vw auto;
+  width: 70%;
   justify-content: center;
   text-transform: uppercase;
 }
@@ -91,7 +96,6 @@ Related Product */
   position: absolute;
   top: 3%;
   right: 5%;
-  padding: .25vw;
   width: 14%;
   height: 10%;
   background: none;
@@ -100,7 +104,7 @@ Related Product */
   opacity: 0;
   border: none;
   outline: none;
-  font-size: 2vw;
+  font-size: 1.5vw;
   color: white;
 }
 
@@ -258,13 +262,13 @@ Related Product */
 }
 
 .add-outfit-sign {
-  font-size: 12vw;
+  font-size: 10vw;
   font-weight: bold;
   text-align: center;
 }
 
 .add-outfit-word {
-  font-size: 2vw;
+  font-size: 1vw;
   text-align: center;
   margin: 2%;
 }
@@ -815,7 +819,7 @@ input {
   width: 100%;
   /* border: 3px solid;
   border-color: blue; */
-  background-color: transparent;
+  background-color: grey;
   overflow: hidden;
 }
 
@@ -925,16 +929,26 @@ a.down{
   min-width: 30%;
   max-width: 30%;
   height: auto;
-  border: 3px solid #73AD21;
-  border-color: red;
 }
 
 .Overview-star-rating {
   height: 50%;
-  border: solid blue
 }
 
-.Overview-styleThumbnail {
+.selectedCheckmark {
+  position: absolute;
+  left: 60px;
+  top: -12px;
+  font-size: 45px;
+}
+
+.Overview-styleGroupOfFour {
+  position:relative;
+  display: flex;
+  flex-wrap: wrap;
+}
+.Overview-styleThumbnailImg {
+  border-radius: 100%;
   height: 100px;
   width: 100px;
   z-index: 150;

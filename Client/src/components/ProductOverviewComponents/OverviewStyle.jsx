@@ -12,10 +12,15 @@ class OverviewStyle extends React.Component {
 
   render() {
     return (
-      <img
-      className='Overview-styleThumbnail'
-      src={this.props.style.photos[0].thumbnail_url}
-      onClick={this.handleClick}/>
+      <div className='Overview-styleThumbnail'>
+        {this.props.select
+          ? <div className='selectedCheckmark'>&#10003;</div>
+          : null}
+        <img
+        className='Overview-styleThumbnailImg'
+        src={this.props.style.photos[0].thumbnail_url}
+        onClick={this.handleClick}/>
+      </div>
     );
   }
 }

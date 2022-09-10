@@ -238,8 +238,9 @@ class RelatedProducts extends React.Component {
           <div className="related-products" style={{transform: `translateX(-${this.state.relatedIndex * 25}%)`}} >
             {this.state.products.map((product, index) => <Card item={product} key={index}
               handleCompare={() => { this.handleCompare(index); }}
-              handleClick={() => { handleClick(product.id);
-                window.location.href = `/?product_id=${product.id}`; }} />)}
+              handleClick={(event) => {
+                handleClick(product.id);
+                window.history.pushState({}, "", `/?product_id=${product.id}`); }} />)}
           </div>
         </section>
         <h3 className="section-title">YOUR OUTFIT</h3>

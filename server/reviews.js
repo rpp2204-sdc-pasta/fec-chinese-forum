@@ -2,7 +2,6 @@ const axios = require('axios');
 require("dotenv").config();
 
 
-const apiurl = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews?product_id=71701&sort=relevant`
 const getProductcount =(sort, productId)=>{
   var options = {
     method: 'get',
@@ -10,10 +9,6 @@ const getProductcount =(sort, productId)=>{
     headers: {Authorization: process.env.DB_TOKEN}
   };
   return axios(options)
-    .catch((err)=>{
-      console.log(err)
-      res.status(500).send(err)
-    })
 }
 
 
@@ -24,10 +19,6 @@ const addHelpful = (id) =>{
     headers: {Authorization: process.env.DB_TOKEN}
   };
   return axios(options)
-  .catch((err=>{
-    console.log(err)
-    res.status(500).send(err)
-  }))
 }
 
 const avgStar = (data) =>{
@@ -71,10 +62,6 @@ const getMeta = (id)=>{
     headers: {Authorization: process.env.DB_TOKEN}
   }
   return axios(options)
-        .catch((err)=>{
-          console.log(err)
-          res.status(500).send(err)
-        })
 }
 
 const postReview = (info) =>{
@@ -85,10 +72,6 @@ const postReview = (info) =>{
     data: info
   }
   return axios(options)
-  .catch((err)=>{
-    res.status(500).send(false)
-
-  })
 }
 
 module.exports ={
@@ -99,5 +82,4 @@ module.exports ={
   breakdownScore,
   getMeta,
   postReview,
-
 }
