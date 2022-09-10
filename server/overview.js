@@ -3,11 +3,12 @@ const axios = require('axios');
 const { getProductInfo, getProductStyles, getProductReviewRating, getOverAllRating } = require('./related');
 
 let getOverview = (id) => {
+
   return Promise.all([getProductInfo(id), getProductStyles(id), getProductReviewRating(id)])
-    .then( (responses) => {
+    .then((responses) => {
       var overviewData;
-      overviewData=responses[0].data;
-      overviewData.styles=responses[1].data.results;
+      overviewData = responses[0].data;
+      overviewData.styles = responses[1].data.results;
 
       let sum = 0;
       let count = 0;
@@ -15,6 +16,7 @@ let getOverview = (id) => {
       [overviewData.starRating, overviewData.reviewCount] = getOverAllRating(reviewsMeta);
       return overviewData;
     })
+
 };
 
 let addToCart = (sku, quantity) => {
@@ -25,7 +27,7 @@ let addToCart = (sku, quantity) => {
       "sku_id": sku,
       "count": quantity
     },
-    headers: {Authorization: process.env.AUTH}
+    headers: { Authorization: process.env.AUTH }
   };
   return axios(option)
     .then(res => {

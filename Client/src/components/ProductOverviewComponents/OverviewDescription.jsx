@@ -8,15 +8,15 @@ class OverviewDescription extends React.Component {
 
   render() {
     let features;
-    if(this.props.features !== undefined) {
+    if (this.props.features !== undefined) {
       features =
-      <div className='Overview-descriptionFeatures'>
-        {this.props.features.map((feature =>
-          <div>
-            &#10003; {feature.feature}: {feature.value}
-          </div>
-        ))}
-      </div>;
+        <div className='Overview-descriptionFeatures'>
+          {this.props.features.map((feature =>
+            <div>
+              &#10003; {feature.feature}: {feature.value}
+            </div>
+          ))}
+        </div>;
     }
 
     return (
@@ -28,7 +28,7 @@ class OverviewDescription extends React.Component {
           </p>
         </div>
         {features}
-        </div>
+      </div>
     );
   }
 }

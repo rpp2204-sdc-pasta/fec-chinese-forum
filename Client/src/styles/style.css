@@ -809,6 +809,8 @@ input, textarea {
   border-color: green; */
   width: auto;
   height: auto;
+  margin-left: 100px;
+  margin-right: 100px;
 }
 .Overview-flexRowOne {
   display: flex;
@@ -933,7 +935,7 @@ a.down{
 }
 
 .Overview-star-rating {
-  height: 50%;
+  height: 20px;
 }
 
 .selectedCheckmark {
@@ -954,7 +956,15 @@ a.down{
   width: 100px;
   z-index: 150;
 }
-
+.Overview-salePrice {
+  color: red;
+}
+.Overview-originalPriceSale {
+  text-decoration:line-through;
+}
+.Overview-originalPrice {
+  color: black;
+}
 .flexRowTwo {
   display: flex;
 }
