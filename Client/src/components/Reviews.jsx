@@ -72,7 +72,7 @@ class Reviews extends React.Component {
   }
 
   getProductcount(filter, product_id){
-    console.log(filter)
+    // console.log(filter)
     let relevant = axios.post('/reviews',
                       {sort: 'relevant',
                       productId: product_id
