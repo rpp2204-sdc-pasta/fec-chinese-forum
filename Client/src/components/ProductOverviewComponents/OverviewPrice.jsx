@@ -7,7 +7,7 @@ class OverviewPrice extends React.Component {
   }
 
   render() {
-    if(this.props.sale_price !== null){
+    if (this.props.sale_price !== null) {
       var price = <div className='Overview-originalPriceSale'>{this.props.original_price}</div>;
     } else {
       var price = <div className='Overview-originalPrice'>{this.props.original_price}</div>;

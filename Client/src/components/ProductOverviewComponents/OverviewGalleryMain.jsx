@@ -10,11 +10,11 @@ class OverviewGalleryMain extends React.Component {
 
   render() {
     let scrollLeft = null;
-    if (parseInt(this.props.mainImageIndex)!==0) {
+    if (parseInt(this.props.mainImageIndex) !== 0) {
       scrollLeft = <a className='left' onClick={this.props.scrollLeft}>&#x2039;</a>;
     }
     let scrollRight = null;
-    if ((parseInt(this.props.mainImageIndex)!==parseInt(this.props.thumbnails.length-1))) {
+    if ((parseInt(this.props.mainImageIndex) !== parseInt(this.props.thumbnails.length - 1))) {
       scrollRight = <a className='right' onClick={this.props.scrollRight}>&#x203a;</a>;
     }
     return (
@@ -24,8 +24,8 @@ class OverviewGalleryMain extends React.Component {
         <div
           className='Overview-mainImgDiv'
           onClick={this.props.handleExpand}>
-        <img className='Overview-mainImg'
-          src={this.props.photo}
+          <img className='Overview-mainImg'
+            src={this.props.photo}
           />
         </div>
         <OverviewGalleryThumbnail
@@ -37,8 +37,8 @@ class OverviewGalleryMain extends React.Component {
           scrollDown={this.props.scrollDown}
         />
       </div>
-      );
-    }
+    );
+  }
 }
 
 export default OverviewGalleryMain;

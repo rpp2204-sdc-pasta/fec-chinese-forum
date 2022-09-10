@@ -52,26 +52,26 @@ class ProductOverview extends React.Component {
 
   fetchData() {
     var options = {
-      method:'get',
-      url:  `/overview/${this.props.id}`
+      method: 'get',
+      url: `/overview/${this.props.id}`
     }
     axios(options)
-    .then((result)=>{
-      let defaultStyle = result.data.styles[0].style_id;
-      if (result.data.styles.find((style)=>style['default?']===true)) {
-        defaultStyle = (result.data.styles.find((style)=>style['default?']===true).style_id);
-      }
+      .then((result) => {
+        let defaultStyle = result.data.styles[0].style_id;
+        if (result.data.styles.find((style) => style['default?'] === true)) {
+          defaultStyle = (result.data.styles.find((style) => style['default?'] === true).style_id);
+        }
 
-      this.setState({
-        product: result.data,
-        isLoading: false,
-        currStyle: defaultStyle
+        this.setState({
+          product: result.data,
+          isLoading: false,
+          currStyle: defaultStyle
+        });
+        this.props.getName(result.data.name);
+      })
+      .catch(err => {
+        console.log(err)
       });
-      this.props.getName(result.data.name);
-    })
-    .catch(err => {
-      console.log(err)
-    });
 
 
   }
@@ -84,24 +84,24 @@ class ProductOverview extends React.Component {
     let OverviewRight =
       <div className='Overview-Right'>
         <div className='Overview-star-rating'>
-          <StarRating rating={this.state.product.starRating}/>
+          <StarRating rating={this.state.product.starRating} />
           <button onClick={this.props.handleScrollToReview}>Read All Reviews</button>
         </div>
         <h2 className="Overview-category">{this.state.product.category}</h2>
         <h1 className="Overview-title">{this.state.product.name}</h1>
         <OverviewPrice
-          original_price={this.state.product.styles.find(style=> style.style_id === this.state.currStyle).original_price}
-          sale_price={this.state.product.styles.find(style=> style.style_id === this.state.currStyle).sale_price}/>
+          original_price={this.state.product.styles.find(style => style.style_id === this.state.currStyle).original_price}
+          sale_price={this.state.product.styles.find(style => style.style_id === this.state.currStyle).sale_price} />
         <OverviewStyleSelect
-          name={this.state.product.styles.find(style=> style.style_id === this.state.currStyle).name}
+          name={this.state.product.styles.find(style => style.style_id === this.state.currStyle).name}
           styles={this.state.product.styles}
-          changeStyle={this.changeStyle}/>
+          changeStyle={this.changeStyle} />
         <OverviewAddtoCart
           product={this.state.product}
           style_id={this.state.currStyle}
-          skus={this.state.product.styles.find(style=> style.style_id === this.state.currStyle).skus}
+          skus={this.state.product.styles.find(style => style.style_id === this.state.currStyle).skus}
           key={new Date().getTime()}
-          setRenderOutfit={this.props.setRenderOutfit}/>
+          setRenderOutfit={this.props.setRenderOutfit} />
       </div>;
 
     let isExpanded = this.state.expanded;
@@ -110,10 +110,10 @@ class ProductOverview extends React.Component {
       <div className='Overview-main'>
         <div className='Overview-flexRowOne'>
           <div className='Overview-Left'>
-          <OverviewGallery
-              photos={this.state.product.styles.find(style=> style.style_id === this.state.currStyle).photos}
+            <OverviewGallery
+              photos={this.state.product.styles.find(style => style.style_id === this.state.currStyle).photos}
               handleExpand={this.changeExpand}
-              key={new Date().getTime()}/>
+              key={new Date().getTime()} />
           </div>
           {isExpanded
             ? null
@@ -122,10 +122,10 @@ class ProductOverview extends React.Component {
         </div>
         <div className='Overview-flexRowTwo'>
           <div className='Overview-Bottom'>
-          <OverviewDescription
-            slogan={this.state.product.slogan}
-            overview={this.state.product.description}
-            features={this.state.product.features}
+            <OverviewDescription
+              slogan={this.state.product.slogan}
+              overview={this.state.product.description}
+              features={this.state.product.features}
             />
           </div>
         </div>

@@ -26,7 +26,7 @@ app.get('/overview/:id', (req, res) => {
     })
     .catch(err => {
       // console.log(err);
-      res.status(500).send("some err happened");
+      res.status(500).send(err);
     });
 });
 
@@ -104,7 +104,7 @@ app.get('/outfit', (req, res) => {
 app.post('/outfit', (req, res) => {
   const { id, category, name, original_price, sale_price, img_url, overallRating, reviewCount } = req.body;
   const obj = { id, category, name, original_price, sale_price, img_url, overallRating, reviewCount };
-  Outfit.updateOne({id: id}, obj, {upsert: true}, function(err) {
+  Outfit.updateOne({ id: id }, obj, { upsert: true }, function (err) {
     if (err) {
       // console.log(err)
       res.status(400).send(err);
@@ -116,7 +116,7 @@ app.post('/outfit', (req, res) => {
 
 app.delete('/outfit', (req, res) => {
   const { id } = req.body;
-  Outfit.deleteOne({id: id}, function(err) {
+  Outfit.deleteOne({ id: id }, function (err) {
     if (err) {
       // console.log(err)
       res.status(406).send(err);
@@ -127,7 +127,7 @@ app.delete('/outfit', (req, res) => {
 });
 //===========================================
 // QnA api
-app.get('/qs/:id', (req,res)=>{
+app.get('/qs/:id', (req, res) => {
   //console.log(req.params, "THIS IS GETTING HERE");
   qna.getQuestions(req.params.id).then((response) => {
     //console.log(response.data.results);
@@ -138,7 +138,7 @@ app.get('/qs/:id', (req,res)=>{
   })
 })
 
-app.get('/ans', (req,res)=>{
+app.get('/ans', (req, res) => {
   qna.getAnswers(req.body.qsId).then((response) => {
     // console.log(response.data);
     res.send(response.data);
@@ -148,7 +148,7 @@ app.get('/ans', (req,res)=>{
   })
 })
 
-app.post('/qs', (req,res)=>{
+app.post('/qs', (req, res) => {
   //console.log(req.body);
   // {
   //   body: "",
@@ -166,7 +166,7 @@ app.post('/qs', (req,res)=>{
   })
 })
 
-app.post('/ans', (req,res)=>{
+app.post('/ans', (req, res) => {
   // {
   //   body: "",
   //   name: "",
@@ -184,7 +184,7 @@ app.post('/ans', (req,res)=>{
   })
 })
 
-app.put('/qshelpful', (req,res)=>{
+app.put('/qshelpful', (req, res) => {
   //console.log(req.body);
   qna.markQSHelpful(req.body.questionId).then((response) => {
     //console.log(response);
@@ -195,7 +195,7 @@ app.put('/qshelpful', (req,res)=>{
   })
 })
 
-app.put('/anshelpful', (req,res)=>{
+app.put('/anshelpful', (req, res) => {
   //console.log(req.body);
   qna.markAnsHelpful(req.body.ansId).then((response) => {
     //console.log(response);
@@ -206,7 +206,7 @@ app.put('/anshelpful', (req,res)=>{
   })
 })
 
-app.put('/reportQs', (req,res)=>{
+app.put('/reportQs', (req, res) => {
   //console.log(req.body);
   qna.reportQS(req.body.questionId).then((response) => {
     //console.log(response);
@@ -217,7 +217,7 @@ app.put('/reportQs', (req,res)=>{
   })
 })
 
-app.put('/reportAns', (req,res)=>{
+app.put('/reportAns', (req, res) => {
   // console.log(req.body);
   qna.reportAns(req.body.ansId).then((response) => {
     // console.log(response);
@@ -240,55 +240,55 @@ app.put('/reportAns', (req,res)=>{
 //=================================================
 //===========================================
 // reviews api
-app.post('/reviews', (req,res)=>{
+app.post('/reviews', (req, res) => {
   reviews.getProductcount(req.body.sort, req.body.productId)
-    .then((response)=>{
+    .then((response) => {
       res.status(200).send({
-        reviews:response.data
+        reviews: response.data
       })
     })
-    .catch((err)=>{
+    .catch((err) => {
       res.status(500).send(err);
     })
 })
 
-app.put('/reviews/:id', (req, res)=>{
+app.put('/reviews/:id', (req, res) => {
   reviews.addHelpful(req.params.id)
-  .then((resonose)=>{
-    res.status(200).send('Helpful')
-  })
-  .catch((err)=>{
-    res.status(500).send(err);
-  })
-})
-
-app.get('/reviews/meta',(req, res)=>{
-  reviews.getMeta(req.query.product_id)
-  .then((response)=>{
-    let percent = reviews.percentRecommend(response.data.recommended)
-    let avg = reviews.avgStar(response.data.ratings)
-    let breakdownScore = reviews.breakdownScore(response.data.ratings)
-    res.status(200).send({
-      avg,
-      percent,
-      breakdownScore,
-      characteristics: response.data.characteristics,
+    .then((resonose) => {
+      res.status(200).send('Helpful')
     })
-  })
-  .catch((err)=>{
-    res.status(500).send(err);
-  })
+    .catch((err) => {
+      res.status(500).send(err);
+    })
 })
 
-app.post('/submit', (req, res)=>{
+app.get('/reviews/meta', (req, res) => {
+  reviews.getMeta(req.query.product_id)
+    .then((response) => {
+      let percent = reviews.percentRecommend(response.data.recommended)
+      let avg = reviews.avgStar(response.data.ratings)
+      let breakdownScore = reviews.breakdownScore(response.data.ratings)
+      res.status(200).send({
+        avg,
+        percent,
+        breakdownScore,
+        characteristics: response.data.characteristics,
+      })
+    })
+    .catch((err) => {
+      res.status(500).send(err);
+    })
+})
+
+app.post('/submit', (req, res) => {
   // console.log(req.body)
   reviews.postReview(req.body)
-  .then((response)=>{
-    res.status(200).send(true)
-  })
-  .catch((err)=>{
-    res.status(500).send(false)
-  })
+    .then((response) => {
+      res.status(200).send(true)
+    })
+    .catch((err) => {
+      res.status(500).send(false)
+    })
 
 })
 
