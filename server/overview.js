@@ -44,12 +44,25 @@ let getOverview = (id) => {
     })
 };
 
-let addToCart = (sku, count) => {
-  let getProductInfo = {
-    method: 'GET',
-    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${id}`,
+let addToCart = (sku, quantity) => {
+  let option = {
+    method: 'POST',
+    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/cart`,
+    data: {
+      "sku_id": parseInt(sku),
+      "count": parseInt(quantity)
+    },
     headers: {Authorization: process.env.AUTH}
   };
+  return axios(option)
+  .then(res => {
+    console.log(res.data);
+    return res.data;
+  })
+  .catch(err => {
+    console.log('ERROR');
+    return err;
+  });
 };
 
 module.exports.addToCart = addToCart;
