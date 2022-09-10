@@ -21,21 +21,37 @@ class QnA extends React.Component {
       this.Search = this.Search.bind(this)
       this.collapse = this.collapse.bind(this)
       this.cancelSearch = this.cancelSearch.bind(this)
+      this.getData = this.getData.bind(this)
     }
 
     componentDidMount() {
       //API call to get questions and answers.
-      console.log(this.props.id)
+      // console.log(this.props.id)
+      this.getData();
+    }
+
+    componentDidUpdate(prevProps) {
+      if (this.props.id !== prevProps.id) {
+        this.getData();
+        this.setState({
+          qsModalshow: false,
+          searching: false,
+          searchResult: [],
+          numQS: 2
+        })
+      }
+    }
+
+    getData() {
       var options = {
         method:'get',
         url:  "/qs/" + this.props.id
       }
       axios(options).then((result)=>{
-        console.log(result.data);
         this.setState({
           qna: result.data
         })
-        //console.log(result.data);
+        console.log(result.data);
       }).catch(err => {
         console.log(err)
       })
@@ -87,10 +103,11 @@ class QnA extends React.Component {
     }
 
     render() {
-        let loader;
-        if(this.state.numQS >= this.state.qna.length) {
-          loader = <button className = "buttonLink" id = "collapse" onClick = {this.collapse}> - COLLAPSE</button>
-        } else if(this.state.qna.length > 2) {
+        let loader, collaps;
+        if(this.state.numQS >= this.state.qna.length && this.state.qna.length != 0) {
+          collaps = <button className = "buttonLink" id = "collapse" onClick = {this.collapse}> - COLLAPSE</button>
+        }
+        if(this.state.qna.length > 2) {
           loader = <button className = "buttonLink" id = "loadMore" onClick = {this.loadMore}> + MORE QUESTIONS </button>
         }
 
@@ -101,13 +118,13 @@ class QnA extends React.Component {
             {(this.state.qna.length > 0 && !this.state.qsModalshow) && <QnASearch search = {this.Search.bind(this)} cancelSearch = {this.cancelSearch.bind(this)}/>}
             <div id = "QSList">
               {this.state.searching && this.state.searchResult.map((qs, i) =>
-                <QnAList key = {i} qnaSet = {qs}/>)}
+                <QnAList key = {qs.question_id} qnaSet = {qs}/>)}
               {!this.state.searching && this.state.qna.slice(0, this.state.numQS).map((qs, i) =>
-              <QnAList key = {i} qnaSet = {qs} refresh = {this.componentDidMount}/>
+              <QnAList key = {qs.question_id} qnaSet = {qs} refresh = {this.componentDidUpdate}/>
               )}
             </div>
             <div>
-              {loader}
+              {collaps}{loader}
               {this.state.qsModalshow &&<QSModal  show = {this.showQSModal.bind(this)} productId = {this.props.id} prodName = {this.props.prodName}/>}{(this.state.qna.length > 0 && !this.state.qsModalshow) && <button  className = "buttonLink addQS" onClick = {this.showQSModal}> ADD A QUESTION + </button>}
             </div>
             </div>)}
