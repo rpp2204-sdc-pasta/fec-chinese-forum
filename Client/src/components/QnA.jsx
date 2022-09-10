@@ -21,7 +21,6 @@ class QnA extends React.Component {
       this.Search = this.Search.bind(this)
       this.collapse = this.collapse.bind(this)
       this.cancelSearch = this.cancelSearch.bind(this)
-      this.getData = this.getData.bind(this)
     }
 
     componentDidMount() {
