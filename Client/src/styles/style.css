@@ -934,7 +934,7 @@ a.down{
 }
 
 .Overview-star-rating {
-  height: 50%;
+  height: 20px;
 }
 
 .selectedCheckmark {
