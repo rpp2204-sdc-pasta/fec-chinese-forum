@@ -20,7 +20,7 @@ let App = (props) => {
       <h2>
         Chiness Forum
       </h2>
-      {/* <OverviewWithTracker id={id} handleScrollToReview={handleScrollToReview} getName={setName} setRenderOutfit={setRenderOutfit} /> */}
+      <OverviewWithTracker id={id} handleScrollToReview={handleScrollToReview} getName={setName} setRenderOutfit={setRenderOutfit} />
       <RelatedWithTracker id={id} handleClick={setID} renderOutfit={renderOutfit} setRenderOutfit={setRenderOutfit} />
       <QnAWithTracker id={id} prodName={prodName}/>
       <div ref={reviewsRef}>

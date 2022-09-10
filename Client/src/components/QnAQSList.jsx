@@ -106,10 +106,9 @@ class QnAList extends React.Component {
       }
     }).then((result)=>{
       // console.log(result);
-      this.props.refresh();
       this.showModal();
     }).catch(err => {
-      //console.log(err);
+      console.log(err);
     })
   }
 

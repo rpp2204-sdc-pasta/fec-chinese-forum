@@ -286,10 +286,10 @@ app.post('/submit', (req, res)=>{
   reviews.postReview(req.body)
   .then((response)=>{
     // console.log(response, 'submit response  line 265555555555')
-    res.status(200)
+    res.status(200).send(true)
   })
   .catch((err)=>{
-    console.log(err,   'submit err server index  line 269999999')
+    res.status(500).send(false)
   })
 
 })
