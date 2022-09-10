@@ -24,7 +24,7 @@ class QnAAnsList extends React.Component {
         ansId: this.props.ans.id
       }
     }).then((result)=>{
-      console.log(result);
+      // console.log(result);
       this.setState({
         votedYes: true,
         yesCount: this.state.yesCount + 1
@@ -43,7 +43,7 @@ class QnAAnsList extends React.Component {
         ansId: this.props.ans.id
       }
     }).then((result)=>{
-      console.log(result);
+      // console.log(result);
       this.setState({
         reported: true
       })

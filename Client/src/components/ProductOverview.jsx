@@ -40,6 +40,12 @@ class ProductOverview extends React.Component {
     this.fetchData();
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.id !== prevProps.id) {
+      this.fetchData();
+    }
+  }
+
   fetchData() {
     var options = {
       method:'get',
