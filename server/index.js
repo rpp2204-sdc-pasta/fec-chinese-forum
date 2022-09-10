@@ -6,11 +6,7 @@ const app = express();
 const reviews =require('./reviews.js')
 const qna =require('./qna.js')
 const port = process.env.PORT || 3000;
-<<<<<<< HEAD
-const { getOverview } = require('./overview.js');
-=======
 const { getOverview, addToCart } = require('./overview.js');
->>>>>>> af846f6740183b894b553fe435c9d56879b1b902
 const { getRelated, getCurrent } = require('./related');
 const { Outfit } = require('../db/index.js');
 
@@ -34,8 +30,6 @@ app.get('/overview/:id', (req, res) => {
     });
 });
 
-<<<<<<< HEAD
-=======
 app.post('/overview/cart', (req, res) => {
   console.log(req.body.sku_id);
   console.log(req.body.quantity);
@@ -49,7 +43,6 @@ app.post('/overview/cart', (req, res) => {
   });
 });
 
->>>>>>> af846f6740183b894b553fe435c9d56879b1b902
 //===========================================
 // log interaction
 app.post('/interactions', (req, res) => {
