@@ -29,9 +29,6 @@ const getAnswers =(questionId)=>{
     headers: {Authorization: process.env.DB_TOKEN}
   };
   return axios(options)
-    .catch((err)=>{
-      console.log(err)
-    })
 }
 
 const postQuestion =(opt)=>{
@@ -43,9 +40,6 @@ const postQuestion =(opt)=>{
     headers: {Authorization: process.env.DB_TOKEN}
   };
   return axios(options)
-    .catch((err)=>{
-      console.log(err)
-    })
 }
 
 const postAnswer =(questionId, options)=>{
@@ -56,9 +50,6 @@ const postAnswer =(questionId, options)=>{
     headers: {Authorization: process.env.DB_TOKEN}
   };
   return axios(options)
-    .catch((err)=>{
-      console.log(err)
-    })
 }
 
 const markQSHelpful =(questionId)=>{
@@ -68,9 +59,6 @@ const markQSHelpful =(questionId)=>{
     headers: {Authorization: process.env.DB_TOKEN}
   };
   return axios(options)
-    .catch((err)=>{
-      console.log(err)
-    })
 }
 
 const reportQS =(questionId)=>{
@@ -80,9 +68,6 @@ const reportQS =(questionId)=>{
     headers: {Authorization: process.env.DB_TOKEN}
   };
   return axios(options)
-    .catch((err)=>{
-      console.log(err)
-    })
 }
 
 
@@ -93,9 +78,6 @@ const markAnsHelpful =(answerId)=>{
     headers: {Authorization: process.env.DB_TOKEN}
   };
   return axios(options)
-    .catch((err)=>{
-      console.log(err)
-    })
 }
 
 const reportAns =(answerId)=>{
@@ -105,9 +87,6 @@ const reportAns =(answerId)=>{
     headers: {Authorization: process.env.DB_TOKEN}
   };
   return axios(options)
-    .catch((err)=>{
-      console.log(err)
-    })
 }
 
 module.exports ={

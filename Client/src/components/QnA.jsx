@@ -21,11 +21,28 @@ class QnA extends React.Component {
       this.Search = this.Search.bind(this)
       this.collapse = this.collapse.bind(this)
       this.cancelSearch = this.cancelSearch.bind(this)
+      this.getData = this.getData.bind(this)
     }
 
-    componentDidMount = () => {
+    componentDidMount() {
       //API call to get questions and answers.
-      console.log(this.props.id)
+      // console.log(this.props.id)
+      this.getData();
+    }
+
+    componentDidUpdate(prevProps) {
+      if (this.props.id !== prevProps.id) {
+        this.getData();
+        this.setState({
+          qsModalshow: false,
+          searching: false,
+          searchResult: [],
+          numQS: 2
+        })
+      }
+    }
+
+    getData() {
       var options = {
         method:'get',
         url:  "/qs/" + this.props.id
@@ -40,20 +57,20 @@ class QnA extends React.Component {
       })
     }
 
-    loadMore = () => {
+    loadMore() {
       this.setState({
         numQS: this.state.numQS + 2
       })
       //send
     }
 
-    showQSModal = () => {
+    showQSModal() {
       this.setState({
         qsModalshow: this.state.qsModalshow?false:true
       })
     }
 
-    Search = (QS) => {
+    Search(QS) {
       //write search function
       let searchResult = [];
       this.state.qna.forEach((val) => {
@@ -71,13 +88,13 @@ class QnA extends React.Component {
       console.log(this.state);
     }
 
-    collapse = () => {
+    collapse() {
       this.setState({
         numQS: 2
       })
     }
 
-    cancelSearch = () => {
+    cancelSearch() {
       this.setState({
         searchResult: [],
         searching: false

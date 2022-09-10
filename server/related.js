@@ -4,7 +4,6 @@ const axios = require('axios');
 let getRelated = (id) => {
   return getRelatedProductID(id)
     .then(response => {
-      response.data.push()
       let moreAPICalls = response.data.map(num => {
         return Promise.all([getProductInfo(num).then(response => response.data),
           getProductStyles(num).then(response => response.data),
