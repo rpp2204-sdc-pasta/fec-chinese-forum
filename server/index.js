@@ -248,6 +248,7 @@ app.post('/reviews', (req,res)=>{
       })
     })
     .catch((err)=>{
+      // console.log(err)
       res.status(500).send(err);
     })
 })
@@ -283,6 +284,7 @@ app.get('/reviews/meta',(req, res)=>{
 app.post('/submit', (req, res)=>{
   reviews.postReview(req.body)
   .then((response)=>{
+    // console.log(response, 'submit response  line 265555555555')
     res.status(200).send(true)
   })
   .catch((err)=>{
@@ -290,6 +292,17 @@ app.post('/submit', (req, res)=>{
   })
 
 })
+// app.post('/image', upload.array('image'), (req, res)=>{
+//   reviews.getImage(req.file)
+//     .then((response)=>{
+//       console.log(response)
+//       res.status(200).send(response)
+//     })
+//     .catch((err)=>{
+//       res.status(500).send(err)
+//     })
+
+// })
 
 //=================================================
 app.get('/*', (req, res) => {

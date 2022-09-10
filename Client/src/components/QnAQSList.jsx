@@ -57,9 +57,32 @@ class QnAList extends React.Component {
     })
 
   }
+  checkAnswer = () => {
+    let alert = ''
+    if(this.inputanswer === ''){
+      alert += ' ' + this.inputanswer
+    }
+    if(this.inputname === ''){
+      alert += ' ' + this.inputname
+    }
+    if(this.inputemail === ''){
+      alert += ' ' + this.inputemail
+    }
+
+    if(alert === ''){
+      return true
+    } else {
+      alert(alert);
+      return false
+    }
+  }
+
   submitAns = (e) => {
     e.preventDefault();
     let checkAnswerer = false
+    if(!this.checkAnswer){
+      return;
+    }
     Object.keys(this.state.ans).forEach(val => {
       // console.log(this.state.ans[val].answerer_name);
       if(this.state.ans[val].answerer_name === this.inputname) {
@@ -83,10 +106,9 @@ class QnAList extends React.Component {
       }
     }).then((result)=>{
       // console.log(result);
-      this.props.refresh();
       this.showModal();
     }).catch(err => {
-      //console.log(err);
+      console.log(err);
     })
   }
 
@@ -155,8 +177,9 @@ class QnAList extends React.Component {
                 this.state.showAnsModal &&
                     <form className = "lvl4 ansModal">
                       <input name = "inputname" placeholder="Name" onChange={this.setValue} placeholder="Name" maxLength="60" required></input><br/>
-                      <input name = "inputemail" placeholder="Email" type="email" onChange={this.setValue} placeholder="Email" maxLength="60" required></input><br/>
-                      <input name = "inputanswer" placeholder="Enter Answer" onChange={this.setValue} size="30" maxLength="1000"required></input><br/>
+                      <input name = "inputemail" placeholder="Alex@email.com" type="email" onChange={this.setValue} placeholder="Email" maxLength="60" required></input><br/>
+                      <a>For authentication reasons, you will not be emailed</a><br/>
+                      <textarea name = "inputanswer" placeholder="Enter Answer" rows = {4} cols = {25} onChange={this.setValue} size="30" maxLength="1000"required></textarea><br/>
                       <button type="submit" value="Submit" onClick = {this.submitAns}>Submit</button>
                       <button onClick={this.showModal}>X</button>
                     </form>
