@@ -37,11 +37,7 @@ class ProductOverview extends React.Component {
   }
 
   componentDidMount() {
-    try {
       this.fetchData();
-    } catch {
-      console.log('error fetching');
-    }
   }
 
   componentDidUpdate(prevProps) {
