@@ -16,7 +16,7 @@ class OverviewPrice extends React.Component {
     return (
       <div className='Overview-price'>
         {price}
-        {this.props.sale_price ? this.props.sale_price : null}
+        {this.props.sale_price ? <div className='Overview-salePrice'>{this.props.sale_price}</div> : null}
       </div>
     );
   }

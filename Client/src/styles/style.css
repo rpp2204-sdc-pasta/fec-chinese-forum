@@ -949,7 +949,15 @@ a.down{
   width: 100px;
   z-index: 150;
 }
-
+.Overview-salePrice {
+  color: red;
+}
+.Overview-originalPriceSale {
+  text-decoration:line-through;
+}
+.Overview-originalPrice {
+  color: black;
+}
 .flexRowTwo {
   display: flex;
 }
