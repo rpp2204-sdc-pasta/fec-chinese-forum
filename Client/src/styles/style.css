@@ -682,8 +682,7 @@ input[type="checkbox"].toggle:checked + label::before{
 .QnA {
   font-family: Arial, Helvetica, sans-serif;
   position: relative;
-  justify-content: center;
-  margin: auto;
+  padding-left: 25%;
   display: initial;
 }
 
