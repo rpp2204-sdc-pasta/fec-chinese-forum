@@ -24,12 +24,6 @@ class QnA extends React.Component {
       this.getData = this.getData.bind(this)
     }
 
-    componentDidMount() {
-      //API call to get questions and answers.
-      // console.log(this.props.id)
-      this.getData();
-    }
-
     componentDidUpdate(prevProps) {
       if (this.props.id !== prevProps.id) {
         this.getData();

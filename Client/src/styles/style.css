@@ -682,8 +682,8 @@ input[type="checkbox"].toggle:checked + label::before{
 .QnA {
   font-family: Arial, Helvetica, sans-serif;
   position: relative;
-  padding-left: 25%;
-  display: initial;
+  left: 25%;
+  margin: auto;
 }
 
 .QS, .QSOpts {
@@ -718,7 +718,7 @@ input[type="checkbox"].toggle:checked + label::before{
 
 #QSList {
   overflow-Y: auto;
-  height: 300px;
+  max-height: 50%;
   width: 1000px;
 }
 
