@@ -15,12 +15,23 @@ class ProductOverview extends React.Component {
       isLoading: true,
       currStyle: 0,
       product: {},
-      expanded: false
+      expanded: false,
+      mainImageIndex: 0,
+      thumbnailRange: [0, 7]
+
     }
     this.changeStyle = this.changeStyle.bind(this);
     this.changeExpand = this.changeExpand.bind(this);
     this.fetchData = this.fetchData.bind(this);
+
+    this.handleClickThumbnail = this.handleClickThumbnail.bind(this);
+    this.handleMainImageScrollLeft = this.handleMainImageScrollLeft.bind(this);
+    this.handleMainImageScrollRight = this.handleMainImageScrollRight.bind(this);
+    this.handleThumbnailScrollUp = this.handleThumbnailScrollUp.bind(this);
+    this.handleThumbnailScrollDown = this.handleThumbnailScrollDown.bind(this);
   }
+
+
 
   changeStyle(style_id) {
     this.setState({
@@ -72,6 +83,51 @@ class ProductOverview extends React.Component {
 
   }
 
+  handleClickThumbnail(index) {
+    let targetIndex = parseInt(index) + parseInt(this.state.thumbnailRange[0]);
+    this.setState({
+      mainImageIndex: targetIndex
+    });
+  }
+
+  handleThumbnailScrollUp() {
+    let lowerRange = parseInt(this.state.thumbnailRange[0]) - 1;
+    let upperRange = parseInt(this.state.thumbnailRange[1]) - 1;
+    if ((lowerRange >= 0) && (upperRange >= 7)) {
+      this.setState({
+        thumbnailRange: [lowerRange, upperRange]
+      });
+    };
+  }
+
+  handleThumbnailScrollDown() {
+    let lowerRange = parseInt(this.state.thumbnailRange[0]) + 1;
+    let upperRange = parseInt(this.state.thumbnailRange[1]) + 1;
+    if (upperRange <= this.state.product.styles.find(style => style.style_id === this.state.currStyle).photos.length) {
+      this.setState({
+        thumbnailRange: [lowerRange, upperRange]
+      });
+    };
+  }
+
+  handleMainImageScrollLeft() {
+    let targetIndex = parseInt(this.state.mainImageIndex) - 1;
+    if (targetIndex >= 0) {
+      this.setState({
+        mainImageIndex: targetIndex
+      });
+    };
+  }
+
+  handleMainImageScrollRight() {
+    let targetIndex = parseInt(this.state.mainImageIndex) + 1;
+    if (targetIndex <= this.state.product.styles.find(style => style.style_id === this.state.currStyle).photos.length - 1) {
+      this.setState({
+        mainImageIndex: targetIndex
+      });
+    };
+  }
+
   render() {
     if (this.state.isLoading) {
       return <div>Loading Overview</div>
@@ -91,7 +147,8 @@ class ProductOverview extends React.Component {
         <OverviewStyleSelect
           name={this.state.product.styles.find(style => style.style_id === this.state.currStyle).name}
           styles={this.state.product.styles}
-          changeStyle={this.changeStyle} />
+          changeStyle={this.changeStyle}
+          handleClickThumbnail={this.handleClickThumbnail}/>
         <OverviewAddtoCart
           product={this.state.product}
           style_id={this.state.currStyle}
@@ -100,21 +157,34 @@ class ProductOverview extends React.Component {
           setRenderOutfit={this.props.setRenderOutfit} />
       </div>;
 
+    let OverviewLeft =
+        <OverviewGallery
+          photos={this.state.product.styles.find(style => style.style_id === this.state.currStyle).photos}
+          handleExpand={this.changeExpand}
+          key={new Date().getTime()}
+          mainImageIndex={this.state.mainImageIndex}
+          thumbnailRange={this.state.thumbnailRange}
+          handleClickThumbnail={this.handleClickThumbnail}
+          handleMainImageScrollLeft={this.handleMainImageScrollLeft}
+          handleMainImageScrollRight={this.handleMainImageScrollRight}
+          handleThumbnailScrollUp={this.handleThumbnailScrollUp}
+          handleThumbnailScrollDown={this.handleThumbnailScrollDown}/>
+
     let isExpanded = this.state.expanded;
 
     return (
       <div className='Overview-main'>
         <div className='Overview-flexRowOne'>
-          <div className='Overview-Left'>
-            <OverviewGallery
-              photos={this.state.product.styles.find(style => style.style_id === this.state.currStyle).photos}
-              handleExpand={this.changeExpand}
-              key={new Date().getTime()} />
-          </div>
-          {isExpanded
-            ? null
-            : OverviewRight
+        {isExpanded
+            ? <div className='Overview-LeftExpanded'>
+              {OverviewLeft}
+            </div>
+            : <div className='Overview-LeftDefault'>
+              {OverviewLeft}
+            </div>
           }
+          {OverviewRight}
+
         </div>
         <div className='Overview-flexRowTwo'>
           <div className='Overview-Bottom'>
