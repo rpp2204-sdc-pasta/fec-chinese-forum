@@ -259,7 +259,9 @@ class RelatedProducts extends React.Component {
               </div>
             </div>
             {this.state.outfits.map((outfit, index) => <Outfit item={outfit} key={index}
-            handleDelete={() => { this.handleDelete(index); }} handleClick={() => {handleClick(outfit.id)}} />)}
+            handleDelete={() => { this.handleDelete(index); }} handleClick={(event) => {
+              handleClick(outfit.id);
+              window.history.pushState({}, "", `/?product_id=${outfit.id}`); }} />)}
           </div>
         </section>
         {this.state.compare && <div id="compare-overlay" onClick={this.closeOverlay}>
