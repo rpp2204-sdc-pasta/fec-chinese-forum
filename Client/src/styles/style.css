@@ -819,15 +819,40 @@ input, textarea {
 .Overview-flexRowOne {
   display: flex;
   flex-direction: row;
+  column-gap: 50px;
 
 }
-.Overview-Left {
+.Overview-LeftDefault {
   order:1;
   width: 100%;
   /* border: 3px solid;
   border-color: blue; */
   background-color: grey;
   overflow: hidden;
+}
+.Overview-LeftExpanded {
+  position:absolute;
+  width: 100%;
+  height:100%;
+  z-index:100;
+  max-height: 85%;
+  max-width: 85%;
+  background-color: grey;
+  overflow: hidden;
+}
+.Overview-LeftExpanded .Overview-mainImg {
+  height: 100%;
+  top: 25%;
+  max-height: 800px;
+  display:block;
+  /* position: absolute; */
+  width: 100%;
+  object-fit: contain;
+  overflow: hidden;
+  cursor: -moz-zoom-out;
+  cursor: -webkit-zoom-out;
+  cursor: zoom-out;
+  transition: 2000ms;
 }
 
 .Overview-gallery {
@@ -978,6 +1003,10 @@ a.down{
   height: auto;
   /* border: 3px solid #73AD21;
   border-color: purple; */
+}
+
+.Overview-flexRowTwo {
+  padding-top: 50px;
 }
 
 .Overview-Description {
