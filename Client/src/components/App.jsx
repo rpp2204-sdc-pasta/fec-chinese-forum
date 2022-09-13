@@ -18,7 +18,7 @@ let App = (props) => {
   return (
     <>
       <h2>
-        Chiness Forum
+        Chinese Forum
       </h2>
       <OverviewWithTracker id={id} handleScrollToReview={handleScrollToReview} getName={setName} setRenderOutfit={setRenderOutfit} />
       <RelatedWithTracker id={id} handleClick={setID} renderOutfit={renderOutfit} setRenderOutfit={setRenderOutfit} />
