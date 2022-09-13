@@ -107,7 +107,7 @@ class QnA extends React.Component {
         if(this.state.numQS > 2 && this.state.qna.length != 0) {
           collaps = <button className = "buttonLink" id = "collapse" onClick = {this.collapse}> - COLLAPSE</button>
         }
-        if(this.state.qna.length > 2) {
+        if(this.state.qna.length > 2 && this.state.qna.length > this.state.numQS) {
           loader = <button className = "buttonLink" id = "loadMore" onClick = {this.loadMore}> + MORE QUESTIONS </button>
         }
 

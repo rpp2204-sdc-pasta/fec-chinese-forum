@@ -61,12 +61,12 @@ class Reviews extends React.Component {
         this.getMeta(this.props.id)
     }
     if(this.state.filter !== prevState.filter){
-      console.log(this.state.filter)
+      // console.log(this.state.filter)
       this.selectFilter(this.state.filter)
       this.resetCount()
     }
     if(this.state.reRender !== prevState.reRender){
-      console.log(this.state.filter)
+      // console.log(this.state.filter)
       this.getProductcount(this.state.filter, this.props.id)
     }
   }
@@ -265,9 +265,7 @@ class Reviews extends React.Component {
       display: 'flex',
       flexDirection: 'column',
       minHeight: 0,
-      marginLeft: '8%',
-      marginTop: '6.5%',
-      marginBottom: '10%'
+      margin: '100px',
     }
     const style_body_reviews ={
       wordWrap: 'break-word',

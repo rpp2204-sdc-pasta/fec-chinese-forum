@@ -18,6 +18,16 @@ class QnAList extends React.Component {
     this.date = this.props.qnaSet.question_date
 
     this.inputanswer, this.inputname, this.inputemail
+    this.qshelpful = this.qshelpful.bind(this);
+    this.reportQS = this.reportQS.bind(this);
+    this.checkAnswer = this.checkAnswer.bind(this);
+    this.reportQS = this.reportQS.bind(this);
+    this.checkAnswer = this.checkAnswer.bind(this);
+    this.submitAns = this.submitAns.bind(this);
+    this.showModal = this.showModal.bind(this);
+    this.loadAns = this.loadAns.bind(this);
+    this.collapse = this.collapse.bind(this);
+    this.setValue = this.setValue.bind(this);
   }
 
   qshelpful = () => {
