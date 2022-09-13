@@ -265,7 +265,9 @@ class Reviews extends React.Component {
       display: 'flex',
       flexDirection: 'column',
       minHeight: 0,
-      margin: '100px',
+      marginLeft: '8%',
+      marginTop: '6.5%',
+      marginBottom: '10%'
     }
     const style_body_reviews ={
       wordWrap: 'break-word',
