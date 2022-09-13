@@ -333,6 +333,9 @@ Reviews */
 
 .starBar{
   background-color: white;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   color: #222;
   padding: 0.01em;
   border: none;
@@ -365,7 +368,7 @@ Reviews */
 }
 
 .star{
-  top:4px;
+  /* top:4px; */
   line-height: 2.5;
   text-align: left;
   position: relative;
@@ -373,7 +376,7 @@ Reviews */
 
 
 .progress-bar{
-  position: relative;
+  /* position: relative; */
   border: none;
   position: relative;
   height: 0.5em;
