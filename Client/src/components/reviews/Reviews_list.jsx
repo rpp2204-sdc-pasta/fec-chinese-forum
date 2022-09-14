@@ -3,7 +3,7 @@ import Photo from './Photo.jsx'
 const axios = require('axios');
 import Report from './Report.jsx'
 import StarRating from '../StarRating.jsx'
-// const StarRating = require('./components/StarRating.jsx')
+
 
 class Reviews_list extends React.Component {
   constructor(props){
