@@ -290,7 +290,7 @@ class Reviews extends React.Component {
 
     return(
       <div className='containerAll' style={style_overall}>
-        <div className='left' style={{marginLeft:'9%'}}>
+        <div className='left' style={{marginLeft:'5%'}}>
           <div className='reviewTitle'>
             {`Ratings & Reviews`}
           </div>
