@@ -16,7 +16,10 @@ module.exports = {
       filename: 'index.html',
       title: 'Chinese Forum'
     }),
-    new CompressionPlugin()
+    new CompressionPlugin({
+      algorithm: 'gzip',
+    }
+    )
   ],
   module: {
     rules: [
