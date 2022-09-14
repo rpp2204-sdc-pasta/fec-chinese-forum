@@ -5,7 +5,8 @@ let Card = (props) => (
     <div className="card" >
       <div className="card-img" >
         <button className="card-function-btn" onClick={props.handleCompare}>&#9733;</button>
-        <img className="card-current-img" src={props.item.photos[0].thumbnail_url} onClick={props.handleClick} />
+        <img className="card-current-img" src={props.item.photos[0].thumbnail_url} onClick={props.handleClick}
+         alt={`a picture for ${props.item.name}`}/>
 
         {/* <ul className="card-thumbnail">
           {props.item.photos.map(photo => {
