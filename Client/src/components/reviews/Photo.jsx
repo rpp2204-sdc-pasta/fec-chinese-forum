@@ -46,7 +46,7 @@ const Photo = (props)=>{
 
   if(props.photo.url.includes('unsplash')){
     // let resize = props.photo.url.slice(0, props.photo.url.lastIndexOf('w=')) + 'w=10'
-    let resize = (props.photo.url.slice(0, props.photo.url.lastIndexOf('w=')) + 'w=100')
+    let resize = (props.photo.url.slice(0, props.photo.url.lastIndexOf('q=')) + 'q=10')
   }
 
   if(reSize){
@@ -54,7 +54,7 @@ const Photo = (props)=>{
       <>
       <div className={props.photo.id}>
          <img  style={imagestyle} onClick={toggleModal} src={resize} alt={props.photo.id}></img>
-         {isOpen && <div style={overlay}><img  style={another_style} onClick={toggleModal} src={props.photo.url} alt={props.photo.id}></img></div>}
+         {isOpen && <div style={overlay}><img  style={another_style} onClick={toggleModal} src={resize} alt={props.photo.id}></img></div>}
       </div>
     </>
     )
