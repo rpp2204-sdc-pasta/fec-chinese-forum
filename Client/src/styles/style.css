@@ -981,7 +981,7 @@ h2.Overview-category {
 .Overview-styleGroupOfFour {
   position:relative;
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
 .Overview-styleThumbnailImg {
   border-radius: 100%;
