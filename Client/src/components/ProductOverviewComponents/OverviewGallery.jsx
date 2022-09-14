@@ -19,10 +19,12 @@ class OverviewGallery extends React.Component {
       };
 
     };
+    let origPhotoUrl = this.props.photos[this.props.mainImageIndex].url;
+    let smallerPhotoUrl = origPhotoUrl.slice(0,-4)+'q=10';
     return (
       <div className='Overview-gallery'>
         <OverviewGalleryMain
-          photo={this.props.photos[this.props.mainImageIndex].url}
+          photo={smallerPhotoUrl}
           scrollLeft={this.props.handleMainImageScrollLeft}
           scrollRight={this.props.handleMainImageScrollRight}
           mainImageIndex={this.props.mainImageIndex}
