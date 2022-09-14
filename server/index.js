@@ -22,7 +22,6 @@ app.use(express.static(path.join(__dirname, '../Client/dist')));
 app.get('/overview/:id', (req, res) => {
   getOverview(req.params.id)
     .then(result => {
-      console.log(result.styles[0].skus);
       res.status(200).send(result);
     })
     .catch(err => {

@@ -28,10 +28,12 @@ class OverviewAddtoCart extends React.Component {
 	}
 
 	handleQuantitySelect(event) {
-		this.setState({
-			quantity: event.value,
-			displayAddToCart: true
-		})
+		if(event.value !== 0){
+			this.setState({
+				quantity: event.value,
+				displayAddToCart: true
+			})
+		}
 	}
 
 	handleOpenSizeSelect() {
@@ -106,10 +108,16 @@ class OverviewAddtoCart extends React.Component {
 		let quantity = 0;
 		if (this.state.sku !== 0) {
 			quantity = (this.props.skus[this.state.sku].quantity);
+			console.log('0 quantity');
 		}
 		let quantitySelect = []
-		for (var i = 1; (i < quantity + 1) && (i <= 15); i++) {
-			quantitySelect.push({ value: i, label: i });
+		if (quantity === 0) {
+			quantitySelect = [{ value:0, label:'Out Of Stock'}];
+		} else {
+			for (var i = 1; (i < quantity + 1) && (i <= 15); i++) {
+				quantitySelect.push({ value: i, label: i });
+			}
+
 		}
 
 		var sizeOptions = []

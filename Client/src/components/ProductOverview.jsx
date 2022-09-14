@@ -54,6 +54,11 @@ class ProductOverview extends React.Component {
   componentDidUpdate(prevProps) {
     if (this.props.id !== prevProps.id) {
       this.fetchData();
+      this.setState({
+        expanded: false,
+        mainImageIndex: 0,
+        thumbnailRange: [0, 7]
+      });
     }
   }
 
