@@ -8,6 +8,8 @@ h2 {
   margin: 3vw;
 }
 
+
+
 /* ================================
 Related Product */
 
@@ -19,6 +21,7 @@ Related Product */
   justify-content: center;
   max-width: 70%;
   margin: auto;
+  background-color: #ffffff;
 }
 
 .section-title {
@@ -521,6 +524,7 @@ Reviews */
   display: flex;
   right:calc(-4% - var(--characteristics-bar));
   position: relative;
+  margin-right: 0;
   z-index: 2;
 }
 
@@ -689,6 +693,10 @@ input[type="checkbox"].toggle:checked + label::before{
   position: relative;
   left: 25%;
   margin: auto;
+}
+
+.QnAImages {
+  width: 50px;
 }
 
 .QS, .QSOpts {
@@ -1032,3 +1040,4 @@ h2.Overview-category {
   padding-left: 10px;
   border-left: 3px solid black;
 }
+

@@ -18,6 +18,7 @@ class QnAList extends React.Component {
     this.date = this.props.qnaSet.question_date
 
     this.inputanswer, this.inputname, this.inputemail
+    this.firstImage, this.secondImage, this.thirdImage, this.fourthImage, this.fifthImage
     this.qshelpful = this.qshelpful.bind(this);
     this.reportQS = this.reportQS.bind(this);
     this.checkAnswer = this.checkAnswer.bind(this);
@@ -150,6 +151,14 @@ class QnAList extends React.Component {
     this[name] = value;
   }
 
+  setImage = (e) => {
+    let value = e.target.files;
+    let name = e.target.name;
+    console.log(value);
+    this[name] = URL.createObjectURL(value[0]);
+    console.log(this.name);
+  }
+
   render(){
     let AnsList, loader, A;
     let AnsLength = Object.keys(this.state.ans).length;
@@ -190,6 +199,8 @@ class QnAList extends React.Component {
                       <input name = "inputemail" placeholder="Alex@email.com" type="email" onChange={this.setValue} placeholder="Email" maxLength="60" required></input><br/>
                       <a>For authentication reasons, you will not be emailed</a><br/>
                       <textarea name = "inputanswer" placeholder="Enter Answer" rows = {4} cols = {25} onChange={this.setValue} size="30" maxLength="1000"required></textarea><br/>
+                      {this.firstImage && <img className = "QnAImages" id="first" src={this.firstImage} />}
+                      <input type='file' name='firstImage' accept="image/*" onChange={this.setImage} class='form-control'></input>
                       <button type="submit" value="Submit" onClick = {this.submitAns}>Submit</button>
                       <button onClick={this.showModal}>X</button>
                     </form>
