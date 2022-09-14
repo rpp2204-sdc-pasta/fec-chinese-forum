@@ -11,6 +11,8 @@ class QnAAnsList extends React.Component {
       reported: false
     };
     this.date = new Date(this.props.ans.date).toLocaleDateString('en-US');
+    this.anshelpful = this.anshelpful.bind(this);
+    this.reportAns = this.reportAns.bind(this);
     
   }
 
