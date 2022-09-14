@@ -337,6 +337,9 @@ Reviews */
 
 .starBar{
   background-color: white;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   color: #222;
   padding: 0.01em;
   border: none;
@@ -369,7 +372,7 @@ Reviews */
 }
 
 .star{
-  top:4px;
+  /* top:4px; */
   line-height: 2.5;
   text-align: left;
   position: relative;
@@ -377,7 +380,7 @@ Reviews */
 
 
 .progress-bar{
-  position: relative;
+  /* position: relative; */
   border: none;
   position: relative;
   height: 0.5em;
@@ -521,6 +524,7 @@ Reviews */
   display: flex;
   right:calc(-4% - var(--characteristics-bar));
   position: relative;
+  margin-right: 0;
   z-index: 2;
 }
 
@@ -819,15 +823,39 @@ input, textarea {
 .Overview-flexRowOne {
   display: flex;
   flex-direction: row;
+  column-gap: 2vw;
 
 }
-.Overview-Left {
+.Overview-LeftDefault {
   order:1;
   width: 100%;
-  /* border: 3px solid;
-  border-color: blue; */
+  height: 100%;
+  scale: .90;
   background-color: grey;
   overflow: hidden;
+}
+.Overview-LeftExpanded {
+  position:absolute;
+  min-height: 800px;
+  width: 100%;
+  height:100%;
+  z-index:100;
+  max-height: 80%;
+  max-width: 100%;
+  background-color: grey;
+  overflow: hidden;
+}
+.Overview-LeftExpanded .Overview-mainImg {
+  height: 100%;
+  top: 25%;
+  display:block;
+  width: 100%;
+  object-fit: contain;
+  overflow: hidden;
+  cursor: -moz-zoom-out;
+  cursor: -webkit-zoom-out;
+  cursor: zoom-out;
+  transition: 2000ms;
 }
 
 .Overview-gallery {
@@ -879,7 +907,7 @@ input, textarea {
 .Overview-galleryThumbnailSelected {
   border: solid;
   border-color: gold;
-  width: 100%;
+  width: 80%;
   height:30%;
 
 }
@@ -937,9 +965,14 @@ a.down{
   max-width: 30%;
   height: auto;
 }
-
+h2.Overview-category {
+  font-size: 3vw;
+  margin: 0;
+  margin-top: 1.5vw;
+}
 .Overview-star-rating {
   height: 20px;
+  margin-top: 2vw;
 }
 
 .selectedCheckmark {
@@ -952,7 +985,7 @@ a.down{
 .Overview-styleGroupOfFour {
   position:relative;
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
 .Overview-styleThumbnailImg {
   border-radius: 100%;
@@ -976,8 +1009,11 @@ a.down{
 .Overview-Bottom {
   width: auto;
   height: auto;
-  /* border: 3px solid #73AD21;
-  border-color: purple; */
+  z-index: 100;
+}
+
+.Overview-flexRowTwo {
+  padding-top: 2vw;
 }
 
 .Overview-Description {
@@ -990,8 +1026,14 @@ a.down{
   flex-wrap: wrap;
   flex-direction: column;
   width: 50%;
+  font-weight: bold;
+}
+.Overview-descriptionOverview {
+  font-weight: initial;
 }
 
 .Overview-descriptionFeatures {
-  border-left: 3px solid black
+  padding-left: 10px;
+  border-left: 3px solid black;
 }
+

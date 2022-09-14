@@ -9,13 +9,13 @@ class OverviewStyleSelect extends React.Component {
 
   onClickStyleSelect(style_id) {
     this.props.changeStyle(style_id);
+    this.props.handleClickThumbnail(0);
   }
 
   render() {
     var index = 0;
     var styles = [];
     var tmpPropStyles = this.props.styles.slice();
-
     for (var groups = 0; groups < Math.ceil(this.props.styles.length / 4); groups++) {
       var group = [];
       if (groups === 0) {
@@ -32,7 +32,7 @@ class OverviewStyleSelect extends React.Component {
         let currStyleIndex = tmpPropStyles.indexOf(tmpPropStyles.find(style => style.name === this.props.name));
         tmpPropStyles.splice(currStyleIndex, 1);
         for (var i = 0; i < 3; i++) {
-          if (index < this.props.styles.length) {
+          if (index < this.props.styles.length-1) {
             group.push(<OverviewStyle
               count={index} style={tmpPropStyles[index]}
               onClick={this.onClickStyleSelect} />);
