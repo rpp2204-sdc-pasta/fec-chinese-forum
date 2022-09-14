@@ -9,8 +9,10 @@ const port = process.env.PORT || 3000;
 const { getOverview, addToCart } = require('./overview.js');
 const { getRelated, getCurrent } = require('./related');
 const { Outfit } = require('../db/index.js');
+const expressStaticGzip = require("express-static-gzip");
 
 
+app.use(expressStaticGzip(path.join(__dirname, '../Client/dist')));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '../Client/dist')));
 

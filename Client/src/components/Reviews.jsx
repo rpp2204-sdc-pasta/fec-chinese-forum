@@ -61,12 +61,12 @@ class Reviews extends React.Component {
         this.getMeta(this.props.id)
     }
     if(this.state.filter !== prevState.filter){
-      console.log(this.state.filter)
+      // console.log(this.state.filter)
       this.selectFilter(this.state.filter)
       this.resetCount()
     }
     if(this.state.reRender !== prevState.reRender){
-      console.log(this.state.filter)
+      // console.log(this.state.filter)
       this.getProductcount(this.state.filter, this.props.id)
     }
   }
@@ -251,7 +251,7 @@ class Reviews extends React.Component {
 
   render(){
 
-    const style_1 = {
+    const style_overall = {
       display:'flex',
       justifyContent: 'center',
       width: '80%',
@@ -265,7 +265,10 @@ class Reviews extends React.Component {
       display: 'flex',
       flexDirection: 'column',
       minHeight: 0,
-      margin: '100px',
+      marginRight: 0,
+      marginTop: '7%',
+      marginLeft: '8%',
+      marginBottom: '3%'
     }
     const style_body_reviews ={
       wordWrap: 'break-word',
@@ -286,8 +289,8 @@ class Reviews extends React.Component {
     }
 
     return(
-      <div className='containerAll' style={style_1}>
-        <div className='left'>
+      <div className='containerAll' style={style_overall}>
+        <div className='left' style={{marginLeft:'5%'}}>
           <div className='reviewTitle'>
             {`Ratings & Reviews`}
           </div>
