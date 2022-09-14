@@ -1,7 +1,7 @@
 
 import {render, fireEvent, screen} from '@testing-library/react';
 import ProductOverview from '../Client/src/components/ProductOverview.jsx';
-import '@testing-library/jest-dom';
+import '@testing-library/jest-dom/';
 
 const mockedSetId = jest.fn();
 // add test suite here
@@ -21,15 +21,16 @@ describe("Example tests", function(){
 
 
 
-describe("overview", () => {
+describe("", () => {
   it('should render Overview-main', async () => {
-    let {container} = render(<ProductOverview id={"71700"} handleClick={mockedSetId} />);
-    const boxes = await container.getElementsByClassName('Overview-addToCartTools');
-    expect(boxes[0]).toHaveClass('Overview-addToCartTools');
+    render(<ProductOverview id={"71700"} handleClick={mockedSetId} />);
+    screen.getByText(/Loading/);
   });
   // it('should render title for related products section', async () => {
   //   render(<RelatedProducts id={"71700"} handleClick={mockedSetId} />);
   //   const titleElement = await screen.findByText(/your outfit/i);
   //   expect(titleElement).toBeInTheDocument();
   // });
+
+
 });
