@@ -4,7 +4,8 @@ let Outfit = (props) => (
   <div className="card" >
     <div className="card-img">
       <button className="card-function-btn" onClick={props.handleDelete} >&times;</button>
-      <img className="card-current-img" src={props.item.img_url} onClick={props.handleClick} />
+      <img className="card-current-img" src={props.item.img_url} onClick={props.handleClick}
+      alt={`a picture for ${props.item.name}`}/>
     </div>
     <div className="card-info" onClick={props.handleClick}>
       <div className="card-category" >{props.item.category}</div>

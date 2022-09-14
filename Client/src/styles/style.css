@@ -8,6 +8,8 @@ h2 {
   margin: 3vw;
 }
 
+
+
 /* ================================
 Related Product */
 
@@ -19,6 +21,7 @@ Related Product */
   justify-content: center;
   max-width: 70%;
   margin: auto;
+  background-color: #ffffff;
 }
 
 .section-title {
@@ -1033,3 +1036,4 @@ h2.Overview-category {
   padding-left: 10px;
   border-left: 3px solid black;
 }
+
