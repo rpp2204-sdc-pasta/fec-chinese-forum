@@ -257,7 +257,6 @@ class Reviews extends React.Component {
       width: '80%',
       position:'relative',
       overflow: 'hidden'
-
     }
     const style_review_box = {
       height: '500px',
@@ -289,14 +288,14 @@ class Reviews extends React.Component {
     }
 
     return(
-      <div className='containerAll' style={style_overall}>
+      <div className='containerAll' style={{...style_overall, ...this.props.theme}}>
         <div className='left' style={{marginLeft:'5%'}}>
           <div className='reviewTitle'>
             {`Ratings & Reviews`}
           </div>
           <div >
             <Ratingbreakdown avgRating={this.state.avgRating} percent={this.state.percent} breakdownScore={this.state.breakdownScore}
-            filterReviews_Star={this.filterReviews_Star}/>
+            filterReviews_Star={this.filterReviews_Star} theme={this.props.theme}/>
             <CharBreakdown characteristics={this.state.characteristics}/>
           </div>
         </div>

@@ -1,5 +1,5 @@
 let Compare = (props) => (
-  <div className="compare-modal">
+  <div className="compare-modal" style={props.theme}>
     <div className="compare-title">Comparing</div>
     <table className="compare-features" >
       <tr>
