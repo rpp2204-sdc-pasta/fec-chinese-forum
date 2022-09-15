@@ -693,6 +693,10 @@ input[type="checkbox"].toggle:checked + label::before{
   margin: auto;
 }
 
+.QnAImages {
+  width: 50px;
+}
+
 .QS, .QSOpts {
   display: inline;
 }
@@ -1034,3 +1038,4 @@ h2.Overview-category {
   padding-left: 10px;
   border-left: 3px solid black;
 }
+

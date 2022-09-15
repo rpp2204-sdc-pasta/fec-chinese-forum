@@ -39,11 +39,26 @@ const overlay = {
 const Photo = (props)=>{
 
   const [isOpen, setIsOpen] =useState(false);
-
+  const [reSize, setReSize] = useState(false)
   const toggleModal= () =>{
     setIsOpen (!isOpen)
   }
 
+  if(props.photo.url.includes('unsplash')){
+    // let resize = props.photo.url.slice(0, props.photo.url.lastIndexOf('w=')) + 'w=10'
+    let resize = (props.photo.url.slice(0, props.photo.url.lastIndexOf('q=')) + 'q=10')
+  }
+
+  if(reSize){
+    return (
+      <>
+      <div className={props.photo.id}>
+         <img  style={imagestyle} onClick={toggleModal} src={resize} alt={props.photo.id}></img>
+         {isOpen && <div style={overlay}><img  style={another_style} onClick={toggleModal} src={resize} alt={props.photo.id}></img></div>}
+      </div>
+    </>
+    )
+  } else{
     return(
     <>
       <div className={props.photo.id}>
@@ -52,6 +67,17 @@ const Photo = (props)=>{
       </div>
     </>
     )
+
+  }
+
+  // return(
+  //   <>
+  //     <div className={props.photo.id}>
+  //        <img  style={imagestyle} onClick={toggleModal} src={props.photo.url} alt={props.photo.id}></img>
+  //        {isOpen && <div style={overlay}><img  style={another_style} onClick={toggleModal} src={props.photo.url} alt={props.photo.id}></img></div>}
+  //     </div>
+  //   </>
+  //   )
 }
 
 
