@@ -51,7 +51,7 @@ class QnA extends React.Component {
         this.setState({
           qna: result.data
         })
-        //console.log(result.data);
+        console.log(result.data);
       }).catch(err => {
         console.log(err)
       })

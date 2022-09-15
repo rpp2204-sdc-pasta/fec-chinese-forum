@@ -673,6 +673,11 @@ input[type="checkbox"].toggle:checked + label::before{
 
 /* ================================ QnA */
 
+.required-field::after {
+  content: "*";
+  color: red;
+}
+
 .buttonLink {
   background: none!important;
   border: none;
@@ -716,6 +721,11 @@ input[type="checkbox"].toggle:checked + label::before{
   margin: 10px;
   border-bottom: gray solid;
   justify-content: center;
+}
+
+.ansPictures {
+  width: 60px;
+  margin: 5px;
 }
 
 .ansModal {
