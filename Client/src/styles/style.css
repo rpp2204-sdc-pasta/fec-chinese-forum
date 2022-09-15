@@ -21,7 +21,6 @@ Related Product */
   justify-content: center;
   max-width: 70%;
   margin: auto;
-  background-color: #222222;
 }
 
 .section-title {
@@ -52,11 +51,11 @@ Related Product */
   border: none;
   position: absolute;
   width: 10%;
-  height: 100%;
+  top: 1%;
+  height: 98%;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(90deg, rgba(255,255,255,0) 0%, #fff 100%);
   cursor: pointer;
   z-index: 9;
   font-size: 2vw;
@@ -81,7 +80,7 @@ Related Product */
   max-width: 24%;
   aspect-ratio: 5 / 8;
   margin: .5%;
-  border: 1px solid black;
+  border: 1px solid;
 }
 
 .card-img {
@@ -138,7 +137,7 @@ Related Product */
   top: 50%;
   left: 50%;
   transform: translate(-30%, -50%);
-  border: 1px solid black;
+  border: 1px solid;
   z-index: 30;
   background-color: white;
   width: 800px;
@@ -301,7 +300,6 @@ Reviews */
   margin-bottom: 20px;
 }
 .containerAll {
-  background-color: white;
   margin-top: 3vw;
   margin-left: auto;
   margin-right: auto;

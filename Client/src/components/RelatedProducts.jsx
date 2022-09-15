@@ -227,13 +227,17 @@ class RelatedProducts extends React.Component {
 
   render(props) {
     let { id, handleClick } = this.props;
+    let buttonStyle = {
+      background: `linear-gradient(90deg, rgba(255,255,255,0) 0%, ${this.props.theme.backgroundColor} 100%)`,
+      color: this.props.theme.color
+    }
     return (
       <>
         <h3 className="section-title">RELATED PRODUCTS</h3>
         <section className="related">
           <div className="button">
-            {this.state.relatedPre && <button className="pre-button" onClick={this.relatedPre} >&#10132;</button>}
-            {this.state.relatedNext && <button className="next-button" onClick={this.relatedNext} >&#10132;</button>}
+            {this.state.relatedPre && <button className="pre-button" onClick={this.relatedPre} style={buttonStyle} >&#10132;</button>}
+            {this.state.relatedNext && <button className="next-button" onClick={this.relatedNext} style={buttonStyle} >&#10132;</button>}
           </div>
           <div className="related-products" style={{transform: `translateX(-${this.state.relatedIndex * 25}%)`}} >
             {this.state.products.map((product, index) => <Card item={product} key={index}
@@ -246,8 +250,8 @@ class RelatedProducts extends React.Component {
         <h3 className="section-title">YOUR OUTFIT</h3>
         <section className="outfit">
           <div>
-            {this.state.outfitPre && <button className="pre-button" onClick={this.outfitPre} >&#10132;</button>}
-            {this.state.outfitNext && <button className="next-button" onClick={this.outfitNext} >&#10132;</button>}
+            {this.state.outfitPre && <button className="pre-button" onClick={this.outfitPre} style={buttonStyle} >&#10132;</button>}
+            {this.state.outfitNext && <button className="next-button" onClick={this.outfitNext} style={buttonStyle} >&#10132;</button>}
           </div>
           <div className="outfit-list" style={{transform: `translateX(-${(this.state.outfitIndex + 1) * 25}%)`}} >
             <div className="card" onClick={this.handleAdd} >
@@ -265,7 +269,7 @@ class RelatedProducts extends React.Component {
           </div>
         </section>
         {this.state.compare && <div id="compare-overlay" onClick={this.closeOverlay}>
-          <Compare data={this.state.compareFeatures} /></div>}
+          <Compare data={this.state.compareFeatures} theme={this.props.theme}/></div>}
       </>
     )
   }
