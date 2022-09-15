@@ -522,7 +522,6 @@ Reviews */
   display: flex;
   right:calc(-4% - var(--characteristics-bar));
   position: relative;
-  margin-right: 0;
   z-index: 2;
 }
 
