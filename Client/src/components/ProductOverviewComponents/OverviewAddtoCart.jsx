@@ -41,8 +41,8 @@ class OverviewAddtoCart extends React.Component {
 			selectSize: true,
 			displayAddToCart: false
 		})
-		if (this.selectRef) {
-			this.selectRef.current.focus();
+		if (this.selectSizeRef) {
+			this.selectSizeRef.current.focus();
 		}
 	}
 
