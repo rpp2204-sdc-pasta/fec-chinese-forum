@@ -676,7 +676,6 @@ class ProductOverview extends React.Component {
       });
     };
     if (targetIndex < this.state.thumbnailRange[0]) {
-      console.log()
       handleThumbnailScrollUp();
     };
   }
