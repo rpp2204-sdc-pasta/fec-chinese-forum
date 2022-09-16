@@ -638,18 +638,6 @@ class ProductOverview extends React.Component {
       .catch(err => {
         console.log(err)
       });
-    // let mockProduct =
-
-    // let defaultStyle = mockProduct.styles[0].style_id;
-    // if (mockProduct.styles.find((style) => style['default?'] === true)) {
-    //   defaultStyle = (mockProduct.styles.find((style) => style['default?'] === true).style_id);
-    // }
-    // this.setState({
-    //   product: mockProduct,
-    //   isLoading: false,
-    //   currStyle: defaultStyle
-    // });
-    // this.props.getName(mockProduct.name);
 
   }
 
