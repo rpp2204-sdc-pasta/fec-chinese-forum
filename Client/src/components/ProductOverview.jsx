@@ -115,7 +115,6 @@ class ProductOverview extends React.Component {
   }
 
   handleMainImageScrollLeft() {
-    console.log('left clicked');
     let targetIndex = parseInt(this.state.mainImageIndex) - 1;
     if (targetIndex >= 0) {
       this.setState({
@@ -123,15 +122,11 @@ class ProductOverview extends React.Component {
       });
     };
     if (targetIndex < this.state.thumbnailRange[0]){
-      console.log('should scroll up');
-      console.log(targetIndex);
-      console.log(this.state.thumbnailRange[0]);
       this.handleThumbnailScrollUp();
     };
   }
 
   handleMainImageScrollRight() {
-    console.log('right clicked');
     let targetIndex = parseInt(this.state.mainImageIndex) + 1;
     if (targetIndex <= this.state.product.styles.find(style => style.style_id === this.state.currStyle).photos.length - 1) {
       this.setState({
@@ -139,9 +134,6 @@ class ProductOverview extends React.Component {
       });
     };
     if (targetIndex >= this.state.thumbnailRange[1]){
-      console.log('should scroll down');
-      console.log(targetIndex);
-      console.log(this.state.thumbnailRange[1]);
       this.handleThumbnailScrollDown();
     };
   }
