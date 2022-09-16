@@ -56,7 +56,7 @@ class OverviewStyleSelect extends React.Component {
 
       <div>
         <div className='Overview-styleSelect'>
-          {this.props.name}
+          <span style={{fontWeight: 'bold'}}>Style ></span>{this.props.name}
         </div>
         <div className="Overview-styles">
           {styles}

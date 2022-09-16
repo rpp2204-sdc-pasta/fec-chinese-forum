@@ -982,7 +982,9 @@ h2.Overview-category {
   top: -12px;
   font-size: 45px;
 }
-
+.Overview-styles {
+  padding-top: 15px;
+}
 .Overview-styleGroupOfFour {
   position:relative;
   display: flex;

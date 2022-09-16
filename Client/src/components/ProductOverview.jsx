@@ -1,6 +1,5 @@
 import React from 'react';
 import OverviewGallery from './ProductOverviewComponents/OverviewGallery.jsx';
-import OverviewReviews from './ProductOverviewComponents/OverviewReviews.jsx';
 import OverviewPrice from './ProductOverviewComponents/OverviewPrice.jsx';
 import OverviewStyleSelect from './ProductOverviewComponents/OverviewStyleSelect.jsx';
 import OverviewAddtoCart from './ProductOverviewComponents/OverviewAddtoCart.jsx';
