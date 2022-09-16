@@ -55,8 +55,8 @@ class Reviews extends React.Component {
 
   componentDidMount(){
     Promise.all([
+      this.getMeta(this.props.id),
       this.getProductcount('relevant', this.props.id),
-      this.getMeta(this.props.id)
     ])
   }
 
