@@ -32,7 +32,8 @@ class Reviews extends React.Component {
       twoStar: true,
       oneStar: true,
       filter: '',
-      reRender: false
+      reRender: false,
+      twoMorefilter: false,
 
 
     }
@@ -47,6 +48,8 @@ class Reviews extends React.Component {
     this.filterReviews_Star=this.filterReviews_Star.bind(this)
     this.filterState=this.filterState.bind(this)
     this.reSet=this.reSet.bind(this)
+    this.checkfilterCount=this.checkfilterCount.bind(this)
+    this.clearAll=this.clearAll.bind(this)
   }
 
 
@@ -69,7 +72,13 @@ class Reviews extends React.Component {
       // console.log(this.state.filter)
       this.getProductcount(this.state.filter, this.props.id)
     }
+    if(this.state.oneStar !== prevState.oneStar || this.state.twoStar !== prevState.twoStar || this.state.threeStar !== prevState.threeStar
+      || this.state.fourStar !== prevState.fourStar || this.state.fiveStar !== prevState.fiveStar) {
+        this.checkfilterCount();
+      }
   }
+
+
 
   getProductcount(filter, product_id){
     // console.log(filter)
@@ -119,6 +128,7 @@ class Reviews extends React.Component {
       }
     })
   }
+
 
   moreReviews(num , review_count=2){
     let total = num + review_count
@@ -205,11 +215,12 @@ class Reviews extends React.Component {
       this.setState({
         currentLoad: relevant,
       })
-      this.setState({
-        product: relevant.slice(0,2)
-      })
+      // this.setState({
+      //   product: relevant.slice(0,2)
+      // })
     }
   }
+
 
   filterReviews_Star(e){
     e.preventDefault();
@@ -234,6 +245,7 @@ class Reviews extends React.Component {
         oneStar: !prevState.oneStar
       }))
     }
+    this.checkfilterCount()
   }
 
   filterState(value){
@@ -246,6 +258,36 @@ class Reviews extends React.Component {
     this.setState(prevState=>({
       reRender: !prevState.reRender
     }))
+  }
+
+  clearAll (){
+    this.setState({
+      oneStar: true,
+      twoStar: true,
+      threeStar: true,
+      fourStar: true,
+      fiveStar: true,
+      twoMorefilter: true
+    })
+  }
+
+  checkfilterCount (){
+    let stars = [this.state.fiveStar, this.state.fourStar, this.state.threeStar, this.state.twoStar, this.state.oneStar];
+    let count = 0;
+    stars.forEach((item)=>{
+      if (!item) {
+        count ++
+      }
+      if (count >= 2) {
+        this.setState({
+          twoMorefilter: true
+        })
+      } else{
+        this.setState({
+          twoMorefilter: false
+        })
+      }
+    })
   }
 
 
@@ -293,10 +335,13 @@ class Reviews extends React.Component {
           <div className='reviewTitle'>
             {`Ratings & Reviews`}
           </div>
-          <div >
-            <Ratingbreakdown avgRating={this.state.avgRating} percent={this.state.percent} breakdownScore={this.state.breakdownScore}
-            filterReviews_Star={this.filterReviews_Star} theme={this.props.theme}/>
-            <CharBreakdown characteristics={this.state.characteristics}/>
+          <div  style={{marginBottom: '10%'}}>
+            <div className='wrap'>
+              <Ratingbreakdown avgRating={this.state.avgRating} percent={this.state.percent} breakdownScore={this.state.breakdownScore}
+              filterReviews_Star={this.filterReviews_Star} theme={this.props.theme}/>
+              {this.state.twoMorefilter? <button style={{ marginTop: '3%', textAlign:'center', whiteSpace: 'noraml', fontSize:'10%'}} onClick={this.clearAll} >CLEAR</button> : <br></br>}
+            </div>
+              <CharBreakdown characteristics={this.state.characteristics}/>
           </div>
         </div>
         <div className='right' style={style_review_box} >
