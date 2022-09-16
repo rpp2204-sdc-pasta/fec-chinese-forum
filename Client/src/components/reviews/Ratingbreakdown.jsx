@@ -27,7 +27,6 @@ const Ratingbreakdown = (props)=>{
         <li id={1}className='starBar' onClick={props.filterReviews_Star} style={props.theme}>
          <span className='star'>1 stars </span><div style={{'--star1-color': `${props.breakdownScore['1']}%`}} className='progress-bar one'></div>
         </li>
-
         </ul>
     </div>
 

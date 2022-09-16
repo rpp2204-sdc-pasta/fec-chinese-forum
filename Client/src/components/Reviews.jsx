@@ -54,8 +54,10 @@ class Reviews extends React.Component {
 
 
   componentDidMount(){
-      this.getProductcount('relevant', this.props.id)
+    Promise.all([
+      this.getProductcount('relevant', this.props.id),
       this.getMeta(this.props.id)
+    ])
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -64,12 +66,10 @@ class Reviews extends React.Component {
         this.getMeta(this.props.id)
     }
     if(this.state.filter !== prevState.filter){
-      // console.log(this.state.filter)
       this.selectFilter(this.state.filter)
       this.resetCount()
     }
     if(this.state.reRender !== prevState.reRender){
-      // console.log(this.state.filter)
       this.getProductcount(this.state.filter, this.props.id)
     }
     if(this.state.oneStar !== prevState.oneStar || this.state.twoStar !== prevState.twoStar || this.state.threeStar !== prevState.threeStar
