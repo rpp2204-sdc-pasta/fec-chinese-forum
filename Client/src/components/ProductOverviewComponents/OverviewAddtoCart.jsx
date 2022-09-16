@@ -22,8 +22,8 @@ class OverviewAddtoCart extends React.Component {
 	handleSizeSelect(event) {
 		this.setState({
 			sku: event.value,
-			quantity: 0,
-			displayAddToCart: false
+			quantity: 1,
+			displayAddToCart: true
 		})
 	}
 
@@ -114,6 +114,7 @@ class OverviewAddtoCart extends React.Component {
 		if (quantity === 0) {
 			quantitySelect = [{ value:0, label:'Out Of Stock'}];
 		} else {
+			quantitySelect.push({ })
 			for (var i = 1; (i < quantity + 1) && (i <= 15); i++) {
 				quantitySelect.push({ value: i, label: i });
 			}
@@ -141,11 +142,17 @@ class OverviewAddtoCart extends React.Component {
 						placeholder='SELECT SIZE'
 						onChange={this.handleSizeSelect}
 						ref={this.selectSizeRef} />
-					<Select
+					{this.state.sku===0
+					?<Select
+					className='Overview-quantitySelectDisabled'
+					placeholder='-'
+					isDisabled={true} />
+					:<Select
 						className='Overview-quantitySelect'
 						options={quantitySelect}
-						onChange={this.handleQuantitySelect}
-						isDisabled={this.state.sku===0} />
+						value={{ value: 1,  label: "1" }}
+						onChange={this.handleQuantitySelect}/>
+					}
 				</div>
 				<div>
 					{this.state.displayAddToCart

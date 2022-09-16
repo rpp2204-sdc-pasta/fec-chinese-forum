@@ -47,7 +47,7 @@ class ProductOverview extends React.Component {
   }
 
   componentDidMount() {
-      this.fetchData();
+    this.fetchData();
   }
 
   componentDidUpdate(prevProps) {
@@ -121,6 +121,9 @@ class ProductOverview extends React.Component {
         mainImageIndex: targetIndex
       });
     };
+    if (targetIndex < this.state.thumbnailRange[0]) {
+      this.handleThumbnailScrollUp();
+    };
   }
 
   handleMainImageScrollRight() {
@@ -129,6 +132,9 @@ class ProductOverview extends React.Component {
       this.setState({
         mainImageIndex: targetIndex
       });
+    };
+    if (targetIndex >= this.state.thumbnailRange[1]) {
+      this.handleThumbnailScrollDown();
     };
   }
 
@@ -152,7 +158,7 @@ class ProductOverview extends React.Component {
           name={this.state.product.styles.find(style => style.style_id === this.state.currStyle).name}
           styles={this.state.product.styles}
           changeStyle={this.changeStyle}
-          handleClickThumbnail={this.handleClickThumbnail}/>
+          handleClickThumbnail={this.handleClickThumbnail} />
         <OverviewAddtoCart
           product={this.state.product}
           style_id={this.state.currStyle}
@@ -162,31 +168,28 @@ class ProductOverview extends React.Component {
       </div>;
 
     let OverviewLeft =
-        <OverviewGallery
-          photos={this.state.product.styles.find(style => style.style_id === this.state.currStyle).photos}
-          handleExpand={this.changeExpand}
-          key={new Date().getTime()}
-          mainImageIndex={this.state.mainImageIndex}
-          thumbnailRange={this.state.thumbnailRange}
-          handleClickThumbnail={this.handleClickThumbnail}
-          handleMainImageScrollLeft={this.handleMainImageScrollLeft}
-          handleMainImageScrollRight={this.handleMainImageScrollRight}
-          handleThumbnailScrollUp={this.handleThumbnailScrollUp}
-          handleThumbnailScrollDown={this.handleThumbnailScrollDown}/>
+      <OverviewGallery
+        photos={this.state.product.styles.find(style => style.style_id === this.state.currStyle).photos}
+        handleExpand={this.changeExpand}
+        key={new Date().getTime()}
+        mainImageIndex={this.state.mainImageIndex}
+        thumbnailRange={this.state.thumbnailRange}
+        handleClickThumbnail={this.handleClickThumbnail}
+        handleMainImageScrollLeft={this.handleMainImageScrollLeft}
+        handleMainImageScrollRight={this.handleMainImageScrollRight}
+        handleThumbnailScrollUp={this.handleThumbnailScrollUp}
+        handleThumbnailScrollDown={this.handleThumbnailScrollDown} />
 
     let isExpanded = this.state.expanded;
 
     return (
       <div className='Overview-main'>
         <div className='Overview-flexRowOne'>
-        {isExpanded
-            ? <div className='Overview-LeftExpanded'>
-              {OverviewLeft}
-            </div>
-            : <div className='Overview-LeftDefault'>
-              {OverviewLeft}
-            </div>
+          {isExpanded && <div className='Overview-LeftExpanded'>{OverviewLeft}</div>
           }
+          <div className='Overview-LeftDefault'>
+            {OverviewLeft}
+          </div>
           {OverviewRight}
 
         </div>
