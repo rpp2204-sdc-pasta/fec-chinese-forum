@@ -4,7 +4,7 @@ const CompressionPlugin = require("compression-webpack-plugin");
 const path = require("path");
 
 module.exports = {
-  mode: "development",
+  mode: "production",
   entry: path.join(__dirname, "/Client/src/index.jsx"),
   output: {
     path: path.join(__dirname, "./Client/dist"),
