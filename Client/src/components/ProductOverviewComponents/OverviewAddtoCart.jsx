@@ -144,7 +144,8 @@ class OverviewAddtoCart extends React.Component {
 					<Select
 						className='Overview-quantitySelect'
 						options={quantitySelect}
-						onChange={this.handleQuantitySelect} />
+						onChange={this.handleQuantitySelect}
+						isDisabled={this.state.sku===0} />
 				</div>
 				<div>
 					{this.state.displayAddToCart
