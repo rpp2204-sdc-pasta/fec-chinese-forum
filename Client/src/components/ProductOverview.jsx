@@ -675,8 +675,8 @@ class ProductOverview extends React.Component {
         mainImageIndex: targetIndex
       });
     };
-    if (targetIndex < this.state.thumbnailRange[0]) {
-      handleThumbnailScrollUp();
+    if (targetIndex <= this.state.thumbnailRange[0]) {
+      this.handleThumbnailScrollUp();
     };
   }
 
@@ -687,8 +687,8 @@ class ProductOverview extends React.Component {
         mainImageIndex: targetIndex
       });
     };
-    if (targetIndex > this.state.thumbnailRange[1]) {
-      handleThumbnailScrollDown();
+    if (targetIndex >= this.state.thumbnailRange[1]-1) {
+      this.handleThumbnailScrollDown();
     };
   }
 
