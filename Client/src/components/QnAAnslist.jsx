@@ -8,12 +8,13 @@ class QnAAnsList extends React.Component {
     this.state = {
       yesCount: this.props.ans.helpfulness,
       votedYes: false,
-      reported: false
+      reported: false,
+      pictures: this.props.ans.photos
     };
     this.date = new Date(this.props.ans.date).toLocaleDateString('en-US');
     this.anshelpful = this.anshelpful.bind(this);
     this.reportAns = this.reportAns.bind(this);
-    
+
   }
 
   anshelpful = (e) => {
@@ -27,7 +28,7 @@ class QnAAnsList extends React.Component {
         ansId: this.props.ans.id
       }
     }).then((result)=>{
-      // console.log(result);
+      //console.log(result);
       this.setState({
         votedYes: true,
         yesCount: this.state.yesCount + 1
@@ -74,6 +75,9 @@ class QnAAnsList extends React.Component {
     return (
       <div className = "ans">
         <a className="lvl3">{this.props.ans.body}</a><br/>
+        {this.state.pictures.map((val, i) =>
+          <img key={i} className = "ansPictures" src={val}></img>
+        )}<br/>
         <span className = "lvl4">by {Answerer}, {this.date}  |  Helpful? {Yes}</span>
         <a className = "lvl4"> &#40;{this.state.yesCount}&#41;  |  </a>
         {!this.state.reported && <button className = "buttonLink" onClick = {this.reportAns}>Report</button>}

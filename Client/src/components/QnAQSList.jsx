@@ -11,14 +11,16 @@ class QnAList extends React.Component {
       reported: this.props.qnaSet.reported,
       qshelpfulness: this.props.qnaSet.question_helpfulness,
       ans: this.props.qnaSet.answers,
-      yes: false
+      yes: false,
+      ansModalImages: []
     }
     this.qsid = this.props.qnaSet.question_id
     this.qs = this.props.qnaSet.question_body
     this.date = this.props.qnaSet.question_date
 
     this.inputanswer, this.inputname, this.inputemail
-    this.firstImage, this.secondImage, this.thirdImage, this.fourthImage, this.fifthImage
+    this.imageArr = [];
+    this.imageURLS = [];
     this.qshelpful = this.qshelpful.bind(this);
     this.reportQS = this.reportQS.bind(this);
     this.checkAnswer = this.checkAnswer.bind(this);
@@ -104,28 +106,76 @@ class QnAList extends React.Component {
       this.showModal();
       return alert("You've already answerd this question.");
     }
-    axios({
-      method:'post',
-      url: "/ans",
-      data: {
-        questionId: this.qsid,
-        opt: {
-          body: this.inputanswer,
-          name: this.inputname,
-          email: this.inputemail
+
+    if(this.imageArr.length>0){
+      Promise.all(this.uploadtoImageBB()).then((results) => {
+        //console.log(results);
+        axios({
+          method:'post',
+          url: "/ans",
+          data: {
+            questionId: this.qsid,
+            opt: {
+              body: this.inputanswer,
+              name: this.inputname,
+              email: this.inputemail,
+              photos: this.imageURLS
+            }
+          }
+        })
+      }).then(()=>{
+        this.showModal();
+      }).catch(err => {
+        console.log(err);
+      })
+    } else {
+      axios({
+        method:'post',
+        url: "/ans",
+        data: {
+          questionId: this.qsid,
+          opt: {
+            body: this.inputanswer,
+            name: this.inputname,
+            email: this.inputemail
+          }
         }
-      }
-    }).then((result)=>{
-      // console.log(result);
-      this.showModal();
-    }).catch(err => {
-      console.log(err);
-    })
+      }).then((result)=>{
+        console.log(result);
+        this.showModal();
+      }).catch(err => {
+        console.log(err);
+      })
+    }
+  }
+  uploadtoImageBB = () => {
+
+    let images = this.imageArr.map((val) => {
+      let form = new FormData();
+      form.append('image', val);
+      return axios({
+          url: "https://api.imgbb.com/1/upload?key=d923fdc81e7f8d48e0ed4efa4cd3ffdb",
+          method: "POST",
+          mimeType: "multipart/form-data",
+          data: form,
+          processData: false
+        }).then((result) => {
+        //console.log(result.data.data.url);
+        this.imageURLS.push(result.data.data.url);
+        return result;
+      }).catch((err) => {
+        console.log(err);
+      })
+    });
+
+    return images;
+
   }
 
   showModal = () => {
     this.setState({
-      showAnsModal: this.state.showAnsModal?false:true
+      showAnsModal: this.state.showAnsModal?false:true,
+      ansModalImages: []
     })
   }
 
@@ -153,14 +203,15 @@ class QnAList extends React.Component {
 
   setImage = (e) => {
     let value = e.target.files;
-    let name = e.target.name;
-    console.log(value);
-    this[name] = URL.createObjectURL(value[0]);
-    console.log(this.name);
+    let pic = URL.createObjectURL(value[0]);
+    this.imageArr.push(value[0]);
+    this.setState({ ansModalImages: [...this.state.ansModalImages, pic] });
+    //console.log(this.state.ansModalImages);
+    e.target.value = null;
   }
 
   render(){
-    let AnsList, loader, A;
+    let AnsList, loader, A, modalImages, imginput;
     let AnsLength = Object.keys(this.state.ans).length;
     if(AnsLength>0){
       AnsList = Object.keys(this.state.ans).slice(0,this.state.numAns).map((ansId, i) =>
@@ -179,6 +230,15 @@ class QnAList extends React.Component {
       loader = <button className = "lvl4 buttonLink" onClick = {this.loadAns}>+ LOAD MORE ANSWERS</button>
     }
 
+    if(this.state.ansModalImages.length > 0) {
+      modalImages = this.state.ansModalImages.map((val, i) =>
+        <img key = {i} className = "QnAImages" src={val}/>
+      )
+    }
+
+    if(this.state.ansModalImages.length < 5){
+      imginput = <input type='file' name='Image' accept="image/*" onChange={this.setImage} className='form-control'></input>
+    }
 
     return (
       <div className = "QSList">
@@ -195,12 +255,16 @@ class QnAList extends React.Component {
               {
                 this.state.showAnsModal &&
                     <form className = "lvl4 ansModal">
-                      <input name = "inputname" placeholder="Name" onChange={this.setValue} placeholder="Name" maxLength="60" required></input><br/>
+                      <div className="required-field">Name:</div>
+                      <input name = "inputname" placeholder="Name" onChange={this.setValue} placeholder="Example: jack543!" maxLength="60" required></input><br/>
+                      <a className="lvl4">For privacy reasons, do not use your full name or email address</a>
+                      <div className="required-field">Email:</div>
                       <input name = "inputemail" placeholder="Alex@email.com" type="email" onChange={this.setValue} placeholder="Email" maxLength="60" required></input><br/>
-                      <a>For authentication reasons, you will not be emailed</a><br/>
+                      <a className="lvl4">For authentication reasons, you will not be emailed</a><br/>
+                      <div className="required-field">Answer:</div>
                       <textarea name = "inputanswer" placeholder="Enter Answer" rows = {4} cols = {25} onChange={this.setValue} size="30" maxLength="1000"required></textarea><br/>
-                      {this.firstImage && <img className = "QnAImages" id="first" src={this.firstImage} />}
-                      <input type='file' name='firstImage' accept="image/*" onChange={this.setImage} class='form-control'></input>
+                      {modalImages}
+                      {imginput}<br/>
                       <button type="submit" value="Submit" onClick = {this.submitAns}>Submit</button>
                       <button onClick={this.showModal}>X</button>
                     </form>
