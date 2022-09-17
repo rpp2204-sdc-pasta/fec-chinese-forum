@@ -29,7 +29,7 @@ class OverviewGalleryThumbnail extends React.Component {
             onClick={() => this.handleClick(index)}>
             <img className='Overview-galleryThumbnail'
               src={thumbnail}
-              alt={'thumbnail#'+index}/> />
+              alt={'thumbnail#'+index}/>
           </div>
         )
 
