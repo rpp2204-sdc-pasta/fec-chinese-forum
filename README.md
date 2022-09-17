@@ -28,7 +28,7 @@ Installation
 
 Usage
 
-Team Member
+Team Member: Alex Yeung, David Chiu, Jingtian Liu, Zefeng Shen
 
 Contributing
 
