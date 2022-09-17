@@ -20,10 +20,7 @@ class OverviewGallery extends React.Component {
 
     };
     let origPhotoUrl = this.props.photos[this.props.mainImageIndex].url;
-    let smallerPhotoUrl = null;
-    if (origPhotoUrl) {
-      smallerPhotoUrl = origPhotoUrl.slice(0,-4)+'q=10';
-    }
+    let smallerPhotoUrl = origPhotoUrl.slice(0,-4)+'q=10';
     return (
       <div className='Overview-gallery'>
         <OverviewGalleryMain
