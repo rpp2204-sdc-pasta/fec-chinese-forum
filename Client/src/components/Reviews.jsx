@@ -215,9 +215,9 @@ class Reviews extends React.Component {
       this.setState({
         currentLoad: relevant,
       })
-      // this.setState({
-      //   product: relevant.slice(0,2)
-      // })
+      this.setState({
+        product: relevant.slice(0,2)
+      })
     }
   }
 
