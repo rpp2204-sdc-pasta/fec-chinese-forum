@@ -18,7 +18,8 @@ class OverviewGalleryThumbnail extends React.Component {
             <div key={index}
               onClick={() => this.handleClick(index)}>
               <img className='Overview-galleryThumbnailSelected'
-                src={thumbnail} />
+                src={thumbnail}
+                alt={'thumbnail#'+index}/>
             </div>
           )
 
@@ -27,7 +28,8 @@ class OverviewGalleryThumbnail extends React.Component {
           <div key={index}
             onClick={() => this.handleClick(index)}>
             <img className='Overview-galleryThumbnail'
-              src={thumbnail} />
+              src={thumbnail}
+              alt={'thumbnail#'+index}/> />
           </div>
         )
 

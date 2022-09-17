@@ -26,6 +26,7 @@ class OverviewGalleryMain extends React.Component {
           onClick={this.props.handleExpand}>
           <img className='Overview-mainImg'
             src={this.props.photo}
+            alt={'mainImage'}
           />
         </div>
         <OverviewGalleryThumbnail
