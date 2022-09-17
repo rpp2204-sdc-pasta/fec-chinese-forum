@@ -9,7 +9,7 @@ class OverviewStyleSelect extends React.Component {
 
   onClickStyleSelect(style_id) {
     this.props.changeStyle(style_id);
-    this.props.handleClickThumbnail(0);
+    // this.props.handleClickThumbnail(0);
   }
 
   render() {

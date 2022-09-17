@@ -995,7 +995,7 @@ h2.Overview-category {
 
 .selectedCheckmark {
   position: absolute;
-  left: 60px;
+  left: 45px;
   top: -12px;
   font-size: 45px;
 }
@@ -1057,4 +1057,3 @@ h2.Overview-category {
   padding-left: 10px;
   border-left: 3px solid black;
 }
-
