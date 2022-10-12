@@ -95,7 +95,7 @@ let getCurrent = (id) => {
 let getRelatedProductID = (id) => {
   let options = {
     method: 'GET',
-    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${id}/related`,
+    url: `http://localhost:5500/products/${id}/related`,
     headers: {
       Authorization: process.env.AUTH
     }
@@ -106,7 +106,7 @@ let getRelatedProductID = (id) => {
 let getProductInfo = (id) => {
   let options = {
     method: 'GET',
-    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${id}`,
+    url: `http://localhost:5500/products/${id}`,
     headers: {
       Authorization: process.env.AUTH
     }
@@ -117,7 +117,7 @@ let getProductInfo = (id) => {
 let getProductStyles = (id) => {
   let options = {
     method: 'GET',
-    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${id}/styles`,
+    url: `http://localhost:5500/products/${id}/styles`,
     headers: {
       Authorization: process.env.AUTH
     }
